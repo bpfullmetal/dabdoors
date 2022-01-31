@@ -106,3 +106,15 @@ function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
 
 add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
 
+// 
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+function my_theme_enqueue_styles() {
+  wp_enqueue_script(
+    'my-theme-frontend',
+    get_stylesheet_directory_uri() . '/build/index.js',
+    ['wp-element'],
+    time(), //For production use wp_get_theme()->get('Version'),
+    true
+  );
+  
+}

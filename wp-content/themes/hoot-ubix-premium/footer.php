@@ -13,6 +13,8 @@
 	</div><!-- #page-wrapper -->
 
 	<?php wp_footer(); // WordPress hook for loading JavaScript, toolbar, and other things in the footer. ?>
+	<!-- <script type='text/javascript' src='http://localhost/garage/wp-content/themes/hoot-ubix-premium/build/index.js' id='my-theme-frontend-js'></script> -->
 
+	<!-- <script type='text/javascript' src='http://localhost/garage/wp-includes/js/dist/element.min.js' id='wp-element-js'></script> -->
 </body>
 </html>
