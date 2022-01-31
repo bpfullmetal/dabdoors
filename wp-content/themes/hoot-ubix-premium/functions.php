@@ -62,3 +62,47 @@ $hoot_theme = new Hoot_Theme();
 
 /* Hoot Theme Setup complete */
 do_action( 'hoot_theme_after_setup' );
+
+function add_order_item_meta($item_id, $values) {
+  if ( $values['new_sku'] ) {
+    woocommerce_add_order_item_meta($item_id, 'model', $values['new_sku']);
+  }
+}
+add_action('woocommerce_add_order_item_meta', 'add_order_item_meta', 10, 2);
+
+function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
+  $product = wc_get_product( $product_id );
+  $price = $product->get_price();
+  $cart_item_data['new_price'] = $price + 15;
+  $cart_item_data['new_sku'] = '98765';
+  return $cart_item_data;
+}
+
+add_filter( 'woocommerce_add_cart_item_data', 'add_cart_item_data', 10, 3 );
+
+function before_calculate_totals( $cart_obj ) {
+  if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+    return;
+  }
+  // Iterate through each cart item
+  foreach( $cart_obj->get_cart() as $key=>$value ) {
+    if( isset( $value['new_price'] ) ) {
+      $price = $value['new_price'];
+      $value['data']->set_price( ( $price ) );
+      $value['data']->update_meta_data( 'model', '123345' );
+    }
+  }
+}
+
+add_action( 'woocommerce_before_calculate_totals', 'before_calculate_totals', 10, 1 );
+
+function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
+    $product = $cart_item['data']; // The WC_Product Object
+    if( is_cart() && $product->get_meta('model') ) {
+        $item_name .= '<br><span class="item-sku">'. $product->get_meta('model') . '</span>';
+    }
+    return $item_name;
+}
+
+add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
+
