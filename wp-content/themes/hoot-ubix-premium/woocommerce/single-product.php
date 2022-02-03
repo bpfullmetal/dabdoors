@@ -67,6 +67,25 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 				</div>
 			</div>
 		</div>
+		<div id="contact-shop-section" class="intro-section">
+			<div class="image-wrapper">
+				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/img_intro-image.png" />
+			</div>
+			<div class="contact-wrapper">
+				<div class="map-section">
+					<label>Location</label>
+					<div id="map" class="su-gmap">
+						<iframe width="360" height="250" src="//maps.google.com/maps?q=Hurricane%20Master%20Garage%20Doors%20%2012195%20NW%2098th%20Ave%20%20Hialeah%2C%20FL%2033018&amp;output=embed" title=""></iframe>
+					</div>
+				</div>
+				<div class="post-section">
+					<label>Like Us on Facebook</label>
+					<div id="facebook-posts" class="su-gmap">
+						<iframe src="//docs.google.com/viewer?embedded=true&amp;url=http://dabnew.jbgaragedoors.com/wp-content/uploads/2018/01/DAB-Brochure-Complete-1.pdf" width="300" height="300" class="su-document" title=""></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php
 		// Template modification Hook
 		do_action( 'hoot_template_main_start', 'single-product.php' );

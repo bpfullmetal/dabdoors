@@ -2,6 +2,11 @@
 body.singular-product main {
   padding: 90px 50px;
 }
+
+body.singular-product main > * {
+  margin-bottom: 50px;
+}
+
 #contact-shop-section {
   display: flex;
   flex-wrap: wrap;
@@ -73,4 +78,8 @@ body.singular-product main {
 
 #contact-shop-section .contact-wrapper .contact-info i {
   margin-right: 5px;
+}
+
+.su-gmap iframe {
+  border: none;
 }
