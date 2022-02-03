@@ -1,5 +1,5 @@
 const { render, useState } = wp.element;
-
+import Builder from './ProductBuilder/Builder';
 const Votes = () => {
   const [votes, setVotes] = useState(0);
   const addVote = () => {
@@ -21,11 +21,12 @@ const Votes = () => {
     });
   };
   return (
-    <div>
-      <p>
-        <button onClick={addVote}>Call the Hooks</button>
-      </p>
-    </div>
+    <Builder />
+    // <div>
+    //   <p>
+    //     <button onClick={addVote}>Call the Hooks</button>
+    //   </p>
+    // </div>
   );
 };
-render(<Votes />, document.getElementById('section-woocommerce'));
+render(<Votes />, document.getElementById('single-product-builder'));

@@ -86,8 +86,8 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 				</div>
 			</div>
 		</div>
-		<div id="single-product-builder">
-
+		<div id="single-product-section">
+			
 		</div>
 		<?php
 		// Template modification Hook

@@ -83,3 +83,15 @@ body.singular-product main > * {
 .su-gmap iframe {
   border: none;
 }
+
+/** Single Product Section **/
+
+body.singular-product #single-product-builder {
+  padding: 85px 80px 80px;
+  background: #FAFBFB;
+}
+
+body.singular-product #single-product-builder .title-section {
+  padding: 20px 30px;
+  background-color: #FFF;
+}
