@@ -6,6 +6,7 @@
 // Fire the wp_head action required for hooking in scripts, styles, and other <head> tags.
 wp_head();
 ?>
+<link rel="stylesheet" id="wc-custom-style-css" href="/garage/wp-content/themes/hoot-ubix-premium/woocommerce_custom.css" type="text/css" media="all" />
 </head>
 
 <body <?php hybridextend_attr( 'body' ); ?>>

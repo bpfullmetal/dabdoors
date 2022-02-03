@@ -26,8 +26,47 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	do_action( 'hoot_template_before_main', 'single-product.php' );
 	?>
 
-	<main <?php hybridextend_attr( 'content' ); ?>>
-
+	<main <?php //hybridextend_attr( 'content' ); ?>>
+		<div id="contact-shop-section">
+			<div class="image-wrapper">
+				<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/images/img_contact-image.png" />
+			</div>
+			<div class="contact-wrapper">
+				<label>Where to find us</label>
+				<h2>Hurricane Master Garage Doors</h2>
+				<div class="contact-info">
+					<span class="contact-address">
+						<i class="fa fa-map-marker"></i>
+						12195 NW 98th Ave, Hialeah, FL 33018
+					</span>
+					<span class="contact-phone">
+						<i class="fa fa-phone"></i>
+						800 257 2016
+					</span>
+					<span class="contact-email">
+						<i class="fa fa-envelope"></i>
+						<a href="mailto:info@dabdoor.com">info@dabdoor.com</a>
+					</span>
+					<span class="contact-email">
+						<i class="fa fa-envelope"></i>
+						<a href="mailto:service@dabdoor.com">service@dabdoor.com</a>
+					</span>
+					<span class="contact-social facebook">
+						<i class="fa fa-facebook"></i>
+						<a href="https://www.facebook.com/DabDoor/">https://www.facebook.com/DabDoor/</a>
+					</span>
+					<span class="contact-open-time">
+						<i class="fa fa-clock"></i>
+						<span>Open <br/> Monday to Friday: 7:30 am - 5:00 pm</span>
+					</span>
+					<span class="contact-comment">
+						<i class="fa fa-comments"></i>
+						<span>"Se Habla Espanol"</span>
+					</span>
+					
+				</div>
+			</div>
+		</div>
 		<?php
 		// Template modification Hook
 		do_action( 'hoot_template_main_start', 'single-product.php' );
@@ -110,7 +149,7 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	 *
 	 * @hooked woocommerce_get_sidebar - 10
 	 */
-	do_action( 'woocommerce_sidebar' );
+	// do_action( 'woocommerce_sidebar' );
 	?>
 
 </div><!-- .hgrid -->
