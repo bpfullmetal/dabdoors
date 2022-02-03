@@ -35,10 +35,57 @@ body.singular-product  {
       flex-wrap: wrap;
       .product-container {
         flex: 1;
+        background: #F2F2F2;
       }
       .product-custom-bar {
         width: 270px;
         background-color: #FFF;
+        .setting-title-section {
+          padding: 20px 30px;
+          label {
+            font-family: Lato;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 14px;
+            text-transform: uppercase;
+            color: #878787;
+          }
+        }
+        .product-setting-item-component {
+          padding: 15px 30px;
+          border-top: 1px solid rgba(236, 236, 236, 0.8);
+          display: flex;
+          flex-direction: column;
+          label {
+            font-family: Lato;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            color: #333333;
+          }
+          .size-settings-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            span {
+              font-family: Lato;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 10px;
+              line-height: 12px;
+              text-transform: uppercase;
+              color: rgba(135, 135, 135, 0.6);
+              margin-right: 5px;
+            }
+            input {
+              max-width: 75px;
+              border-radius: 4px;
+            }
+          }
+        }
       }
     }
   }
