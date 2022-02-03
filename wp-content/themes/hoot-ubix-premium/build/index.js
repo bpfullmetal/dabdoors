@@ -99,17 +99,30 @@ const Votes = () => {
   const [votes, setVotes] = useState(0);
 
   const addVote = () => {
-    setVotes(votes + 1);
+    // setVotes(votes + 1);
+    // console.log(jQuery('#section-woocommerce'));
+    let formData = {
+      action: 'ajaxHandleForTestHook',
+      item_id: 1,
+      values: 10
+    };
+    jQuery.ajax({
+      type: "post",
+      dataType: "json",
+      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      data: formData,
+      success: function (msg) {
+        console.log(msg);
+      }
+    });
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, votes, " Votes"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: addVote
-  }, "Vote!")));
+  }, "Call the Hooks")));
 };
 
-console.log(render);
-console.log(document.getElementById(`main`));
-render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Votes, null), document.getElementById(`app`));
+render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Votes, null), document.getElementById('section-woocommerce'));
 }();
 /******/ })()
 ;

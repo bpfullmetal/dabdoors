@@ -247,7 +247,7 @@ do_action( 'hoot_template_before_content_grid', 'frontpage.php' );
 		// Template modification Hook
 		do_action( 'hoot_template_main_end', 'frontpage.php' );
 		?>
-
+		<div id="section-woocommerce"></div>
 	</main><!-- #content -->
 
 	<?php

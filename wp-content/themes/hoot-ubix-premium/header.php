@@ -9,7 +9,6 @@ wp_head();
 </head>
 
 <body <?php hybridextend_attr( 'body' ); ?>>
-	<h1>Here is React Section</h1>
 	<div <?php hybridextend_attr( 'page-wrapper' ); ?>>
 
 		<div class="skip-link">
@@ -62,4 +61,3 @@ wp_head();
 			// Template modification Hook
 			do_action( 'hoot_template_main_wrapper_start' );
 ?>
-	<div id="app"></div>

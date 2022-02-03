@@ -106,7 +106,6 @@ function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
 
 add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
 
-// 
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 function my_theme_enqueue_styles() {
   wp_enqueue_script(
@@ -115,6 +114,19 @@ function my_theme_enqueue_styles() {
     ['wp-element'],
     time(), //For production use wp_get_theme()->get('Version'),
     true
-  );
-  
+  ); 
 }
+
+function testHook($item_id, $values) {
+  echo $item_id.' : '.$values;
+}
+add_action( 'runTestHook', 'testHook', 10, 2 );
+
+function ajaxHandleForTestHook() {
+  $item_id = $_POST['item_id'];
+  $values = $_POST['values'];
+  do_action('runTestHook', $item_id, $values);
+}
+
+add_action( 'wp_ajax_nopriv_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
+add_action( 'wp_ajax_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );

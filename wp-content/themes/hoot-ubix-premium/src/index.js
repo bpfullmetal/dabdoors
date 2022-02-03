@@ -3,17 +3,29 @@ const { render, useState } = wp.element;
 const Votes = () => {
   const [votes, setVotes] = useState(0);
   const addVote = () => {
-    setVotes(votes + 1);
+    // setVotes(votes + 1);
+    // console.log(jQuery('#section-woocommerce'));
+    let formData = {
+      action: 'ajaxHandleForTestHook',
+      item_id: 1,
+      values: 10
+    };
+    jQuery.ajax({
+      type: "post",
+      dataType: "json",
+      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      data: formData,
+      success: function(msg){
+          console.log(msg);
+      }
+    });
   };
   return (
     <div>
-      <h2>{votes} Votes</h2>
       <p>
-        <button onClick={addVote}>Vote!</button>
+        <button onClick={addVote}>Call the Hooks</button>
       </p>
     </div>
   );
 };
-console.log(render);
-console.log(document.getElementById(`main`));
-render(<Votes />, document.getElementById(`app`));
+render(<Votes />, document.getElementById('section-woocommerce'));
