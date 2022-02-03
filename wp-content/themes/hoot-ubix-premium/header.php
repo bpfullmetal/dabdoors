@@ -7,6 +7,7 @@
 wp_head();
 ?>
 <link rel="stylesheet" id="wc-custom-style-css" href="/garage/wp-content/themes/hoot-ubix-premium/woocommerce_custom.css" type="text/css" media="all" />
+<link rel="stylesheet" id="wc-custom-style-css_" href="/garage/wp-content/themes/hoot-ubix-premium/build/style-index.css" type="text/css" media="all" />
 </head>
 
 <body <?php hybridextend_attr( 'body' ); ?>>

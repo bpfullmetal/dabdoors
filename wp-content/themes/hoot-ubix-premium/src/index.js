@@ -1,5 +1,6 @@
 const { render, useState } = wp.element;
 import Builder from './ProductBuilder/Builder';
+import "./style.scss";
 const Votes = () => {
   const [votes, setVotes] = useState(0);
   const addVote = () => {
