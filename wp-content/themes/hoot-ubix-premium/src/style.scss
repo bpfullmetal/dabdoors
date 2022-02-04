@@ -85,8 +85,30 @@ body.singular-product  {
               border-radius: 4px;
             }
           }
+          &.window-settings {
+            .description {
+              font-family: Lato;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 10px;
+              line-height: 14px;
+              color: #878787;
+              max-width: 165px;
+              margin-top: 10px;
+            }
+          }
         }
       }
     }
+  }
+}
+
+.d-flex {
+  display: flex;
+  &.align-items-center {
+    align-items: center;
+  }
+  &.justify-content-between {
+    justify-content: space-between;
   }
 }

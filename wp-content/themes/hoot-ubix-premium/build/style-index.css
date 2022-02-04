@@ -86,5 +86,25 @@ body.singular-product #single-product-builder .product-builder-content .product-
   max-width: 75px;
   border-radius: 4px;
 }
+body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.window-settings .description {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 14px;
+  color: #878787;
+  max-width: 165px;
+  margin-top: 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+.d-flex.align-items-center {
+  align-items: center;
+}
+.d-flex.justify-content-between {
+  justify-content: space-between;
+}
 
 /*# sourceMappingURL=style-index.css.map*/

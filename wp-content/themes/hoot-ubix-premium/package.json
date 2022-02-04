@@ -20,6 +20,7 @@
     "@wordpress/scripts": "^20.0.1"
   },
   "dependencies": {
+    "react-switch": "^6.0.0",
     "sass": "^1.49.7"
   }
 }
