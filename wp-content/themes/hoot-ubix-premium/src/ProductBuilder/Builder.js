@@ -4,6 +4,7 @@ import WindowsSettingComponent from "./Components/WindowsSettingComponent";
 import InsulationSettingComponent from "./Components/InsulationSettingComponent";
 import VentsSettingComponent from "./Components/VentsSettingComponent";
 import LockPlacementSettingComponent from "./Components/LockPlacementSettingComponent";
+import PanelSettingComponent from "./Components/PanelSettingComponent";
 
 const Builder = () => {
   return (
@@ -23,6 +24,7 @@ const Builder = () => {
           <InsulationSettingComponent />
           <VentsSettingComponent />
           <LockPlacementSettingComponent />
+          <PanelSettingComponent />
         </div>
       </div>
     </div>
