@@ -2,6 +2,8 @@ import Logo from "./../assets/img_logo.png";
 import SizeChangeComponent from "./Components/SizeChangeComponent";
 import WindowsSettingComponent from "./Components/WindowsSettingComponent";
 import InsulationSettingComponent from "./Components/InsulationSettingComponent";
+import VentsSettingComponent from "./Components/VentsSettingComponent";
+
 const Builder = () => {
   return (
     <div className="product-builder">
@@ -18,6 +20,7 @@ const Builder = () => {
           <SizeChangeComponent />
           <WindowsSettingComponent />
           <InsulationSettingComponent />
+          <VentsSettingComponent />
         </div>
       </div>
     </div>

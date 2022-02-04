@@ -15,6 +15,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/SizeChangeComponent */ "./src/ProductBuilder/Components/SizeChangeComponent.js");
 /* harmony import */ var _Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/WindowsSettingComponent */ "./src/ProductBuilder/Components/WindowsSettingComponent.js");
 /* harmony import */ var _Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/InsulationSettingComponent */ "./src/ProductBuilder/Components/InsulationSettingComponent.js");
+/* harmony import */ var _Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/VentsSettingComponent */ "./src/ProductBuilder/Components/VentsSettingComponent.js");
+
 
 
 
@@ -37,7 +39,7 @@ const Builder = () => {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);
@@ -116,6 +118,47 @@ const SizeChangeComponent = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SizeChangeComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/Components/VentsSettingComponent.js":
+/*!****************************************************************!*\
+  !*** ./src/ProductBuilder/Components/VentsSettingComponent.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+
+const {
+  render,
+  useState
+} = wp.element;
+
+
+const VentsSettingComponent = () => {
+  const [vents, setVents] = useState(false);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "product-setting-item-component vents-settings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "d-flex align-items-center justify-content-between"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Vents"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    onChange: e => {
+      setVents(e);
+    },
+    checked: vents,
+    width: 40,
+    height: 20,
+    onColor: '#1396E7',
+    checkedIcon: '',
+    uncheckedIcon: ''
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (VentsSettingComponent);
 
 /***/ }),
 
