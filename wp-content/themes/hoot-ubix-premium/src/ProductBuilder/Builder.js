@@ -5,6 +5,7 @@ import InsulationSettingComponent from "./Components/InsulationSettingComponent"
 import VentsSettingComponent from "./Components/VentsSettingComponent";
 import LockPlacementSettingComponent from "./Components/LockPlacementSettingComponent";
 import PanelSettingComponent from "./Components/PanelSettingComponent";
+import RollerTypeSettingComponent from "./Components/RollerTypeSettingComponent";
 
 const Builder = () => {
   return (
@@ -25,6 +26,7 @@ const Builder = () => {
           <VentsSettingComponent />
           <LockPlacementSettingComponent />
           <PanelSettingComponent />
+          <RollerTypeSettingComponent />
         </div>
       </div>
     </div>

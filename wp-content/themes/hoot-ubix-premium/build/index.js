@@ -18,6 +18,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/VentsSettingComponent */ "./src/ProductBuilder/Components/VentsSettingComponent.js");
 /* harmony import */ var _Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/LockPlacementSettingComponent */ "./src/ProductBuilder/Components/LockPlacementSettingComponent.js");
 /* harmony import */ var _Components_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/PanelSettingComponent */ "./src/ProductBuilder/Components/PanelSettingComponent.js");
+/* harmony import */ var _Components_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Components/RollerTypeSettingComponent */ "./src/ProductBuilder/Components/RollerTypeSettingComponent.js");
+
 
 
 
@@ -43,7 +45,7 @@ const Builder = () => {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);
@@ -174,6 +176,55 @@ const PanelSettingComponent = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PanelSettingComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/Components/RollerTypeSettingComponent.js":
+/*!*********************************************************************!*\
+  !*** ./src/ProductBuilder/Components/RollerTypeSettingComponent.js ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+
+const {
+  render,
+  useState
+} = wp.element;
+
+
+const RollerTypeSettingComponent = () => {
+  const [option, setOption] = useState(1);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "product-setting-item-component lock-placement-settings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Roller Type"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "d-flex button-wrapper align-items-center justify-content-between"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    class: "radio-container"
+  }, "2\u201D Steel Nylon", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "radio",
+    checked: "checked",
+    name: "radio",
+    value: "1"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: "checkmark"
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    class: "radio-container"
+  }, "3\u201D Steel Nylon", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "radio",
+    checked: "checked",
+    name: "radio",
+    value: "1"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    class: "checkmark"
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RollerTypeSettingComponent);
 
 /***/ }),
 
