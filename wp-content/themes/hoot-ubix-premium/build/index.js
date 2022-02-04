@@ -16,6 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/WindowsSettingComponent */ "./src/ProductBuilder/Components/WindowsSettingComponent.js");
 /* harmony import */ var _Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/InsulationSettingComponent */ "./src/ProductBuilder/Components/InsulationSettingComponent.js");
 /* harmony import */ var _Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/VentsSettingComponent */ "./src/ProductBuilder/Components/VentsSettingComponent.js");
+/* harmony import */ var _Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/LockPlacementSettingComponent */ "./src/ProductBuilder/Components/LockPlacementSettingComponent.js");
+
 
 
 
@@ -39,7 +41,7 @@ const Builder = () => {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);
@@ -84,6 +86,49 @@ const InsulationSettingComponent = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (InsulationSettingComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/Components/LockPlacementSettingComponent.js":
+/*!************************************************************************!*\
+  !*** ./src/ProductBuilder/Components/LockPlacementSettingComponent.js ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+
+const {
+  render,
+  useState
+} = wp.element;
+
+
+const LockPlacementSettingComponent = () => {
+  const [option, setOption] = useState(1);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "product-setting-item-component lock-placement-settings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Lock Placement"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "d-flex button-wrapper align-items-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    className: `button ${option == 1 ? 'active' : ''}`,
+    onClick: e => {
+      setOption(1);
+    }
+  }, "Inside"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    type: "button",
+    className: `button ${option == 2 ? 'active' : ''}`,
+    onClick: e => {
+      setOption(2);
+    }
+  }, "Outside")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LockPlacementSettingComponent);
 
 /***/ }),
 
