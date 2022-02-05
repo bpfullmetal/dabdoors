@@ -33,6 +33,11 @@ const Builder = () => {
           <TrackRadiusSettingComponent />
           <ColorsSettingComponent />
           <PremiumColorsSettingComponent />
+          <div className="product-setting-item-component addCartButton">
+            <button type="button" className="btn btn-add-cart">
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>

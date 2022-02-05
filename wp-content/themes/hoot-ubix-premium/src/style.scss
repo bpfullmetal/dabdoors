@@ -158,6 +158,25 @@ body.singular-product  {
               border-radius: 4px;
             }
           }
+
+          &.addCartButton {
+            padding-bottom: 50px;
+            button {
+              padding: 15px;
+              background-color: #1396E7;
+              font-family: Lato;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 14px;
+              color: #FFFFFF;
+              border: 1px solid #1396E7;
+              transition: all .25s;
+              &:hover {
+                opacity: 0.6;
+              }
+            }
+          }
         }
       }
     }
