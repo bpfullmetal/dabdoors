@@ -133,6 +133,10 @@ body #single-product-builder .product-builder-content .product-container #produc
 body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.no-window:hover .btn.btn-add {
   opacity: 1;
 }
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.active-window {
+  border: 4px solid #FFF;
+  background: #5f5250;
+}
 body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.active-window:hover .btn.btn-remove {
   opacity: 1;
 }
