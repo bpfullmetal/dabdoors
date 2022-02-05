@@ -187,3 +187,39 @@ body.singular-product  {
     background: #1396e7;
   }
 }
+
+.slider-bar {
+  padding: 20px 0px;
+  flex: 1;
+  .horizontal-slider {
+    flex: 1;
+    margin-right: 24px;
+    margin-top: 20px;
+    height: 4px;
+    border-radius: 13px;
+    .example-thumb {
+        width: 10px;
+        height: 10px;
+        top: -3px;
+        border-radius: 50%;
+        background-color: #1396E7;
+        font-size: 0px;
+        outline: none !important;
+        cursor: pointer;
+    }
+    .example-track.example-track-0 {
+      background-color: #1396E7;
+      height: 4px;
+      overflow: hidden;
+    }
+    .example-track.example-track-1 {
+      background-color: #F1F1F1;
+      height: 4px;
+      overflow: hidden;
+    }
+  }
+  .minmax {
+      padding-left: 20px;
+      padding-right: 65px;
+  }
+}
