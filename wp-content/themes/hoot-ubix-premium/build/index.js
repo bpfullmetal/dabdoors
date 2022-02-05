@@ -12,16 +12,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assets/img_logo.png */ "./src/assets/img_logo.png");
-/* harmony import */ var _Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/SizeChangeComponent */ "./src/ProductBuilder/Components/SizeChangeComponent.js");
-/* harmony import */ var _Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/WindowsSettingComponent */ "./src/ProductBuilder/Components/WindowsSettingComponent.js");
-/* harmony import */ var _Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/InsulationSettingComponent */ "./src/ProductBuilder/Components/InsulationSettingComponent.js");
-/* harmony import */ var _Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/VentsSettingComponent */ "./src/ProductBuilder/Components/VentsSettingComponent.js");
-/* harmony import */ var _Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/LockPlacementSettingComponent */ "./src/ProductBuilder/Components/LockPlacementSettingComponent.js");
-/* harmony import */ var _Components_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/PanelSettingComponent */ "./src/ProductBuilder/Components/PanelSettingComponent.js");
-/* harmony import */ var _Components_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Components/RollerTypeSettingComponent */ "./src/ProductBuilder/Components/RollerTypeSettingComponent.js");
-/* harmony import */ var _Components_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Components/TrackRadiusSettingComponent */ "./src/ProductBuilder/Components/TrackRadiusSettingComponent.js");
-/* harmony import */ var _Components_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Components/ColorsSettingComponent */ "./src/ProductBuilder/Components/ColorsSettingComponent.js");
-/* harmony import */ var _Components_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Components/PremiumColorsSettingComponent */ "./src/ProductBuilder/Components/PremiumColorsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingsComponents/SizeChangeComponent */ "./src/ProductBuilder/SettingsComponents/SizeChangeComponent.js");
+/* harmony import */ var _SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SettingsComponents/WindowsSettingComponent */ "./src/ProductBuilder/SettingsComponents/WindowsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SettingsComponents/InsulationSettingComponent */ "./src/ProductBuilder/SettingsComponents/InsulationSettingComponent.js");
+/* harmony import */ var _SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SettingsComponents/VentsSettingComponent */ "./src/ProductBuilder/SettingsComponents/VentsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SettingsComponents/LockPlacementSettingComponent */ "./src/ProductBuilder/SettingsComponents/LockPlacementSettingComponent.js");
+/* harmony import */ var _SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SettingsComponents/PanelSettingComponent */ "./src/ProductBuilder/SettingsComponents/PanelSettingComponent.js");
+/* harmony import */ var _SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SettingsComponents/RollerTypeSettingComponent */ "./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js");
+/* harmony import */ var _SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsComponents/TrackRadiusSettingComponent */ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js");
+/* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
 
 
 
@@ -51,7 +51,7 @@ const Builder = () => {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Components_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -63,10 +63,10 @@ const Builder = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/ColorsSettingComponent.js":
-/*!*****************************************************************!*\
-  !*** ./src/ProductBuilder/Components/ColorsSettingComponent.js ***!
-  \*****************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js":
+/*!*************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js ***!
+  \*************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -110,10 +110,10 @@ const ColorsSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/InsulationSettingComponent.js":
-/*!*********************************************************************!*\
-  !*** ./src/ProductBuilder/Components/InsulationSettingComponent.js ***!
-  \*********************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/InsulationSettingComponent.js":
+/*!*****************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/InsulationSettingComponent.js ***!
+  \*****************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -151,10 +151,10 @@ const InsulationSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/LockPlacementSettingComponent.js":
-/*!************************************************************************!*\
-  !*** ./src/ProductBuilder/Components/LockPlacementSettingComponent.js ***!
-  \************************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/LockPlacementSettingComponent.js":
+/*!********************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/LockPlacementSettingComponent.js ***!
+  \********************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -194,10 +194,10 @@ const LockPlacementSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/PanelSettingComponent.js":
-/*!****************************************************************!*\
-  !*** ./src/ProductBuilder/Components/PanelSettingComponent.js ***!
-  \****************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/PanelSettingComponent.js":
+/*!************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/PanelSettingComponent.js ***!
+  \************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -237,10 +237,10 @@ const PanelSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/PremiumColorsSettingComponent.js":
-/*!************************************************************************!*\
-  !*** ./src/ProductBuilder/Components/PremiumColorsSettingComponent.js ***!
-  \************************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js":
+/*!********************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js ***!
+  \********************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -288,10 +288,10 @@ const PremiumColorsSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/RollerTypeSettingComponent.js":
-/*!*********************************************************************!*\
-  !*** ./src/ProductBuilder/Components/RollerTypeSettingComponent.js ***!
-  \*********************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js":
+/*!*****************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js ***!
+  \*****************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -337,10 +337,10 @@ const RollerTypeSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/SizeChangeComponent.js":
-/*!**************************************************************!*\
-  !*** ./src/ProductBuilder/Components/SizeChangeComponent.js ***!
-  \**************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/SizeChangeComponent.js":
+/*!**********************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/SizeChangeComponent.js ***!
+  \**********************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -371,10 +371,10 @@ const SizeChangeComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/TrackRadiusSettingComponent.js":
-/*!**********************************************************************!*\
-  !*** ./src/ProductBuilder/Components/TrackRadiusSettingComponent.js ***!
-  \**********************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js":
+/*!******************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js ***!
+  \******************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -417,10 +417,10 @@ const TrackRadiusSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/VentsSettingComponent.js":
-/*!****************************************************************!*\
-  !*** ./src/ProductBuilder/Components/VentsSettingComponent.js ***!
-  \****************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/VentsSettingComponent.js":
+/*!************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/VentsSettingComponent.js ***!
+  \************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -458,10 +458,10 @@ const VentsSettingComponent = () => {
 
 /***/ }),
 
-/***/ "./src/ProductBuilder/Components/WindowsSettingComponent.js":
-/*!******************************************************************!*\
-  !*** ./src/ProductBuilder/Components/WindowsSettingComponent.js ***!
-  \******************************************************************/
+/***/ "./src/ProductBuilder/SettingsComponents/WindowsSettingComponent.js":
+/*!**************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/WindowsSettingComponent.js ***!
+  \**************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

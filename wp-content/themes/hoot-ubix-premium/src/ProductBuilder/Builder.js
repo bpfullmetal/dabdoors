@@ -1,14 +1,14 @@
 import Logo from "./../assets/img_logo.png";
-import SizeChangeComponent from "./Components/SizeChangeComponent";
-import WindowsSettingComponent from "./Components/WindowsSettingComponent";
-import InsulationSettingComponent from "./Components/InsulationSettingComponent";
-import VentsSettingComponent from "./Components/VentsSettingComponent";
-import LockPlacementSettingComponent from "./Components/LockPlacementSettingComponent";
-import PanelSettingComponent from "./Components/PanelSettingComponent";
-import RollerTypeSettingComponent from "./Components/RollerTypeSettingComponent";
-import TrackRadiusSettingComponent from "./Components/TrackRadiusSettingComponent";
-import ColorsSettingComponent from "./Components/ColorsSettingComponent";
-import PremiumColorsSettingComponent from "./Components/PremiumColorsSettingComponent";
+import SizeChangeComponent from "./SettingsComponents/SizeChangeComponent";
+import WindowsSettingComponent from "./SettingsComponents/WindowsSettingComponent";
+import InsulationSettingComponent from "./SettingsComponents/InsulationSettingComponent";
+import VentsSettingComponent from "./SettingsComponents/VentsSettingComponent";
+import LockPlacementSettingComponent from "./SettingsComponents/LockPlacementSettingComponent";
+import PanelSettingComponent from "./SettingsComponents/PanelSettingComponent";
+import RollerTypeSettingComponent from "./SettingsComponents/RollerTypeSettingComponent";
+import TrackRadiusSettingComponent from "./SettingsComponents/TrackRadiusSettingComponent";
+import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent";
+import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 
 const Builder = () => {
   return (
