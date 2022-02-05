@@ -76,6 +76,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _WindowComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WindowComponent */ "./src/ProductBuilder/CustomProductComponents/WindowComponent.js");
+/* harmony import */ var _VentsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VentsComponent */ "./src/ProductBuilder/CustomProductComponents/VentsComponent.js");
+
 
 
 
@@ -95,12 +97,50 @@ const ProductContainerComponent = () => {
     className: "window-wrapper"
   }, windows.map((e, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null);
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vent-wrapper"
-  }))))));
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProductContainerComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/CustomProductComponents/VentsComponent.js":
+/*!**********************************************************************!*\
+  !*** ./src/ProductBuilder/CustomProductComponents/VentsComponent.js ***!
+  \**********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../assets/img_vent_background.png */ "./src/assets/img_vent_background.png");
+
+
+
+const VentsComponent = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vents-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vent-item"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vent-item"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vent-item"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vent-item"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (VentsComponent);
 
 /***/ }),
 
@@ -3595,6 +3635,17 @@ if (false) {} else {
 
 "use strict";
 module.exports = __webpack_require__.p + "images/img_logo.4f15490d.png";
+
+/***/ }),
+
+/***/ "./src/assets/img_vent_background.png":
+/*!********************************************!*\
+  !*** ./src/assets/img_vent_background.png ***!
+  \********************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/img_vent_background.cc04b1db.png";
 
 /***/ }),
 
