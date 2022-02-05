@@ -7,6 +7,7 @@ import LockPlacementSettingComponent from "./Components/LockPlacementSettingComp
 import PanelSettingComponent from "./Components/PanelSettingComponent";
 import RollerTypeSettingComponent from "./Components/RollerTypeSettingComponent";
 import TrackRadiusSettingComponent from "./Components/TrackRadiusSettingComponent";
+import ColorsSettingComponent from "./Components/ColorsSettingComponent";
 
 const Builder = () => {
   return (
@@ -29,6 +30,7 @@ const Builder = () => {
           <PanelSettingComponent />
           <RollerTypeSettingComponent />
           <TrackRadiusSettingComponent />
+          <ColorsSettingComponent />
         </div>
       </div>
     </div>
