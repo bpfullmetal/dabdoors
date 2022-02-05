@@ -1,6 +1,6 @@
 import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
-
+import WallSettingsComponent from "../WallSettingsComponents/WallSettingsComponent";
 const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
@@ -23,6 +23,7 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
           </div>
         </div>
       </div>
+      <WallSettingsComponent />
     </div>
   )
 }

@@ -96,6 +96,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _WindowComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WindowComponent */ "./src/ProductBuilder/CustomProductComponents/WindowComponent.js");
 /* harmony import */ var _VentsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VentsComponent */ "./src/ProductBuilder/CustomProductComponents/VentsComponent.js");
+/* harmony import */ var _WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../WallSettingsComponents/WallSettingsComponent */ "./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js");
+
 
 
 
@@ -127,7 +129,7 @@ const ProductContainerComponent = _ref => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], {
       enableWindow: hasWindow
     });
-  })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))));
+  })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProductContainerComponent);
@@ -700,6 +702,30 @@ const WindowsSettingComponent = _ref => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WindowsSettingComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js":
+/*!****************************************************************************!*\
+  !*** ./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js ***!
+  \****************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const WallSettingsComponent = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "wallSettings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "d-flex align-items-center"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WallSettingsComponent);
 
 /***/ }),
 
