@@ -142,6 +142,17 @@ body.singular-product #single-product-builder .product-builder-content .product-
   box-sizing: border-box;
   padding: 0px;
 }
+body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .addPrice {
+  padding: 2px 8px;
+  background-color: #EBFFF0;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #028C29;
+  border-radius: 4px;
+}
 
 .d-flex {
   display: flex;
