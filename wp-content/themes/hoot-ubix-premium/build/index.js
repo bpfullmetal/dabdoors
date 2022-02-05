@@ -43,6 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 const Builder = () => {
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -56,7 +57,8 @@ const Builder = () => {
     className: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
     hasWindow: hasWindow,
-    hasVents: hasVents
+    hasVents: hasVents,
+    colorIndex: colorIndex
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -67,7 +69,10 @@ const Builder = () => {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
     onChange: e => setHasVents(e)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    colorIndex: colorIndex,
+    onChange: e => setColorIndex(e)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -98,9 +103,11 @@ __webpack_require__.r(__webpack_exports__);
 const ProductContainerComponent = _ref => {
   let {
     hasWindow,
-    hasVents
+    hasVents,
+    colorIndex
   } = _ref;
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  let colors = ['#ADA487', '#D1C394', '#9A8333'];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -110,7 +117,10 @@ const ProductContainerComponent = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "inline-door"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "inline-wrapper"
+    className: "inline-wrapper",
+    style: {
+      backgroundColor: colors[colorIndex]
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "window-wrapper"
   }, windows.map((e, index) => {
@@ -263,19 +273,22 @@ const {
 } = wp.element;
 
 
-const ColorsSettingComponent = () => {
-  let colors = ['#ADA487', '#D1C394', '#9A8333'];
-  const [option, setOption] = useState(0);
+const ColorsSettingComponent = _ref => {
+  let {
+    colorIndex,
+    onChange
+  } = _ref;
+  let colors = ['#ADA487', '#D1C394', '#9A8333']; // const [option, setOption] = useState(0);
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component colors-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Colors"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center colors-wrapper"
   }, colors.map((e, index) => {
-    console.log('index=', index);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "color-item",
       style: {
-        border: `2px solid ${option == index ? e : '#FFF'}`
+        border: `2px solid ${colorIndex == index ? e : '#FFF'}`
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
@@ -283,7 +296,7 @@ const ColorsSettingComponent = () => {
       style: {
         backgroundColor: `${e}`
       },
-      onClick: e => setOption(index)
+      onClick: e => onChange(index)
     }));
   })));
 };

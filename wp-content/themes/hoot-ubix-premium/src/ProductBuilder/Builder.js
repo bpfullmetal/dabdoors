@@ -15,6 +15,7 @@ import ProductContainerComponent from "./CustomProductComponents/ProductContaine
 const Builder = () => {
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
+  const [colorIndex, setColorIndex] = useState(0);
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -23,7 +24,7 @@ const Builder = () => {
       </div>
       <div className="product-builder-content">
         <div className="product-container">
-          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} />
+          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} colorIndex={colorIndex} />
         </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
@@ -37,7 +38,7 @@ const Builder = () => {
           <PanelSettingComponent />
           <RollerTypeSettingComponent />
           <TrackRadiusSettingComponent />
-          <ColorsSettingComponent />
+          <ColorsSettingComponent colorIndex={colorIndex} onChange={(e) => setColorIndex(e)} />
           <PremiumColorsSettingComponent />
           <div className="product-setting-item-component addCartButton">
             <button type="button" className="btn btn-add-cart">
