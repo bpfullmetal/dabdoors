@@ -1,7 +1,7 @@
 import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
 
-const ProductContainerComponent = () => {
+const ProductContainerComponent = ({ hasWindow }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <div id="product-container">
@@ -13,7 +13,7 @@ const ProductContainerComponent = () => {
               <div className="window-wrapper">
                 {
                   windows.map((e, index) => {
-                    return <WindowComponent />
+                    return <WindowComponent enableWindow={hasWindow} />
                   })
                 }
               </div>

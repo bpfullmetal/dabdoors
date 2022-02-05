@@ -11,18 +11,21 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../assets/img_logo.png */ "./src/assets/img_logo.png");
-/* harmony import */ var _SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingsComponents/SizeChangeComponent */ "./src/ProductBuilder/SettingsComponents/SizeChangeComponent.js");
-/* harmony import */ var _SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SettingsComponents/WindowsSettingComponent */ "./src/ProductBuilder/SettingsComponents/WindowsSettingComponent.js");
-/* harmony import */ var _SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SettingsComponents/InsulationSettingComponent */ "./src/ProductBuilder/SettingsComponents/InsulationSettingComponent.js");
-/* harmony import */ var _SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SettingsComponents/VentsSettingComponent */ "./src/ProductBuilder/SettingsComponents/VentsSettingComponent.js");
-/* harmony import */ var _SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SettingsComponents/LockPlacementSettingComponent */ "./src/ProductBuilder/SettingsComponents/LockPlacementSettingComponent.js");
-/* harmony import */ var _SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SettingsComponents/PanelSettingComponent */ "./src/ProductBuilder/SettingsComponents/PanelSettingComponent.js");
-/* harmony import */ var _SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SettingsComponents/RollerTypeSettingComponent */ "./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js");
-/* harmony import */ var _SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsComponents/TrackRadiusSettingComponent */ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js");
-/* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
-/* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
-/* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../assets/img_logo.png */ "./src/assets/img_logo.png");
+/* harmony import */ var _SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SettingsComponents/SizeChangeComponent */ "./src/ProductBuilder/SettingsComponents/SizeChangeComponent.js");
+/* harmony import */ var _SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SettingsComponents/WindowsSettingComponent */ "./src/ProductBuilder/SettingsComponents/WindowsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SettingsComponents/InsulationSettingComponent */ "./src/ProductBuilder/SettingsComponents/InsulationSettingComponent.js");
+/* harmony import */ var _SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SettingsComponents/VentsSettingComponent */ "./src/ProductBuilder/SettingsComponents/VentsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./SettingsComponents/LockPlacementSettingComponent */ "./src/ProductBuilder/SettingsComponents/LockPlacementSettingComponent.js");
+/* harmony import */ var _SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./SettingsComponents/PanelSettingComponent */ "./src/ProductBuilder/SettingsComponents/PanelSettingComponent.js");
+/* harmony import */ var _SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsComponents/RollerTypeSettingComponent */ "./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js");
+/* harmony import */ var _SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SettingsComponents/TrackRadiusSettingComponent */ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js");
+/* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
+/* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
+/* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
+
 
 
 
@@ -38,22 +41,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Builder = () => {
+  const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "title-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1__,
+    src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2__,
     className: "logo"
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Hurricane Garage Doors Product BuiLder")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-container"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    hasWindow: hasWindow
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    hasWindow: hasWindow,
+    onChange: e => setHasWindow(e)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -81,7 +90,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ProductContainerComponent = () => {
+const ProductContainerComponent = _ref => {
+  let {
+    hasWindow
+  } = _ref;
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
@@ -96,7 +108,9 @@ const ProductContainerComponent = () => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "window-wrapper"
   }, windows.map((e, index) => {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      enableWindow: hasWindow
+    });
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))));
 };
 
@@ -160,10 +174,13 @@ const {
   useState
 } = wp.element;
 
-const WindowComponent = () => {
+const WindowComponent = _ref => {
+  let {
+    enableWindow
+  } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `window-item ${hasWindow ? 'active-window' : 'no-window'}`
+    className: `window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => setHasWindow(true)
@@ -635,15 +652,18 @@ const {
 } = wp.element;
 
 
-const WindowsSettingComponent = () => {
-  const [hasWindow, setHasWindow] = useState(0);
+const WindowsSettingComponent = _ref => {
+  let {
+    hasWindow,
+    onChange
+  } = _ref;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Windows"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
-      setHasWindow(e);
+      onChange(e);
     },
     checked: hasWindow,
     width: 40,

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Logo from "./../assets/img_logo.png";
 import SizeChangeComponent from "./SettingsComponents/SizeChangeComponent";
 import WindowsSettingComponent from "./SettingsComponents/WindowsSettingComponent";
@@ -12,6 +13,8 @@ import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSet
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
 const Builder = () => {
+  const [hasWindow, setHasWindow] = useState(false);
+
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -20,14 +23,14 @@ const Builder = () => {
       </div>
       <div className="product-builder-content">
         <div className="product-container">
-          <ProductContainerComponent />
+          <ProductContainerComponent hasWindow={hasWindow} />
         </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
             <label>Customization Settings</label>
           </div>
           <SizeChangeComponent />
-          <WindowsSettingComponent />
+          <WindowsSettingComponent hasWindow={hasWindow} onChange={(e) => setHasWindow(e)} />
           <InsulationSettingComponent />
           <VentsSettingComponent />
           <LockPlacementSettingComponent />

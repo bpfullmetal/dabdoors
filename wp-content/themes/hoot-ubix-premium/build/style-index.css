@@ -116,7 +116,7 @@ body #single-product-builder .product-builder-content .product-container #produc
 body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item .btn:hover {
   background-color: #FEFEFE;
 }
-body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item::before {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item:not(.disableWindow)::before {
   position: absolute;
   content: "";
   width: 100%;
@@ -127,18 +127,21 @@ body #single-product-builder .product-builder-content .product-container #produc
   left: 0px;
   opacity: 0;
 }
-body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.no-window:hover::before {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item:not(.disableWindow).no-window:hover::before {
   opacity: 1;
 }
-body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.no-window:hover .btn.btn-add {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item:not(.disableWindow).no-window:hover .btn.btn-add {
   opacity: 1;
 }
-body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.active-window {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item:not(.disableWindow).active-window {
   border: 4px solid #FFF;
   background: #5f5250;
 }
-body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.active-window:hover .btn.btn-remove {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item:not(.disableWindow).active-window:hover .btn.btn-remove {
   opacity: 1;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.disableWindow {
+  border: none;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper {
   display: flex;

@@ -107,35 +107,40 @@ body {
                         }
                         opacity: 0;
                       }
-                      &::before {
-                        position: absolute;
-                        content: '';
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(255, 255, 255, 0.28);
-                        box-sizing: border-box;
-                        top: 0px;
-                        left: 0px;
-                        opacity: 0;
-                      }
-                      &.no-window {
-                        &:hover {
-                          &::before {
-                            opacity: 1;
-                          }
-                          .btn.btn-add {
-                            opacity: 1;
+                      &:not(.disableWindow) {
+                        &::before {
+                          position: absolute;
+                          content: '';
+                          width: 100%;
+                          height: 100%;
+                          background: rgba(255, 255, 255, 0.28);
+                          box-sizing: border-box;
+                          top: 0px;
+                          left: 0px;
+                          opacity: 0;
+                        }
+                        &.no-window {
+                          &:hover {
+                            &::before {
+                              opacity: 1;
+                            }
+                            .btn.btn-add {
+                              opacity: 1;
+                            }
                           }
                         }
-                      }
-                      &.active-window {
-                        &:hover {
-                          .btn.btn-remove {
-                            opacity: 1;
+                        &.active-window {
+                          &:hover {
+                            .btn.btn-remove {
+                              opacity: 1;
+                            }
                           }
+                          border: 4px solid #FFF;
+                          background: #5f5250;
                         }
-                        border: 4px solid #FFF;
-                        background: #5f5250;
+                      }
+                      &.disableWindow {
+                        border: none;
                       }
                     }
                   }

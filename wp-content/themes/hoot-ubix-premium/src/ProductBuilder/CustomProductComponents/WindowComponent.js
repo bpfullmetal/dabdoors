@@ -1,9 +1,9 @@
 const { render, useState } = wp.element;
 
-const WindowComponent = () => {
+const WindowComponent = ({ enableWindow }) => {
   const [hasWindow, setHasWindow] = useState(false);
   return (
-    <div className={`window-item ${hasWindow ? 'active-window' : 'no-window'}`}>
+    <div className={`window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
         hasWindow == false && <span className="btn btn-add" onClick={(e) => setHasWindow(true)}>
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
