@@ -36,6 +36,60 @@ body.singular-product  {
       .product-container {
         flex: 1;
         background: #F2F2F2;
+        padding: 30px 50px;
+        #product-container {
+          width: 100%;
+          height: 100%;
+          .wall-wrapper {
+            width: 100%;
+            height: 100%;
+            max-height: 450px;
+            background-image: url(./assets/grid.svg);
+            background-color: #CCAC7B;
+            background-size: 100% 100%;
+            padding: 70px 50px 0px 50px;
+            box-sizing: border-box;
+            .outline-door {
+              box-sizing: border-box;
+              border-top: 20px solid #FFF;
+              border-left: 17px solid #FFF;
+              border-right: 17px solid #FFF;
+              height: 100%;
+              width: 100%;
+              .inline-door {
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                border-top: 7px solid #A6A7A8;
+                border-left: 9px solid #C9C9C9;
+                border-right: 9px solid #C9C9C9;
+                .inline-wrapper {
+                  padding-top: 24px;
+                  padding-left: 20px;
+                  padding-right: 20px;
+                  background-color: #ADA487;
+                  width:100%;
+                  height: 100%;
+                  box-sizing: border-box;
+                  background-image: url(./assets/door_background.png);
+                  background-position: 0px -10px;
+                  .window-wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    > * {
+                      flex-basis: calc((100% - 90px) / 4);
+                      margin-bottom: 20px;
+                      height: 65px;
+                      border: 1.04035px dashed #FFFFFF;
+                      // box-sizing: border-box;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
       .product-custom-bar {
         width: 270px;

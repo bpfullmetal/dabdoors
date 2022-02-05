@@ -9,6 +9,7 @@ import RollerTypeSettingComponent from "./SettingsComponents/RollerTypeSettingCo
 import TrackRadiusSettingComponent from "./SettingsComponents/TrackRadiusSettingComponent";
 import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent";
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
+import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
 const Builder = () => {
   return (
@@ -18,7 +19,9 @@ const Builder = () => {
         <h2>Hurricane Garage Doors Product BuiLder</h2>
       </div>
       <div className="product-builder-content">
-        <div className="product-container"></div>
+        <div className="product-container">
+          <ProductContainerComponent />
+        </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
             <label>Customization Settings</label>

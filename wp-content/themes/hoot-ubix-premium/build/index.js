@@ -22,6 +22,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsComponents/TrackRadiusSettingComponent */ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js");
 /* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
 /* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
+/* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
+
 
 
 
@@ -47,7 +49,7 @@ const Builder = () => {
     className: "product-builder-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-container"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
@@ -60,6 +62,67 @@ const Builder = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js":
+/*!*********************************************************************************!*\
+  !*** ./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js ***!
+  \*********************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _WindowComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WindowComponent */ "./src/ProductBuilder/CustomProductComponents/WindowComponent.js");
+
+
+
+const ProductContainerComponent = () => {
+  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    id: "product-container"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "wall-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "outline-door"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "inline-door"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "inline-wrapper"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "window-wrapper"
+  }, windows.map((e, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], null);
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "vent-wrapper"
+  }))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProductContainerComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/CustomProductComponents/WindowComponent.js":
+/*!***********************************************************************!*\
+  !*** ./src/ProductBuilder/CustomProductComponents/WindowComponent.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const WindowComponent = () => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "window-item"
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WindowComponent);
 
 /***/ }),
 
