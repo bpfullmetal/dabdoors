@@ -14,7 +14,7 @@ import ProductContainerComponent from "./CustomProductComponents/ProductContaine
 
 const Builder = () => {
   const [hasWindow, setHasWindow] = useState(false);
-
+  const [hasVents, setHasVents] = useState(false);
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -23,7 +23,7 @@ const Builder = () => {
       </div>
       <div className="product-builder-content">
         <div className="product-container">
-          <ProductContainerComponent hasWindow={hasWindow} />
+          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} />
         </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
@@ -32,7 +32,7 @@ const Builder = () => {
           <SizeChangeComponent />
           <WindowsSettingComponent hasWindow={hasWindow} onChange={(e) => setHasWindow(e)} />
           <InsulationSettingComponent />
-          <VentsSettingComponent />
+          <VentsSettingComponent hasVents={hasVents} onChange={(e) => setHasVents(e)}/>
           <LockPlacementSettingComponent />
           <PanelSettingComponent />
           <RollerTypeSettingComponent />

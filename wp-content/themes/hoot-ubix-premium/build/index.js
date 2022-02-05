@@ -42,6 +42,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const Builder = () => {
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -54,7 +55,8 @@ const Builder = () => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    hasWindow: hasWindow
+    hasWindow: hasWindow,
+    hasVents: hasVents
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -62,7 +64,10 @@ const Builder = () => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
     onChange: e => setHasWindow(e)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    hasVents: hasVents,
+    onChange: e => setHasVents(e)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -92,7 +97,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const ProductContainerComponent = _ref => {
   let {
-    hasWindow
+    hasWindow,
+    hasVents
   } = _ref;
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -111,7 +117,7 @@ const ProductContainerComponent = _ref => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_1__["default"], {
       enableWindow: hasWindow
     });
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))));
+  })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_2__["default"], null))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProductContainerComponent);
@@ -611,17 +617,21 @@ const {
 } = wp.element;
 
 
-const VentsSettingComponent = () => {
-  const [vents, setVents] = useState(false);
+const VentsSettingComponent = _ref => {
+  let {
+    hasVents,
+    onChange
+  } = _ref;
+  // const [vents, setVents] = useState(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component vents-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Vents"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
-      setVents(e);
+      onChange(e);
     },
-    checked: vents,
+    checked: hasVents,
     width: 40,
     height: 20,
     onColor: '#1396E7',

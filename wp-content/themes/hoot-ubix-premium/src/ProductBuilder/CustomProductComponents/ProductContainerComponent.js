@@ -1,7 +1,7 @@
 import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
 
-const ProductContainerComponent = ({ hasWindow }) => {
+const ProductContainerComponent = ({ hasWindow, hasVents }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   return (
     <div id="product-container">
@@ -17,7 +17,7 @@ const ProductContainerComponent = ({ hasWindow }) => {
                   })
                 }
               </div>
-              <VentsComponent />
+              {hasVents && <VentsComponent />}
             </div>
           </div>
         </div>
