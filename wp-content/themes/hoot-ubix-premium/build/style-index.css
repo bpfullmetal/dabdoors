@@ -1,7 +1,11 @@
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************/
-body.singular-product #single-product-builder .title-section {
+body #single-product-builder {
+  padding: 85px 80px 80px;
+  background: #FAFBFB;
+}
+body #single-product-builder .title-section {
   padding: 20px 30px;
   height: 93px;
   background-color: #FFF;
@@ -12,12 +16,12 @@ body.singular-product #single-product-builder .title-section {
   box-sizing: border-box;
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
 }
-body.singular-product #single-product-builder .title-section .logo {
+body #single-product-builder .title-section .logo {
   position: absolute;
   left: 30px;
   top: 20px;
 }
-body.singular-product #single-product-builder .title-section h2 {
+body #single-product-builder .title-section h2 {
   text-align: center;
   font-family: Lato;
   font-style: normal;
@@ -28,20 +32,20 @@ body.singular-product #single-product-builder .title-section h2 {
   color: #000000;
   margin: 0px;
 }
-body.singular-product #single-product-builder .product-builder-content {
+body #single-product-builder .product-builder-content {
   display: flex;
   flex-wrap: wrap;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container {
+body #single-product-builder .product-builder-content .product-container {
   flex: 1;
   background: #F2F2F2;
   padding: 30px 50px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container {
+body #single-product-builder .product-builder-content .product-container #product-container {
   width: 100%;
   height: 100%;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper {
   width: 100%;
   height: 100%;
   max-height: 450px;
@@ -51,7 +55,7 @@ body.singular-product #single-product-builder .product-builder-content .product-
   padding: 70px 50px 0px 50px;
   box-sizing: border-box;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door {
   box-sizing: border-box;
   border-top: 20px solid #FFF;
   border-left: 17px solid #FFF;
@@ -59,7 +63,7 @@ body.singular-product #single-product-builder .product-builder-content .product-
   height: 100%;
   width: 100%;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -67,7 +71,7 @@ body.singular-product #single-product-builder .product-builder-content .product-
   border-left: 9px solid #C9C9C9;
   border-right: 9px solid #C9C9C9;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper {
   padding-top: 24px;
   padding-left: 20px;
   padding-right: 20px;
@@ -78,12 +82,12 @@ body.singular-product #single-product-builder .product-builder-content .product-
   background-image: url(images/door_background.0de54f25.png);
   background-position: 0px -10px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > * {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > * {
   flex-basis: calc((100% - 90px) / 4);
   width: calc((100% - 90px) / 4);
   margin-bottom: 20px;
@@ -91,22 +95,22 @@ body.singular-product #single-product-builder .product-builder-content .product-
   border: 1.04035px dashed #FFFFFF;
   box-sizing: border-box;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-body.singular-product #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper > * {
+body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper > * {
   flex-basis: calc((100% - 90px) / 4);
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar {
+body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;
   background-color: #FFF;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .setting-title-section {
+body #single-product-builder .product-builder-content .product-custom-bar .setting-title-section {
   padding: 20px 30px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .setting-title-section label {
+body #single-product-builder .product-builder-content .product-custom-bar .setting-title-section label {
   font-family: Lato;
   font-style: normal;
   font-weight: 600;
@@ -115,13 +119,13 @@ body.singular-product #single-product-builder .product-builder-content .product-
   text-transform: uppercase;
   color: #878787;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component {
   padding: 15px 30px;
   border-top: 1px solid rgba(236, 236, 236, 0.8);
   display: flex;
   flex-direction: column;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component label {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component label {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -129,13 +133,13 @@ body.singular-product #single-product-builder .product-builder-content .product-
   line-height: 14px;
   color: #333333;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper span {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper span {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -145,11 +149,11 @@ body.singular-product #single-product-builder .product-builder-content .product-
   color: rgba(135, 135, 135, 0.6);
   margin-right: 5px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper input {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper input {
   max-width: 75px;
   border-radius: 4px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.window-settings .description {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.window-settings .description {
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -159,10 +163,10 @@ body.singular-product #single-product-builder .product-builder-content .product-
   max-width: 165px;
   margin-top: 10px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper {
   margin-top: 15px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper button {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper button {
   margin-right: 10px;
   width: 80px;
   height: 22px;
@@ -176,15 +180,18 @@ body.singular-product #single-product-builder .product-builder-content .product-
   line-height: 12px;
   color: rgba(51, 51, 51, 0.5);
   border-radius: 56px;
+  border: none !important;
+  box-shadow: none !important;
+  background: #F2F2F2 !important;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper button.active {
-  background: #1396E7;
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper button.active {
+  background: #1396E7 !important;
   color: #FFF;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper {
   margin-top: 10px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item {
   margin-right: 8px;
   padding: 0px;
   width: 24px;
@@ -195,17 +202,19 @@ body.singular-product #single-product-builder .product-builder-content .product-
   justify-content: center;
   align-items: center;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item:not(:last-child) {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item:not(:last-child) {
   margin-right: 10px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item button {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .colors-wrapper .color-item button {
   width: 18px;
   height: 18px;
   border-radius: 50%;
   box-sizing: border-box;
   padding: 0px;
+  border: none !important;
+  box-shadow: none !important;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .addPrice {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.colors-settings .addPrice {
   padding: 2px 8px;
   background-color: #EBFFF0;
   font-family: Lato;
@@ -216,10 +225,10 @@ body.singular-product #single-product-builder .product-builder-content .product-
   color: #028C29;
   border-radius: 4px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton {
   padding-bottom: 50px;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button {
   padding: 15px;
   background-color: #1396E7;
   font-family: Lato;
@@ -231,7 +240,7 @@ body.singular-product #single-product-builder .product-builder-content .product-
   border: 1px solid #1396E7;
   transition: all 0.25s;
 }
-body.singular-product #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button:hover {
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button:hover {
   opacity: 0.6;
 }
 
