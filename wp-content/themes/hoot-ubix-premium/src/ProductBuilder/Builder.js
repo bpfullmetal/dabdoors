@@ -16,6 +16,7 @@ const Builder = () => {
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
+
   return (
     <div className="product-builder">
       <div className="title-section">
