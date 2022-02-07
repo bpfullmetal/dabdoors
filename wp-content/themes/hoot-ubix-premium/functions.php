@@ -130,3 +130,13 @@ function ajaxHandleForTestHook() {
 
 add_action( 'wp_ajax_nopriv_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
 add_action( 'wp_ajax_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Product Builder Options',
+		'menu_title'	=> 'Product Builder Options',
+		'menu_slug' 	=> 'product-builder-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+}
