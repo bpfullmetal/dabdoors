@@ -718,11 +718,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const WallSettingsComponent = () => {
+  let indexes = ['grid', 'single-line', 'single'];
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "wallSettings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center"
-  }));
+  }, indexes.map((e, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "wall-item",
+      style: {
+        border: `2px solid ${0 == index ? e : '#FFF'}`
+      }
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+      type: "button",
+      className: `btn-color button ${e}`
+    }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WallSettingsComponent);

@@ -154,6 +154,42 @@ body #single-product-builder .product-builder-content .product-container #produc
 body #single-product-builder .product-builder-content .product-container #product-container .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper > * img {
   width: 100%;
 }
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item {
+  margin-right: 18px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: none;
+  box-shadow: none;
+  border: none;
+  padding: 0px;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item button.grid {
+  background-image: url(images/img_grid.95fe5a15.png);
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item button.single-line {
+  background-image: url(images/img_single_grid.06ca021a.png);
+}
+body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item button.single {
+  background-color: #CCAC7B;
+}
 body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;
   background-color: #FFF;

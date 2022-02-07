@@ -159,6 +159,43 @@ body {
               }
             }
           }
+          .wallSettings {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            .wall-item {
+              margin-right: 18px;
+              // padding: 4px;
+              box-sizing: border-box;
+              width: 40px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+              button {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                background-color: none;
+                box-shadow: none;
+                border: none;
+                padding: 0px;
+                &.grid {
+                  background-image: url(./assets/img_grid.png);
+                }
+                &.single-line {
+                  background-image: url(./assets/img_single_grid.png);
+                }
+                &.single {
+                  background-color: #CCAC7B;
+                }
+              }
+            }
+          }
         }
       }
       .product-custom-bar {
