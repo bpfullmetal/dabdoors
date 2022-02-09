@@ -773,33 +773,27 @@ const {
 
 
 const Votes = () => {
-  const [votes, setVotes] = useState(0);
+  const [adminProperties, setAdminProperties] = useState(0);
 
-  const addVote = () => {
-    // setVotes(votes + 1);
-    // console.log(jQuery('#section-woocommerce'));
+  const getAdminProperties = () => {
     let formData = {
-      action: 'ajaxHandleForTestHook',
-      item_id: 1,
-      values: 10
+      action: 'getAdminProperties'
     };
     jQuery.ajax({
       type: "post",
       dataType: "json",
       url: 'http://localhost/garage/wp-admin/admin-ajax.php',
       data: formData,
-      success: function (msg) {
-        console.log(msg);
+      success: function (response) {
+        setAdminProperties(response);
       }
     });
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], null) // <div>
-  //   <p>
-  //     <button onClick={addVote}>Call the Hooks</button>
-  //   </p>
-  // </div>
-  ;
+  getAdminProperties();
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    adminProperties: adminProperties
+  });
 };
 
 render((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(Votes, null), document.getElementById('single-product-builder'));

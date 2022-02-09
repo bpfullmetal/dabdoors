@@ -168,3 +168,6 @@ function getAdminProperties() {
   echo json_encode($adminProperties);
   wp_die();
 }
+
+add_action( 'wp_ajax_nopriv_getAdminProperties', 'getAdminProperties' );
+add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
