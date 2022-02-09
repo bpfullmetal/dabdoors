@@ -140,3 +140,31 @@ if( function_exists('acf_add_options_page') ) {
 		'redirect'		=> false
 	));
 }
+
+function getAdminProperties() {
+  $minimum_area_for_additional_fees = get_field('minimum_area_for_additional_fees', 'option');
+  $panel_group = get_field('panel', 'option');
+  $window_group = get_field('window', 'option');
+  $vents_group = get_field('vents', 'option');
+  $insulation_group = get_field('insulation', 'option');
+  $roller_type_group = get_field('roller_type', 'option');
+  $lock_placement_group = get_field('lock_placement', 'option');
+  $track_radius_group = get_field('track_radius', 'option');
+  $standard_colors_group = get_field('standard_colors', 'option');
+  $premium_colors_group = get_field('premium_colors', 'option');
+
+  $adminProperties = array(
+    'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
+    'panel_group' => $panel_group,
+    'window_group' => $window_group,
+    'vents_group' => $vents_group,
+    'insulation_group' => $insulation_group,
+    'roller_type_group' => $roller_type_group,
+    'lock_placement_group' => $lock_placement_group,
+    'track_radius_group' => $track_radius_group,
+    'standard_colors_group' => $standard_colors_group,
+    'premium_colors_group' => $premium_colors_group
+  );
+  echo json_encode($adminProperties);
+  wp_die();
+}
