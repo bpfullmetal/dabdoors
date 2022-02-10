@@ -330,7 +330,6 @@ body {
               border-radius: 4px;
             }
           }
-
           &.addCartButton {
             padding-bottom: 50px;
             button {
@@ -347,6 +346,29 @@ body {
               &:hover {
                 opacity: 0.6;
               }
+            }
+          }
+          &.price-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            label {
+              font-family: Lato;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 14px;
+              color: #878787;
+            }
+            p {
+              margin: 0px;
+              font-family: Lato;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 12px;
+              line-height: 14px;
+              color: #333333;
             }
           }
         }

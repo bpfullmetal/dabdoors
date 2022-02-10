@@ -336,6 +336,29 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button:hover {
   opacity: 0.6;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.price-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.price-section label {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #878787;
+}
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.price-section p {
+  margin: 0px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: #333333;
+}
 
 .d-flex {
   display: flex;

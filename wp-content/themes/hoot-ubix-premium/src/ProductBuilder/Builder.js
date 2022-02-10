@@ -41,6 +41,10 @@ const Builder = () => {
           <TrackRadiusSettingComponent />
           <ColorsSettingComponent colorIndex={colorIndex} onChange={(e) => setColorIndex(e)} />
           <PremiumColorsSettingComponent />
+          <div className="product-setting-item-component price-section">
+            <label>Total</label>
+            <p>$ 500</p>
+          </div>
           <div className="product-setting-item-component addCartButton">
             <button type="button" className="btn btn-add-cart">
               Add to Cart
