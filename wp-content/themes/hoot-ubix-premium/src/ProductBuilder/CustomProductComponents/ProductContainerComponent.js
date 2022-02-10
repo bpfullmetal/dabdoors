@@ -4,6 +4,7 @@ import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
 import WallSettingsComponent from "../WallSettingsComponents/WallSettingsComponent";
 import ZoomControlComponent from './ZoomControlComponent';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -11,23 +12,38 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   const [tileIndex, setTileIndex] = useState(0);
   return (
     <div id="product-container">
-      <ZoomControlComponent />
-      <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
-        <div className="outline-door">
-          <div className="inline-door">
-            <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
-              <div className="window-wrapper">
-                {
-                  windows.map((e, index) => {
-                    return <WindowComponent enableWindow={hasWindow} />
-                  })
-                }
+
+      <TransformWrapper
+        initialScale={1}
+        initialPositionX={0}
+        initialPositionY={0}
+      >
+        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+          <React.Fragment>
+            <ZoomControlComponent onZoomIn={() => { zoomIn() }} onZoomOut={() => { zoomOut() }} />
+            <TransformComponent>
+              <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
+                <div className="outline-door">
+                  <div className="inline-door">
+                    <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
+                      <div className="window-wrapper">
+                        {
+                          windows.map((e, index) => {
+                            return <WindowComponent enableWindow={hasWindow} />
+                          })
+                        }
+                      </div>
+                      {hasVents && <VentsComponent />}
+                    </div>
+                  </div>
+                </div>
               </div>
-              {hasVents && <VentsComponent />}
-            </div>
-          </div>
-        </div>
-      </div>
+            </TransformComponent>
+          </React.Fragment>
+        )}
+
+      </TransformWrapper>
+
       <WallSettingsComponent tileIndex={tileIndex} onChange={(e) => setTileIndex(e)}/>
     </div>
   )
