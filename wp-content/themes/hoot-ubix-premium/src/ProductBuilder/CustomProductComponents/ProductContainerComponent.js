@@ -3,6 +3,7 @@ import { useState } from 'react';
 import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
 import WallSettingsComponent from "../WallSettingsComponents/WallSettingsComponent";
+import ZoomControlComponent from './ZoomControlComponent';
 
 const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
@@ -10,6 +11,7 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   const [tileIndex, setTileIndex] = useState(0);
   return (
     <div id="product-container">
+      <ZoomControlComponent />
       <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
         <div className="outline-door">
           <div className="inline-door">

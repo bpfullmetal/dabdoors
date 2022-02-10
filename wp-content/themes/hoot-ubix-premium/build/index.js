@@ -101,6 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WindowComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WindowComponent */ "./src/ProductBuilder/CustomProductComponents/WindowComponent.js");
 /* harmony import */ var _VentsComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VentsComponent */ "./src/ProductBuilder/CustomProductComponents/VentsComponent.js");
 /* harmony import */ var _WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../WallSettingsComponents/WallSettingsComponent */ "./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js");
+/* harmony import */ var _ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ZoomControlComponent */ "./src/ProductBuilder/CustomProductComponents/ZoomControlComponent.js");
+
 
 
 
@@ -118,7 +120,7 @@ const ProductContainerComponent = _ref => {
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "outline-door"
@@ -263,6 +265,71 @@ const WindowComponent = _ref => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WindowComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/CustomProductComponents/ZoomControlComponent.js":
+/*!****************************************************************************!*\
+  !*** ./src/ProductBuilder/CustomProductComponents/ZoomControlComponent.js ***!
+  \****************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  render,
+  useState
+} = wp.element;
+
+const ZoomControlComponent = () => {
+  const [hasWindow, setHasWindow] = useState(false);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "zoom-control-panel"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "zoom-control"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "btn-zoom zoom-minus"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "15",
+    height: "14",
+    viewBox: "0 0 15 14",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M13.9999 13.4999L11.0093 10.5039L13.9999 13.4999ZM12.6666 6.49992C12.6666 8.00281 12.0696 9.44415 11.0069 10.5069C9.94415 11.5696 8.50281 12.1666 6.99992 12.1666C5.49703 12.1666 4.05569 11.5696 2.99298 10.5069C1.93027 9.44415 1.33325 8.00281 1.33325 6.49992C1.33325 4.99703 1.93027 3.55569 2.99298 2.49298C4.05569 1.43027 5.49703 0.833252 6.99992 0.833252C8.50281 0.833252 9.94415 1.43027 11.0069 2.49298C12.0696 3.55569 12.6666 4.99703 12.6666 6.49992V6.49992Z",
+    stroke: "#878787",
+    "stroke-linecap": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M8.66659 6.5H5.33325",
+    stroke: "#878787",
+    "stroke-linecap": "round"
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "zoom-value"
+  }, "100%"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "btn-zoom zoom-plus"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+    width: "15",
+    height: "14",
+    viewBox: "0 0 15 14",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M13.9999 13.4999L11.0093 10.5039L13.9999 13.4999ZM12.6666 6.49992C12.6666 8.00281 12.0696 9.44415 11.0069 10.5069C9.94415 11.5696 8.50281 12.1666 6.99992 12.1666C5.49703 12.1666 4.05569 11.5696 2.99298 10.5069C1.93027 9.44415 1.33325 8.00281 1.33325 6.49992C1.33325 4.99703 1.93027 3.55569 2.99298 2.49298C4.05569 1.43027 5.49703 0.833252 6.99992 0.833252C8.50281 0.833252 9.94415 1.43027 11.0069 2.49298C12.0696 3.55569 12.6666 4.99703 12.6666 6.49992V6.49992Z",
+    stroke: "#878787",
+    "stroke-linecap": "round"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
+    d: "M6.99984 4.1665V6.49984M6.99984 6.49984V8.83317M6.99984 6.49984H9.33317M6.99984 6.49984H4.6665",
+    stroke: "#878787",
+    "stroke-linecap": "round"
+  })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "size-section"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ZoomControlComponent);
 
 /***/ }),
 
