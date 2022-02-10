@@ -202,6 +202,54 @@ body {
               }
             }
           }
+          .zoom-control-panel {
+            background-color: #FFF;
+            border-radius: 16px;
+            margin-left: auto;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            .size-section,
+            .zoom-control {
+              padding: 15px 20px;
+            }
+            .zoom-control {
+              display: flex;
+              align-items: center;
+              border-right: 1px solid #F2F2F2;
+              .zoom-value {
+                font-family: Lato;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 14px;
+                color: #000000;
+                margin: 0px 10px;
+              }
+              .btn-zoom {
+                cursor: pointer;
+                &:hover {
+                  svg {
+                    path {
+                      transition: all .25s;
+                      stroke: #1396E7;
+                    }
+                  }
+                }
+              }
+            }
+            .size-section {
+              span {
+                font-family: Lato;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 17px;
+                color: #878787;
+              }
+            }
+          }
         }
       }
       .product-custom-bar {

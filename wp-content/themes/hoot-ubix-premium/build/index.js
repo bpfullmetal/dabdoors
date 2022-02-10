@@ -326,7 +326,7 @@ const ZoomControlComponent = () => {
     "stroke-linecap": "round"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-section"
-  }));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Size: 8\u201D X 18\u201D")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ZoomControlComponent);

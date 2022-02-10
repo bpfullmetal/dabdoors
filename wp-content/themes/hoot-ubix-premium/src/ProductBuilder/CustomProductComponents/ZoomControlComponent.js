@@ -20,7 +20,7 @@ const ZoomControlComponent = () => {
         </span>
       </div>
       <div className="size-section">
-
+        <span>Size: 8” X 18”</span>
       </div>
     </div>
   )

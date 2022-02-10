@@ -196,6 +196,50 @@ body #single-product-builder .product-builder-content .product-container #produc
 body #single-product-builder .product-builder-content .product-container #product-container .wallSettings .wall-item button.single {
   background-color: #CCAC7B;
 }
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel {
+  background-color: #FFF;
+  border-radius: 16px;
+  margin-left: auto;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .size-section,
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control {
+  padding: 15px 20px;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #F2F2F2;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control .zoom-value {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+  margin: 0px 10px;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control .btn-zoom {
+  cursor: pointer;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control .btn-zoom:hover svg path {
+  transition: all 0.25s;
+  stroke: #1396E7;
+}
+body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .size-section span {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #878787;
+}
 body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;
   background-color: #FFF;
