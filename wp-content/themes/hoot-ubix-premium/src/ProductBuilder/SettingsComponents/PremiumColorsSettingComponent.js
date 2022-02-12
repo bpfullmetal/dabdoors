@@ -13,7 +13,6 @@ const PremiumColorsSettingComponent = () => {
       <div className="d-flex align-items-center colors-wrapper">
         {
           colors.map((e, index) => {
-            console.log('index = ', index);
             return (
               <div className="color-item" style={{border: `2px solid ${option === index ? e : '#FFF'}`}}>
                 <button type="button" className="btn-color button" style={{ backgroundColor: `${e}` }} onClick={(e) => setOption(index)}></button>

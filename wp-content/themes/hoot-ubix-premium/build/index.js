@@ -584,7 +584,6 @@ const PremiumColorsSettingComponent = () => {
   }, "+$50")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center colors-wrapper"
   }, colors.map((e, index) => {
-    console.log('index = ', index);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "color-item",
       style: {
