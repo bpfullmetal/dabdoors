@@ -52,6 +52,7 @@ const Builder = _ref => {
   const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [isLoaded, setLoadingStatus] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -66,9 +67,13 @@ const Builder = _ref => {
   };
 
   const changePricewithLock = e => {
-    console.log(changedPriceWithLock, e);
     setPrice(price - changedPriceWithLock + e);
     setChangedPriceWithLock(e);
+  };
+
+  const changePriceWithPanelGroup = e => {
+    setPrice(price - changedPriceWithPanel + e);
+    setChangedPriceWithPanel(e);
   };
 
   React.useEffect(() => {
@@ -78,6 +83,14 @@ const Builder = _ref => {
     } else if (adminProperties.lock_placement_group.outside.default === true) {
       setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
       setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+    }
+
+    if (adminProperties.panel_group.raised.default === true) {
+      setPrice(price + Number(adminProperties.panel_group.raised.additional_price_$));
+      setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+    } else if (adminProperties.panel_group.flush.default === true) {
+      setPrice(price + Number(adminProperties.panel_group.flush.additional_price_$));
+      setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
     }
   }, []);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -129,7 +142,10 @@ const Builder = _ref => {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
     setAdditionalPriceForLock: e => changePricewithLock(e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    setAdditionalPriceForPanelGroup: e => changePriceWithPanelGroup(e),
+    properties: adminProperties.panel_group && adminProperties.panel_group
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
     onChange: e => setColorIndex(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -594,33 +610,37 @@ const LockPlacementSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 const {
   render,
   useState
 } = wp.element;
 
-
-const PanelSettingComponent = () => {
-  const [option, setOption] = useState(1);
+const PanelSettingComponent = _ref => {
+  let {
+    properties,
+    setAdditionalPriceForPanelGroup
+  } = _ref;
+  const [option, setOption] = useState(properties.raised.default == true ? 1 : properties.flush.default == true ? 2 : -1);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Panel"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `button ${option == 1 ? 'active' : ''}`,
     onClick: e => {
       setOption(1);
+      setAdditionalPriceForPanelGroup(Number(properties.raised.additional_price_$));
     }
-  }, "Raised"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, " Raised "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `button ${option == 2 ? 'active' : ''}`,
     onClick: e => {
       setOption(2);
+      setAdditionalPriceForPanelGroup(Number(properties.flush.additional_price_$));
     }
-  }, "Flush")));
+  }, " Flush ")));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PanelSettingComponent);

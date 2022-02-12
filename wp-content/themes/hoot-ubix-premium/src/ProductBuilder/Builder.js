@@ -21,6 +21,7 @@ const Builder = ({ adminProperties }) => {
   const [windowCnt, setWindowCnt] = useState(0); 
   const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
+  const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -34,9 +35,13 @@ const Builder = ({ adminProperties }) => {
   }
 
   const changePricewithLock = (e) => {
-    console.log(changedPriceWithLock, e);
     setPrice(price - changedPriceWithLock + e);
     setChangedPriceWithLock(e);
+  }
+
+  const changePriceWithPanelGroup = (e) => {
+    setPrice(price - changedPriceWithPanel + e);
+    setChangedPriceWithPanel(e);
   }
 
   React.useEffect(() => {
@@ -47,6 +52,15 @@ const Builder = ({ adminProperties }) => {
         setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
       }
+
+      if (adminProperties.panel_group.raised.default === true) {
+        setPrice(price + Number(adminProperties.panel_group.raised.additional_price_$));
+        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else if (adminProperties.panel_group.flush.default === true) {
+        setPrice(price + Number(adminProperties.panel_group.flush.additional_price_$));
+        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
+      }
+
   }, [])
 
   return (
@@ -93,7 +107,10 @@ const Builder = ({ adminProperties }) => {
             setAdditionalPriceForLock={(e) => changePricewithLock(e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
           />
-          <PanelSettingComponent />
+          <PanelSettingComponent
+            setAdditionalPriceForPanelGroup = {(e) => changePriceWithPanelGroup(e)}
+            properties={adminProperties.panel_group && adminProperties.panel_group}
+          />
           <RollerTypeSettingComponent />
           <TrackRadiusSettingComponent />
           <ColorsSettingComponent colorIndex={colorIndex} onChange={(e) => setColorIndex(e)} />

@@ -1,18 +1,27 @@
 const { render, useState } = wp.element;
-import Switch from "react-switch";
 
-const PanelSettingComponent = () => {
-  const [option, setOption] = useState(1);
+const PanelSettingComponent = ({ properties, setAdditionalPriceForPanelGroup }) => {
+  const [option, setOption] = useState(properties.raised.default == true ? 1 : (properties.flush.default == true ? 2 : -1));
   return (
     <div className="product-setting-item-component lock-placement-settings">
-      <label>Panel</label>
+      <label>{ properties.label }</label>
       <div className="d-flex button-wrapper align-items-center">
-        <button type="button" className={`button ${option == 1 ? 'active' : ''}`} onClick={(e) => {setOption(1);}}>
-          Raised
-        </button>
-        <button type="button" className={`button ${option == 2 ? 'active' : ''}`} onClick={(e) => {setOption(2);}}>
-          Flush
-        </button>
+        <button
+          type="button"
+          className={`button ${option == 1 ? 'active' : ''}`}
+          onClick={(e) => {
+            setOption(1);
+            setAdditionalPriceForPanelGroup(Number(properties.raised.additional_price_$))
+          }}
+        > Raised </button>
+        <button
+          type="button"
+          className={`button ${option == 2 ? 'active' : ''}`}
+          onClick={(e) => {
+            setOption(2);
+            setAdditionalPriceForPanelGroup(Number(properties.flush.additional_price_$))
+          }}
+        > Flush </button>
       </div>
     </div>
   );
