@@ -226,6 +226,10 @@ body #single-product-builder .product-builder-content .product-container #produc
   border-right: 1px solid #F2F2F2;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .zoom-control-panel .zoom-control .zoom-value {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-family: Lato;
   font-style: normal;
   font-weight: normal;
@@ -248,6 +252,10 @@ body #single-product-builder .product-builder-content .product-container #produc
   font-size: 14px;
   line-height: 17px;
   color: #878787;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;

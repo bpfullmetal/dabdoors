@@ -120,29 +120,40 @@ const ProductContainerComponent = _ref => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
+  let myComponent = React.createRef();
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
+    ref: myComponent,
     initialScale: 1,
     initialPositionX: 0,
-    initialPositionY: 0
+    initialPositionY: 0,
+    doubleClick: {
+      disabled: true
+    },
+    onZoomStop: (ref, event) => {
+      setScale(ref.state.scale * 100);
+    },
+    onInit: ref => {
+      console.log(ref);
+      myComponent = ref;
+    }
   }, _ref2 => {
     let {
-      scale,
       zoomIn,
       zoomOut,
       resetTransform,
-      pan,
       ...rest
     } = _ref2;
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(React.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
       onZoomIn: () => {
-        zoomIn();
-        console.log(document.querySelector('.wall-wrapper').getContext('2d'));
+        zoomIn(0.5, 200);
+        setScale(scale * 1.5);
       },
       onZoomOut: () => {
-        zoomOut();
-        console.log(pan);
+        zoomOut(0.5, 200);
+        setScale(scale / 1.5);
       },
       scale: scale
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -342,10 +353,10 @@ const ZoomControlComponent = _ref => {
     "stroke-linecap": "round"
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "zoom-value"
-  }, scale, " %"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, scale.toFixed(2), " %"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn-zoom zoom-plus",
-    onClick: () => {
-      onZoomIn();
+    onClick: event => {
+      onZoomIn(event);
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "15",

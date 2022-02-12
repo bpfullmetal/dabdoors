@@ -10,22 +10,32 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = useState(0);
+  const [scale, setScale] = useState(100)
+  let myComponent = React.createRef();
   return (
     <div id="product-container">
 
       <TransformWrapper
+        ref={myComponent}
         initialScale={1}
         initialPositionX={0}
         initialPositionY={0}
+        doubleClick={{
+          disabled: true
+        }}
+        onZoomStop={(ref, event) => {
+          setScale(ref.state.scale * 100);
+        }}
+        onInit={(ref) => {
+          console.log(ref);
+          myComponent = ref
+        }}
       >
-        {({ scale, zoomIn, zoomOut, resetTransform, pan, ...rest }) => (
+        {({ zoomIn, zoomOut, resetTransform, ...rest}) => (
           <React.Fragment>
             <ZoomControlComponent
-              onZoomIn={() => { 
-                zoomIn();
-                console.log(document.querySelector('.wall-wrapper').getContext('2d'))
-              }}
-              onZoomOut={() => { zoomOut(); console.log(pan)}}
+              onZoomIn={() => { zoomIn(0.5, 200); setScale(scale * 1.5)}}
+              onZoomOut={() => { zoomOut(0.5, 200); setScale(scale / 1.5) }}
               scale={scale}
             />
             <TransformComponent>

@@ -228,6 +228,7 @@ body {
               align-items: center;
               border-right: 1px solid #F2F2F2;
               .zoom-value {
+                user-select: none;
                 font-family: Lato;
                 font-style: normal;
                 font-weight: normal;
@@ -256,6 +257,7 @@ body {
                 font-size: 14px;
                 line-height: 17px;
                 color: #878787;
+                user-select: none;
               }
             }
           }
