@@ -2,6 +2,7 @@ const { render, useState } = wp.element;
 
 const LockPlacementSettingComponent = ({ properties, setAdditionalPriceForLock }) => {
   const [option, setOption] = useState(properties.inside.default === true ? 1 : (properties.outside.default == true ? 2 : -1));
+
   return (
     <div className="product-setting-item-component lock-placement-settings">
       <label>{ properties.label }</label>

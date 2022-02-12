@@ -13,17 +13,14 @@ import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSet
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
 const Builder = ({ adminProperties }) => {
+  console.log(adminProperties);
   const [price, setPrice] = useState(500);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
   const [windowCnt, setWindowCnt] = useState(0); 
-  if (adminProperties.lock_placement_group.inside.default == true) {
-    setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
-  } else if (adminProperties.lock_placement_group.outside.default == true) {
-    setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
-  }
-  // console.log(adminProperties);
+  const [isLoaded, setLoadingStatus] = useState(false);
+  const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -35,6 +32,23 @@ const Builder = ({ adminProperties }) => {
       }
     }
   }
+
+  const changePricewithLock = (e) => {
+    console.log(changedPriceWithLock, e);
+    setPrice(price - changedPriceWithLock + e);
+    setChangedPriceWithLock(e);
+  }
+
+  React.useEffect(() => {
+      if (adminProperties.lock_placement_group.inside.default === true) {
+        setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else if (adminProperties.lock_placement_group.outside.default === true) {
+        setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      }
+  }, [])
+
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -76,7 +90,7 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.vents_group && adminProperties.vents_group}
           />
           <LockPlacementSettingComponent
-            setAdditionalPriceForLock={(e) => setPrice(price + e)}
+            setAdditionalPriceForLock={(e) => changePricewithLock(e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
           />
           <PanelSettingComponent />

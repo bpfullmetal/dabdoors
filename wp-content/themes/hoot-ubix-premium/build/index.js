@@ -44,18 +44,14 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
+  console.log(adminProperties);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-
-  if (adminProperties.lock_placement_group.inside.default == true) {
-    setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
-  } else if (adminProperties.lock_placement_group.outside.default == true) {
-    setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
-  } // console.log(adminProperties);
-
+  const [isLoaded, setLoadingStatus] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -69,6 +65,21 @@ const Builder = _ref => {
     }
   };
 
+  const changePricewithLock = e => {
+    console.log(changedPriceWithLock, e);
+    setPrice(price - changedPriceWithLock + e);
+    setChangedPriceWithLock(e);
+  };
+
+  React.useEffect(() => {
+    if (adminProperties.lock_placement_group.inside.default === true) {
+      setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+    } else if (adminProperties.lock_placement_group.outside.default === true) {
+      setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+    }
+  }, []);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -116,7 +127,7 @@ const Builder = _ref => {
     },
     properties: adminProperties.vents_group && adminProperties.vents_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    setAdditionalPriceForLock: e => setPrice(price + e),
+    setAdditionalPriceForLock: e => changePricewithLock(e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
