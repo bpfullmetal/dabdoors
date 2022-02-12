@@ -17,7 +17,13 @@ const Builder = ({ adminProperties }) => {
   const [price, setPrice] = useState(500);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
-  const [colorIndex, setColorIndex] = useState(0);
+  const [colorIndex, setColorIndex] = useState(
+    adminProperties.standard_colors_group.select_button_options.findIndex(option => {
+      return option.default == true
+    }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
+      return option.default == true
+    }) : 0
+  );
   const [windowCnt, setWindowCnt] = useState(0); 
   const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
@@ -90,7 +96,17 @@ const Builder = ({ adminProperties }) => {
       </div>
       <div className="product-builder-content">
         <div className="product-container">
-          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} colorIndex={colorIndex} changeWindowsCount={(e) => {changeWindowsCount(e);}} />
+          <ProductContainerComponent
+            hasWindow={hasWindow}
+            hasVents={hasVents}
+            colorIndex={colorIndex}
+            colors={
+              adminProperties.standard_colors_group.select_button_options.map((option, index) => {
+                return option.select_color;
+              })
+            }
+            changeWindowsCount={(e) => {changeWindowsCount(e);}}
+          />
         </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
@@ -144,7 +160,11 @@ const Builder = ({ adminProperties }) => {
             setAdditionalPriceForRollerType={(e) => changePriceWithRollerType(e)}
           />
           <TrackRadiusSettingComponent />
-          <ColorsSettingComponent colorIndex={colorIndex} onChange={(e) => setColorIndex(e)} />
+          <ColorsSettingComponent
+            colorIndex={colorIndex}
+            onChange={(e) => setColorIndex(e)}
+            properties={adminProperties.standard_colors_group}
+          />
           <PremiumColorsSettingComponent />
           <div className="product-setting-item-component price-section">
             <label>Total</label>

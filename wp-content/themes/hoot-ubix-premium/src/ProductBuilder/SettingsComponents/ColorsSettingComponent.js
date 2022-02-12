@@ -1,9 +1,11 @@
 const { render, useState } = wp.element;
 import Switch from "react-switch";
 
-const ColorsSettingComponent = ({colorIndex, onChange}) => {
-  let colors = ['#ADA487', '#D1C394', '#9A8333'];
-  // const [option, setOption] = useState(0);
+const ColorsSettingComponent = ({properties, colorIndex, onChange}) => {
+  // let colors = ['#ADA487', '#D1C394', '#9A8333'];
+  let colors = properties.select_button_options.map((option, index) => {
+    return option.select_color;
+  });
   return (
     <div className="product-setting-item-component colors-settings">
       <label>Colors</label>

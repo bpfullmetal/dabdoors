@@ -48,7 +48,11 @@ const Builder = _ref => {
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProperties.standard_colors_group.select_button_options.findIndex(option => {
+    return option.default == true;
+  }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
+    return option.default == true;
+  }) : 0);
   const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [isLoaded, setLoadingStatus] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -131,6 +135,9 @@ const Builder = _ref => {
     hasWindow: hasWindow,
     hasVents: hasVents,
     colorIndex: colorIndex,
+    colors: adminProperties.standard_colors_group.select_button_options.map((option, index) => {
+      return option.select_color;
+    }),
     changeWindowsCount: e => {
       changeWindowsCount(e);
     }
@@ -182,7 +189,8 @@ const Builder = _ref => {
     setAdditionalPriceForRollerType: e => changePriceWithRollerType(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
-    onChange: e => setColorIndex(e)
+    onChange: e => setColorIndex(e),
+    properties: adminProperties.standard_colors_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -224,13 +232,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const ProductContainerComponent = _ref => {
   let {
+    colors,
     hasWindow,
     hasVents,
     colorIndex,
     changeWindowsCount
   } = _ref;
-  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  let colors = ['#ADA487', '#D1C394', '#9A8333'];
+  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // let colors = ['#ADA487', '#D1C394', '#9A8333'];
+
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -517,11 +526,14 @@ const {
 
 const ColorsSettingComponent = _ref => {
   let {
+    properties,
     colorIndex,
     onChange
   } = _ref;
-  let colors = ['#ADA487', '#D1C394', '#9A8333']; // const [option, setOption] = useState(0);
-
+  // let colors = ['#ADA487', '#D1C394', '#9A8333'];
+  let colors = properties.select_button_options.map((option, index) => {
+    return option.select_color;
+  });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component colors-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Colors"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
