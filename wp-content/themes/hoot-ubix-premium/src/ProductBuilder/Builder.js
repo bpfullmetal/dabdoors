@@ -58,7 +58,18 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.window_group && adminProperties.window_group}
           />
           <InsulationSettingComponent />
-          <VentsSettingComponent hasVents={hasVents} onChange={(e) => setHasVents(e)}/>
+          <VentsSettingComponent
+            hasVents={hasVents}
+            onChange={(e) => {
+              if (e == true) {
+                setPrice(price + Number(adminProperties.vents_group.additional_price_$_if_added));
+              } else {
+                setPrice(price - Number(adminProperties.vents_group.additional_price_$_if_added));
+              }
+              setHasVents(e);
+            }}
+            properties={adminProperties.vents_group && adminProperties.vents_group}
+          />
           <LockPlacementSettingComponent />
           <PanelSettingComponent />
           <RollerTypeSettingComponent />
