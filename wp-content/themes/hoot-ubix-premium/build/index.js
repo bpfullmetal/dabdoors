@@ -53,6 +53,7 @@ const Builder = _ref => {
   const [isLoaded, setLoadingStatus] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -76,22 +77,44 @@ const Builder = _ref => {
     setChangedPriceWithPanel(e);
   };
 
+  const changePriceWithRollerType = e => {
+    setPrice(price - changedPriceWithRollerType + e);
+    setChangedPriceWithRollerType(e);
+  };
+
   React.useEffect(() => {
+    let initialPrice = price;
+
     if (adminProperties.lock_placement_group.inside.default === true) {
-      setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
       setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
     } else if (adminProperties.lock_placement_group.outside.default === true) {
-      setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
       setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
     }
 
     if (adminProperties.panel_group.raised.default === true) {
-      setPrice(price + Number(adminProperties.panel_group.raised.additional_price_$));
+      initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
       setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
     } else if (adminProperties.panel_group.flush.default === true) {
-      setPrice(price + Number(adminProperties.panel_group.flush.additional_price_$));
+      initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
       setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
     }
+
+    if (adminProperties.roller_type_group) {
+      let index = adminProperties.roller_type_group.select_button_options.findIndex(e => {
+        return e.default == true;
+      });
+
+      if (index > -1) {
+        initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
+        setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
+      } else {
+        setChangedPriceWithRollerType(0);
+      }
+    }
+
+    setPrice(initialPrice);
   }, []);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
@@ -145,7 +168,10 @@ const Builder = _ref => {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     setAdditionalPriceForPanelGroup: e => changePriceWithPanelGroup(e),
     properties: adminProperties.panel_group && adminProperties.panel_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
+    setAdditionalPriceForRollerType: e => changePriceWithRollerType(e)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
     onChange: e => setColorIndex(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -715,31 +741,36 @@ const {
 } = wp.element;
 
 
-const RollerTypeSettingComponent = () => {
-  const [option, setOption] = useState(1);
+const RollerTypeSettingComponent = _ref => {
+  let {
+    properties,
+    setAdditionalPriceForRollerType
+  } = _ref;
+  const [selectedIndex, setSelectedIndex] = useState(properties.select_button_options.findIndex(option => {
+    return option.default === true;
+  }));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Roller Type"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    class: "radio-container"
-  }, "2\u201D Steel Nylon", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "radio",
-    checked: "checked",
-    name: "radio",
-    value: "1"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    class: "checkmark"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    class: "radio-container"
-  }, "3\u201D Steel Nylon", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    type: "radio",
-    checked: "checked",
-    name: "radio",
-    value: "1"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    class: "checkmark"
-  }))));
+  }, properties.select_button_options.map((option, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+      class: "radio-container",
+      for: `roller-type-${index}`
+    }, option.button_name, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+      id: `roller-type-${index}`,
+      type: "radio",
+      name: "radio",
+      value: index,
+      checked: selectedIndex == index ? 'checked' : '',
+      onChange: e => {
+        setSelectedIndex(index);
+        setAdditionalPriceForRollerType(Number(option.additional_price));
+      }
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "checkmark"
+    }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (RollerTypeSettingComponent);

@@ -22,6 +22,7 @@ const Builder = ({ adminProperties }) => {
   const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
+  const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -44,23 +45,41 @@ const Builder = ({ adminProperties }) => {
     setChangedPriceWithPanel(e);
   }
 
+  const changePriceWithRollerType = (e) => {
+    setPrice(price - changedPriceWithRollerType + e);
+    setChangedPriceWithRollerType(e);
+  }
+
   React.useEffect(() => {
+      let initialPrice = price;
       if (adminProperties.lock_placement_group.inside.default === true) {
-        setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
+        initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
       } else if (adminProperties.lock_placement_group.outside.default === true) {
-        setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
+        initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
       }
 
       if (adminProperties.panel_group.raised.default === true) {
-        setPrice(price + Number(adminProperties.panel_group.raised.additional_price_$));
+        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
         setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
       } else if (adminProperties.panel_group.flush.default === true) {
-        setPrice(price + Number(adminProperties.panel_group.flush.additional_price_$));
+        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
         setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
       }
 
+      if (adminProperties.roller_type_group) {
+        let index = adminProperties.roller_type_group.select_button_options.findIndex((e) => {
+          return e.default == true;
+        });
+        if (index > -1) {
+          initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
+          setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
+        } else {
+          setChangedPriceWithRollerType(0);
+        }
+      }
+      setPrice(initialPrice);
   }, [])
 
   return (
@@ -111,7 +130,10 @@ const Builder = ({ adminProperties }) => {
             setAdditionalPriceForPanelGroup = {(e) => changePriceWithPanelGroup(e)}
             properties={adminProperties.panel_group && adminProperties.panel_group}
           />
-          <RollerTypeSettingComponent />
+          <RollerTypeSettingComponent
+            properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
+            setAdditionalPriceForRollerType={(e) => changePriceWithRollerType(e)}
+          />
           <TrackRadiusSettingComponent />
           <ColorsSettingComponent colorIndex={colorIndex} onChange={(e) => setColorIndex(e)} />
           <PremiumColorsSettingComponent />
