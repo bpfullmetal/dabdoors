@@ -128,18 +128,23 @@ const ProductContainerComponent = _ref => {
     initialPositionY: 0
   }, _ref2 => {
     let {
+      scale,
       zoomIn,
       zoomOut,
       resetTransform,
+      pan,
       ...rest
     } = _ref2;
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(React.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
       onZoomIn: () => {
         zoomIn();
+        console.log(document.querySelector('.wall-wrapper').getContext('2d'));
       },
       onZoomOut: () => {
         zoomOut();
-      }
+        console.log(pan);
+      },
+      scale: scale
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -308,7 +313,8 @@ const {
 const ZoomControlComponent = _ref => {
   let {
     onZoomIn,
-    onZoomOut
+    onZoomOut,
+    scale
   } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -336,7 +342,7 @@ const ZoomControlComponent = _ref => {
     "stroke-linecap": "round"
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "zoom-value"
-  }, "100%"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, scale, " %"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn-zoom zoom-plus",
     onClick: () => {
       onZoomIn();

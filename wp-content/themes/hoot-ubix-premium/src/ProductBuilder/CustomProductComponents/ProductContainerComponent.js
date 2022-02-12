@@ -18,9 +18,16 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
         initialPositionX={0}
         initialPositionY={0}
       >
-        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+        {({ scale, zoomIn, zoomOut, resetTransform, pan, ...rest }) => (
           <React.Fragment>
-            <ZoomControlComponent onZoomIn={() => { zoomIn() }} onZoomOut={() => { zoomOut() }} />
+            <ZoomControlComponent
+              onZoomIn={() => { 
+                zoomIn();
+                console.log(document.querySelector('.wall-wrapper').getContext('2d'))
+              }}
+              onZoomOut={() => { zoomOut(); console.log(pan)}}
+              scale={scale}
+            />
             <TransformComponent>
               <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
                 <div className="outline-door">
