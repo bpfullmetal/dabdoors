@@ -6,15 +6,15 @@ import WallSettingsComponent from "../WallSettingsComponents/WallSettingsCompone
 import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
+const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex, changeWindowsCount }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = useState(0);
-  const [scale, setScale] = useState(100)
+  const [scale, setScale] = useState(100);
+  let [windowsCnt, setWindowsCnt] = useState(0);
   let myComponent = React.createRef();
   return (
     <div id="product-container">
-
       <TransformWrapper
         ref={myComponent}
         initialScale={1}
@@ -42,7 +42,16 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
                       <div className="window-wrapper">
                         {
                           windows.map((e, index) => {
-                            return <WindowComponent enableWindow={hasWindow} />
+                            return <WindowComponent enableWindow={hasWindow} addedWindow={(e) => {
+                              if (e == true) {
+                                windowsCnt ++;
+                                setWindowsCnt(windowsCnt);
+                              } else {
+                                windowsCnt --;
+                                setWindowsCnt(windowsCnt);
+                              }
+                              changeWindowsCount(windowsCnt);
+                            }}/>
                           })
                         }
                       </div>

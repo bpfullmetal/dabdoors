@@ -12,11 +12,15 @@ import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent"
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
-const Builder = () => {
+const Builder = ({ adminProperties }) => {
+  console.log(adminProperties);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
-
+  const [price, setPrice] = useState(500);
+  const changeWindowsCount = (e) => {
+    console.log(e);
+  }
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -25,14 +29,18 @@ const Builder = () => {
       </div>
       <div className="product-builder-content">
         <div className="product-container">
-          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} colorIndex={colorIndex} />
+          <ProductContainerComponent hasWindow={hasWindow} hasVents={hasVents} colorIndex={colorIndex} changeWindowsCount={(e) => {changeWindowsCount(e);}} />
         </div>
         <div className="product-custom-bar">
           <div className="setting-title-section">
             <label>Customization Settings</label>
           </div>
           <SizeChangeComponent />
-          <WindowsSettingComponent hasWindow={hasWindow} onChange={(e) => setHasWindow(e)} />
+          <WindowsSettingComponent
+            hasWindow={hasWindow}
+            onChange={(e) => setHasWindow(e)}
+            properties={adminProperties.window_group && adminProperties.window_group}
+          />
           <InsulationSettingComponent />
           <VentsSettingComponent hasVents={hasVents} onChange={(e) => setHasVents(e)}/>
           <LockPlacementSettingComponent />
@@ -43,7 +51,7 @@ const Builder = () => {
           <PremiumColorsSettingComponent />
           <div className="product-setting-item-component price-section">
             <label>Total</label>
-            <p>$ 500</p>
+            <p>$ {price}</p>
           </div>
           <div className="product-setting-item-component addCartButton">
             <button type="button" className="btn btn-add-cart">

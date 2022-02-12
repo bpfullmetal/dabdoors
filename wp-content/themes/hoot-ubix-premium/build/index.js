@@ -40,10 +40,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const Builder = () => {
+const Builder = _ref => {
+  let {
+    adminProperties
+  } = _ref;
+  console.log(adminProperties);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
+
+  const changeWindowsCount = e => {
+    console.log(e);
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -58,14 +68,18 @@ const Builder = () => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
     hasWindow: hasWindow,
     hasVents: hasVents,
-    colorIndex: colorIndex
+    colorIndex: colorIndex,
+    changeWindowsCount: e => {
+      changeWindowsCount(e);
+    }
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
-    onChange: e => setHasWindow(e)
+    onChange: e => setHasWindow(e),
+    properties: adminProperties.window_group && adminProperties.window_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
     onChange: e => setHasVents(e)
@@ -74,7 +88,7 @@ const Builder = () => {
     onChange: e => setColorIndex(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ 500")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -115,12 +129,14 @@ const ProductContainerComponent = _ref => {
   let {
     hasWindow,
     hasVents,
-    colorIndex
+    colorIndex,
+    changeWindowsCount
   } = _ref;
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
+  let [windowsCnt, setWindowsCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   let myComponent = React.createRef();
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
@@ -167,7 +183,18 @@ const ProductContainerComponent = _ref => {
       className: "window-wrapper"
     }, windows.map((e, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        enableWindow: hasWindow
+        enableWindow: hasWindow,
+        addedWindow: e => {
+          if (e == true) {
+            windowsCnt++;
+            setWindowsCnt(windowsCnt);
+          } else {
+            windowsCnt--;
+            setWindowsCnt(windowsCnt);
+          }
+
+          changeWindowsCount(windowsCnt);
+        }
       });
     })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -238,14 +265,18 @@ const {
 
 const WindowComponent = _ref => {
   let {
-    enableWindow
+    enableWindow,
+    addedWindow
   } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
-    onClick: e => setHasWindow(true)
+    onClick: e => {
+      setHasWindow(true);
+      addedWindow(true);
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "15",
     height: "15",
@@ -257,7 +288,10 @@ const WindowComponent = _ref => {
     fill: "#1D1E1D"
   }))), hasWindow == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-remove",
-    onClick: e => setHasWindow(false)
+    onClick: e => {
+      setHasWindow(false);
+      addedWindow(false);
+    }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "24",
     height: "24",
@@ -798,6 +832,7 @@ const {
 
 const WindowsSettingComponent = _ref => {
   let {
+    properties,
     hasWindow,
     onChange
   } = _ref;
@@ -805,7 +840,7 @@ const WindowsSettingComponent = _ref => {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Windows"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties?.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       onChange(e);
     },
@@ -885,7 +920,7 @@ const {
 
 
 const Votes = () => {
-  const [adminProperties, setAdminProperties] = useState(0);
+  const [adminProperties, setAdminProperties] = useState(null);
 
   const getAdminProperties = () => {
     let formData = {
@@ -903,7 +938,7 @@ const Votes = () => {
   };
 
   getAdminProperties();
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return adminProperties && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], {
     adminProperties: adminProperties
   });
 };

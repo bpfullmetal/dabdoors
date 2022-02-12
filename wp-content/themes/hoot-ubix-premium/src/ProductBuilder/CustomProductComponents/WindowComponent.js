@@ -1,18 +1,18 @@
 const { render, useState } = wp.element;
 
-const WindowComponent = ({ enableWindow }) => {
+const WindowComponent = ({ enableWindow, addedWindow }) => {
   const [hasWindow, setHasWindow] = useState(false);
   return (
     <div className={`window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
-        hasWindow == false && <span className="btn btn-add" onClick={(e) => setHasWindow(true)}>
+        hasWindow == false && <span className="btn btn-add" onClick={(e) => {setHasWindow(true); addedWindow(true)}}>
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.15625 6.34375V0H6.34375V6.34375H0V8.15625H6.34375V14.5H8.15625V8.15625H14.5V6.34375H8.15625Z" fill="#1D1E1D"/>
           </svg>
         </span>
       }
       {
-        hasWindow == true && <span className="btn btn-remove" onClick={(e) => setHasWindow(false)}>
+        hasWindow == true && <span className="btn btn-remove" onClick={(e) => {setHasWindow(false); addedWindow(false)}}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.1973 10.3435L14.1973 17.0883" stroke="#C83939" stroke-width="1.92708" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10.3438 10.3435L10.3438 17.0883" stroke="#C83939" stroke-width="1.92708" stroke-linecap="round" stroke-linejoin="round"/>

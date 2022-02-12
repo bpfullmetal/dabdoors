@@ -1,11 +1,11 @@
 const { render, useState } = wp.element;
 import Switch from "react-switch";
 
-const WindowsSettingComponent = ({ hasWindow, onChange }) => {
+const WindowsSettingComponent = ({ properties, hasWindow, onChange }) => {
   return (
     <div className="product-setting-item-component window-settings">
       <div class="d-flex align-items-center justify-content-between">
-        <label>Windows</label>
+        <label>{ properties?.label }</label>
         <Switch onChange={(e) => {onChange(e)}} checked={hasWindow} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>
 
