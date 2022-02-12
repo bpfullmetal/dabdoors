@@ -18,8 +18,17 @@ const Builder = ({ adminProperties }) => {
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
   const [price, setPrice] = useState(500);
+  const [windowCnt, setWindowCnt] = useState(0); 
   const changeWindowsCount = (e) => {
-    console.log(e);
+    if (hasWindow) {
+      if (e === true) {
+        setPrice(price + Number(adminProperties.window_group.additional_price_$_per_window));
+        setWindowCnt(windowCnt + 1);
+      } else {
+        setPrice(price - Number(adminProperties.window_group.additional_price_$_per_window));
+        setWindowCnt(windowCnt - 1);
+      }
+    }
   }
   return (
     <div className="product-builder">
@@ -38,7 +47,14 @@ const Builder = ({ adminProperties }) => {
           <SizeChangeComponent />
           <WindowsSettingComponent
             hasWindow={hasWindow}
-            onChange={(e) => setHasWindow(e)}
+            onChange={(e) => {
+              if (e === true) {
+                setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
+              } else {
+                setPrice(price - windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
+              }
+              setHasWindow(e)
+            }}
             properties={adminProperties.window_group && adminProperties.window_group}
           />
           <InsulationSettingComponent />

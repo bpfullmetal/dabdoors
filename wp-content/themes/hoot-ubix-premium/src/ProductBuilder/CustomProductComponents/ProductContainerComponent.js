@@ -11,12 +11,9 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex, changeWind
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
-  let [windowsCnt, setWindowsCnt] = useState(0);
-  let myComponent = React.createRef();
   return (
     <div id="product-container">
       <TransformWrapper
-        ref={myComponent}
         initialScale={1}
         initialPositionX={0}
         initialPositionY={0}
@@ -43,14 +40,7 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex, changeWind
                         {
                           windows.map((e, index) => {
                             return <WindowComponent enableWindow={hasWindow} addedWindow={(e) => {
-                              if (e == true) {
-                                windowsCnt ++;
-                                setWindowsCnt(windowsCnt);
-                              } else {
-                                windowsCnt --;
-                                setWindowsCnt(windowsCnt);
-                              }
-                              changeWindowsCount(windowsCnt);
+                              changeWindowsCount(e);
                             }}/>
                           })
                         }

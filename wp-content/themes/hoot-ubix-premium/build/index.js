@@ -49,9 +49,18 @@ const Builder = _ref => {
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
+  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
-    console.log(e);
+    if (hasWindow) {
+      if (e === true) {
+        setPrice(price + Number(adminProperties.window_group.additional_price_$_per_window));
+        setWindowCnt(windowCnt + 1);
+      } else {
+        setPrice(price - Number(adminProperties.window_group.additional_price_$_per_window));
+        setWindowCnt(windowCnt - 1);
+      }
+    }
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -78,7 +87,15 @@ const Builder = _ref => {
     className: "setting-title-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
-    onChange: e => setHasWindow(e),
+    onChange: e => {
+      if (e === true) {
+        setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
+      } else {
+        setPrice(price - windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
+      }
+
+      setHasWindow(e);
+    },
     properties: adminProperties.window_group && adminProperties.window_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
@@ -136,12 +153,9 @@ const ProductContainerComponent = _ref => {
   let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
-  let [windowsCnt, setWindowsCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  let myComponent = React.createRef();
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
-    ref: myComponent,
     initialScale: 1,
     initialPositionX: 0,
     initialPositionY: 0,
@@ -185,15 +199,7 @@ const ProductContainerComponent = _ref => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         enableWindow: hasWindow,
         addedWindow: e => {
-          if (e == true) {
-            windowsCnt++;
-            setWindowsCnt(windowsCnt);
-          } else {
-            windowsCnt--;
-            setWindowsCnt(windowsCnt);
-          }
-
-          changeWindowsCount(windowsCnt);
+          changeWindowsCount(e);
         }
       });
     })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
