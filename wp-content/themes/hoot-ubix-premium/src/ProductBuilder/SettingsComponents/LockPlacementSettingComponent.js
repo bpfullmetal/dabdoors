@@ -1,16 +1,23 @@
 const { render, useState } = wp.element;
-import Switch from "react-switch";
 
-const LockPlacementSettingComponent = () => {
-  const [option, setOption] = useState(1);
+const LockPlacementSettingComponent = ({ properties, setAdditionalPriceForLock }) => {
+  const [option, setOption] = useState(properties.inside.default === true ? 1 : (properties.outside.default == true ? 2 : -1));
   return (
     <div className="product-setting-item-component lock-placement-settings">
-      <label>Lock Placement</label>
+      <label>{ properties.label }</label>
       <div className="d-flex button-wrapper align-items-center">
-        <button type="button" className={`button ${option == 1 ? 'active' : ''}`} onClick={(e) => {setOption(1);}}>
+        <button
+          type="button"
+          className={`button ${option == 1 ? 'active' : ''}`}
+          onClick={(e) => {setOption(1); setAdditionalPriceForLock(Number(properties.inside.additional_price_$))}}
+        >
           Inside
         </button>
-        <button type="button" className={`button ${option == 2 ? 'active' : ''}`} onClick={(e) => {setOption(2);}}>
+        <button
+          type="button"
+          className={`button ${option == 2 ? 'active' : ''}`}
+          onClick={(e) => {setOption(2); setAdditionalPriceForLock(Number(properties.outside.additional_price_$))}}
+        >
           Outside
         </button>
       </div>

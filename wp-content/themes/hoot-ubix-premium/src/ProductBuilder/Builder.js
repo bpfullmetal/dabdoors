@@ -13,12 +13,17 @@ import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSet
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
 const Builder = ({ adminProperties }) => {
-  console.log(adminProperties);
+  const [price, setPrice] = useState(500);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
-  const [price, setPrice] = useState(500);
   const [windowCnt, setWindowCnt] = useState(0); 
+  if (adminProperties.lock_placement_group.inside.default == true) {
+    setPrice(price + Number(adminProperties.lock_placement_group.inside.additional_price_$));
+  } else if (adminProperties.lock_placement_group.outside.default == true) {
+    setPrice(price + Number(adminProperties.lock_placement_group.outside.additional_price_$));
+  }
+  // console.log(adminProperties);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -70,7 +75,10 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.vents_group && adminProperties.vents_group}
           />
-          <LockPlacementSettingComponent />
+          <LockPlacementSettingComponent
+            setAdditionalPriceForLock={(e) => setPrice(price + e)}
+            properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
+          />
           <PanelSettingComponent />
           <RollerTypeSettingComponent />
           <TrackRadiusSettingComponent />
