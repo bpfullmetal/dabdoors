@@ -109,7 +109,16 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
           />
-          <InsulationSettingComponent />
+          <InsulationSettingComponent 
+            properties={adminProperties.insulation_group}
+            enableInsulation={(e) => {
+              if (e == true) {
+                setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
+              } else {
+                setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
+              }
+            }}
+          />
           <VentsSettingComponent
             hasVents={hasVents}
             onChange={(e) => {

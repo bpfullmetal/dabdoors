@@ -150,7 +150,16 @@ const Builder = _ref => {
       setHasWindow(e);
     },
     properties: adminProperties.window_group && adminProperties.window_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    properties: adminProperties.insulation_group,
+    enableInsulation: e => {
+      if (e == true) {
+        setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
+      } else {
+        setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
+      }
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
     onChange: e => {
       if (e == true) {
@@ -556,15 +565,20 @@ const {
 } = wp.element;
 
 
-const InsulationSettingComponent = () => {
+const InsulationSettingComponent = _ref => {
+  let {
+    properties,
+    enableInsulation
+  } = _ref;
   const [insulation, setInsulation] = useState(false);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component insulation-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Insulation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       setInsulation(e);
+      enableInsulation(e);
     },
     checked: insulation,
     width: 40,
