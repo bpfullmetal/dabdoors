@@ -134,10 +134,6 @@ const ProductContainerComponent = _ref => {
     },
     onZoomStop: (ref, event) => {
       setScale(ref.state.scale * 100);
-    },
-    onInit: ref => {
-      console.log(ref);
-      myComponent = ref;
     }
   }, _ref2 => {
     let {
@@ -153,7 +149,7 @@ const ProductContainerComponent = _ref => {
       },
       onZoomOut: () => {
         zoomOut(0.5, 200);
-        setScale(scale / 1.5);
+        scale != 100 && setScale(scale / 1.5 < 100 ? 100 : scale / 1.5);
       },
       scale: scale
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

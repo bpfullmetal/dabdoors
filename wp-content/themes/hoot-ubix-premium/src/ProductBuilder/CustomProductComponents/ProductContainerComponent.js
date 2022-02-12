@@ -26,16 +26,12 @@ const ProductContainerComponent = ({ hasWindow, hasVents, colorIndex }) => {
         onZoomStop={(ref, event) => {
           setScale(ref.state.scale * 100);
         }}
-        onInit={(ref) => {
-          console.log(ref);
-          myComponent = ref
-        }}
       >
         {({ zoomIn, zoomOut, resetTransform, ...rest}) => (
           <React.Fragment>
             <ZoomControlComponent
               onZoomIn={() => { zoomIn(0.5, 200); setScale(scale * 1.5)}}
-              onZoomOut={() => { zoomOut(0.5, 200); setScale(scale / 1.5) }}
+              onZoomOut={() => { zoomOut(0.5, 200); scale != 100 && setScale((scale / 1.5 < 100) ? 100 : scale / 1.5) }}
               scale={scale}
             />
             <TransformComponent>
