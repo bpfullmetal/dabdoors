@@ -165,7 +165,9 @@ const Builder = ({ adminProperties }) => {
             onChange={(e) => setColorIndex(e)}
             properties={adminProperties.standard_colors_group}
           />
-          <PremiumColorsSettingComponent />
+          <PremiumColorsSettingComponent
+            properties={adminProperties.premium_colors_group}
+          />
           <div className="product-setting-item-component price-section">
             <label>Total</label>
             <p>$ {price}</p>

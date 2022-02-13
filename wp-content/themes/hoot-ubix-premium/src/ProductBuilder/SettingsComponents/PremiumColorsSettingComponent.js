@@ -1,14 +1,20 @@
 const { render, useState } = wp.element;
 import Switch from "react-switch";
 
-const PremiumColorsSettingComponent = () => {
-  let colors = ['#E3B718', '#B85C28', '#4F4C45'];
-  const [option, setOption] = useState(0);
+const PremiumColorsSettingComponent = ({ properties, enablePrice }) => {
+  let colors = properties.select_button_options.map((option, index) => {
+    return option.select_color;
+  });
+
+  const [option, setOption] = useState(properties.select_button_options.findIndex(option => {
+    return option.default == true
+  }));
+
   return (
     <div className="product-setting-item-component colors-settings">
       <div className="d-flex justify-content-beteen align-items-center">
-        <label>Premium Colors</label>
-        <span className="addPrice">+$50</span>
+        <label>{ properties.label } &nbsp;</label>
+        { properties.additional_price && <span className="addPrice">+${properties.additional_price}</span>}
       </div>
       <div className="d-flex align-items-center colors-wrapper">
         {

@@ -8,7 +8,6 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const ProductContainerComponent = ({ colors, hasWindow, hasVents, colorIndex, changeWindowsCount }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  // let colors = ['#ADA487', '#D1C394', '#9A8333'];
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
   return (

@@ -191,7 +191,9 @@ const Builder = _ref => {
     colorIndex: colorIndex,
     onChange: e => setColorIndex(e),
     properties: adminProperties.standard_colors_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    properties: adminProperties.premium_colors_group
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
@@ -238,8 +240,7 @@ const ProductContainerComponent = _ref => {
     colorIndex,
     changeWindowsCount
   } = _ref;
-  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; // let colors = ['#ADA487', '#D1C394', '#9A8333'];
-
+  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -516,13 +517,11 @@ const ZoomControlComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 const {
   render,
   useState
 } = wp.element;
-
 
 const ColorsSettingComponent = _ref => {
   let {
@@ -530,13 +529,12 @@ const ColorsSettingComponent = _ref => {
     colorIndex,
     onChange
   } = _ref;
-  // let colors = ['#ADA487', '#D1C394', '#9A8333'];
   let colors = properties.select_button_options.map((option, index) => {
     return option.select_color;
   });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component colors-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Colors"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center colors-wrapper"
   }, colors.map((e, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -717,16 +715,24 @@ const {
 } = wp.element;
 
 
-const PremiumColorsSettingComponent = () => {
-  let colors = ['#E3B718', '#B85C28', '#4F4C45'];
-  const [option, setOption] = useState(0);
+const PremiumColorsSettingComponent = _ref => {
+  let {
+    properties,
+    enablePrice
+  } = _ref;
+  let colors = properties.select_button_options.map((option, index) => {
+    return option.select_color;
+  });
+  const [option, setOption] = useState(properties.select_button_options.findIndex(option => {
+    return option.default == true;
+  }));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component colors-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex justify-content-beteen align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Premium Colors"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " \xA0"), properties.additional_price && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "addPrice"
-  }, "+$50")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "+$", properties.additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center colors-wrapper"
   }, colors.map((e, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
