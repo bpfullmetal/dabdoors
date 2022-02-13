@@ -1,7 +1,8 @@
 const { render, useState } = wp.element;
 
-const ZoomControlComponent = ({onZoomIn, onZoomOut, scale}) => {
+const ZoomControlComponent = ({windowSize, onZoomIn, onZoomOut, scale}) => {
   const [hasWindow, setHasWindow] = useState(false);
+  let {width1, width2, height1, height2} = windowSize;
   return (
     <div className="zoom-control-panel">
       <div className="zoom-control">
@@ -20,7 +21,7 @@ const ZoomControlComponent = ({onZoomIn, onZoomOut, scale}) => {
         </span>
       </div>
       <div className="size-section">
-        <span>Size: 8” X 18”</span>
+        <span>Size: { `${width1}’ ${width2}” X ${height1}’ ${height2}”` }</span>
       </div>
     </div>
   )

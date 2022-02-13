@@ -31,6 +31,12 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
+  const [windowSize, changeWindowSize] = useState({
+    height1: 18,
+    height2: 0,
+    width1: 8,
+    width2: 0
+  })
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -141,6 +147,7 @@ const Builder = ({ adminProperties }) => {
             hasWindow={hasWindow}
             hasVents={hasVents}
             colorIndex={colorIndex}
+            windowSize={windowSize}
             colors={
               adminProperties.standard_colors_group.select_button_options.map((option, index) => {
                 return option.select_color;
@@ -153,7 +160,9 @@ const Builder = ({ adminProperties }) => {
           <div className="setting-title-section">
             <label>Customization Settings</label>
           </div>
-          <SizeChangeComponent />
+          <SizeChangeComponent
+            onChangeWindowSize = {(e) => {changeWindowSize(e);}}
+          />
           <WindowsSettingComponent
             hasWindow={hasWindow}
             onChange={(e) => {

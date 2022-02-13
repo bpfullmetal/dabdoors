@@ -60,6 +60,12 @@ const Builder = _ref => {
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    height1: 18,
+    height2: 0,
+    width1: 8,
+    width2: 0
+  });
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -176,6 +182,7 @@ const Builder = _ref => {
     hasWindow: hasWindow,
     hasVents: hasVents,
     colorIndex: colorIndex,
+    windowSize: windowSize,
     colors: adminProperties.standard_colors_group.select_button_options.map((option, index) => {
       return option.select_color;
     }),
@@ -186,7 +193,11 @@ const Builder = _ref => {
     className: "product-custom-bar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onChangeWindowSize: e => {
+      changeWindowSize(e);
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
     onChange: e => {
       if (e === true) {
@@ -279,6 +290,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const ProductContainerComponent = _ref => {
   let {
+    windowSize,
     colors,
     hasWindow,
     hasVents,
@@ -316,7 +328,8 @@ const ProductContainerComponent = _ref => {
         zoomOut(0.5, 200);
         scale != 100 && setScale(scale / 1.5 < 100 ? 100 : scale / 1.5);
       },
-      scale: scale
+      scale: scale,
+      windowSize: windowSize
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -494,11 +507,18 @@ const {
 
 const ZoomControlComponent = _ref => {
   let {
+    windowSize,
     onZoomIn,
     onZoomOut,
     scale
   } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
+  let {
+    width1,
+    width2,
+    height1,
+    height2
+  } = windowSize;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "zoom-control-panel"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -545,7 +565,7 @@ const ZoomControlComponent = _ref => {
     "stroke-linecap": "round"
   })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Size: 8\u201D X 18\u201D")));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Size: ", `${width1}’ ${width2}” X ${height1}’ ${height2}”`)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ZoomControlComponent);
@@ -867,9 +887,27 @@ const RollerTypeSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const SizeChangeComponent = () => {
+
+const SizeChangeComponent = _ref => {
+  let {
+    onChangeWindowSize
+  } = _ref;
+  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(8);
+  const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(18);
+  const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    onChangeWindowSize({
+      width1,
+      width2,
+      height1,
+      height2
+    });
+  }, [width1, width2, height1, height2]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -882,10 +920,18 @@ const SizeChangeComponent = () => {
     className: "d-flex align-items-center input-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
-    name: "width_1"
+    name: "width_1",
+    value: width1,
+    onChange: e => {
+      setWidth1(e.target.value);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
-    name: "width_2"
+    name: "width_2",
+    value: width2,
+    onChange: e => {
+      setWidth2(e.target.validationMessage);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "height-wrapper d-flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -894,10 +940,18 @@ const SizeChangeComponent = () => {
     className: "d-flex align-items-center input-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
-    name: "height_1"
+    name: "height_1",
+    value: height1,
+    onChange: e => {
+      setHeight1(e.target.value);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
-    name: "height_2"
+    name: "height_2",
+    value: height2,
+    onChange: e => {
+      setHeight2(e.target.value);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D")))));
 };
 

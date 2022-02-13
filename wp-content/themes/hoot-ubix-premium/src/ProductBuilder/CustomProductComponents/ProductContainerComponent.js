@@ -6,7 +6,7 @@ import WallSettingsComponent from "../WallSettingsComponents/WallSettingsCompone
 import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-const ProductContainerComponent = ({ colors, hasWindow, hasVents, colorIndex, changeWindowsCount }) => {
+const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount }) => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
@@ -29,6 +29,7 @@ const ProductContainerComponent = ({ colors, hasWindow, hasVents, colorIndex, ch
               onZoomIn={() => { zoomIn(0.5, 200); setScale(scale * 1.5)}}
               onZoomOut={() => { zoomOut(0.5, 200); scale != 100 && setScale((scale / 1.5 < 100) ? 100 : scale / 1.5) }}
               scale={scale}
+              windowSize={windowSize}
             />
             <TransformComponent>
               <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
