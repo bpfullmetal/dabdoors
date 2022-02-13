@@ -59,6 +59,7 @@ const Builder = _ref => {
   const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -90,7 +91,17 @@ const Builder = _ref => {
   const changePriceWithPremiumColor = e => {
     if (e == true) {
       setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
-      setChangedPriceWithPremiumColor(adminProperties.premium_colors_group.additional_price);
+      setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+    }
+  };
+
+  const changePriceWithTrackRadius = e => {
+    if (e === true) {
+      setPrice(price - changedPriceWithTrackRadius + Number(adminProperties.track_radius_group.additional_price_$));
+      setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
+    } else if (e === false) {
+      setPrice(price - changedPriceWithTrackRadius + 0);
+      setChangedPriceWithTrackRadius(0);
     }
   };
 
@@ -136,6 +147,15 @@ const Builder = _ref => {
         setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
       } else {
         setChangedPriceWithPremiumColor(0);
+      }
+    }
+
+    if (adminProperties.track_radius_group) {
+      if (Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_)) {
+        initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
+        setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
+      } else {
+        setChangedPriceWithTrackRadius(0);
       }
     }
 
@@ -208,7 +228,10 @@ const Builder = _ref => {
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
     setAdditionalPriceForRollerType: e => changePriceWithRollerType(e)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    properties: adminProperties.track_radius_group,
+    enablePrice: e => changePriceWithTrackRadius(e)
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
     onChange: e => setColorIndex(e),
     properties: adminProperties.standard_colors_group
@@ -878,8 +901,7 @@ const SizeChangeComponent = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
-/* harmony import */ var react_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-slider */ "./node_modules/react-slider/es/components/ReactSlider/ReactSlider.js");
+/* harmony import */ var react_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-slider */ "./node_modules/react-slider/es/components/ReactSlider/ReactSlider.js");
 
 const {
   render,
@@ -887,25 +909,34 @@ const {
 } = wp.element;
 
 
-
-const TrackRadiusSettingComponent = () => {
-  const [value, setValue] = useState(1);
+const TrackRadiusSettingComponent = _ref => {
+  let {
+    properties,
+    enablePrice
+  } = _ref;
+  const [value, setValue] = useState(Number(properties.minimum));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component track-radius-settings slider-bar"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Track Radius"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " ( ", `${value}${properties.unit}`, " )"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_slider__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_slider__WEBPACK_IMPORTED_MODULE_1__["default"], {
     ariaLabelledby: "slider-label",
     className: "horizontal-slider",
     thumbClassName: "example-thumb",
     trackClassName: "example-track",
     renderThumb: (props, state) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", props, state.valueNow),
-    step: 0.1,
-    min: 1,
-    max: 10,
+    step: Number(properties.step_count),
+    min: Number(properties.minimum),
+    max: Number(properties.maximum),
     value: value,
     onChange: e => {
       setValue(e);
+
+      if (e > Number(properties.if_over_)) {
+        enablePrice(true);
+      } else {
+        enablePrice(false);
+      }
     }
   })));
 };

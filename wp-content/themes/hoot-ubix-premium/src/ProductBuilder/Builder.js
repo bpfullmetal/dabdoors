@@ -30,6 +30,7 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
+  const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -60,7 +61,17 @@ const Builder = ({ adminProperties }) => {
   const changePriceWithPremiumColor = (e) => {
     if (e == true) {
       setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
-      setChangedPriceWithPremiumColor(adminProperties.premium_colors_group.additional_price);
+      setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+    }
+  }
+
+  const changePriceWithTrackRadius = (e) => {
+    if ( e === true) {
+      setPrice(price - changedPriceWithTrackRadius + Number(adminProperties.track_radius_group.additional_price_$));
+      setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
+    } else if (e === false) {
+      setPrice(price - changedPriceWithTrackRadius + 0);
+      setChangedPriceWithTrackRadius(0);
     }
   }
 
@@ -105,6 +116,16 @@ const Builder = ({ adminProperties }) => {
           setChangedPriceWithPremiumColor(0);
         }
       }
+
+      if (adminProperties.track_radius_group) {
+        if ( Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_) ) {
+          initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
+          setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
+        } else {
+          setChangedPriceWithTrackRadius(0);
+        }
+      }
+
       setPrice(initialPrice);
   }, [])
 
@@ -179,7 +200,10 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
             setAdditionalPriceForRollerType={(e) => changePriceWithRollerType(e)}
           />
-          <TrackRadiusSettingComponent />
+          <TrackRadiusSettingComponent
+            properties={adminProperties.track_radius_group}
+            enablePrice={(e) => changePriceWithTrackRadius(e)}
+          />
           <ColorsSettingComponent
             colorIndex={colorIndex}
             onChange={(e) => setColorIndex(e)}
