@@ -29,6 +29,7 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
+  const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -54,6 +55,13 @@ const Builder = ({ adminProperties }) => {
   const changePriceWithRollerType = (e) => {
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
+  }
+
+  const changePriceWithPremiumColor = (e) => {
+    if (e == true) {
+      setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
+      setChangedPriceWithPremiumColor(adminProperties.premium_colors_group.additional_price);
+    }
   }
 
   React.useEffect(() => {
@@ -83,6 +91,18 @@ const Builder = ({ adminProperties }) => {
           setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
         } else {
           setChangedPriceWithRollerType(0);
+        }
+      }
+
+      if (adminProperties.premium_colors_group) {
+        let index = adminProperties.premium_colors_group.select_button_options.findIndex((e) => {
+          return e.default == true;
+        });
+        if (index > -1) {
+          initialPrice += Number(adminProperties.premium_colors_group.additional_price);
+          setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+        } else {
+          setChangedPriceWithPremiumColor(0);
         }
       }
       setPrice(initialPrice);
@@ -167,6 +187,7 @@ const Builder = ({ adminProperties }) => {
           />
           <PremiumColorsSettingComponent
             properties={adminProperties.premium_colors_group}
+            enablePrice={(e) => changePriceWithPremiumColor(e)}
           />
           <div className="product-setting-item-component price-section">
             <label>Total</label>

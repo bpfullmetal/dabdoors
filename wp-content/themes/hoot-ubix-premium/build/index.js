@@ -58,6 +58,7 @@ const Builder = _ref => {
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -84,6 +85,13 @@ const Builder = _ref => {
   const changePriceWithRollerType = e => {
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
+  };
+
+  const changePriceWithPremiumColor = e => {
+    if (e == true) {
+      setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
+      setChangedPriceWithPremiumColor(adminProperties.premium_colors_group.additional_price);
+    }
   };
 
   React.useEffect(() => {
@@ -115,6 +123,19 @@ const Builder = _ref => {
         setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
       } else {
         setChangedPriceWithRollerType(0);
+      }
+    }
+
+    if (adminProperties.premium_colors_group) {
+      let index = adminProperties.premium_colors_group.select_button_options.findIndex(e => {
+        return e.default == true;
+      });
+
+      if (index > -1) {
+        initialPrice += Number(adminProperties.premium_colors_group.additional_price);
+        setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+      } else {
+        setChangedPriceWithPremiumColor(0);
       }
     }
 
@@ -192,7 +213,8 @@ const Builder = _ref => {
     onChange: e => setColorIndex(e),
     properties: adminProperties.standard_colors_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    properties: adminProperties.premium_colors_group
+    properties: adminProperties.premium_colors_group,
+    enablePrice: e => changePriceWithPremiumColor(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -746,7 +768,10 @@ const PremiumColorsSettingComponent = _ref => {
       style: {
         backgroundColor: `${e}`
       },
-      onClick: e => setOption(index)
+      onClick: e => {
+        setOption(index);
+        enablePrice(true);
+      }
     }));
   })));
 };
