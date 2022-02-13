@@ -293,8 +293,7 @@ body {
           }
           .size-settings-wrapper {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
             margin-top: 10px;
             span {
               font-family: Lato;
@@ -305,10 +304,29 @@ body {
               text-transform: uppercase;
               color: rgba(135, 135, 135, 0.6);
               margin-right: 5px;
+              &.label {
+                display: flex;
+                align-items: center;
+                width: 12px;
+              }
             }
             input {
               max-width: 75px;
               border-radius: 4px;
+            }
+            .input-wrapper {
+              display: flex;
+              align-items: center;
+              input {
+                margin: 0px 5px;
+              }
+              span {
+                height: 100%;
+                font-size: 26px;
+              }
+            }
+            .height-wrapper {
+              margin-top: 15px;
             }
           }
           &.window-settings {
