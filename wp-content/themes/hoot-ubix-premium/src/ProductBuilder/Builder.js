@@ -32,9 +32,9 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const [windowSize, changeWindowSize] = useState({
-    height1: 18,
-    height2: 0,
-    width1: 8,
+    height1: 16,
+    height2: 2,
+    width1: 10,
     width2: 0
   })
   const changeWindowsCount = (e) => {

@@ -61,9 +61,9 @@ const Builder = _ref => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    height1: 18,
-    height2: 0,
-    width1: 8,
+    height1: 16,
+    height2: 2,
+    width1: 10,
     width2: 0
   });
 
@@ -300,6 +300,16 @@ const ProductContainerComponent = _ref => {
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
+  const [realWidth, setRealWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [realHeight, setRealHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    let width = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth : '';
+    let settingWidth = windowSize.width1 + windowSize.width2 / 10;
+    let settingHeight = windowSize.height1 + windowSize.height2 / 10;
+    let height = width / settingWidth * settingHeight;
+    setRealWidth(width);
+    setRealHeight(height);
+  }, [windowSize]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
@@ -331,7 +341,8 @@ const ProductContainerComponent = _ref => {
       scale: scale,
       windowSize: windowSize
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
+      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}` // style={{width: realWidth, height: realHeight}}
+
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "outline-door"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -896,10 +907,10 @@ const SizeChangeComponent = _ref => {
   let {
     onChangeWindowSize
   } = _ref;
-  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(8);
+  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(10);
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(18);
-  const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(16);
+  const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     onChangeWindowSize({
       width1,
@@ -923,14 +934,14 @@ const SizeChangeComponent = _ref => {
     name: "width_1",
     value: width1,
     onChange: e => {
-      setWidth1(e.target.value);
+      setWidth1(Number(e.target.value));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "width_2",
     value: width2,
     onChange: e => {
-      setWidth2(e.target.validationMessage);
+      setWidth2(Number(e.target.value));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "height-wrapper d-flex"
@@ -943,14 +954,14 @@ const SizeChangeComponent = _ref => {
     name: "height_1",
     value: height1,
     onChange: e => {
-      setHeight1(e.target.value);
+      setHeight1(Number(e.target.value));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "height_2",
     value: height2,
     onChange: e => {
-      setHeight2(e.target.value);
+      setHeight2(Number(e.target.value));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D")))));
 };

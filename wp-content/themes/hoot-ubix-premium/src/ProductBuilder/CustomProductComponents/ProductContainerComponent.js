@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import WindowComponent from "./WindowComponent";
 import VentsComponent from "./VentsComponent";
@@ -10,6 +10,16 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
+  const [realWidth, setRealWidth] = useState(0);
+  const [realHeight, setRealHeight] = useState(0);
+  useEffect(() => {
+    let width = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth : '';
+    let settingWidth = windowSize.width1 + (windowSize.width2 / 10);
+    let settingHeight = windowSize.height1 + (windowSize.height2 / 10);
+    let height = (width / settingWidth) * settingHeight;
+    setRealWidth(width);
+    setRealHeight(height);
+  }, [windowSize])
   return (
     <div id="product-container">
       <TransformWrapper
@@ -32,7 +42,10 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
               windowSize={windowSize}
             />
             <TransformComponent>
-              <div className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}>
+              <div
+                className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
+                // style={{width: realWidth, height: realHeight}}
+              >
                 <div className="outline-door">
                   <div className="inline-door">
                     <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
