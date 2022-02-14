@@ -128,9 +128,19 @@ const Builder = _ref => {
       url: 'http://localhost/garage/wp-admin/admin-ajax.php',
       data: formData,
       success: function (response) {
-        if (response && response.id) {// Add product to cart
-        } // console.log(response);
-
+        if (response && response.id) {
+          jQuery.ajax({
+            type: "post",
+            dataType: "json",
+            url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+            data: {
+              action: 'addProductToCart',
+              item_id: response.id
+            }
+          }).done(function (res) {
+            console.log(res);
+          });
+        }
       }
     });
   };

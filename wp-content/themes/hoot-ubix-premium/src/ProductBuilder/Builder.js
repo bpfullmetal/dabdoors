@@ -99,10 +99,19 @@ const Builder = ({ adminProperties }) => {
       data: formData,
       success: function(response){
         if (response && response.id) {
-          // Add product to cart
+          jQuery.ajax({
+            type: "post",
+            dataType: "json",
+            url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+            data: {
+              action: 'addProductToCart',
+              item_id: response.id
+            },
+          }).done(function(res) {
 
+            console.log(res);
+          })
         }
-        // console.log(response);
       }
     });
   }
