@@ -81,6 +81,32 @@ const Builder = ({ adminProperties }) => {
     }
   }
 
+  const createProduct = (e) => {
+    // html2canvas(document.querySelector("#product-container"), {
+    //   allowTaint: true,
+    //   useCORS: true
+    // }).then((canvas) => {
+    //   const base64image = canvas.toDataURL("image/png");
+    // });
+    let formData = {
+      action: 'createProduct',
+      price: price
+    };
+    jQuery.ajax({
+      type: "post",
+      dataType: "json",
+      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      data: formData,
+      success: function(response){
+        if (response && response.id) {
+          // Add product to cart
+
+        }
+        // console.log(response);
+      }
+    });
+  }
+
   React.useEffect(() => {
       let initialPrice = price;
       if (adminProperties.lock_placement_group.inside.default === true) {
@@ -227,7 +253,23 @@ const Builder = ({ adminProperties }) => {
             <p>$ {price}</p>
           </div>
           <div className="product-setting-item-component addCartButton">
-            <button type="button" className="btn btn-add-cart">
+            <button type="button" className="btn btn-add-cart" onClick={(e) => {
+              console.log(e);
+              createProduct(e);
+              // html2canvas(document.querySelector("#product-container"), {
+              //   allowTaint: true,
+              //   useCORS: true,
+              // })
+              // .then(function (canvas) {
+              //   // It will return a canvas element
+              //   let image = canvas.toDataURL("image/png", 1);
+              //   console.log(image);
+              // })
+              // .catch((e) => {
+              //   // Handle errors
+              //   console.log(e);
+              // });
+            }}>
               Add to Cart
             </button>
           </div>

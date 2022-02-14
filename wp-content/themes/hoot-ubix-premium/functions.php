@@ -109,6 +109,13 @@ add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 function my_theme_enqueue_styles() {
   wp_enqueue_script(
+    'my-theme-frontend-htmlcanvas',
+    get_stylesheet_directory_uri() . '/js/htmlcanvas.lib.js',
+    ['wp-element'],
+    time(), //For production use wp_get_theme()->get('Version'),
+    true
+  ); 
+  wp_enqueue_script(
     'my-theme-frontend',
     get_stylesheet_directory_uri() . '/build/index.js',
     ['wp-element'],
@@ -171,3 +178,35 @@ function getAdminProperties() {
 
 add_action( 'wp_ajax_nopriv_getAdminProperties', 'getAdminProperties' );
 add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
+
+function createProduct() { 
+  $image_id = 1626;
+  $price = $_POST['price'];
+  $product = new WC_Product_Simple();
+  $product->set_name( 'Custom Product' );
+  $product->set_status( 'publish' ); 
+  $product->set_catalog_visibility( 'visible' );
+  $product->set_price( $price );
+  $product->set_regular_price( $price );
+  $product->set_sold_individually( true );
+  $product->set_image_id( $image_id );
+  $product->set_downloadable( true );
+  $product->set_virtual( true );      
+  $src_img = wp_get_attachment_image_src( $image_id, 'full' );
+  $file_url = reset( $src_img );
+  $file_md5 = md5( $file_url );
+  $download = new WC_Product_Download();
+  $download->set_name( get_the_title( $image_id ) );
+  $download->set_id( $file_md5 );
+  $download->set_file( $file_url );
+  $downloads[$file_md5] = $download;
+  $product->set_downloads( $downloads );
+  $product->save();
+  echo json_encode(array(
+    'id' => $product->get_id()
+  ));
+  wp_die();
+}
+
+add_action( 'wp_ajax_nopriv_createProduct', 'createProduct' );
+add_action( 'wp_ajax_createProduct', 'createProduct' );
