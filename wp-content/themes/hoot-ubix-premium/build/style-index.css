@@ -327,9 +327,20 @@ body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;
   background-color: #FFF;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .btn-times {
+  display: none;
+}
 @media (max-width: 799px) {
   body #single-product-builder .product-builder-content .product-custom-bar {
     display: none;
+  }
+  body #single-product-builder .product-builder-content .product-custom-bar .btn-times {
+    display: block;
+    font-size: 24px;
+    position: fixed;
+    cursor: pointer;
+    top: 60px;
+    right: calc(4vw + 20px);
   }
 }
 body #single-product-builder .product-builder-content .product-custom-bar .setting-title-section {
@@ -528,6 +539,17 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
   line-height: 14px;
   color: #333333;
 }
+body #single-product-builder .product-builder-content .product-custom-bar.fixed-pos {
+  display: block;
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  left: 4vw;
+  right: 4vw;
+  z-index: 1111;
+  width: auto;
+  overflow: auto;
+}
 
 .d-flex {
   display: flex;
@@ -628,6 +650,51 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
   pointer-events: none;
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.mobile-switch-button {
+  display: none;
+}
+@media (max-width: 799px) {
+  .mobile-switch-button {
+    display: flex;
+    align-items: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 20px 0px 20px auto;
+    padding: 10px;
+    background: #FAFBFB;
+    box-shadow: 1.94182px 2.5891px 24.5964px rgba(0, 0, 0, 0.05), 1.94182px 2.5891px 24.5964px rgba(0, 0, 0, 0.05);
+    border-radius: 8.41456px;
+  }
+  .mobile-switch-button span {
+    margin-right: 10px;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.background-overlay {
+  display: none;
+}
+.background-overlay.fixed-pos {
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

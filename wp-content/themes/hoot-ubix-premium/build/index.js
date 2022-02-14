@@ -25,6 +25,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
 /* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
 /* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+
 
 
 
@@ -69,6 +71,7 @@ const Builder = _ref => {
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [showAlerts, setShowAlerts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [productUrl, setProductUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  const [showCustomPanel, setShowCustomPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -81,6 +84,14 @@ const Builder = _ref => {
       }
     }
   };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (showCustomPanel === true) {
+      jQuery('body').addClass('no-scroll');
+    } else {
+      jQuery('body').removeClass('no-scroll');
+    }
+  }, [showCustomPanel]);
 
   const changePricewithLock = e => {
     setPrice(price - changedPriceWithLock + e);
@@ -232,11 +243,28 @@ const Builder = _ref => {
     changeWindowsCount: e => {
       changeWindowsCount(e);
     }
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-custom-bar"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "mobile-switch-button"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    onChange: e => {
+      setShowCustomPanel(e);
+    },
+    checked: showCustomPanel,
+    width: 40,
+    height: 20,
+    onColor: '#1396E7',
+    checkedIcon: '',
+    uncheckedIcon: ''
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `product-custom-bar ${showCustomPanel ? 'fixed-pos' : ''}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "setting-title-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Customization Settings")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "times btn-times",
+    onClick: e => {
+      setShowCustomPanel(false);
+    }
+  }, "\xD7"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onChangeWindowSize: e => {
       changeWindowSize(e);
     }
@@ -315,7 +343,9 @@ const Builder = _ref => {
     onClick: e => {
       setShowAlerts(false);
     }
-  }, "\xD7"))))));
+  }, "\xD7")))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `background-overlay ${showCustomPanel ? 'fixed-pos' : ''}`
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);

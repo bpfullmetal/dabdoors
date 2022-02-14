@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import Logo from "./../assets/img_logo.png";
 import SizeChangeComponent from "./SettingsComponents/SizeChangeComponent";
 import WindowsSettingComponent from "./SettingsComponents/WindowsSettingComponent";
@@ -11,6 +11,8 @@ import TrackRadiusSettingComponent from "./SettingsComponents/TrackRadiusSetting
 import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent";
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
+import Switch from "react-switch";
+
 
 const Builder = ({ adminProperties }) => {
   // console.log(adminProperties);
@@ -40,6 +42,7 @@ const Builder = ({ adminProperties }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [productUrl, setProductUrl] = useState('');
+  const [showCustomPanel, setShowCustomPanel] = useState(false);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -51,6 +54,14 @@ const Builder = ({ adminProperties }) => {
       }
     }
   }
+
+  useEffect(() => {
+    if (showCustomPanel === true ) {
+      jQuery('body').addClass('no-scroll');
+    } else {
+      jQuery('body').removeClass('no-scroll');
+    }
+  }, [showCustomPanel])
 
   const changePricewithLock = (e) => {
     setPrice(price - changedPriceWithLock + e);
@@ -197,11 +208,16 @@ const Builder = ({ adminProperties }) => {
             }
             changeWindowsCount={(e) => {changeWindowsCount(e);}}
           />
+          <div className='mobile-switch-button'>
+            <span>Customization</span>
+            <Switch onChange={(e) => {setShowCustomPanel(e)}} checked={showCustomPanel} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
+          </div>
         </div>
-        <div className="product-custom-bar">
+        <div className={`product-custom-bar ${showCustomPanel ? 'fixed-pos' : ''}`}>
           <div className="setting-title-section">
             <label>Customization Settings</label>
           </div>
+          <span className="times btn-times" onClick={(e) => {setShowCustomPanel(false)}}>&times;</span>
           <SizeChangeComponent
             onChangeWindowSize = {(e) => {changeWindowSize(e);}}
           />
@@ -284,6 +300,7 @@ const Builder = ({ adminProperties }) => {
             }
           </div>
         </div>
+        <div className={`background-overlay ${showCustomPanel ? 'fixed-pos' : ''}`}></div>
       </div>
     </div>
   );
