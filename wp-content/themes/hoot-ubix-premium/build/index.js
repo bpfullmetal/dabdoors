@@ -66,6 +66,8 @@ const Builder = _ref => {
     width1: 10,
     width2: 0
   });
+  const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [showAlerts, setShowAlerts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -112,12 +114,7 @@ const Builder = _ref => {
   };
 
   const createProduct = e => {
-    // html2canvas(document.querySelector("#product-container"), {
-    //   allowTaint: true,
-    //   useCORS: true
-    // }).then((canvas) => {
-    //   const base64image = canvas.toDataURL("image/png");
-    // });
+    setIsAdding(true);
     let formData = {
       action: 'createProduct',
       price: price
@@ -139,6 +136,7 @@ const Builder = _ref => {
             }
           }).done(function (res) {
             console.log(res);
+            setIsAdding(false);
           });
         }
       }
@@ -289,24 +287,20 @@ const Builder = _ref => {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
-    className: "btn btn-add-cart",
+    className: `btn btn-add-cart ${isAdding ? 'disabled' : ''}`,
     onClick: e => {
-      console.log(e);
-      createProduct(e); // html2canvas(document.querySelector("#product-container"), {
-      //   allowTaint: true,
-      //   useCORS: true,
-      // })
-      // .then(function (canvas) {
-      //   // It will return a canvas element
-      //   let image = canvas.toDataURL("image/png", 1);
-      //   console.log(image);
-      // })
-      // .catch((e) => {
-      //   // Handle errors
-      //   console.log(e);
-      // });
+      createProduct(e);
     }
-  }, "Add to Cart")))));
+  }, isAdding ? 'Adding Product...' : 'Add to Cart'), !showAlerts && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "alert"
+  }, "Product was added to Cart, please check your ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "/cart"
+  }, "cart."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "times",
+    onClick: e => {
+      setShowAlerts(false);
+    }
+  }, "\xD7"))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Builder);

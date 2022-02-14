@@ -37,6 +37,8 @@ const Builder = ({ adminProperties }) => {
     width1: 10,
     width2: 0
   })
+  const [isAdding, setIsAdding] = useState(false);
+  const [showAlerts, setShowAlerts] = useState(false);
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -82,12 +84,7 @@ const Builder = ({ adminProperties }) => {
   }
 
   const createProduct = (e) => {
-    // html2canvas(document.querySelector("#product-container"), {
-    //   allowTaint: true,
-    //   useCORS: true
-    // }).then((canvas) => {
-    //   const base64image = canvas.toDataURL("image/png");
-    // });
+    setIsAdding(true);
     let formData = {
       action: 'createProduct',
       price: price
@@ -108,8 +105,8 @@ const Builder = ({ adminProperties }) => {
               item_id: response.id
             },
           }).done(function(res) {
-
             console.log(res);
+            setIsAdding(false);
           })
         }
       }
@@ -262,25 +259,20 @@ const Builder = ({ adminProperties }) => {
             <p>$ {price}</p>
           </div>
           <div className="product-setting-item-component addCartButton">
-            <button type="button" className="btn btn-add-cart" onClick={(e) => {
-              console.log(e);
+            <button type="button" className={`btn btn-add-cart ${isAdding ? 'disabled' : ''}`} onClick={(e) => {
               createProduct(e);
-              // html2canvas(document.querySelector("#product-container"), {
-              //   allowTaint: true,
-              //   useCORS: true,
-              // })
-              // .then(function (canvas) {
-              //   // It will return a canvas element
-              //   let image = canvas.toDataURL("image/png", 1);
-              //   console.log(image);
-              // })
-              // .catch((e) => {
-              //   // Handle errors
-              //   console.log(e);
-              // });
             }}>
-              Add to Cart
+              {isAdding ? 'Adding Product...' : 'Add to Cart'}
             </button>
+            { 
+              !showAlerts && (
+
+                <p className='alert'>
+                  Product was added to Cart, please check your <a href="/cart">cart.</a>
+                  <span className='times' onClick={(e) => {setShowAlerts(false)}}>&times;</span>
+                </p>
+              )
+            }
           </div>
         </div>
       </div>

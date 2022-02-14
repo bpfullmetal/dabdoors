@@ -415,6 +415,25 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton button:hover {
   opacity: 0.6;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton p {
+  font-size: 12px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  text-align: center;
+  position: relative;
+  line-height: 140%;
+  background: rgba(119, 196, 243, 0.667);
+  color: white;
+  padding: 5px;
+  border-radius: 8px;
+}
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.addCartButton p .times {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  cursor: pointer;
+  font-size: 20px;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.price-section {
   display: flex;
   flex-direction: row;
@@ -532,6 +551,12 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
 .slider-bar .minmax {
   padding-left: 20px;
   padding-right: 65px;
+}
+
+.btn-add-cart.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
