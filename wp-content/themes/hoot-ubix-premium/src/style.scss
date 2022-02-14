@@ -5,6 +5,9 @@ body {
   #single-product-builder {
     padding: 85px 80px 80px;
     background: #FAFBFB;
+    @media (max-width: 1023px) {
+      padding: 25px 15px;
+    }
     .title-section {
       padding: 20px 30px;
       height: 93px;
@@ -31,6 +34,18 @@ body {
         color: #000000;
         margin: 0px;
       }
+      @media (max-width: 700px) {
+        height: fit-content;
+        .logo {
+          position: unset;
+          top: unset;
+          left: unset;
+          margin-bottom: 20px;
+        }
+        flex-direction: column;
+        align-items: center;
+        
+      }
     }
     .product-builder-content {
       display: flex;
@@ -39,6 +54,14 @@ body {
         flex: 1;
         background: #F2F2F2;
         padding: 30px 50px;
+        position: relative;
+        @media (max-width: 1023px) {
+          padding: 30px 20px;
+          @media (max-width: 799px) {
+            padding-bottom: 0px;
+            height: fit-content;
+          }
+        }
         #product-container {
           width: 100%;
           height: 100%;
@@ -55,7 +78,7 @@ body {
               height: 100%;
               max-height: 450px;
               background-color: #CCAC7B;
-              background-size: 100% 100%;
+              background-size: auto 100%;
               padding: 70px 50px 0px 50px;
               box-sizing: border-box;
               &.grid-wall {
@@ -172,6 +195,9 @@ body {
                   }
                 }
               }
+              @media (max-width: 799px) {
+                padding: 40px 30px 0px;
+              }
             }
           }
           .wallSettings {
@@ -210,6 +236,15 @@ body {
                 }
               }
             }
+            @media (max-width: 799px) {
+              position: absolute;
+              left: 20px;
+              top: 34px;
+              margin-top: 0px;
+              .wall-item {
+                margin-right: 10px;
+              }
+            }
           }
           .zoom-control-panel {
             background-color: #FFF;
@@ -219,9 +254,15 @@ body {
             display: flex;
             align-items: center;
             width: fit-content;
+            @media (max-width: 799px) {
+              margin-bottom: 25px;
+            }
             .size-section,
             .zoom-control {
               padding: 15px 20px;
+              @media (max-width: 799px) {
+                padding: 10px;
+              }
             }
             .zoom-control {
               display: flex;
@@ -259,6 +300,9 @@ body {
                 color: #878787;
                 user-select: none;
               }
+              @media (max-width: 640px) {
+                display: none;
+              }
             }
           }
         }
@@ -266,6 +310,9 @@ body {
       .product-custom-bar {
         width: 270px;
         background-color: #FFF;
+        @media (max-width: 799px) {
+          display: none;
+        }
         .setting-title-section {
           padding: 20px 30px;
           label {
