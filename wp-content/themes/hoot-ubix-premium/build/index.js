@@ -68,6 +68,7 @@ const Builder = _ref => {
   });
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [showAlerts, setShowAlerts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [productUrl, setProductUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
 
   const changeWindowsCount = e => {
     if (hasWindow) {
@@ -136,7 +137,17 @@ const Builder = _ref => {
             }
           }).done(function (res) {
             console.log(res);
-            setIsAdding(false);
+
+            if (res.error == false) {
+              setIsAdding(false);
+              setShowAlerts(true);
+              setProductUrl(res.product_url);
+            } else {
+              setIsAdding(false);
+              alert("Error was occured!");
+              setProductUrl('');
+              setShowAlerts(false);
+            }
           });
         }
       }
@@ -296,7 +307,10 @@ const Builder = _ref => {
   }, "Product was added to Cart, please check your ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: `${baseUrl}/cart`,
     target: "_blank"
-  }, "cart."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, "cart"), " and your ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: productUrl,
+    target: "_blank"
+  }, "product."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "times",
     onClick: e => {
       setShowAlerts(false);

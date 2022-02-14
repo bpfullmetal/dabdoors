@@ -39,6 +39,7 @@ const Builder = ({ adminProperties }) => {
   })
   const [isAdding, setIsAdding] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
+  const [productUrl, setProductUrl] = useState('');
   const changeWindowsCount = (e) => {
     if (hasWindow) {
       if (e === true) {
@@ -106,7 +107,16 @@ const Builder = ({ adminProperties }) => {
             },
           }).done(function(res) {
             console.log(res);
-            setIsAdding(false);
+            if (res.error == false) {
+              setIsAdding(false);
+              setShowAlerts(true);
+              setProductUrl(res.product_url);
+            } else {
+              setIsAdding(false);
+              alert("Error was occured!");
+              setProductUrl('');
+              setShowAlerts(false);
+            }
           })
         }
       }
@@ -267,7 +277,7 @@ const Builder = ({ adminProperties }) => {
             { 
               showAlerts && (
                 <p className='alert'>
-                  Product was added to Cart, please check your <a href={`${baseUrl}/cart`} target="_blank">cart.</a>
+                  Product was added to Cart, please check your <a href={`${baseUrl}/cart`} target="_blank">cart</a> and your <a href={productUrl} target="_blank">product.</a>
                   <span className='times' onClick={(e) => {setShowAlerts(false)}}>&times;</span>
                 </p>
               )
