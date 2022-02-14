@@ -1,4 +1,4 @@
-const { render, useState } = wp.element;
+const { render, useState, useEffect } = wp.element;
 import Builder from './ProductBuilder/Builder';
 import "./style.scss";
 const Votes = () => {
@@ -10,15 +10,16 @@ const Votes = () => {
     jQuery.ajax({
       type: "post",
       dataType: "json",
-      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
       success: function(response){
         setAdminProperties(response);
       }
     });
   };
-  getAdminProperties();
-
+  useEffect(() => {
+    getAdminProperties();
+  }, [])
   return (
     adminProperties && <Builder adminProperties={adminProperties} />
   );

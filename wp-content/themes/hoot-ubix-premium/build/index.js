@@ -44,7 +44,7 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
-  console.log(adminProperties);
+  // console.log(adminProperties);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -122,14 +122,14 @@ const Builder = _ref => {
     jQuery.ajax({
       type: "post",
       dataType: "json",
-      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
       success: function (response) {
         if (response && response.id) {
           jQuery.ajax({
             type: "post",
             dataType: "json",
-            url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+            url: `${baseUrl}/wp-admin/admin-ajax.php`,
             data: {
               action: 'addProductToCart',
               item_id: response.id
@@ -291,10 +291,11 @@ const Builder = _ref => {
     onClick: e => {
       createProduct(e);
     }
-  }, isAdding ? 'Adding Product...' : 'Add to Cart'), !showAlerts && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, isAdding ? 'Adding Product...' : 'Add to Cart'), showAlerts && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "alert"
   }, "Product was added to Cart, please check your ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "/cart"
+    href: `${baseUrl}/cart`,
+    target: "_blank"
   }, "cart."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "times",
     onClick: e => {
@@ -1215,7 +1216,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const {
   render,
-  useState
+  useState,
+  useEffect
 } = wp.element;
 
 
@@ -1230,7 +1232,7 @@ const Votes = () => {
     jQuery.ajax({
       type: "post",
       dataType: "json",
-      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
       success: function (response) {
         setAdminProperties(response);
@@ -1238,7 +1240,9 @@ const Votes = () => {
     });
   };
 
-  getAdminProperties();
+  useEffect(() => {
+    getAdminProperties();
+  }, []);
   return adminProperties && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], {
     adminProperties: adminProperties
   });

@@ -13,7 +13,7 @@ import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSet
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 
 const Builder = ({ adminProperties }) => {
-  console.log(adminProperties);
+  // console.log(adminProperties);
   const [price, setPrice] = useState(500);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
@@ -92,14 +92,14 @@ const Builder = ({ adminProperties }) => {
     jQuery.ajax({
       type: "post",
       dataType: "json",
-      url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+      url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
       success: function(response){
         if (response && response.id) {
           jQuery.ajax({
             type: "post",
             dataType: "json",
-            url: 'http://localhost/garage/wp-admin/admin-ajax.php',
+            url: `${baseUrl}/wp-admin/admin-ajax.php`,
             data: {
               action: 'addProductToCart',
               item_id: response.id
@@ -265,10 +265,9 @@ const Builder = ({ adminProperties }) => {
               {isAdding ? 'Adding Product...' : 'Add to Cart'}
             </button>
             { 
-              !showAlerts && (
-
+              showAlerts && (
                 <p className='alert'>
-                  Product was added to Cart, please check your <a href="/cart">cart.</a>
+                  Product was added to Cart, please check your <a href={`${baseUrl}/cart`} target="_blank">cart.</a>
                   <span className='times' onClick={(e) => {setShowAlerts(false)}}>&times;</span>
                 </p>
               )
