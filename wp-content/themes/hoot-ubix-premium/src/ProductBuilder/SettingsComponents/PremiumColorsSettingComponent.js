@@ -21,7 +21,7 @@ const PremiumColorsSettingComponent = ({ properties, enablePrice }) => {
           colors.map((e, index) => {
             return (
               <div className="color-item" style={{border: `2px solid ${option === index ? e : '#FFF'}`}}>
-                <button type="button" className="btn-color button" style={{ backgroundColor: `${e}` }} onClick={(e) => {setOption(index); enablePrice(true)}}></button>
+                <button type="button" className="btn-color button" style={{ backgroundColor: `${e}` }} onClick={(evt) => {setOption(index); enablePrice(e, true)}}></button>
               </div>
             )
           })

@@ -39,6 +39,15 @@ const Builder = ({ adminProperties }) => {
     },
     trackRadius:  {
       radius: 12
+    },
+    rollerType: {
+      type: ''
+    },
+    standardColor: {
+      color: '',
+    },
+    premiumColor: {
+      color: ''
     }
   })
   const [price, setPrice] = useState(basePrice);
@@ -131,6 +140,12 @@ const Builder = ({ adminProperties }) => {
   }
 
   const changePriceWithRollerType = (e) => {
+    setMetaObject({
+      ...metaObj,
+      rollerType: {
+        type: e
+      }
+    });
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
   }
@@ -202,6 +217,9 @@ const Builder = ({ adminProperties }) => {
       let lock_placement = metaObj.lock_placement;
       let panelType = metaObj.panelType;
       let trackRadius = metaObj.trackRadius;
+      let rollerType = metaObj.rollerType;
+      let standardColor = metaObj.standardColor;
+      let premiumColor = metaObj.premiumColor;
       if (adminProperties.lock_placement_group.inside.default === true) {
         lock_placement.hasLock = true;
         lock_placement.placement = 'inside';
@@ -232,9 +250,11 @@ const Builder = ({ adminProperties }) => {
           return e.default == true;
         });
         if (index > -1) {
+          rollerType.type = adminProperties.roller_type_group.select_button_options[index].button_name;
           initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
           setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
         } else {
+          rollerType.type = '';
           setChangedPriceWithRollerType(0);
         }
       }
@@ -246,6 +266,7 @@ const Builder = ({ adminProperties }) => {
         if (index > -1) {
           initialPrice += Number(adminProperties.premium_colors_group.additional_price);
           setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+          premiumColor.color = adminProperties.premium_colors_group.select_button_options[index].select_color;
         } else {
           setChangedPriceWithPremiumColor(0);
         }
@@ -258,6 +279,15 @@ const Builder = ({ adminProperties }) => {
           setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
         } else {
           setChangedPriceWithTrackRadius(0);
+        }
+      }
+
+      if(adminProperties.standard_colors_group) {
+        let index = adminProperties.standard_colors_group.select_button_options.findIndex((e) => {
+          return e.default == true;
+        });
+        if (index > -1) {
+          standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
         }
       }
 
@@ -353,7 +383,7 @@ const Builder = ({ adminProperties }) => {
           />
           <RollerTypeSettingComponent
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
-            setAdditionalPriceForRollerType={(e) => changePriceWithRollerType(e)}
+            setAdditionalPriceForRollerType={(type, e) => changePriceWithRollerType(type, e)}
           />
           <TrackRadiusSettingComponent
             properties={adminProperties.track_radius_group}
@@ -361,12 +391,28 @@ const Builder = ({ adminProperties }) => {
           />
           <ColorsSettingComponent
             colorIndex={colorIndex}
-            onChange={(e) => setColorIndex(e)}
+            onChange={(color, e) => {
+              setMetaObject({
+                ...metaObj,
+                standardColor: {
+                  color: color
+                }
+              })
+              setColorIndex(e);
+            }}
             properties={adminProperties.standard_colors_group}
           />
           <PremiumColorsSettingComponent
             properties={adminProperties.premium_colors_group}
-            enablePrice={(e) => changePriceWithPremiumColor(e)}
+            enablePrice={(color, e) => {
+              setMetaObject({
+                ...metaObj,
+                premiumColor: {
+                  color: color
+                }
+              })
+              changePriceWithPremiumColor(e);
+            }}
           />
           <div className="product-setting-item-component price-section">
             <label>Total</label>

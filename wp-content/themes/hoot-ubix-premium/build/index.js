@@ -70,6 +70,15 @@ const Builder = _ref => {
     },
     trackRadius: {
       radius: 12
+    },
+    rollerType: {
+      type: ''
+    },
+    standardColor: {
+      color: ''
+    },
+    premiumColor: {
+      color: ''
     }
   });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
@@ -157,6 +166,11 @@ const Builder = _ref => {
   };
 
   const changePriceWithRollerType = e => {
+    setMetaObject({ ...metaObj,
+      rollerType: {
+        type: e
+      }
+    });
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
   };
@@ -229,6 +243,9 @@ const Builder = _ref => {
     let lock_placement = metaObj.lock_placement;
     let panelType = metaObj.panelType;
     let trackRadius = metaObj.trackRadius;
+    let rollerType = metaObj.rollerType;
+    let standardColor = metaObj.standardColor;
+    let premiumColor = metaObj.premiumColor;
 
     if (adminProperties.lock_placement_group.inside.default === true) {
       lock_placement.hasLock = true;
@@ -261,9 +278,11 @@ const Builder = _ref => {
       });
 
       if (index > -1) {
+        rollerType.type = adminProperties.roller_type_group.select_button_options[index].button_name;
         initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
         setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
       } else {
+        rollerType.type = '';
         setChangedPriceWithRollerType(0);
       }
     }
@@ -276,6 +295,7 @@ const Builder = _ref => {
       if (index > -1) {
         initialPrice += Number(adminProperties.premium_colors_group.additional_price);
         setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+        premiumColor.color = adminProperties.premium_colors_group.select_button_options[index].select_color;
       } else {
         setChangedPriceWithPremiumColor(0);
       }
@@ -289,6 +309,16 @@ const Builder = _ref => {
         setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
       } else {
         setChangedPriceWithTrackRadius(0);
+      }
+    }
+
+    if (adminProperties.standard_colors_group) {
+      let index = adminProperties.standard_colors_group.select_button_options.findIndex(e => {
+        return e.default == true;
+      });
+
+      if (index > -1) {
+        standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
       }
     }
 
@@ -393,17 +423,31 @@ const Builder = _ref => {
     properties: adminProperties.panel_group && adminProperties.panel_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
-    setAdditionalPriceForRollerType: e => changePriceWithRollerType(e)
+    setAdditionalPriceForRollerType: (type, e) => changePriceWithRollerType(type, e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
     properties: adminProperties.track_radius_group,
     enablePrice: (radius, e) => changePriceWithTrackRadius(radius, e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
-    onChange: e => setColorIndex(e),
+    onChange: (color, e) => {
+      setMetaObject({ ...metaObj,
+        standardColor: {
+          color: color
+        }
+      });
+      setColorIndex(e);
+    },
     properties: adminProperties.standard_colors_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
     properties: adminProperties.premium_colors_group,
-    enablePrice: e => changePriceWithPremiumColor(e)
+    enablePrice: (color, e) => {
+      setMetaObject({ ...metaObj,
+        premiumColor: {
+          color: color
+        }
+      });
+      changePriceWithPremiumColor(e);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -797,7 +841,7 @@ const ColorsSettingComponent = _ref => {
       style: {
         backgroundColor: `${e}`
       },
-      onClick: e => onChange(index)
+      onClick: evt => onChange(e, index)
     }));
   })));
 };
@@ -995,9 +1039,9 @@ const PremiumColorsSettingComponent = _ref => {
       style: {
         backgroundColor: `${e}`
       },
-      onClick: e => {
+      onClick: evt => {
         setOption(index);
-        enablePrice(true);
+        enablePrice(e, true);
       }
     }));
   })));
@@ -1049,7 +1093,7 @@ const RollerTypeSettingComponent = _ref => {
       checked: selectedIndex == index ? 'checked' : '',
       onChange: e => {
         setSelectedIndex(index);
-        setAdditionalPriceForRollerType(Number(option.additional_price));
+        setAdditionalPriceForRollerType(option.button_name, Number(option.additional_price));
       }
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       class: "checkmark"

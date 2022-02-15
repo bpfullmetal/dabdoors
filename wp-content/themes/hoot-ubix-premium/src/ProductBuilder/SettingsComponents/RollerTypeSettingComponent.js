@@ -21,7 +21,7 @@ const RollerTypeSettingComponent = ({ properties, setAdditionalPriceForRollerTyp
                   checked={selectedIndex == index ? 'checked' : ''}
                   onChange={(e) => {
                     setSelectedIndex(index);
-                    setAdditionalPriceForRollerType(Number(option.additional_price))
+                    setAdditionalPriceForRollerType(option.button_name, Number(option.additional_price))
                   }}
                 />
                 <span class="checkmark"></span>

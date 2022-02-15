@@ -12,7 +12,7 @@ const ColorsSettingComponent = ({properties, colorIndex, onChange}) => {
           colors.map((e, index) => {
             return (
               <div className="color-item" style={{border: `2px solid ${colorIndex == index ? e : '#FFF'}`}}>
-                <button type="button" className="btn-color button" style={{ backgroundColor: `${e}` }} onClick={(e) => onChange(index)}></button>
+                <button type="button" className="btn-color button" style={{ backgroundColor: `${e}` }} onClick={(evt) => onChange(e, index)}></button>
               </div>
             )
           })
