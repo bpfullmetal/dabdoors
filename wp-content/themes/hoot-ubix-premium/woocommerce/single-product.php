@@ -119,7 +119,12 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 		$_product = wc_get_product( $product_id );
 		print_r($_product);
 		$_base_price = $_product->get_price();
-		echo '<script>let basePrice = '.$_base_price.';</script>';
+		echo '<script>
+			let basePrice = '.$_base_price.';
+			let productId = '.$product_id.';
+			let initWidth = '.$_product->get_width().';
+			let initHeight = '.$_product->get_height().';
+		</script>';
 ?>
 </pre>
 <div class="hgrid main-content-grid">

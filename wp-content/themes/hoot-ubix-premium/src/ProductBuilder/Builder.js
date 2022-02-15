@@ -15,6 +15,16 @@ import Switch from "react-switch";
 
 
 const Builder = ({ adminProperties }) => {
+  const [metaObj, setMetaObject] = useState({
+    size: {
+      width: 10.0,
+      height: 16.2
+    },
+    windows: {
+      hasWindow: false,
+      position: []
+    }
+  })
   const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
@@ -33,24 +43,38 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const [windowSize, changeWindowSize] = useState({
-    height1: 16,
-    height2: 2,
-    width1: 10,
+    height1: Math.floor(initHeight),
+    height2: 0,
+    width1: Math.floor(initWidth),
     width2: 0
   })
   const [isAdding, setIsAdding] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [productUrl, setProductUrl] = useState('');
   const [showCustomPanel, setShowCustomPanel] = useState(false);
-  const changeWindowsCount = (e) => {
+  const changeWindowsCount = (e, index) => {
+    let rows = ['A','B','C'];
+    let rowIndex = Math.floor(index / 4);
+    let colIndex = Math.floor(index % 4);
+    let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
+    let windwsObj = metaObj.windows;
+    let windowsPos = metaObj.windows.position;
+
     if (hasWindow) {
       if (e === true) {
+        windowsPos.push(selectedWindowPos);
         setPrice(price + Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt + 1);
       } else {
+        windowsPos.splice(windowsPos.indexOf(selectedWindowPos), 1);
         setPrice(price - Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt - 1);
       }
+      windwsObj.position = windowsPos;
+      setMetaObject({
+        ...metaObj,
+        windows: windwsObj
+      });
     }
   }
 
@@ -205,7 +229,7 @@ const Builder = ({ adminProperties }) => {
                 return option.select_color;
               })
             }
-            changeWindowsCount={(e) => {changeWindowsCount(e);}}
+            changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
           />
           <div className='mobile-switch-button'>
             <span>Customization</span>

@@ -53,7 +53,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                         {
                           windows.map((e, index) => {
                             return <WindowComponent enableWindow={hasWindow} addedWindow={(e) => {
-                              changeWindowsCount(e);
+                              changeWindowsCount(e, index);
                             }}/>
                           })
                         }

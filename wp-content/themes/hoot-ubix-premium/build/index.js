@@ -46,6 +46,16 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
+  const [metaObj, setMetaObject] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    size: {
+      width: 10.0,
+      height: 16.2
+    },
+    windows: {
+      hasWindow: false,
+      position: []
+    }
+  });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -62,9 +72,9 @@ const Builder = _ref => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    height1: 16,
-    height2: 2,
-    width1: 10,
+    height1: Math.floor(initHeight),
+    height2: 0,
+    width1: Math.floor(initWidth),
     width2: 0
   });
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -72,15 +82,29 @@ const Builder = _ref => {
   const [productUrl, setProductUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const [showCustomPanel, setShowCustomPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
 
-  const changeWindowsCount = e => {
+  const changeWindowsCount = (e, index) => {
+    let rows = ['A', 'B', 'C'];
+    let rowIndex = Math.floor(index / 4);
+    let colIndex = Math.floor(index % 4);
+    let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
+    let windwsObj = metaObj.windows;
+    let windowsPos = metaObj.windows.position;
+
     if (hasWindow) {
       if (e === true) {
+        windowsPos.push(selectedWindowPos);
         setPrice(price + Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt + 1);
       } else {
+        windowsPos.splice(windowsPos.indexOf(selectedWindowPos), 1);
         setPrice(price - Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt - 1);
       }
+
+      windwsObj.position = windowsPos;
+      setMetaObject({ ...metaObj,
+        windows: windwsObj
+      });
     }
   };
 
@@ -239,8 +263,8 @@ const Builder = _ref => {
     colors: adminProperties.standard_colors_group.select_button_options.map((option, index) => {
       return option.select_color;
     }),
-    changeWindowsCount: e => {
-      changeWindowsCount(e);
+    changeWindowsCount: (e, index) => {
+      changeWindowsCount(e, index);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
@@ -446,7 +470,7 @@ const ProductContainerComponent = _ref => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         enableWindow: hasWindow,
         addedWindow: e => {
-          changeWindowsCount(e);
+          changeWindowsCount(e, index);
         }
       });
     })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
