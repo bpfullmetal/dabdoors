@@ -290,7 +290,15 @@ const Builder = ({ adminProperties }) => {
           standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
         }
       }
-
+      setMetaObject({
+        ...metaObj,
+        lock_placement,
+        panelType,
+        trackRadius,
+        rollerType,
+        standardColor,
+        premiumColor
+      });
       setPrice(initialPrice);
   }, [])
 

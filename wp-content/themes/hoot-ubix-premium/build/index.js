@@ -322,6 +322,14 @@ const Builder = _ref => {
       }
     }
 
+    setMetaObject({ ...metaObj,
+      lock_placement,
+      panelType,
+      trackRadius,
+      rollerType,
+      standardColor,
+      premiumColor
+    });
     setPrice(initialPrice);
   }, []);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
