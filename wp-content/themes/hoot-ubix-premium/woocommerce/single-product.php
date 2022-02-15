@@ -113,5 +113,8 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	?>
 
 </div><!-- .hgrid -->
+<div class="hgrid main-content-grid">
+	<div id="single-product-builder"></div>
+</div>
 
 <?php get_footer( 'shop' ); ?>
