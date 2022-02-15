@@ -60,8 +60,11 @@ do_action( 'hybrid_after_setup' );
 /* Launch the Theme */
 $hoot_theme = new Hoot_Theme();
 
+
 /* Hoot Theme Setup complete */
 do_action( 'hoot_theme_after_setup' );
+
+$customProductMeta = null;
 
 function add_order_item_meta($item_id, $values) {
   if ( $values['new_sku'] ) {
@@ -75,6 +78,59 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
   $price = $product->get_price();
   $cart_item_data['new_price'] = $price + 15;
   $cart_item_data['new_sku'] = '98765';
+  session_start();    
+  if (isset($_SESSION['meta_data'])) {
+      $option = $_SESSION['meta_data'];
+      if (!empty($option)) {
+        $metaData = array(
+          'size' => $option['size']['width'].'*'.$option['size']['height']
+        );
+        if ($option['windows']['hasWindow'] == true) {
+          $metaData[] = array(
+            'window_placement' => implode(",", $option['windows']['position'])
+          );
+        }
+        if ($option['lock_placement']['hasLock'] == true) {
+          $metaData[] = array(
+            'lock_placement' => implode(",", $option['lock_placement']['placement'])
+          );
+        }
+        if ($option['insulation']['hasInsulation'] == true) {
+          $metaData[] = array(
+            'insulation' => true
+          );
+        }
+        if ($option['vents']['hasVents'] == true) {
+          $metaData[] = array(
+            'vents' => true
+          );
+        }
+        if ($option['panelType'] == true) {
+          $metaData[] = array(
+            'panelType' => $option['panelType']['type']
+          );
+        }
+        $metaData['trackRadius'] = $option['trackRadius']['radius'];
+        $metaData['rollerType'] = $option['rollerType']['type'];
+        $metaData['standardColor'] = $option['standardColor']['color'];
+        $metaData['premiumColor'] = $option['premiumColor']['color'];
+        $new_value = array(
+          'meta_data' => $metaData
+        );
+      }
+      // $new_value = array('custom_data' => $option);
+  }
+  if(empty($option))
+      return $cart_item_data;
+  else
+  {    
+      if(empty($cart_item_data))
+          return $new_value;
+      else
+          return array_merge($cart_item_data,$new_value);
+  }
+  unset($_SESSION['meta_data']); 
+
   return $cart_item_data;
 }
 
@@ -99,7 +155,7 @@ add_action( 'woocommerce_before_calculate_totals', 'before_calculate_totals', 10
 function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
     $product = $cart_item['data']; // The WC_Product Object
     if( is_cart() && $product->get_meta('model') ) {
-        $item_name .= '<br><span class="item-sku">'. $product->get_meta('model') . '</span>';
+        $item_name .= '<br><span class="item-sku">'. 123123123 . '</span>';
     }
     return $item_name;
 }
@@ -124,19 +180,7 @@ function my_theme_enqueue_styles() {
   ); 
 }
 
-function testHook($item_id, $values) {
-  echo $item_id.' : '.$values;
-}
-add_action( 'runTestHook', 'testHook', 10, 2 );
 
-function ajaxHandleForTestHook() {
-  $item_id = $_POST['item_id'];
-  $values = $_POST['values'];
-  do_action('runTestHook', $item_id, $values);
-}
-
-add_action( 'wp_ajax_nopriv_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
-add_action( 'wp_ajax_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
 if( function_exists('acf_add_options_page') ) {
 	
 	acf_add_options_page(array(
@@ -179,39 +223,10 @@ function getAdminProperties() {
 add_action( 'wp_ajax_nopriv_getAdminProperties', 'getAdminProperties' );
 add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
 
-function createProduct() { 
-  $image_id = 1626;
-  $price = $_POST['price'];
-  $product = new WC_Product_Simple();
-  $product->set_name( 'Custom Product' );
-  $product->set_status( 'publish' ); 
-  $product->set_catalog_visibility( 'visible' );
-  $product->set_price( $price );
-  $product->set_regular_price( $price );
-  $product->set_sold_individually( true );
-  $product->set_image_id( $image_id );
-  $product->set_downloadable( true );
-  $product->set_virtual( true );      
-  $src_img = wp_get_attachment_image_src( $image_id, 'full' );
-  $file_url = reset( $src_img );
-  $file_md5 = md5( $file_url );
-  $download = new WC_Product_Download();
-  $download->set_name( get_the_title( $image_id ) );
-  $download->set_id( $file_md5 );
-  $download->set_file( $file_url );
-  $downloads[$file_md5] = $download;
-  $product->set_downloads( $downloads );
-  $product->save();
-  echo json_encode(array(
-    'id' => $product->get_id()
-  ));
-  wp_die();
-}
-
-add_action( 'wp_ajax_nopriv_createProduct', 'createProduct' );
-add_action( 'wp_ajax_createProduct', 'createProduct' );
 
 function addProductToCart() {
+  session_start();    
+  $_SESSION['meta_data'] = $_POST['meta_data'];
   ob_start();
   $product_id        = $_POST['item_id'];
   $quantity          = 1;
@@ -238,9 +253,44 @@ function addProductToCart() {
       wp_send_json( $data );
 
   }
-
-  die();
-
+  // echo json_encode($cart_obj);
+  wp_die();
 }
 add_action( 'wp_ajax_nopriv_addProductToCart', 'addProductToCart' );
 add_action( 'wp_ajax_addProductToCart', 'addProductToCart' );
+
+add_filter('woocommerce_get_cart_item_from_session', 'wdm_get_cart_items_from_session', 1, 3 );
+if(!function_exists('wdm_get_cart_items_from_session'))
+{
+    function wdm_get_cart_items_from_session($item,$values,$key)
+    {
+        if (array_key_exists( 'meta_data', $values ) )
+        {
+        $item['meta_data'] = $values['meta_data'];
+        }       
+        return $item;
+    }
+}
+
+add_filter('woocommerce_checkout_cart_item_quantity','wdm_add_user_custom_option_from_session_into_cart',1,3);  
+add_filter('woocommerce_cart_item_price','wdm_add_user_custom_option_from_session_into_cart',1,3);
+if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
+{
+ function wdm_add_user_custom_option_from_session_into_cart($product_name, $values, $cart_item_key )
+    {
+        /*code to add custom data on Cart & checkout Page*/    
+        if(count($values['meta_data']) > 0)
+        {
+            $return_string = $product_name . "</a><dl class='variation'>";
+            $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
+            $return_string .= "<tr><td>" . $values['custom_data']['custom_key'] . "</td></tr>";
+            $return_string .= "</table></dl>"; 
+            $return_string .= json_encode($values['meta_data']);
+            return $return_string;
+        }
+        else
+        {
+            return $product_name;
+        }
+    }
+}
