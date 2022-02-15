@@ -10,14 +10,14 @@ const LockPlacementSettingComponent = ({ properties, setAdditionalPriceForLock }
         <button
           type="button"
           className={`button ${option == 1 ? 'active' : ''}`}
-          onClick={(e) => {setOption(1); setAdditionalPriceForLock(Number(properties.inside.additional_price_$))}}
+          onClick={(e) => {setOption(1); setAdditionalPriceForLock(1, Number(properties.inside.additional_price_$))}}
         >
           Inside
         </button>
         <button
           type="button"
           className={`button ${option == 2 ? 'active' : ''}`}
-          onClick={(e) => {setOption(2); setAdditionalPriceForLock(Number(properties.outside.additional_price_$))}}
+          onClick={(e) => {setOption(2); setAdditionalPriceForLock(2, Number(properties.outside.additional_price_$))}}
         >
           Outside
         </button>

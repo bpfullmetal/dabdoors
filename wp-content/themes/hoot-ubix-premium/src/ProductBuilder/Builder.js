@@ -23,6 +23,10 @@ const Builder = ({ adminProperties }) => {
     windows: {
       hasWindow: false,
       position: []
+    },
+    lock_placement: {
+      hasLock: false,
+      placement: ''
     }
   })
   const [price, setPrice] = useState(basePrice);
@@ -36,7 +40,7 @@ const Builder = ({ adminProperties }) => {
     }) : 0
   );
   const [windowCnt, setWindowCnt] = useState(0); 
-  const [isLoaded, setLoadingStatus] = useState(false);
+  // const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
@@ -78,6 +82,11 @@ const Builder = ({ adminProperties }) => {
     }
   }
 
+
+  useEffect(() => {
+    console.log(metaObj);
+  }, [metaObj])
+
   useEffect(() => {
     if (showCustomPanel === true ) {
       jQuery('body').addClass('no-scroll');
@@ -86,7 +95,14 @@ const Builder = ({ adminProperties }) => {
     }
   }, [showCustomPanel])
 
-  const changePricewithLock = (e) => {
+  const changePricewithLock = (option, e) => {
+    let lock_placement = metaObj.lock_placement;
+    lock_placement.hasLock = true;
+    lock_placement.placement = option == 1 ? 'inside' : 'outside';
+    setMetaObject({
+      ...metaObj,
+      lock_placement
+    })
     setPrice(price - changedPriceWithLock + e);
     setChangedPriceWithLock(e);
   }
@@ -159,12 +175,20 @@ const Builder = ({ adminProperties }) => {
 
   React.useEffect(() => {
       let initialPrice = price;
+      let lock_placement = metaObj.lock_placement;
       if (adminProperties.lock_placement_group.inside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'inside';
         initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
       } else if (adminProperties.lock_placement_group.outside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'outside';
         initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      } else {
+        lock_placement.hasLock = false;
+        lock_placement.placement = '';
       }
 
       if (adminProperties.panel_group.raised.default === true) {
@@ -279,7 +303,7 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.vents_group && adminProperties.vents_group}
           />
           <LockPlacementSettingComponent
-            setAdditionalPriceForLock={(e) => changePricewithLock(e)}
+            setAdditionalPriceForLock={(option, e) => changePricewithLock(option, e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
           />
           <PanelSettingComponent

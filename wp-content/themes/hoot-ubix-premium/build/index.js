@@ -54,6 +54,10 @@ const Builder = _ref => {
     windows: {
       hasWindow: false,
       position: []
+    },
+    lock_placement: {
+      hasLock: false,
+      placement: ''
     }
   });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
@@ -64,8 +68,8 @@ const Builder = _ref => {
   }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
     return option.default == true;
   }) : 0);
-  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [isLoaded, setLoadingStatus] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0); // const [isLoaded, setLoadingStatus] = useState(false);
+
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -109,6 +113,9 @@ const Builder = _ref => {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(metaObj);
+  }, [metaObj]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (showCustomPanel === true) {
       jQuery('body').addClass('no-scroll');
     } else {
@@ -116,7 +123,13 @@ const Builder = _ref => {
     }
   }, [showCustomPanel]);
 
-  const changePricewithLock = e => {
+  const changePricewithLock = (option, e) => {
+    let lock_placement = metaObj.lock_placement;
+    lock_placement.hasLock = true;
+    lock_placement.placement = option == 1 ? 'inside' : 'outside';
+    setMetaObject({ ...metaObj,
+      lock_placement
+    });
     setPrice(price - changedPriceWithLock + e);
     setChangedPriceWithLock(e);
   };
@@ -190,13 +203,21 @@ const Builder = _ref => {
 
   React.useEffect(() => {
     let initialPrice = price;
+    let lock_placement = metaObj.lock_placement;
 
     if (adminProperties.lock_placement_group.inside.default === true) {
+      lock_placement.hasLock = true;
+      lock_placement.placement = 'inside';
       initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
       setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
     } else if (adminProperties.lock_placement_group.outside.default === true) {
+      lock_placement.hasLock = true;
+      lock_placement.placement = 'outside';
       initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
       setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+    } else {
+      lock_placement.hasLock = false;
+      lock_placement.placement = '';
     }
 
     if (adminProperties.panel_group.raised.default === true) {
@@ -325,7 +346,7 @@ const Builder = _ref => {
     },
     properties: adminProperties.vents_group && adminProperties.vents_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    setAdditionalPriceForLock: e => changePricewithLock(e),
+    setAdditionalPriceForLock: (option, e) => changePricewithLock(option, e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     setAdditionalPriceForPanelGroup: e => changePriceWithPanelGroup(e),
@@ -822,14 +843,14 @@ const LockPlacementSettingComponent = _ref => {
     className: `button ${option == 1 ? 'active' : ''}`,
     onClick: e => {
       setOption(1);
-      setAdditionalPriceForLock(Number(properties.inside.additional_price_$));
+      setAdditionalPriceForLock(1, Number(properties.inside.additional_price_$));
     }
   }, "Inside"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `button ${option == 2 ? 'active' : ''}`,
     onClick: e => {
       setOption(2);
-      setAdditionalPriceForLock(Number(properties.outside.additional_price_$));
+      setAdditionalPriceForLock(2, Number(properties.outside.additional_price_$));
     }
   }, "Outside")));
 };
