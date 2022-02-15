@@ -20,9 +20,9 @@ const TrackRadiusSettingComponent = ({ properties, enablePrice }) => {
           onChange={(e) => {
             setValue(e);
             if (e > Number(properties.if_over_)) {
-              enablePrice(true);
+              enablePrice(e, true);
             } else {
-              enablePrice(false);
+              enablePrice(e, false);
             }
           }}
         />

@@ -11,7 +11,7 @@ const PanelSettingComponent = ({ properties, setAdditionalPriceForPanelGroup }) 
           className={`button ${option == 1 ? 'active' : ''}`}
           onClick={(e) => {
             setOption(1);
-            setAdditionalPriceForPanelGroup(Number(properties.raised.additional_price_$))
+            setAdditionalPriceForPanelGroup(1, Number(properties.raised.additional_price_$))
           }}
         > Raised </button>
         <button
@@ -19,7 +19,7 @@ const PanelSettingComponent = ({ properties, setAdditionalPriceForPanelGroup }) 
           className={`button ${option == 2 ? 'active' : ''}`}
           onClick={(e) => {
             setOption(2);
-            setAdditionalPriceForPanelGroup(Number(properties.flush.additional_price_$))
+            setAdditionalPriceForPanelGroup(2, Number(properties.flush.additional_price_$))
           }}
         > Flush </button>
       </div>

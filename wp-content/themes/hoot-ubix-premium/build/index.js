@@ -61,6 +61,15 @@ const Builder = _ref => {
     },
     insulation: {
       hasInsulation: false
+    },
+    vents: {
+      hasVents: false
+    },
+    panelType: {
+      type: ''
+    },
+    trackRadius: {
+      radius: 12
     }
   });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
@@ -137,9 +146,14 @@ const Builder = _ref => {
     setChangedPriceWithLock(e);
   };
 
-  const changePriceWithPanelGroup = e => {
+  const changePriceWithPanelGroup = (option, e) => {
     setPrice(price - changedPriceWithPanel + e);
     setChangedPriceWithPanel(e);
+    setMetaObject({ ...metaObj,
+      panelType: {
+        type: option == 1 ? 'raised' : 'flush'
+      }
+    });
   };
 
   const changePriceWithRollerType = e => {
@@ -154,7 +168,13 @@ const Builder = _ref => {
     }
   };
 
-  const changePriceWithTrackRadius = e => {
+  const changePriceWithTrackRadius = (radius, e) => {
+    setMetaObject({ ...metaObj,
+      trackRadius: {
+        radius: radius
+      }
+    });
+
     if (e === true) {
       setPrice(price - changedPriceWithTrackRadius + Number(adminProperties.track_radius_group.additional_price_$));
       setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
@@ -207,6 +227,8 @@ const Builder = _ref => {
   React.useEffect(() => {
     let initialPrice = price;
     let lock_placement = metaObj.lock_placement;
+    let panelType = metaObj.panelType;
+    let trackRadius = metaObj.trackRadius;
 
     if (adminProperties.lock_placement_group.inside.default === true) {
       lock_placement.hasLock = true;
@@ -224,9 +246,11 @@ const Builder = _ref => {
     }
 
     if (adminProperties.panel_group.raised.default === true) {
+      panelType.type = 'raised';
       initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
       setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
     } else if (adminProperties.panel_group.flush.default === true) {
+      panelType.type = 'flush';
       initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
       setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
     }
@@ -258,6 +282,8 @@ const Builder = _ref => {
     }
 
     if (adminProperties.track_radius_group) {
+      trackRadius.radius = adminProperties.track_radius_group.minimum;
+
       if (Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_)) {
         initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
         setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
@@ -331,20 +357,16 @@ const Builder = _ref => {
     properties: adminProperties.insulation_group,
     enableInsulation: e => {
       if (e == true) {
-        setMetaObject({ ...metaObj,
-          insulation: {
-            hasInsulation: true
-          }
-        });
         setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
       } else {
-        setMetaObject({ ...metaObj,
-          insulation: {
-            hasInsulation: false
-          }
-        });
         setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
       }
+
+      setMetaObject({ ...metaObj,
+        insulation: {
+          hasInsulation: e
+        }
+      });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
@@ -355,6 +377,11 @@ const Builder = _ref => {
         setPrice(price - Number(adminProperties.vents_group.additional_price_$_if_added));
       }
 
+      setMetaObject({ ...metaObj,
+        vents: {
+          hasVents: e
+        }
+      });
       setHasVents(e);
     },
     properties: adminProperties.vents_group && adminProperties.vents_group
@@ -362,14 +389,14 @@ const Builder = _ref => {
     setAdditionalPriceForLock: (option, e) => changePricewithLock(option, e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    setAdditionalPriceForPanelGroup: e => changePriceWithPanelGroup(e),
+    setAdditionalPriceForPanelGroup: (option, e) => changePriceWithPanelGroup(option, e),
     properties: adminProperties.panel_group && adminProperties.panel_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
     setAdditionalPriceForRollerType: e => changePriceWithRollerType(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
     properties: adminProperties.track_radius_group,
-    enablePrice: e => changePriceWithTrackRadius(e)
+    enablePrice: (radius, e) => changePriceWithTrackRadius(radius, e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
     colorIndex: colorIndex,
     onChange: e => setColorIndex(e),
@@ -903,14 +930,14 @@ const PanelSettingComponent = _ref => {
     className: `button ${option == 1 ? 'active' : ''}`,
     onClick: e => {
       setOption(1);
-      setAdditionalPriceForPanelGroup(Number(properties.raised.additional_price_$));
+      setAdditionalPriceForPanelGroup(1, Number(properties.raised.additional_price_$));
     }
   }, " Raised "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
     className: `button ${option == 2 ? 'active' : ''}`,
     onClick: e => {
       setOption(2);
-      setAdditionalPriceForPanelGroup(Number(properties.flush.additional_price_$));
+      setAdditionalPriceForPanelGroup(2, Number(properties.flush.additional_price_$));
     }
   }, " Flush ")));
 };
@@ -1158,9 +1185,9 @@ const TrackRadiusSettingComponent = _ref => {
       setValue(e);
 
       if (e > Number(properties.if_over_)) {
-        enablePrice(true);
+        enablePrice(e, true);
       } else {
-        enablePrice(false);
+        enablePrice(e, false);
       }
     }
   })));
