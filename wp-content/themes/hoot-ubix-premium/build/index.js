@@ -58,6 +58,9 @@ const Builder = _ref => {
     lock_placement: {
       hasLock: false,
       placement: ''
+    },
+    insulation: {
+      hasInsulation: false
     }
   });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
@@ -328,8 +331,18 @@ const Builder = _ref => {
     properties: adminProperties.insulation_group,
     enableInsulation: e => {
       if (e == true) {
+        setMetaObject({ ...metaObj,
+          insulation: {
+            hasInsulation: true
+          }
+        });
         setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
       } else {
+        setMetaObject({ ...metaObj,
+          insulation: {
+            hasInsulation: false
+          }
+        });
         setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
       }
     }

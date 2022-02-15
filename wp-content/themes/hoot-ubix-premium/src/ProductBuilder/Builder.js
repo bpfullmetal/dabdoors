@@ -27,6 +27,9 @@ const Builder = ({ adminProperties }) => {
     lock_placement: {
       hasLock: false,
       placement: ''
+    },
+    insulation: {
+      hasInsulation: false
     }
   })
   const [price, setPrice] = useState(basePrice);
@@ -284,8 +287,20 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.insulation_group}
             enableInsulation={(e) => {
               if (e == true) {
+                setMetaObject({
+                  ...metaObj,
+                  insulation: {
+                    hasInsulation: true
+                  }
+                });
                 setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
               } else {
+                setMetaObject({
+                  ...metaObj,
+                  insulation: {
+                    hasInsulation: false
+                  }
+                });
                 setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
               }
             }}
