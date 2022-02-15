@@ -15,8 +15,7 @@ import Switch from "react-switch";
 
 
 const Builder = ({ adminProperties }) => {
-  // console.log(adminProperties);
-  const [price, setPrice] = useState(500);
+  const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(

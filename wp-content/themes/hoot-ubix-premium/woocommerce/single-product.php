@@ -113,6 +113,15 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 	?>
 
 </div><!-- .hgrid -->
+<pre>
+<?php 
+		$product_id = get_the_ID();
+		$_product = wc_get_product( $product_id );
+		print_r($_product);
+		$_base_price = $_product->get_price();
+		echo '<script>let basePrice = '.$_base_price.';</script>';
+?>
+</pre>
 <div class="hgrid main-content-grid">
 	<div id="single-product-builder"></div>
 </div>

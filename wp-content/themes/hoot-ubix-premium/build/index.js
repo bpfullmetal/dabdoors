@@ -46,8 +46,7 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
-  // console.log(adminProperties);
-  const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(500);
+  const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProperties.standard_colors_group.select_button_options.findIndex(option => {
