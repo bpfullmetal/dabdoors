@@ -29,6 +29,9 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
         doubleClick={{
           disabled: true
         }}
+        wheel={{
+          disabled: true
+        }}
         onZoomStop={(ref, event) => {
           setScale(ref.state.scale * 100);
         }}

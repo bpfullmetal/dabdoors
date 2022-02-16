@@ -213,41 +213,7 @@ const Builder = _ref => {
       data: formData
     }).then(res => {
       console.log(res);
-    }); // let formData = {
-    //   action: 'createProduct',
-    //   price: price
-    // };
-    // jQuery.ajax({
-    //   type: "post",
-    //   dataType: "json",
-    //   url: `${baseUrl}/wp-admin/admin-ajax.php`,
-    //   data: formData,
-    //   success: function(response){
-    //     if (response && response.id) {
-    //       jQuery.ajax({
-    //         type: "post",
-    //         dataType: "json",
-    //         url: `${baseUrl}/wp-admin/admin-ajax.php`,
-    //         data: {
-    //           action: 'addProductToCart',
-    //           item_id: response.id
-    //         },
-    //       }).done(function(res) {
-    //         console.log(res);
-    //         if (res.error == false) {
-    //           setIsAdding(false);
-    //           setShowAlerts(true);
-    //           setProductUrl(res.product_url);
-    //         } else {
-    //           setIsAdding(false);
-    //           alert("Error was occured!");
-    //           setProductUrl('');
-    //           setShowAlerts(false);
-    //         }
-    //       })
-    //     }
-    //   }
-    // });
+    });
   };
 
   React.useEffect(() => {
@@ -554,6 +520,9 @@ const ProductContainerComponent = _ref => {
     initialPositionX: 0,
     initialPositionY: 0,
     doubleClick: {
+      disabled: true
+    },
+    wheel: {
       disabled: true
     },
     onZoomStop: (ref, event) => {
