@@ -12,6 +12,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
   const [scale, setScale] = useState(100);
   const [realWidth, setRealWidth] = useState(0);
   const [realHeight, setRealHeight] = useState(0);
+  const [bgColor, setBgColor] = useState('#CCAC7B');
   useEffect(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
     let width = maxWidth;
@@ -56,6 +57,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
             <TransformComponent>
               <div
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
+                style={{backgroundColor: bgColor}}
               >
                 <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">
@@ -80,7 +82,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
 
       </TransformWrapper>
 
-      <WallSettingsComponent tileIndex={tileIndex} onChange={(e) => setTileIndex(e)}/>
+      <WallSettingsComponent tileIndex={tileIndex} onChange={(e) => setTileIndex(e)} onWallBgColorChange={(c) => setBgColor(c)}/>
     </div>
   )
 }

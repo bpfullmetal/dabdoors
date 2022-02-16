@@ -218,6 +218,13 @@ body {
               padding: 10px;
               .btn-color-picker {
                 cursor: pointer;
+                transition: transform .25s;
+                &:hover {
+                  transform: scale(1.1);
+                }
+                &:active {
+                  transform: scale(1);
+                }
               }
             }
             .wall-item {

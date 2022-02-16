@@ -1,7 +1,7 @@
-const { render, useState } = wp.element;
+const { render, useState, useEffect } = wp.element;
 import { SketchPicker, ChromePicker } from 'react-color';
 
-const WallSettingsComponent = ({tileIndex, onChange}) => {
+const WallSettingsComponent = ({tileIndex, onChange, onWallBgColorChange}) => {
   let indexes = ['grid', 'single-line', 'single'];
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [color, setColor] = useState('#CCAC7B');
@@ -9,8 +9,12 @@ const WallSettingsComponent = ({tileIndex, onChange}) => {
     setShowColorPicker(!showColorPicker)
   };
 
+  useEffect(() => {
+    onWallBgColorChange(color);
+  }, [color])
+
   const handleClose = () => {
-    setShowColorPicker(false)
+    setShowColorPicker(false);
   };
   const popover = {
     position: 'absolute',

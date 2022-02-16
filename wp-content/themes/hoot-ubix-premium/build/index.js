@@ -608,6 +608,7 @@ const ProductContainerComponent = _ref => {
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   const [realWidth, setRealWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [realHeight, setRealHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [bgColor, setBgColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('#CCAC7B');
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
     let width = maxWidth;
@@ -662,7 +663,10 @@ const ProductContainerComponent = _ref => {
       scale: scale,
       windowSize: windowSize
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
+      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`,
+      style: {
+        backgroundColor: bgColor
+      }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "outline-door",
       style: {
@@ -688,7 +692,8 @@ const ProductContainerComponent = _ref => {
     })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     tileIndex: tileIndex,
-    onChange: e => setTileIndex(e)
+    onChange: e => setTileIndex(e),
+    onWallBgColorChange: c => setBgColor(c)
   }));
 };
 
@@ -1479,14 +1484,16 @@ __webpack_require__.r(__webpack_exports__);
 
 const {
   render,
-  useState
+  useState,
+  useEffect
 } = wp.element;
 
 
 const WallSettingsComponent = _ref => {
   let {
     tileIndex,
-    onChange
+    onChange,
+    onWallBgColorChange
   } = _ref;
   let indexes = ['grid', 'single-line', 'single'];
   const [showColorPicker, setShowColorPicker] = useState(false);
@@ -1495,6 +1502,10 @@ const WallSettingsComponent = _ref => {
   const handleClick = () => {
     setShowColorPicker(!showColorPicker);
   };
+
+  useEffect(() => {
+    onWallBgColorChange(color);
+  }, [color]);
 
   const handleClose = () => {
     setShowColorPicker(false);
