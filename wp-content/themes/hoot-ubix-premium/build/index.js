@@ -261,10 +261,10 @@ const Builder = _ref => {
     });
   };
 
-  const changePriceWithRollerType = e => {
+  const changePriceWithRollerType = (type, e) => {
     setMetaObject({ ...metaObj,
       rollerType: {
-        type: e
+        type: type
       }
     });
     setPrice(price - changedPriceWithRollerType + e);
