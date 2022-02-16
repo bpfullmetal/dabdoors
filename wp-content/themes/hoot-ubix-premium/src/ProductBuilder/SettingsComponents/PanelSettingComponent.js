@@ -1,10 +1,13 @@
 const { render, useState } = wp.element;
 
-const PanelSettingComponent = ({ properties, setAdditionalPriceForPanelGroup }) => {
+const PanelSettingComponent = ({ additional_price, properties, setAdditionalPriceForPanelGroup }) => {
   const [option, setOption] = useState(properties.raised.default == true ? 1 : (properties.flush.default == true ? 2 : -1));
   return (
     <div className="product-setting-item-component lock-placement-settings">
-      <label>{ properties.label }</label>
+      <label>
+        { properties.label }
+        { additional_price > 0 && <span className="additional_price_alert">{`+$${additional_price}`}</span> }
+      </label>
       <div className="d-flex button-wrapper align-items-center">
         <button
           type="button"

@@ -349,6 +349,20 @@ body {
             font-size: 12px;
             line-height: 14px;
             color: #333333;
+            span {
+              &.additional_price_alert {
+                padding: 2px 8px;
+                background-color: #EBFFF0;
+                font-family: Lato;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 10px;
+                line-height: 12px;
+                color: #028C29;
+                border-radius: 4px;
+                margin-left: 5px;
+              }
+            }
           }
           .size-settings-wrapper {
             display: flex;

@@ -8,7 +8,7 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
       <div class="d-flex align-items-center justify-content-between">
         <label>
           { properties?.label }
-          { hasWindow && additional_price > 0 && (<span className="additiaon_price_alert">+${additional_price}</span>) }
+          { hasWindow && additional_price > 0 && (<span className="additional_price_alert">+${additional_price}</span>) }
         </label>
         <Switch onChange={(e) => {onChange(e)}} checked={hasWindow} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>

@@ -1,11 +1,14 @@
 const { render, useState } = wp.element;
 import ReactSlider from 'react-slider';
 
-const TrackRadiusSettingComponent = ({ properties, enablePrice }) => {
+const TrackRadiusSettingComponent = ({ additional_price, properties, enablePrice }) => {
   const [value, setValue] = useState(Number(properties.minimum));
   return (
     <div className="product-setting-item-component track-radius-settings slider-bar">
-      <label>{ properties.label } ( { `${value}${properties.unit}` } )</label>
+      <label>
+        { properties.label } ( { `${value}${properties.unit}` } )
+        { additional_price > 0 && <span className='additional_price_alert'>{`+$${additional_price}`}</span> }
+      </label>
       <div className="d-flex">
         <ReactSlider
           ariaLabelledby="slider-label"

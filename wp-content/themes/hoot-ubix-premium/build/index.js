@@ -372,6 +372,7 @@ const Builder = _ref => {
     properties: adminProperties.window_group && adminProperties.window_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     properties: adminProperties.insulation_group,
+    additional_price: Number(adminProperties.insulation_group.additional_price_$_if_added),
     enableInsulation: e => {
       if (e == true) {
         setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
@@ -387,6 +388,7 @@ const Builder = _ref => {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
+    additional_price: Number(adminProperties.vents_group.additional_price_$_if_added),
     onChange: e => {
       if (e == true) {
         setPrice(price + Number(adminProperties.vents_group.additional_price_$_if_added));
@@ -403,15 +405,19 @@ const Builder = _ref => {
     },
     properties: adminProperties.vents_group && adminProperties.vents_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    additional_price: changedPriceWithLock,
     setAdditionalPriceForLock: (option, e) => changePricewithLock(option, e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    additional_price: changedPriceWithPanel,
     setAdditionalPriceForPanelGroup: (option, e) => changePriceWithPanelGroup(option, e),
     properties: adminProperties.panel_group && adminProperties.panel_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    additional_price: changedPriceWithRollerType,
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
     setAdditionalPriceForRollerType: (type, e) => changePriceWithRollerType(type, e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    additional_price: changedPriceWithTrackRadius,
     properties: adminProperties.track_radius_group,
     enablePrice: (radius, e) => changePriceWithTrackRadius(radius, e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -864,6 +870,7 @@ const {
 
 const InsulationSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     enableInsulation
   } = _ref;
@@ -872,7 +879,9 @@ const InsulationSettingComponent = _ref => {
     className: "product-setting-item-component insulation-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, insulation && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       setInsulation(e);
       enableInsulation(e);
@@ -908,13 +917,16 @@ const {
 
 const LockPlacementSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     setAdditionalPriceForLock
   } = _ref;
   const [option, setOption] = useState(properties.inside.default === true ? 1 : properties.outside.default == true ? 2 : -1);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -955,13 +967,16 @@ const {
 
 const PanelSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     setAdditionalPriceForPanelGroup
   } = _ref;
   const [option, setOption] = useState(properties.raised.default == true ? 1 : properties.flush.default == true ? 2 : -1);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
@@ -1065,6 +1080,7 @@ const {
 
 const RollerTypeSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     setAdditionalPriceForRollerType
   } = _ref;
@@ -1073,7 +1089,9 @@ const RollerTypeSettingComponent = _ref => {
   }));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center justify-content-between"
   }, properties.select_button_options.map((option, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -1201,13 +1219,16 @@ const {
 
 const TrackRadiusSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     enablePrice
   } = _ref;
   const [value, setValue] = useState(Number(properties.minimum));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component track-radius-settings slider-bar"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " ( ", `${value}${properties.unit}`, " )"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " ( ", `${value}${properties.unit}`, " )", additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_slider__WEBPACK_IMPORTED_MODULE_1__["default"], {
     ariaLabelledby: "slider-label",
@@ -1255,6 +1276,7 @@ const {
 
 const VentsSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     hasVents,
     onChange
@@ -1263,7 +1285,9 @@ const VentsSettingComponent = _ref => {
     className: "product-setting-item-component vents-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, hasVents && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       onChange(e);
     },
@@ -1311,7 +1335,7 @@ const WindowsSettingComponent = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties?.label, hasWindow && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "additiaon_price_alert"
+    className: "additional_price_alert"
   }, "+$", additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       onChange(e);

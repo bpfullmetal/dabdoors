@@ -329,6 +329,7 @@ const Builder = ({ adminProperties }) => {
           />
           <InsulationSettingComponent 
             properties={adminProperties.insulation_group}
+            additional_price = {Number(adminProperties.insulation_group.additional_price_$_if_added)}
             enableInsulation={(e) => {
               if (e == true) {
                 setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
@@ -345,6 +346,7 @@ const Builder = ({ adminProperties }) => {
           />
           <VentsSettingComponent
             hasVents={hasVents}
+            additional_price = {Number(adminProperties.vents_group.additional_price_$_if_added)}
             onChange={(e) => {
               if (e == true) {
                 setPrice(price + Number(adminProperties.vents_group.additional_price_$_if_added));
@@ -362,18 +364,22 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.vents_group && adminProperties.vents_group}
           />
           <LockPlacementSettingComponent
+            additional_price={changedPriceWithLock}
             setAdditionalPriceForLock={(option, e) => changePricewithLock(option, e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
           />
           <PanelSettingComponent
+            additional_price={changedPriceWithPanel}
             setAdditionalPriceForPanelGroup = {(option, e) => changePriceWithPanelGroup(option, e)}
             properties={adminProperties.panel_group && adminProperties.panel_group}
           />
           <RollerTypeSettingComponent
+            additional_price={changedPriceWithRollerType}
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
             setAdditionalPriceForRollerType={(type, e) => changePriceWithRollerType(type, e)}
           />
           <TrackRadiusSettingComponent
+            additional_price={changedPriceWithTrackRadius}
             properties={adminProperties.track_radius_group}
             enablePrice={(radius, e) => changePriceWithTrackRadius(radius, e)}
           />

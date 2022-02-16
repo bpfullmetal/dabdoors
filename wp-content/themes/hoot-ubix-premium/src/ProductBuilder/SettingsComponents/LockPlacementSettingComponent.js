@@ -1,11 +1,14 @@
 const { render, useState } = wp.element;
 
-const LockPlacementSettingComponent = ({ properties, setAdditionalPriceForLock }) => {
+const LockPlacementSettingComponent = ({ additional_price, properties, setAdditionalPriceForLock }) => {
   const [option, setOption] = useState(properties.inside.default === true ? 1 : (properties.outside.default == true ? 2 : -1));
 
   return (
     <div className="product-setting-item-component lock-placement-settings">
-      <label>{ properties.label }</label>
+      <label>
+        { properties.label }
+        { additional_price > 0 && <span className="additional_price_alert">{`+$${additional_price}`}</span> }
+      </label>
       <div className="d-flex button-wrapper align-items-center">
         <button
           type="button"

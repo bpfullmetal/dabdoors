@@ -370,6 +370,18 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
   line-height: 14px;
   color: #333333;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component label span.additional_price_alert {
+  padding: 2px 8px;
+  background-color: #EBFFF0;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #028C29;
+  border-radius: 4px;
+  margin-left: 5px;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-settings-wrapper {
   display: flex;
   flex-direction: column;
