@@ -13,10 +13,19 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
   const [realWidth, setRealWidth] = useState(0);
   const [realHeight, setRealHeight] = useState(0);
   useEffect(() => {
-    let width = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth : '';
+    let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
+    let width = maxWidth;
     let settingWidth = windowSize.width1 + (windowSize.width2 / 10);
     let settingHeight = windowSize.height1 + (windowSize.height2 / 10);
     let height = (width / settingWidth) * settingHeight;
+    if (height > 410) {
+      width  = maxWidth * (410 / height);
+      height = 410;
+    }
+    if (width > maxWidth) {
+      height = ( maxWidth / width ) * height;
+      width= maxWidth;
+    }
     setRealWidth(width);
     setRealHeight(height);
   }, [windowSize])
@@ -47,9 +56,8 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
             <TransformComponent>
               <div
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
-                // style={{width: realWidth, height: realHeight}}
               >
-                <div className="outline-door">
+                <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">
                     <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
                       <div className="window-wrapper">

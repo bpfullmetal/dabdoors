@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const SizeChangeComponent = ({onChangeWindowSize}) => {
-  const [width1, setWidth1] = useState(10);
+  const [width1, setWidth1] = useState(24);
   const [width2, setWidth2] = useState(0);
   const [height1, setHeight1] = useState(16);
   const [height2, setHeight2] = useState(2);

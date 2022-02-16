@@ -513,10 +513,22 @@ const ProductContainerComponent = _ref => {
   const [realWidth, setRealWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [realHeight, setRealHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    let width = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth : '';
+    let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
+    let width = maxWidth;
     let settingWidth = windowSize.width1 + windowSize.width2 / 10;
     let settingHeight = windowSize.height1 + windowSize.height2 / 10;
     let height = width / settingWidth * settingHeight;
+
+    if (height > 410) {
+      width = maxWidth * (410 / height);
+      height = 410;
+    }
+
+    if (width > maxWidth) {
+      height = maxWidth / width * height;
+      width = maxWidth;
+    }
+
     setRealWidth(width);
     setRealHeight(height);
   }, [windowSize]);
@@ -554,10 +566,13 @@ const ProductContainerComponent = _ref => {
       scale: scale,
       windowSize: windowSize
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}` // style={{width: realWidth, height: realHeight}}
-
+      className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "outline-door"
+      className: "outline-door",
+      style: {
+        width: realWidth,
+        height: realHeight
+      }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "inline-door"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1136,7 +1151,7 @@ const SizeChangeComponent = _ref => {
   let {
     onChangeWindowSize
   } = _ref;
-  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(10);
+  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(24);
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(16);
   const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
