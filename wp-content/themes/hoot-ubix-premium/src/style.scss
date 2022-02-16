@@ -211,9 +211,17 @@ body {
             margin-top: 50px;
             display: flex;
             align-items: center;
+            position: relative;
+            > div {
+              background: #FFFFFF;
+              border-radius: 9px;
+              padding: 10px;
+              .btn-color-picker {
+                cursor: pointer;
+              }
+            }
             .wall-item {
-              margin-right: 18px;
-              // padding: 4px;
+              margin-right: 14px;
               box-sizing: border-box;
               width: 40px;
               height: 40px;
@@ -233,10 +241,11 @@ body {
                 border: none;
                 padding: 0px;
                 &.grid {
-                  background-image: url(./assets/img_grid.png);
+                  background-image: url(./assets/small_grid.svg);
+                  
                 }
                 &.single-line {
-                  background-image: url(./assets/img_single_grid.png);
+                  background-image: url(./assets/small_single_grid.svg);
                 }
                 &.single {
                   background-color: #CCAC7B;
