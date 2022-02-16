@@ -190,7 +190,8 @@ body #single-product-builder .product-builder-content .product-container #produc
   opacity: 1;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item.disableWindow {
-  border: none;
+  border: 1px solid #FFFFFF;
+  opacity: 0.3;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .vents-wrapper {
   display: flex;
