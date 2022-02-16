@@ -359,6 +359,7 @@ const Builder = _ref => {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
+    additional_price: windowCnt * Number(adminProperties.window_group.additional_price_$_per_window),
     onChange: e => {
       if (e === true) {
         setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
@@ -645,8 +646,10 @@ const WindowComponent = _ref => {
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => {
-      setHasWindow(true);
-      addedWindow(true);
+      if (enableWindow === true) {
+        setHasWindow(true);
+        addedWindow(true);
+      }
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "15",
@@ -660,8 +663,10 @@ const WindowComponent = _ref => {
   }))), hasWindow == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-remove",
     onClick: e => {
-      setHasWindow(false);
-      addedWindow(false);
+      if (enableWindow === true) {
+        setHasWindow(false);
+        addedWindow(false);
+      }
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
     width: "24",
@@ -1295,15 +1300,19 @@ const {
 
 const WindowsSettingComponent = _ref => {
   let {
+    additional_price,
     properties,
     hasWindow,
     onChange
   } = _ref;
+  console.log(hasWindow ? additional_price : 0);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties?.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties?.label, hasWindow && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additiaon_price_alert"
+  }, "+$", additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onChange: e => {
       onChange(e);
     },

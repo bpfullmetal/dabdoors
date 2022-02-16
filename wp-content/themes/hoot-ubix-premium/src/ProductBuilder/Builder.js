@@ -316,6 +316,7 @@ const Builder = ({ adminProperties }) => {
           />
           <WindowsSettingComponent
             hasWindow={hasWindow}
+            additional_price={windowCnt * Number(adminProperties.window_group.additional_price_$_per_window)}
             onChange={(e) => {
               if (e === true) {
                 setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));

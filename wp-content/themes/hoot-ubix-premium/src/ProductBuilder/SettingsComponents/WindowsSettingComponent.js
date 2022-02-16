@@ -1,11 +1,15 @@
 const { render, useState } = wp.element;
 import Switch from "react-switch";
 
-const WindowsSettingComponent = ({ properties, hasWindow, onChange }) => {
+const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onChange }) => {
+  console.log(hasWindow ? additional_price : 0);
   return (
     <div className="product-setting-item-component window-settings">
       <div class="d-flex align-items-center justify-content-between">
-        <label>{ properties?.label }</label>
+        <label>
+          { properties?.label }
+          { hasWindow && additional_price > 0 && (<span className="additiaon_price_alert">+${additional_price}</span>) }
+        </label>
         <Switch onChange={(e) => {onChange(e)}} checked={hasWindow} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>
 
