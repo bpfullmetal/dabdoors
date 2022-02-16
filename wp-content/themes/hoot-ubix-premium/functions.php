@@ -75,14 +75,14 @@ add_action('woocommerce_add_order_item_meta', 'add_order_item_meta', 10, 2);
 
 function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
   $product = wc_get_product( $product_id );
-  $price = $product->get_price();
-  $cart_item_data['new_price'] = $price + 15;
-  $cart_item_data['new_sku'] = '98765';
+  // $price = $product->get_price();
   session_start();    
   if (isset($_SESSION['meta_data'])) {
-      $option = $_SESSION['meta_data'];
+    $option = $_SESSION['meta_data'];
+    $cart_item_data['new_price'] = floatval($option['price']) + 15;
+    $cart_item_data['new_sku'] = '98765';
       if (!empty($option)) {
-        $metaData = array(
+        $metaData[] = array(
           'size' => $option['size']['width'].'*'.$option['size']['height']
         );
         if ($option['windows']['hasWindow'] == true) {
@@ -115,10 +115,9 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
         $metaData['standardColor'] = $option['standardColor']['color'];
         $metaData['premiumColor'] = $option['premiumColor']['color'];
         $new_value = array(
-          'meta_data' => $metaData
+          'meta_data' => $metaData,
         );
       }
-      // $new_value = array('custom_data' => $option);
   }
   if(empty($option))
       return $cart_item_data;
@@ -152,15 +151,15 @@ function before_calculate_totals( $cart_obj ) {
 
 add_action( 'woocommerce_before_calculate_totals', 'before_calculate_totals', 10, 1 );
 
-function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
-    $product = $cart_item['data']; // The WC_Product Object
-    if( is_cart() && $product->get_meta('model') ) {
-        $item_name .= '<br><span class="item-sku">'. 123123123 . '</span>';
-    }
-    return $item_name;
-}
+// function display_sku_after_item_name( $item_name, $cart_item, $cart_item_key ) {
+//     $product = $cart_item['data'];
+//     if( is_cart() && $product->get_meta('model') ) {
+//         $item_name .= '<br><span class="item-sku">'. $cart_item_key . '</span>';
+//     }
+//     return $item_name;
+// }
 
-add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
+// add_filter( 'woocommerce_cart_item_name', 'display_sku_after_item_name', 5, 3 );
 
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 function my_theme_enqueue_styles() {
@@ -278,14 +277,32 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
 {
  function wdm_add_user_custom_option_from_session_into_cart($product_name, $values, $cart_item_key )
     {
-        /*code to add custom data on Cart & checkout Page*/    
         if(count($values['meta_data']) > 0)
         {
+          $metaData = $values['meta_data'];
+          $metaDataString = '';
+          foreach($metaData as $metaItem) {
+
+            if (isset($metaItem['size'])) {
+              $metaDataString .= '<span class="meta-item"><b>Size: </b>'.$metaItem['size'].'</span>';
+            } else if (isset($metaItem['window_placement']) && $metaItem['window_placement']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Window placement: </b>'.$metaItem['window_placement'].'</span>';
+            } else if (isset($metaItem['lock_placement']) && $metaItem['lock_placement']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Lock placement: </b>'.$metaItem['lock_placement'].'</span>';
+            } else if (isset($metaItem['insulation']) && $metaItem['insulation']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Insulation: </b>Enabled</span>';
+            } else if (isset($metaItem['vents']) && $metaItem['vents']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Enabled</span>';
+            } else if (isset($metaItem['panelType']) && $metaItem['panelType']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Panel: </b>'. $metaItem['panelType'] .'</span>';
+            }
+          }
+          if ($metaData['window_placement'])
             $return_string = $product_name . "</a><dl class='variation'>";
             $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
-            $return_string .= "<tr><td>" . $values['custom_data']['custom_key'] . "</td></tr>";
+            $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
             $return_string .= "</table></dl>"; 
-            $return_string .= json_encode($values['meta_data']);
+            $return_string .= '<b><u>Meta Data:</u></b><br/>'.$metaDataString;
             return $return_string;
         }
         else

@@ -187,6 +187,8 @@ const Builder = ({ adminProperties }) => {
       url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
     }).then(res => {
+      setIsAdding(false);
+      setShowAlerts(true);
       console.log(res);
     }) 
   }
