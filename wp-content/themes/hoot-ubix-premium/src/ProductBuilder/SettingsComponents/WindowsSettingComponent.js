@@ -2,7 +2,6 @@ const { render, useState } = wp.element;
 import Switch from "react-switch";
 
 const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onChange }) => {
-  console.log(hasWindow ? additional_price : 0);
   return (
     <div className="product-setting-item-component window-settings">
       <div class="d-flex align-items-center justify-content-between">
@@ -16,7 +15,6 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
       <span className="description">
         Click on a window space to add or delete windows.
       </span>
-
     </div>
   );
 }

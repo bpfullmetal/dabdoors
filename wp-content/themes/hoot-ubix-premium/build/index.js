@@ -1329,7 +1329,6 @@ const WindowsSettingComponent = _ref => {
     hasWindow,
     onChange
   } = _ref;
-  console.log(hasWindow ? additional_price : 0);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
