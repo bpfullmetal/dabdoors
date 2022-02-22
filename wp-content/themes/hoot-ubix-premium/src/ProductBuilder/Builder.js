@@ -296,6 +296,7 @@ const Builder = ({ adminProperties }) => {
             hasVents={hasVents}
             colorIndex={colorIndex}
             windowSize={windowSize}
+            lockPlacement={metaObj.lock_placement}
             colors={
               adminProperties.standard_colors_group.select_button_options.map((option, index) => {
                 return option.select_color;

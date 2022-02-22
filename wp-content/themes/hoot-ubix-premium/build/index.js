@@ -424,6 +424,7 @@ const Builder = _ref => {
     hasVents: hasVents,
     colorIndex: colorIndex,
     windowSize: windowSize,
+    lockPlacement: metaObj.lock_placement,
     colors: adminProperties.standard_colors_group.select_button_options.map((option, index) => {
       return option.select_color;
     }),
@@ -603,7 +604,8 @@ const ProductContainerComponent = _ref => {
     hasWindow,
     hasVents,
     colorIndex,
-    changeWindowsCount
+    changeWindowsCount,
+    lockPlacement
   } = _ref;
   let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -691,7 +693,29 @@ const ProductContainerComponent = _ref => {
           changeWindowsCount(e, index);
         }
       });
-    })), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
+    })), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "lock"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
+      width: "21",
+      height: "16",
+      viewBox: "0 0 21 16",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("circle", {
+      cx: "10",
+      cy: "8",
+      r: "7.5",
+      fill: "#C4C4C4",
+      stroke: "black"
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("rect", {
+      x: "0.5",
+      y: "6.5",
+      width: "20",
+      height: "4",
+      rx: "2",
+      fill: "#C4C4C4",
+      stroke: "black"
+    }))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     tileIndex: tileIndex,
     onChange: e => setTileIndex(e),
