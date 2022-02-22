@@ -199,6 +199,16 @@ body {
                         }
                       }
                     }
+                    .lock {
+                      width: 26px;
+                      height: 24px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      position: absolute;
+                      left: calc(50% - 13px);
+                      top: calc(50% - 12px);
+                    }
                   }
                 }
               }
