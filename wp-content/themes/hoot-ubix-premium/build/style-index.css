@@ -146,7 +146,7 @@ body #single-product-builder .product-builder-content .product-container #produc
   display: grid;
   -ms-grid-columns: (1fr)[4];
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px 20px;
+  gap: 10px;
   flex: 1;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item {
