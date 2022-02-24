@@ -103,11 +103,6 @@ const Builder = ({ adminProperties }) => {
     }
   }
 
-
-  useEffect(() => {
-    console.log(metaObj);
-  }, [metaObj])
-
   useEffect(() => {
     if (showCustomPanel === true ) {
       jQuery('body').addClass('no-scroll');

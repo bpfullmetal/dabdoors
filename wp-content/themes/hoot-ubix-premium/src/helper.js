@@ -29,6 +29,7 @@ export const getWindowRowsCols = (windowSize) => {
     } else if (width >= 13.11 && width < 15.10) {
         cols = 7;
     }
+
     return {
         rows, cols
     }

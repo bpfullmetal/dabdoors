@@ -230,9 +230,6 @@ const Builder = _ref => {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log(metaObj);
-  }, [metaObj]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (showCustomPanel === true) {
       jQuery('body').addClass('no-scroll');
     } else {
@@ -589,6 +586,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../WallSettingsComponents/WallSettingsComponent */ "./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js");
 /* harmony import */ var _ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ZoomControlComponent */ "./src/ProductBuilder/CustomProductComponents/ZoomControlComponent.js");
 /* harmony import */ var react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-zoom-pan-pinch */ "./node_modules/react-zoom-pan-pinch/dist/index.esm.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper */ "./src/helper.js");
+
 
 
 
@@ -607,12 +606,17 @@ const ProductContainerComponent = _ref => {
     changeWindowsCount,
     lockPlacement
   } = _ref;
-  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  // let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const [windows, setWindows] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   const [realWidth, setRealWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [realHeight, setRealHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [bgColor, setBgColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('#CCAC7B');
+  const [windowsRectRange, setWindowsRectRange] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    rows: 4,
+    cols: 4
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
     let width = maxWidth;
@@ -632,7 +636,18 @@ const ProductContainerComponent = _ref => {
 
     setRealWidth(width);
     setRealHeight(height);
+    let rectRange = (0,_helper__WEBPACK_IMPORTED_MODULE_7__.getWindowRowsCols)(windowSize);
+    setWindowsRectRange(rectRange);
   }, [windowSize]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    let array = [];
+
+    for (let i = 0; i < windowsRectRange.rows * windowsRectRange.cols; i++) {
+      array.push(i);
+    }
+
+    setWindows(array);
+  }, [windowsRectRange]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
@@ -1601,6 +1616,63 @@ const WallSettingsComponent = _ref => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WallSettingsComponent);
+
+/***/ }),
+
+/***/ "./src/helper.js":
+/*!***********************!*\
+  !*** ./src/helper.js ***!
+  \***********************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWindowRowsCols": function() { return /* binding */ getWindowRowsCols; }
+/* harmony export */ });
+const getWindowRowsCols = windowSize => {
+  let {
+    width1,
+    width2,
+    height1,
+    height2
+  } = windowSize;
+  const width = width1 + width2 / 10;
+  const height = height1 + height2 / 10;
+  let rows = 4;
+  let cols = 4;
+
+  if (height >= 6.6 && height < 7.6) {
+    rows = 4;
+  } else if (width >= 7.6 && height < 8.9) {
+    rows = 5;
+  } else if (height >= 8.9 && height < 10.8) {
+    rows = 6;
+  } else if (height >= 10.9 && height < 12.5) {
+    rows = 7;
+  } else if (height >= 12.6 && height < 14.2) {
+    rows = 8;
+  } else if (height >= 14.3 && height < 15.11) {
+    rows = 9;
+  } else {
+    rows = 10;
+  }
+
+  if (width >= 8 && width < 9.11) {
+    cols = 4;
+  } else if (width >= 9.11 && width < 11.11) {
+    cols = 5;
+  } else if (width >= 11.11 && width < 13.11) {
+    cols = 6;
+  } else if (width >= 13.11 && width < 15.10) {
+    cols = 7;
+  }
+
+  return {
+    rows,
+    cols
+  };
+};
 
 /***/ }),
 

@@ -5,14 +5,19 @@ import VentsComponent from "./VentsComponent";
 import WallSettingsComponent from "../WallSettingsComponents/WallSettingsComponent";
 import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
+import { getWindowRowsCols } from '../../helper';
 const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement }) => {
-  let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  // let windows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const [windows, setWindows] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
   const [realWidth, setRealWidth] = useState(0);
   const [realHeight, setRealHeight] = useState(0);
   const [bgColor, setBgColor] = useState('#CCAC7B');
+  const [windowsRectRange, setWindowsRectRange] = useState({
+    rows: 4,
+    cols: 4
+  })
 
   useEffect(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
@@ -30,7 +35,19 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     }
     setRealWidth(width);
     setRealHeight(height);
+    let rectRange = getWindowRowsCols(windowSize);
+    setWindowsRectRange(rectRange);
   }, [windowSize])
+
+  useEffect(() => {
+    let array = [];
+    for(let i = 0; i < windowsRectRange.rows * windowsRectRange.cols; i++) {
+      array.push(i);
+    }
+    setWindows(array);
+  }, [windowsRectRange]);
+
+
   return (
     <div id="product-container">
       <TransformWrapper
@@ -77,7 +94,6 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                           <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>
                           <rect x="0.5" y="6.5" width="20" height="4" rx="2" fill="#C4C4C4" stroke="black"/>
                         </svg>
-
                         </span>}
                       {hasVents && <VentsComponent />}
                     </div>
