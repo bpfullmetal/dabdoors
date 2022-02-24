@@ -80,7 +80,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                 <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">
                     <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
-                      <div className="window-wrapper">
+                      <div className="window-wrapper" style={{ gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)` }}>
                         {
                           windows.map((e, index) => {
                             return <WindowComponent enableWindow={hasWindow} addedWindow={(e) => {

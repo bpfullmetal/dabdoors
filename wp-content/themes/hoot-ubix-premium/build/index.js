@@ -700,7 +700,10 @@ const ProductContainerComponent = _ref => {
         backgroundColor: colors[colorIndex]
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "window-wrapper"
+      className: "window-wrapper",
+      style: {
+        gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)`
+      }
     }, windows.map((e, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
         enableWindow: hasWindow,
@@ -1666,6 +1669,8 @@ const getWindowRowsCols = windowSize => {
     cols = 6;
   } else if (width >= 13.11 && width < 15.10) {
     cols = 7;
+  } else {
+    cols = 8;
   }
 
   return {
