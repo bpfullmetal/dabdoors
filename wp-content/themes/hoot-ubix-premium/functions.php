@@ -202,7 +202,7 @@ function getAdminProperties() {
   $track_radius_group = get_field('track_radius', 'option');
   $standard_colors_group = get_field('standard_colors', 'option');
   $premium_colors_group = get_field('premium_colors', 'option');
-
+  $pressure_group = get_field('design_pressure_settings', 'option');
   $adminProperties = array(
     'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
     'panel_group' => $panel_group,
@@ -213,7 +213,8 @@ function getAdminProperties() {
     'lock_placement_group' => $lock_placement_group,
     'track_radius_group' => $track_radius_group,
     'standard_colors_group' => $standard_colors_group,
-    'premium_colors_group' => $premium_colors_group
+    'premium_colors_group' => $premium_colors_group,
+    'pressure_group' => $pressure_group
   );
   echo json_encode($adminProperties);
   wp_die();
