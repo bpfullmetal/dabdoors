@@ -49,6 +49,10 @@ const Builder = ({ adminProperties }) => {
     },
     premiumColor: {
       color: ''
+    },
+    ubarSettings: {
+      count: 0,
+      preesure_option: ''
     }
   })
   const [price, setPrice] = useState(basePrice);
@@ -196,6 +200,7 @@ const Builder = ({ adminProperties }) => {
   }
 
   React.useEffect(() => {
+    console.log(adminProperties);
       let initialPrice = price;
       let lock_placement = metaObj.lock_placement;
       let panelType = metaObj.panelType;
@@ -300,6 +305,13 @@ const Builder = ({ adminProperties }) => {
       let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
       setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
       setChangedPriceWithPressure(additional_price_with_pressure);
+      setMetaObject({
+        ...metaObj,
+        ubarSettings: {
+          count: Number(ubarSettings[ubarIndex].ubar_counts),
+          preesure_option: selectedPressure.pressure_range
+        }
+      });
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
@@ -307,6 +319,13 @@ const Builder = ({ adminProperties }) => {
       });
       setPrice(price - changedPriceWithPressure);
       setChangedPriceWithPressure(0);
+      setMetaObject({
+        ...metaObj,
+        ubarSettings: {
+          count: 0,
+          preesure_option: selectedPressure.pressure_range
+        }
+      });
     }
   }, [pressureIndex, windowSize])
 
