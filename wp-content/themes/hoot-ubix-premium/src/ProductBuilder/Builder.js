@@ -11,6 +11,7 @@ import TrackRadiusSettingComponent from "./SettingsComponents/TrackRadiusSetting
 import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent";
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
+import UbarSettingsComponent from './SettingsComponents/UbarSettningsComponent';
 import Switch from "react-switch";
 
 
@@ -325,6 +326,7 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
           />
+          <UbarSettingsComponent />
           <InsulationSettingComponent 
             properties={adminProperties.insulation_group}
             additional_price = {Number(adminProperties.insulation_group.additional_price_$_if_added)}
