@@ -1,13 +1,12 @@
 const { render, useState } = wp.element;
 
 
-const UbarSettingsComponent = () => {
+const PressureSettingsComponent = ({properties}) => {
 //   const [value, setValue] = useState(Number(properties.minimum));
   return (
-    <div className="product-setting-item-component ubar-settings">
+    <div className="product-setting-item-component pressure-settings">
       <label>
-        Design Pressure
-        {/* { properties.label } ( { `${value}${properties.unit}` } ) */}
+        { properties.label }
         {/* { additional_price > 0 && <span className='additional_price_alert'>{`+$${additional_price}`}</span> } */}
       </label>
       <div className="d-flex">
@@ -26,4 +25,4 @@ const UbarSettingsComponent = () => {
   );
 }
 
-export default UbarSettingsComponent;
+export default PressureSettingsComponent;

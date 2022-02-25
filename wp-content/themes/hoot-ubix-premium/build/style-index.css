@@ -466,6 +466,9 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
   max-width: 165px;
   margin-top: 10px;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings select {
+  margin-top: 10px;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper {
   margin-top: 15px;
 }
