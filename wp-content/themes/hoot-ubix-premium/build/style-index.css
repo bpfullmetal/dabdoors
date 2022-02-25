@@ -469,6 +469,22 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings select {
   margin-top: 10px;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings .additional_price_alert {
+  margin-left: 0px;
+  margin-top: 10px;
+  padding: 2px 8px;
+  background-color: #EBFFF0;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #028C29;
+  border-radius: 4px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.lock-placement-settings .button-wrapper {
   margin-top: 15px;
 }

@@ -78,6 +78,11 @@ const Builder = ({ adminProperties }) => {
   const [showAlerts, setShowAlerts] = useState(false);
   const [productUrl, setProductUrl] = useState('');
   const [showCustomPanel, setShowCustomPanel] = useState(false);
+  const [pressureIndex, setPressureIndex] = useState(0);
+  const [selectedUbarSetting, setSelectedUbarSetting] = useState({
+    ubar_counts: 0,
+    ubar_costs: 0
+  })
   const changeWindowsCount = (e, index) => {
     let rows = ['A','B','C'];
     let rowIndex = Math.floor(index / 4);
@@ -277,7 +282,27 @@ const Builder = ({ adminProperties }) => {
         premiumColor
       });
       setPrice(initialPrice);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
+    let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+    let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+    let ubarIndex = ubarSettings.findIndex(it => {
+      return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
+    });
+    if (ubarIndex > -1) {
+      setSelectedUbarSetting({
+        ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+        ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+      })
+    } else {
+      setSelectedUbarSetting({
+        ubar_counts: 0,
+        ubar_costs: 0
+      })
+    }
+  }, [pressureIndex, windowSize])
 
   return (
     <div className="product-builder">
@@ -328,6 +353,10 @@ const Builder = ({ adminProperties }) => {
           />
           <PressureSettingsComponent
             properties={adminProperties.pressure_group && adminProperties.pressure_group}
+            onSelectPressure={(e)=>{
+              setPressureIndex(e)
+            }}
+            selectedUbarSetting={selectedUbarSetting}
           />
           <InsulationSettingComponent 
             properties={adminProperties.insulation_group}
