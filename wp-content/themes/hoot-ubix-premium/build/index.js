@@ -194,6 +194,7 @@ const Builder = _ref => {
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithPressure, setChangedPriceWithPressure] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     height1: Math.floor(initHeight),
     height2: 0,
@@ -425,11 +426,16 @@ const Builder = _ref => {
         ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
         ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
       });
+      let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+      setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+      setChangedPriceWithPressure(additional_price_with_pressure);
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
         ubar_costs: 0
       });
+      setPrice(price - changedPriceWithPressure);
+      setChangedPriceWithPressure(0);
     }
   }, [pressureIndex, windowSize]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

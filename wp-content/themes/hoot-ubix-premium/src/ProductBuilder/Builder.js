@@ -68,6 +68,7 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
+  const [changedPriceWithPressure, setChangedPriceWithPressure] = useState(0);
   const [windowSize, changeWindowSize] = useState({
     height1: Math.floor(initHeight),
     height2: 0,
@@ -295,12 +296,17 @@ const Builder = ({ adminProperties }) => {
       setSelectedUbarSetting({
         ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
         ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
-      })
+      });
+      let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+      setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+      setChangedPriceWithPressure(additional_price_with_pressure);
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
         ubar_costs: 0
-      })
+      });
+      setPrice(price - changedPriceWithPressure);
+      setChangedPriceWithPressure(0);
     }
   }, [pressureIndex, windowSize])
 
