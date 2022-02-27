@@ -110,6 +110,14 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
             'panelType' => $option['panelType']['type']
           );
         }
+        if ($option['ubarSettings']['count'] > 0) {
+          $metaData[] = array(
+            'ubarSettings' => array(
+              'count' => $option['ubarSettings']['count'],
+              'pressure' => $option['ubarSettings']['preesure_option'],
+            )
+          );
+        }
         $metaData['trackRadius'] = $option['trackRadius']['radius'];
         $metaData['rollerType'] = $option['rollerType']['type'];
         $metaData['standardColor'] = $option['standardColor']['color'];
@@ -278,7 +286,7 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
 {
  function wdm_add_user_custom_option_from_session_into_cart($product_name, $values, $cart_item_key )
     {
-        if(count($values['meta_data']) > 0)
+        if(isset($values['meta_data']))
         {
           $metaData = $values['meta_data'];
           $metaDataString = '';
@@ -296,6 +304,8 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Enabled</span>';
             } else if (isset($metaItem['panelType']) && $metaItem['panelType']) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Panel: </b>'. $metaItem['panelType'] .'</span>';
+            } else if (isset($metaItem['ubarSettings'])) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Ubar Count: </b>'. $metaItem['ubarSettings']['count'] .', <b>Pressure Option: </b>'. $metaItem['ubarSettings']['pressure'] .'</span>';
             }
           }
           if ($metaData['window_placement'])
