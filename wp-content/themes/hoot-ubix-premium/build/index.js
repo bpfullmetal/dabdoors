@@ -1608,7 +1608,24 @@ const WindowsSettingComponent = _ref => {
     onColor: '#1396E7',
     checkedIcon: '',
     uncheckedIcon: ''
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    className: "mt-1",
+    style: {
+      marginTop: 10
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 0
+  }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 1
+  }, "305 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 2
+  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 3
+  }, "393 Cathedral"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 4
+  }, "397 Stockton"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 5
+  }, "Custom")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "description"
   }, "Click on a window space to add or delete windows."));
 };
