@@ -116,6 +116,20 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 <?php 
 		$product_id = get_the_ID();
 		$_product = wc_get_product( $product_id );
+		if ($_product->attributes) {
+			$attributes = $_product->attributes;
+			if ($attributes['max-width-height']) {
+				$value = $attributes['max-width-height']['options'];
+				if ($value) {
+					$max_width = $value[0];
+					$max_height = $value[1];
+					echo '<script>';
+					echo 'let maxWidth = '.$max_width.';';
+					echo 'let maxHeight = '.$max_height.';';
+					echo '</script>';
+				}
+			}
+		}
 		$_base_price = $_product->get_price();
 		echo '<script>
 			let basePrice = '.$_base_price.';
