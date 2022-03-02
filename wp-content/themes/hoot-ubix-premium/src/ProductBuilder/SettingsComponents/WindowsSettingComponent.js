@@ -11,14 +11,14 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
         </label>
         <Switch onChange={(e) => {onChange(e)}} checked={hasWindow} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>
-      <select className="mt-1" style={{marginTop:10}}>
+      {/* <select className="mt-1" style={{marginTop:10}}>
         <option value={0}>405 Williamsburg</option>
         <option value={1}>305 Williamsburg</option>
         <option value={2}>306 Sherwood</option>
         <option value={3}>393 Cathedral</option>
         <option value={4}>397 Stockton</option>
         <option value={5}>Custom</option>
-      </select>
+      </select> */}
       <span className="description">
         Click on a window space to add or delete windows.
       </span>

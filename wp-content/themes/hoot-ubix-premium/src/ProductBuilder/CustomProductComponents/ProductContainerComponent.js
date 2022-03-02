@@ -6,7 +6,7 @@ import WallSettingsComponent from "../WallSettingsComponents/WallSettingsCompone
 import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { getWindowRowsCols } from '../../helper';
-const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement }) => {
+const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement, changeWindowRowsCols }) => {
   const [windows, setWindows] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
@@ -36,6 +36,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     setRealHeight(height);
     let rectRange = getWindowRowsCols(windowSize);
     setWindowsRectRange(rectRange);
+    changeWindowRowsCols(rectRange);
   }, [windowSize])
 
   useEffect(() => {

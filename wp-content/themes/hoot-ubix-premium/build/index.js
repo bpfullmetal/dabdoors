@@ -200,6 +200,10 @@ const Builder = _ref => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPressure, setChangedPriceWithPressure] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [windowRowsCols, setWindowRowsCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    rows: 4,
+    cols: 4
+  });
   const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     height1: Math.floor(initHeight),
     height2: 0,
@@ -217,9 +221,9 @@ const Builder = _ref => {
   });
 
   const changeWindowsCount = (e, index) => {
-    let rows = ['A', 'B', 'C'];
-    let rowIndex = Math.floor(index / 4);
-    let colIndex = Math.floor(index % 4);
+    let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
+    let rowIndex = Math.floor(index / windowRowsCols.cols);
+    let colIndex = Math.floor(index % windowRowsCols.cols);
     let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
     let windwsObj = metaObj.windows;
     let windowsPos = metaObj.windows.position;
@@ -483,6 +487,9 @@ const Builder = _ref => {
     }),
     changeWindowsCount: (e, index) => {
       changeWindowsCount(e, index);
+    },
+    changeWindowRowsCols: e => {
+      setWindowRowsCols(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
@@ -669,7 +676,8 @@ const ProductContainerComponent = _ref => {
     hasVents,
     colorIndex,
     changeWindowsCount,
-    lockPlacement
+    lockPlacement,
+    changeWindowRowsCols
   } = _ref;
   const [windows, setWindows] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -702,6 +710,7 @@ const ProductContainerComponent = _ref => {
     setRealHeight(height);
     let rectRange = (0,_helper__WEBPACK_IMPORTED_MODULE_7__.getWindowRowsCols)(windowSize);
     setWindowsRectRange(rectRange);
+    changeWindowRowsCols(rectRange);
   }, [windowSize]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let array = [];
@@ -1669,24 +1678,7 @@ const WindowsSettingComponent = _ref => {
     onColor: '#1396E7',
     checkedIcon: '',
     uncheckedIcon: ''
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    className: "mt-1",
-    style: {
-      marginTop: 10
-    }
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 0
-  }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 1
-  }, "305 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 2
-  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 3
-  }, "393 Cathedral"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 4
-  }, "397 Stockton"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
-    value: 5
-  }, "Custom")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "description"
   }, "Click on a window space to add or delete windows."));
 };

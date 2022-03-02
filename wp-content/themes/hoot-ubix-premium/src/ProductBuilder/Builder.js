@@ -74,6 +74,10 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const [changedPriceWithPressure, setChangedPriceWithPressure] = useState(0);
+  const [windowRowsCols, setWindowRowsCols] = useState({
+    rows: 4,
+    cols: 4
+  });
   const [windowSize, changeWindowSize] = useState({
     height1: Math.floor(initHeight),
     height2: 0,
@@ -90,9 +94,9 @@ const Builder = ({ adminProperties }) => {
     ubar_costs: 0
   })
   const changeWindowsCount = (e, index) => {
-    let rows = ['A','B','C'];
-    let rowIndex = Math.floor(index / 4);
-    let colIndex = Math.floor(index % 4);
+    let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
+    let rowIndex = Math.floor(index / windowRowsCols.cols);
+    let colIndex = Math.floor(index % windowRowsCols.cols);
     let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
     let windwsObj = metaObj.windows;
     let windowsPos = metaObj.windows.position;
@@ -354,6 +358,7 @@ const Builder = ({ adminProperties }) => {
               })
             }
             changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
+            changeWindowRowsCols={(e) => {setWindowRowsCols(e)}}
           />
           <div className='mobile-switch-button'>
             <span>Customization</span>
