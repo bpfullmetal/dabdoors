@@ -5,12 +5,34 @@ const SizeChangeComponent = ({onChangeWindowSize}) => {
   const [width2, setWidth2] = useState(0);
   const [height1, setHeight1] = useState(16);
   const [height2, setHeight2] = useState(2);
+  const [hasWidthRangeError, setHasWidthRangeError] = useState(false);
+  const [hasHeightRangeError, setHasHeightRangeError] = useState(false);
+
   useEffect(() => {
-    onChangeWindowSize({width1, width2, height1, height2});
+    let totalWidth = width1 + width2 / 10;
+    let totalHeight = height1 + height2 / 10;
+    setHasWidthRangeError(false);
+    setHasHeightRangeError(false);
+
+    if (maxWidth && maxHeight) {
+      if (totalWidth > maxWidth) {
+        setHasWidthRangeError(true);
+      }
+      if (totalHeight > maxHeight) {
+        setHasHeightRangeError(true);
+      }
+      if (maxWidth > totalWidth && maxHeight > totalHeight) {
+        onChangeWindowSize({width1, width2, height1, height2});
+      }
+    } else {
+      onChangeWindowSize({width1, width2, height1, height2});
+    }
   }, [width1, width2, height1, height2])
   return (
     <div className="product-setting-item-component">
-      <label>Size</label>
+      <label>
+        Size { maxWidth ? ` (maxWidth: ${maxWidth}, maxHeight: ${maxHeight})` : ''}
+      </label>
       <div className="size-settings-wrapper">
         <div className="width-wrapper d-flex">
           <span className="label">W</span>
@@ -38,6 +60,8 @@ const SizeChangeComponent = ({onChangeWindowSize}) => {
             <span>”</span>
           </div>
         </div>
+        { hasWidthRangeError ? <span className='range-error'>Width is bigger than maxWidth.</span> : '' }
+        { hasHeightRangeError ? <span className='range-error'>Height is bigger than maxWidth.</span> : '' }
       </div>
     </div>
   );

@@ -1403,17 +1403,43 @@ const SizeChangeComponent = _ref => {
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(16);
   const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
+  const [hasWidthRangeError, setHasWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    onChangeWindowSize({
-      width1,
-      width2,
-      height1,
-      height2
-    });
+    let totalWidth = width1 + width2 / 10;
+    let totalHeight = height1 + height2 / 10;
+    setHasWidthRangeError(false);
+    setHasHeightRangeError(false);
+
+    if (maxWidth && maxHeight) {
+      if (totalWidth > maxWidth) {
+        setHasWidthRangeError(true);
+      }
+
+      if (totalHeight > maxHeight) {
+        setHasHeightRangeError(true);
+      }
+
+      if (maxWidth > totalWidth && maxHeight > totalHeight) {
+        onChangeWindowSize({
+          width1,
+          width2,
+          height1,
+          height2
+        });
+      }
+    } else {
+      onChangeWindowSize({
+        width1,
+        width2,
+        height1,
+        height2
+      });
+    }
   }, [width1, width2, height1, height2]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size ", maxWidth ? ` (maxWidth: ${maxWidth}, maxHeight: ${maxHeight})` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-settings-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "width-wrapper d-flex"
@@ -1455,7 +1481,11 @@ const SizeChangeComponent = _ref => {
     onChange: e => {
       setHeight2(Number(e.target.value));
     }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D")))));
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), hasWidthRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "range-error"
+  }, "Width is bigger than maxWidth.") : '', hasHeightRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "range-error"
+  }, "Height is bigger than maxWidth.") : ''));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SizeChangeComponent);

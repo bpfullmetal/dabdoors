@@ -433,6 +433,13 @@ body {
             .height-wrapper {
               margin-top: 15px;
             }
+            > .range-error {
+              font-size: 10px;
+              text-transform: capitalize;
+              color: #FF4444;
+              margin-top: 5px;
+              text-align: center;
+            }
           }
           &.window-settings {
             .description {
