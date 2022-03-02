@@ -1405,41 +1405,52 @@ const SizeChangeComponent = _ref => {
   const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
   const [hasWidthRangeError, setHasWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [hasMinWidthRangeError, setHasMinWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [hasMinHeightRangeError, setHasMinHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let totalWidth = width1 + width2 / 10;
     let totalHeight = height1 + height2 / 10;
     setHasWidthRangeError(false);
     setHasHeightRangeError(false);
+    setHasMinWidthRangeError(false);
+    setHasMinHeightRangeError(false);
 
-    if (maxWidth && maxHeight) {
-      if (totalWidth > maxWidth) {
+    if (typeof productMaxWidth !== 'undefined' && typeof productMaxHeight !== 'undefined') {
+      if (totalWidth > productMaxWidth) {
         setHasWidthRangeError(true);
+        return;
       }
 
-      if (totalHeight > maxHeight) {
+      if (totalHeight > productMaxHeight) {
         setHasHeightRangeError(true);
+        return;
+      }
+    }
+
+    if (typeof productMinWidth !== 'undefined' && typeof productMinHeight !== 'undefined') {
+      if (totalWidth < productMinWidth) {
+        setHasMinWidthRangeError(true);
+        return;
       }
 
-      if (maxWidth > totalWidth && maxHeight > totalHeight) {
-        onChangeWindowSize({
-          width1,
-          width2,
-          height1,
-          height2
-        });
+      if (totalHeight < productMinHeight) {
+        setHasMinHeightRangeError(true);
+        return;
       }
-    } else {
-      onChangeWindowSize({
-        width1,
-        width2,
-        height1,
-        height2
-      });
     }
+
+    onChangeWindowSize({
+      width1,
+      width2,
+      height1,
+      height2
+    });
   }, [width1, width2, height1, height2]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size ", maxWidth ? ` (maxWidth: ${maxWidth}, maxHeight: ${maxHeight})` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "size-range"
+  }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}, maxHeight: ${productMaxHeight})` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}, minHeight: ${productMinHeight})` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-settings-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "width-wrapper d-flex"
@@ -1485,7 +1496,11 @@ const SizeChangeComponent = _ref => {
     className: "range-error"
   }, "Width is bigger than maxWidth.") : '', hasHeightRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "range-error"
-  }, "Height is bigger than maxWidth.") : ''));
+  }, "Height is bigger than maxHeight.") : '', hasMinWidthRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "range-error"
+  }, "Width is less than minWidth.") : '', hasMinHeightRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "range-error"
+  }, "Height is less than minHeight.") : ''));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (SizeChangeComponent);

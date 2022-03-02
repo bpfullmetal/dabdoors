@@ -463,6 +463,12 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
   margin-top: 5px;
   text-align: center;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component .size-range {
+  margin: 10px 0px 5px;
+  font-size: 12px;
+  line-height: 120%;
+  font-weight: bold;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.window-settings .description {
   font-family: Lato;
   font-style: normal;

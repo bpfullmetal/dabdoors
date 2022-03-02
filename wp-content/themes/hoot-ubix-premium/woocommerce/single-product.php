@@ -124,8 +124,19 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 					$max_width = $value[0];
 					$max_height = $value[1];
 					echo '<script>';
-					echo 'let maxWidth = '.$max_width.';';
-					echo 'let maxHeight = '.$max_height.';';
+					echo 'let productMaxWidth = '.$max_width.';';
+					echo 'let productMaxHeight = '.$max_height.';';
+					echo '</script>';
+				}
+			}
+			if ($attributes['min-width-height']) {
+				$value = $attributes['min-width-height']['options'];
+				if ($value) {
+					$min_widht = $value[0];
+					$min_widht = $value[1];
+					echo '<script>';
+					echo 'let productMinWidth = '.$min_widht.';';
+					echo 'let productMinHeight = '.$min_widht.';';
 					echo '</script>';
 				}
 			}
