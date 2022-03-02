@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const SizeChangeComponent = ({onChangeWindowSize}) => {
+const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const [width1, setWidth1] = useState(24);
   const [width2, setWidth2] = useState(0);
   const [height1, setHeight1] = useState(16);
@@ -17,27 +17,32 @@ const SizeChangeComponent = ({onChangeWindowSize}) => {
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
     setHasMinHeightRangeError(false);
-
+    hasSizeError(false);
     if (typeof productMaxWidth !== 'undefined' && typeof productMaxHeight !== 'undefined') {
       if (totalWidth > productMaxWidth) {
         setHasWidthRangeError(true);
+        hasSizeError(true);
         return;
       }
       if (totalHeight > productMaxHeight) {
         setHasHeightRangeError(true);
+        hasSizeError(true);
         return;
       }
     }
     if (typeof productMinWidth !== 'undefined' && typeof productMinHeight !== 'undefined') {
       if (totalWidth < productMinWidth) {
         setHasMinWidthRangeError(true);
+        hasSizeError(true);
         return;
       }
       if (totalHeight < productMinHeight) {
         setHasMinHeightRangeError(true);
+        hasSizeError(true);
         return;
       }
     }
+    hasSizeError(false);
     onChangeWindowSize({width1, width2, height1, height2});
   }, [width1, width2, height1, height2])
   return (

@@ -65,6 +65,7 @@ const Builder = ({ adminProperties }) => {
       return option.default == true
     }) : 0
   );
+  const [hasSizeValidationError, setSizeValidationError] = useState(false);
   const [windowCnt, setWindowCnt] = useState(0); 
   // const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
@@ -180,6 +181,10 @@ const Builder = ({ adminProperties }) => {
   }
 
   const createProduct = (e) => {
+    if (hasSizeValidationError) {
+      window.alert('Product size has some errors. Please check before create the request.');
+      return false;
+    }
     setIsAdding(true);
     metaObj.price = price;
     let formData = {
@@ -362,6 +367,7 @@ const Builder = ({ adminProperties }) => {
           <span className="times btn-times" onClick={(e) => {setShowCustomPanel(false)}}>&times;</span>
           <SizeChangeComponent
             onChangeWindowSize = {(e) => {changeWindowSize(e);}}
+            hasSizeError = {(e) => { setSizeValidationError(e); }}
           />
           <WindowsSettingComponent
             hasWindow={hasWindow}

@@ -191,6 +191,7 @@ const Builder = _ref => {
   }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
     return option.default == true;
   }) : 0);
+  const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0); // const [isLoaded, setLoadingStatus] = useState(false);
 
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -304,6 +305,11 @@ const Builder = _ref => {
   };
 
   const createProduct = e => {
+    if (hasSizeValidationError) {
+      window.alert('Product size has some errors. Please check before create the request.');
+      return false;
+    }
+
     setIsAdding(true);
     metaObj.price = price;
     let formData = {
@@ -502,6 +508,9 @@ const Builder = _ref => {
   }, "\xD7"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_SizeChangeComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onChangeWindowSize: e => {
       changeWindowSize(e);
+    },
+    hasSizeError: e => {
+      setSizeValidationError(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
@@ -1397,7 +1406,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const SizeChangeComponent = _ref => {
   let {
-    onChangeWindowSize
+    onChangeWindowSize,
+    hasSizeError
   } = _ref;
   const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(24);
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -1414,15 +1424,18 @@ const SizeChangeComponent = _ref => {
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
     setHasMinHeightRangeError(false);
+    hasSizeError(false);
 
     if (typeof productMaxWidth !== 'undefined' && typeof productMaxHeight !== 'undefined') {
       if (totalWidth > productMaxWidth) {
         setHasWidthRangeError(true);
+        hasSizeError(true);
         return;
       }
 
       if (totalHeight > productMaxHeight) {
         setHasHeightRangeError(true);
+        hasSizeError(true);
         return;
       }
     }
@@ -1430,15 +1443,18 @@ const SizeChangeComponent = _ref => {
     if (typeof productMinWidth !== 'undefined' && typeof productMinHeight !== 'undefined') {
       if (totalWidth < productMinWidth) {
         setHasMinWidthRangeError(true);
+        hasSizeError(true);
         return;
       }
 
       if (totalHeight < productMinHeight) {
         setHasMinHeightRangeError(true);
+        hasSizeError(true);
         return;
       }
     }
 
+    hasSizeError(false);
     onChangeWindowSize({
       width1,
       width2,
