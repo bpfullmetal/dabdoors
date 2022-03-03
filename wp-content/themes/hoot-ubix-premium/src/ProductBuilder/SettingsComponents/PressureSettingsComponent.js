@@ -1,7 +1,7 @@
 const { render, useState } = wp.element;
 
 
-const PressureSettingsComponent = ({properties, onSelectPressure, selectedUbarSetting}) => {
+const PressureSettingsComponent = ({availablePressureIndex, properties, onSelectPressure, selectedUbarSetting}) => {
   const [pressureIndex, setPressureIndex] = useState(0);
   return (
     <div className="product-setting-item-component pressure-settings">
@@ -10,13 +10,13 @@ const PressureSettingsComponent = ({properties, onSelectPressure, selectedUbarSe
         {/* { additional_price > 0 && <span className='additional_price_alert'>{`+$${additional_price}`}</span> } */}
       </label>
       <div className="d-flex">
-        <select value={pressureIndex} className="mt-1" onChange={(e) => {
+        <select value={availablePressureIndex} className="mt-1" onChange={(e) => {
           setPressureIndex(e.target.value);
           onSelectPressure(e.target.value);
         }}>
           {
             properties.pressure_options.map((it, index) => {
-              return (<option key={index} value={index}>{it.pressure_range}</option>);
+              return (<option key={index} value={index} disabled={availablePressureIndex==index?false:true}>{it.pressure_range}</option>);
             })
           }
         </select>

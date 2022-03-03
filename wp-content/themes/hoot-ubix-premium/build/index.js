@@ -192,8 +192,7 @@ const Builder = _ref => {
     return option.default == true;
   }) : 0);
   const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0); // const [isLoaded, setLoadingStatus] = useState(false);
-
+  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -219,6 +218,7 @@ const Builder = _ref => {
     ubar_counts: 0,
     ubar_costs: 0
   });
+  const [availablePressureIndex, setAvailablePressureIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
 
   const changeWindowsCount = (e, index) => {
     let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
@@ -429,12 +429,28 @@ const Builder = _ref => {
     setPrice(initialPrice);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
+    let pressureOptions = adminProperties.pressure_group.pressure_options;
+    let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+    let availablePressureOption = -1;
+
+    for (let i = 0; i < pressureOptions.length; i++) {
+      let pressureOption = pressureOptions[i];
+
+      if (windowWidth < Number(pressureOption.under_width)) {
+        availablePressureOption = i == 0 ? i : i - 1;
+        break;
+      }
+    }
+
+    let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
+    setAvailablePressureIndex(availablePressureOption);
     let windowHeight = windowSize.height1 + windowSize.height2 / 10;
     let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+    console.log(selectedPressure);
     let ubarIndex = ubarSettings.findIndex(it => {
       return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
     });
+    console.log(ubarIndex, ubarSettings);
 
     if (ubarIndex > -1) {
       setSelectedUbarSetting({
@@ -533,6 +549,7 @@ const Builder = _ref => {
     },
     properties: adminProperties.window_group && adminProperties.window_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    availablePressureIndex: availablePressureIndex,
     properties: adminProperties.pressure_group && adminProperties.pressure_group,
     onSelectPressure: e => {
       setPressureIndex(e);
@@ -1311,6 +1328,7 @@ const {
 
 const PressureSettingsComponent = _ref => {
   let {
+    availablePressureIndex,
     properties,
     onSelectPressure,
     selectedUbarSetting
@@ -1321,7 +1339,7 @@ const PressureSettingsComponent = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    value: pressureIndex,
+    value: availablePressureIndex,
     className: "mt-1",
     onChange: e => {
       setPressureIndex(e.target.value);
@@ -1330,7 +1348,8 @@ const PressureSettingsComponent = _ref => {
   }, properties.pressure_options.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
-      value: index
+      value: index,
+      disabled: availablePressureIndex == index ? false : true
     }, it.pressure_range);
   }))), selectedUbarSetting.ubar_counts > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "additional_price_alert"

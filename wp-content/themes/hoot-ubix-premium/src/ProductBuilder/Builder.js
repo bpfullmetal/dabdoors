@@ -67,7 +67,6 @@ const Builder = ({ adminProperties }) => {
   );
   const [hasSizeValidationError, setSizeValidationError] = useState(false);
   const [windowCnt, setWindowCnt] = useState(0); 
-  // const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
@@ -92,7 +91,8 @@ const Builder = ({ adminProperties }) => {
   const [selectedUbarSetting, setSelectedUbarSetting] = useState({
     ubar_counts: 0,
     ubar_costs: 0
-  })
+  });
+  const [availablePressureIndex, setAvailablePressureIndex] = useState(-1);
   const changeWindowsCount = (e, index) => {
     let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
     let rowIndex = Math.floor(index / windowRowsCols.cols);
@@ -300,12 +300,26 @@ const Builder = ({ adminProperties }) => {
   }, []);
 
   useEffect(() => {
-    let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
+    let pressureOptions =  adminProperties.pressure_group.pressure_options;
+    let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+    let availablePressureOption = -1;
+    for (let i = 0; i < pressureOptions.length; i++) {
+      let pressureOption = pressureOptions[i];
+      if (windowWidth < Number(pressureOption.under_width)) {
+        availablePressureOption = i == 0 ? i : i - 1;
+        break;
+      }
+    }
+
+    let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
+    setAvailablePressureIndex(availablePressureOption);
     let windowHeight = windowSize.height1 + windowSize.height2 / 10;
     let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+    console.log(selectedPressure);
     let ubarIndex = ubarSettings.findIndex(it => {
       return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
     });
+    console.log(ubarIndex, ubarSettings);
     if (ubarIndex > -1) {
       setSelectedUbarSetting({
         ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
@@ -388,6 +402,7 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.window_group && adminProperties.window_group}
           />
           <PressureSettingsComponent
+            availablePressureIndex={availablePressureIndex}
             properties={adminProperties.pressure_group && adminProperties.pressure_group}
             onSelectPressure={(e)=>{
               setPressureIndex(e)
