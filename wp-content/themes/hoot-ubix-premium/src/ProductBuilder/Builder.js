@@ -58,6 +58,7 @@ const Builder = ({ adminProperties }) => {
   const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
+  const [hasPressure, setHasPressure] = useState(false);
   const [colorIndex, setColorIndex] = useState(
     adminProperties.standard_colors_group.select_button_options.findIndex(option => {
       return option.default == true
@@ -300,41 +301,55 @@ const Builder = ({ adminProperties }) => {
   }, []);
 
   useEffect(() => {
-    let pressureOptions =  adminProperties.pressure_group.pressure_options;
-    let windowWidth = windowSize.width1 + windowSize.width2 / 10;
-    let availablePressureOption = -1;
-    for (let i = 0; i < pressureOptions.length; i++) {
-      let pressureOption = pressureOptions[i];
-      if (windowWidth < Number(pressureOption.under_width)) {
-        availablePressureOption = i == 0 ? i : i - 1;
-        break;
-      }
-    }
-
-    let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
-    setAvailablePressureIndex(availablePressureOption);
-    let windowHeight = windowSize.height1 + windowSize.height2 / 10;
-    let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
-    console.log(selectedPressure);
-    let ubarIndex = ubarSettings.findIndex(it => {
-      return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
-    });
-    console.log(ubarIndex, ubarSettings);
-    if (ubarIndex > -1) {
-      setSelectedUbarSetting({
-        ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
-        ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
-      });
-      let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
-      setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
-      setChangedPriceWithPressure(additional_price_with_pressure);
-      setMetaObject({
-        ...metaObj,
-        ubarSettings: {
-          count: Number(ubarSettings[ubarIndex].ubar_counts),
-          preesure_option: selectedPressure.pressure_range
+    if (hasPressure) {
+      let pressureOptions =  adminProperties.pressure_group.pressure_options;
+      let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+      let availablePressureOption = -1;
+      for (let i = 0; i < pressureOptions.length; i++) {
+        let pressureOption = pressureOptions[i];
+        if (windowWidth < Number(pressureOption.under_width)) {
+          availablePressureOption = i == 0 ? i : i - 1;
+          break;
         }
+      }
+  
+      let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
+      setAvailablePressureIndex(availablePressureOption);
+      let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+      let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+      let ubarIndex = ubarSettings.findIndex(it => {
+        return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
       });
+      if (ubarIndex > -1) {
+        setSelectedUbarSetting({
+          ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+          ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+        });
+        let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+        setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+        setChangedPriceWithPressure(additional_price_with_pressure);
+        setMetaObject({
+          ...metaObj,
+          ubarSettings: {
+            count: Number(ubarSettings[ubarIndex].ubar_counts),
+            preesure_option: selectedPressure.pressure_range
+          }
+        });
+      } else {
+        setSelectedUbarSetting({
+          ubar_counts: 0,
+          ubar_costs: 0
+        });
+        setPrice(price - changedPriceWithPressure);
+        setChangedPriceWithPressure(0);
+        setMetaObject({
+          ...metaObj,
+          ubarSettings: {
+            count: 0,
+            preesure_option: selectedPressure.pressure_range
+          }
+        });
+      }
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
@@ -344,13 +359,10 @@ const Builder = ({ adminProperties }) => {
       setChangedPriceWithPressure(0);
       setMetaObject({
         ...metaObj,
-        ubarSettings: {
-          count: 0,
-          preesure_option: selectedPressure.pressure_range
-        }
+        ubarSettings: null
       });
     }
-  }, [pressureIndex, windowSize])
+  }, [pressureIndex, windowSize, hasPressure])
 
   return (
     <div className="product-builder">
@@ -402,6 +414,8 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.window_group && adminProperties.window_group}
           />
           <PressureSettingsComponent
+            onChange={(e) => setHasPressure(e)}
+            hasPressure={hasPressure}
             availablePressureIndex={availablePressureIndex}
             properties={adminProperties.pressure_group && adminProperties.pressure_group}
             onSelectPressure={(e)=>{
