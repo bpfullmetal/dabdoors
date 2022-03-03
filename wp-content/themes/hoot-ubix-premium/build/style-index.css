@@ -482,6 +482,11 @@ body #single-product-builder .product-builder-content .product-custom-bar .produ
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings select {
   margin-top: 10px;
 }
+body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings select.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 body #single-product-builder .product-builder-content .product-custom-bar .product-setting-item-component.pressure-settings .additional_price_alert {
   margin-left: 0px;
   margin-top: 10px;

@@ -462,6 +462,11 @@ body {
           &.pressure-settings {
             select {
               margin-top: 10px;
+              &.disabled {
+                pointer-events: none;
+                opacity: 0.4;
+                cursor: not-allowed;
+              }
             }
             .additional_price_alert {
               margin-left: 0px;
