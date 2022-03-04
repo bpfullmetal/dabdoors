@@ -185,8 +185,8 @@ const Builder = _ref => {
   });
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [hasPressure, setHasPressure] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false); // const [hasPressure, setHasPressure] = useState(false);
+
   const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProperties.standard_colors_group.select_button_options.findIndex(option => {
     return option.default == true;
   }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
@@ -219,7 +219,7 @@ const Builder = _ref => {
     ubar_counts: 0,
     ubar_costs: 0
   });
-  const [availablePressureIndex, setAvailablePressureIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
+  const [availablePressures, setAvailablePressures] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
 
   const changeWindowsCount = (e, index) => {
     let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
@@ -430,56 +430,41 @@ const Builder = _ref => {
     setPrice(initialPrice);
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (hasPressure) {
-      let pressureOptions = adminProperties.pressure_group.pressure_options;
-      let windowWidth = windowSize.width1 + windowSize.width2 / 10;
-      let availablePressureOption = -1;
-
-      for (let i = 0; i < pressureOptions.length; i++) {
-        let pressureOption = pressureOptions[i];
-
-        if (windowWidth < Number(pressureOption.under_width)) {
-          availablePressureOption = i == 0 ? i : i - 1;
-          break;
-        }
+    let pressureOptions = adminProperties.pressure_group.pressure_options;
+    let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+    let index = 0;
+    let indexList = [];
+    pressureOptions.forEach(it => {
+      if (Number(it.min_width) <= windowWidth && Number(it.max_width) >= windowWidth) {
+        indexList.push(index);
       }
 
-      let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
-      setAvailablePressureIndex(availablePressureOption);
-      let windowHeight = windowSize.height1 + windowSize.height2 / 10;
-      let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
-      let ubarIndex = ubarSettings.findIndex(it => {
-        return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
+      index++;
+    });
+    console.log(indexList);
+    setAvailablePressures(indexList);
+    let selectedPressure = adminProperties.pressure_group.pressure_options[0]; // setAvailablePressures(windowSize);
+
+    let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+    let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+    let ubarIndex = ubarSettings.findIndex(it => {
+      return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
+    });
+
+    if (ubarIndex > -1) {
+      setSelectedUbarSetting({
+        ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+        ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
       });
-
-      if (ubarIndex > -1) {
-        setSelectedUbarSetting({
-          ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
-          ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
-        });
-        let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
-        setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
-        setChangedPriceWithPressure(additional_price_with_pressure);
-        setMetaObject({ ...metaObj,
-          ubarSettings: {
-            count: Number(ubarSettings[ubarIndex].ubar_counts),
-            preesure_option: selectedPressure.pressure_range
-          }
-        });
-      } else {
-        setSelectedUbarSetting({
-          ubar_counts: 0,
-          ubar_costs: 0
-        });
-        setPrice(price - changedPriceWithPressure);
-        setChangedPriceWithPressure(0);
-        setMetaObject({ ...metaObj,
-          ubarSettings: {
-            count: 0,
-            preesure_option: selectedPressure.pressure_range
-          }
-        });
-      }
+      let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+      setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+      setChangedPriceWithPressure(additional_price_with_pressure);
+      setMetaObject({ ...metaObj,
+        ubarSettings: {
+          count: Number(ubarSettings[ubarIndex].ubar_counts),
+          preesure_option: selectedPressure.pressure_range
+        }
+      });
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
@@ -488,10 +473,13 @@ const Builder = _ref => {
       setPrice(price - changedPriceWithPressure);
       setChangedPriceWithPressure(0);
       setMetaObject({ ...metaObj,
-        ubarSettings: null
+        ubarSettings: {
+          count: 0,
+          preesure_option: selectedPressure.pressure_range
+        }
       });
     }
-  }, [pressureIndex, windowSize, hasPressure]);
+  }, [pressureIndex, windowSize]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -560,9 +548,7 @@ const Builder = _ref => {
     },
     properties: adminProperties.window_group && adminProperties.window_group
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    onChange: e => setHasPressure(e),
-    hasPressure: hasPressure,
-    availablePressureIndex: availablePressureIndex,
+    availablePressures: availablePressures,
     properties: adminProperties.pressure_group && adminProperties.pressure_group,
     onSelectPressure: e => {
       setPressureIndex(e);
@@ -1333,43 +1319,33 @@ const PremiumColorsSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 const {
   render,
-  useState
+  useState,
+  useEffect
 } = wp.element;
-
 
 const PressureSettingsComponent = _ref => {
   let {
-    onChange,
-    hasPressure,
-    availablePressureIndex,
+    availablePressures,
     properties,
     onSelectPressure,
     selectedUbarSetting
   } = _ref;
-  const [pressureIndex, setPressureIndex] = useState(0);
+  const [pressureIndex, setPressureIndex] = useState();
+  useEffect(() => {
+    setPressureIndex(availablePressures[0]);
+  }, [availablePressures]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component pressure-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "d-flex justify-content-between align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    onChange: e => {
-      onChange(e);
-    },
-    checked: hasPressure,
-    width: 40,
-    height: 20,
-    onColor: '#1396E7',
-    checkedIcon: '',
-    uncheckedIcon: ''
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "d-flex justify-content-start align-items-center"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-    value: availablePressureIndex,
-    className: `mt-1 ${hasPressure ? '' : 'disabled'}`,
+    value: pressureIndex,
+    className: "mt-1",
     onChange: e => {
       setPressureIndex(e.target.value);
       onSelectPressure(e.target.value);
@@ -1378,7 +1354,7 @@ const PressureSettingsComponent = _ref => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
       value: index,
-      disabled: availablePressureIndex == index ? false : true
+      disabled: availablePressures.indexOf(index) > -1 ? false : true
     }, it.pressure_range);
   }))), selectedUbarSetting.ubar_counts > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "additional_price_alert"

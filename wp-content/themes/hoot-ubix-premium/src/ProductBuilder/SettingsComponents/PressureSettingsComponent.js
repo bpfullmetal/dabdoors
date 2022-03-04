@@ -1,25 +1,25 @@
-const { render, useState } = wp.element;
-import Switch from "react-switch";
+const { render, useState, useEffect } = wp.element;
 
-
-const PressureSettingsComponent = ({onChange, hasPressure, availablePressureIndex, properties, onSelectPressure, selectedUbarSetting}) => {
-  const [pressureIndex, setPressureIndex] = useState(0);
+const PressureSettingsComponent = ({availablePressures, properties, onSelectPressure, selectedUbarSetting}) => {
+  const [pressureIndex, setPressureIndex] = useState();
+  useEffect(() => {
+    setPressureIndex(availablePressures[0]);
+  }, [availablePressures])
   return (
     <div className="product-setting-item-component pressure-settings">
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-start align-items-center">
         <label>
           { properties.label }
         </label>
-        <Switch onChange={(e) => {onChange(e)}} checked={hasPressure} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>
       <div className="d-flex">
-        <select value={availablePressureIndex} className={`mt-1 ${hasPressure ? '' : 'disabled'}`} onChange={(e) => {
+        <select value={pressureIndex} className="mt-1" onChange={(e) => {
           setPressureIndex(e.target.value);
           onSelectPressure(e.target.value);
         }}>
           {
             properties.pressure_options.map((it, index) => {
-              return (<option key={index} value={index} disabled={availablePressureIndex==index?false:true}>{it.pressure_range}</option>);
+              return (<option key={index} value={index} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);
             })
           }
         </select>

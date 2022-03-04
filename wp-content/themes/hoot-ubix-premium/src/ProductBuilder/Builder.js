@@ -58,7 +58,7 @@ const Builder = ({ adminProperties }) => {
   const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
-  const [hasPressure, setHasPressure] = useState(false);
+  // const [hasPressure, setHasPressure] = useState(false);
   const [colorIndex, setColorIndex] = useState(
     adminProperties.standard_colors_group.select_button_options.findIndex(option => {
       return option.default == true
@@ -93,7 +93,7 @@ const Builder = ({ adminProperties }) => {
     ubar_counts: 0,
     ubar_costs: 0
   });
-  const [availablePressureIndex, setAvailablePressureIndex] = useState(-1);
+  const [availablePressures, setAvailablePressures] = useState([]);
   const changeWindowsCount = (e, index) => {
     let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
     let rowIndex = Math.floor(index / windowRowsCols.cols);
@@ -301,20 +301,21 @@ const Builder = ({ adminProperties }) => {
   }, []);
 
   useEffect(() => {
-    if (hasPressure) {
       let pressureOptions =  adminProperties.pressure_group.pressure_options;
       let windowWidth = windowSize.width1 + windowSize.width2 / 10;
-      let availablePressureOption = -1;
-      for (let i = 0; i < pressureOptions.length; i++) {
-        let pressureOption = pressureOptions[i];
-        if (windowWidth < Number(pressureOption.under_width)) {
-          availablePressureOption = i == 0 ? i : i - 1;
-          break;
+      let index = 0;
+      let indexList = [];
+      pressureOptions.forEach(it => {
+        if (Number(it.min_width) <= windowWidth && Number(it.max_width) >= windowWidth) {
+          indexList.push(index);
         }
-      }
+        index++;
+      });
+      console.log(indexList);
+      setAvailablePressures(indexList);
   
-      let selectedPressure = adminProperties.pressure_group.pressure_options[availablePressureOption];
-      setAvailablePressureIndex(availablePressureOption);
+      let selectedPressure = adminProperties.pressure_group.pressure_options[0];
+      // setAvailablePressures(windowSize);
       let windowHeight = windowSize.height1 + windowSize.height2 / 10;
       let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
       let ubarIndex = ubarSettings.findIndex(it => {
@@ -350,19 +351,7 @@ const Builder = ({ adminProperties }) => {
           }
         });
       }
-    } else {
-      setSelectedUbarSetting({
-        ubar_counts: 0,
-        ubar_costs: 0
-      });
-      setPrice(price - changedPriceWithPressure);
-      setChangedPriceWithPressure(0);
-      setMetaObject({
-        ...metaObj,
-        ubarSettings: null
-      });
-    }
-  }, [pressureIndex, windowSize, hasPressure])
+  }, [pressureIndex, windowSize])
 
   return (
     <div className="product-builder">
@@ -414,9 +403,7 @@ const Builder = ({ adminProperties }) => {
             properties={adminProperties.window_group && adminProperties.window_group}
           />
           <PressureSettingsComponent
-            onChange={(e) => setHasPressure(e)}
-            hasPressure={hasPressure}
-            availablePressureIndex={availablePressureIndex}
+            availablePressures={availablePressures}
             properties={adminProperties.pressure_group && adminProperties.pressure_group}
             onSelectPressure={(e)=>{
               setPressureIndex(e)
