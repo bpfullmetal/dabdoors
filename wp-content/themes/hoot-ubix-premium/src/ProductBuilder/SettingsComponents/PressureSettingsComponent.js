@@ -3,7 +3,13 @@ const { render, useState, useEffect } = wp.element;
 const PressureSettingsComponent = ({availablePressures, properties, onSelectPressure, selectedUbarSetting}) => {
   const [pressureIndex, setPressureIndex] = useState();
   useEffect(() => {
-    setPressureIndex(availablePressures[0]);
+    if (availablePressures.length > 0) {
+      setPressureIndex(availablePressures[0]);
+      onSelectPressure(availablePressures[0]);
+    } else {
+      setPressureIndex(-1);
+      onSelectPressure(-1);
+    }
   }, [availablePressures])
   return (
     <div className="product-setting-item-component pressure-settings">

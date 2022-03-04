@@ -441,30 +441,87 @@ const Builder = _ref => {
 
       index++;
     });
-    console.log(indexList);
-    setAvailablePressures(indexList);
-    let selectedPressure = adminProperties.pressure_group.pressure_options[0]; // setAvailablePressures(windowSize);
 
-    let windowHeight = windowSize.height1 + windowSize.height2 / 10;
-    let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
-    let ubarIndex = ubarSettings.findIndex(it => {
-      return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
-    });
+    if (indexList.length > 0) {
+      setAvailablePressures(indexList);
+    } else {
+      setAvailablePressures([]);
+    } // let selectedPressure = adminProperties.pressure_group.pressure_options[0];
+    // let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+    // let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+    // let ubarIndex = ubarSettings.findIndex(it => {
+    //   return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
+    // });
+    // if (ubarIndex > -1) {
+    //   setSelectedUbarSetting({
+    //     ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+    //     ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+    //   });
+    //   let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+    //   setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+    //   setChangedPriceWithPressure(additional_price_with_pressure);
+    //   setMetaObject({
+    //     ...metaObj,
+    //     ubarSettings: {
+    //       count: Number(ubarSettings[ubarIndex].ubar_counts),
+    //       preesure_option: selectedPressure.pressure_range
+    //     }
+    //   });
+    // } else {
+    //   setSelectedUbarSetting({
+    //     ubar_counts: 0,
+    //     ubar_costs: 0
+    //   });
+    //   setPrice(price - changedPriceWithPressure);
+    //   setChangedPriceWithPressure(0);
+    //   setMetaObject({
+    //     ...metaObj,
+    //     ubarSettings: {
+    //       count: 0,
+    //       preesure_option: selectedPressure.pressure_range
+    //     }
+    //   });
+    // }
 
-    if (ubarIndex > -1) {
-      setSelectedUbarSetting({
-        ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
-        ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+  }, [windowSize]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    // console.log(pressureIndex);
+    if (pressureIndex > -1) {
+      let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
+      let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+      let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+      let ubarIndex = ubarSettings.findIndex(it => {
+        return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
       });
-      let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
-      setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
-      setChangedPriceWithPressure(additional_price_with_pressure);
-      setMetaObject({ ...metaObj,
-        ubarSettings: {
-          count: Number(ubarSettings[ubarIndex].ubar_counts),
-          preesure_option: selectedPressure.pressure_range
-        }
-      });
+
+      if (ubarIndex > -1) {
+        setSelectedUbarSetting({
+          ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+          ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+        });
+        let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+        setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+        setChangedPriceWithPressure(additional_price_with_pressure);
+        setMetaObject({ ...metaObj,
+          ubarSettings: {
+            count: Number(ubarSettings[ubarIndex].ubar_counts),
+            preesure_option: selectedPressure.pressure_range
+          }
+        });
+      } else {
+        setSelectedUbarSetting({
+          ubar_counts: 0,
+          ubar_costs: 0
+        });
+        setPrice(price - changedPriceWithPressure);
+        setChangedPriceWithPressure(0);
+        setMetaObject({ ...metaObj,
+          ubarSettings: {
+            count: 0,
+            preesure_option: null
+          }
+        });
+      }
     } else {
       setSelectedUbarSetting({
         ubar_counts: 0,
@@ -475,7 +532,7 @@ const Builder = _ref => {
       setMetaObject({ ...metaObj,
         ubarSettings: {
           count: 0,
-          preesure_option: selectedPressure.pressure_range
+          preesure_option: null
         }
       });
     }
@@ -1335,7 +1392,13 @@ const PressureSettingsComponent = _ref => {
   } = _ref;
   const [pressureIndex, setPressureIndex] = useState();
   useEffect(() => {
-    setPressureIndex(availablePressures[0]);
+    if (availablePressures.length > 0) {
+      setPressureIndex(availablePressures[0]);
+      onSelectPressure(availablePressures[0]);
+    } else {
+      setPressureIndex(-1);
+      onSelectPressure(-1);
+    }
   }, [availablePressures]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component pressure-settings"
