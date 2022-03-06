@@ -21,8 +21,8 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
   useEffect(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
     let width = maxWidth;
-    let settingWidth = windowSize.width1 + (windowSize.width2 / 10);
-    let settingHeight = windowSize.height1 + (windowSize.height2 / 10);
+    let settingWidth = windowSize.width1 * 12 + windowSize.width2;
+    let settingHeight = windowSize.height1 * 12 + windowSize.height2;
     let height = (width / settingWidth) * settingHeight;
     if (height > 410) {
       width  = maxWidth * (410 / height);

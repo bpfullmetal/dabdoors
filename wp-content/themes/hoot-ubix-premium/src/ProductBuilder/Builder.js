@@ -192,8 +192,8 @@ const Builder = ({ adminProperties }) => {
     setIsAdding(true);
     metaObj.price = price;
     metaObj.size = {
-      width: windowSize.width1 + windowSize.width2 / 10,
-      height: windowSize.height1 + windowSize.height2 / 10
+      width: windowSize.width1 * 12 + windowSize.width2,
+      height: windowSize.height1 * 12 + windowSize.height2
     }
 
     let formData = {
@@ -306,7 +306,7 @@ const Builder = ({ adminProperties }) => {
 
   useEffect(() => {
       let pressureOptions =  adminProperties.pressure_group.pressure_options;
-      let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+      let windowWidth = windowSize.width1 * 12 + windowSize.width2;
       let index = 0;
       let indexList = [];
       pressureOptions.forEach(it => {
@@ -326,7 +326,7 @@ const Builder = ({ adminProperties }) => {
     // console.log(pressureIndex);
     if (pressureIndex > -1) {
       let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
-      let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+      let windowHeight = windowSize.height1 * 12 + windowSize.height2;
       let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
       let ubarIndex = ubarSettings.findIndex(it => {
         return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;

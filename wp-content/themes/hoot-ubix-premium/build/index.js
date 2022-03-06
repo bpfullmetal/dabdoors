@@ -317,8 +317,8 @@ const Builder = _ref => {
     setIsAdding(true);
     metaObj.price = price;
     metaObj.size = {
-      width: windowSize.width1 + windowSize.width2 / 10,
-      height: windowSize.height1 + windowSize.height2 / 10
+      width: windowSize.width1 * 12 + windowSize.width2,
+      height: windowSize.height1 * 12 + windowSize.height2
     };
     let formData = {
       action: 'addProductToCart',
@@ -434,7 +434,7 @@ const Builder = _ref => {
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let pressureOptions = adminProperties.pressure_group.pressure_options;
-    let windowWidth = windowSize.width1 + windowSize.width2 / 10;
+    let windowWidth = windowSize.width1 * 12 + windowSize.width2;
     let index = 0;
     let indexList = [];
     pressureOptions.forEach(it => {
@@ -455,7 +455,7 @@ const Builder = _ref => {
     // console.log(pressureIndex);
     if (pressureIndex > -1) {
       let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
-      let windowHeight = windowSize.height1 + windowSize.height2 / 10;
+      let windowHeight = windowSize.height1 * 12 + windowSize.height2;
       let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
       let ubarIndex = ubarSettings.findIndex(it => {
         return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
@@ -732,8 +732,8 @@ const ProductContainerComponent = _ref => {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
     let width = maxWidth;
-    let settingWidth = windowSize.width1 + windowSize.width2 / 10;
-    let settingHeight = windowSize.height1 + windowSize.height2 / 10;
+    let settingWidth = windowSize.width1 * 12 + windowSize.width2;
+    let settingHeight = windowSize.height1 * 12 + windowSize.height2;
     let height = width / settingWidth * settingHeight;
 
     if (height > 410) {
@@ -1867,8 +1867,8 @@ const getWindowRowsCols = windowSize => {
     height1,
     height2
   } = windowSize;
-  const width = width1 + width2 / 10;
-  const height = height1 + height2 / 10;
+  const width = width1 * 12 + width2;
+  const height = height1 * 12 + height2;
   let rows = 4;
   let cols = 4;
 

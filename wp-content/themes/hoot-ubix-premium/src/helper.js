@@ -1,7 +1,7 @@
 export const getWindowRowsCols = (windowSize) => {
     let { width1, width2, height1, height2 } = windowSize;
-    const width = width1 + (width2 / 10);
-    const height = height1 + (height2 / 10);
+    const width = width1 * 12 + width2;
+    const height = height1 * 12 + height2;
     let rows = 4;
     let cols = 4;
     if (height >= 6.6 && height < 7.6) {
