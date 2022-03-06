@@ -1481,8 +1481,8 @@ const SizeChangeComponent = _ref => {
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    let totalWidth = width1 + width2 / 10;
-    let totalHeight = height1 + height2 / 10;
+    let totalWidth = width1 * 12 + width2;
+    let totalHeight = height1 * 12 + height2;
     setHasWidthRangeError(false);
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
@@ -1529,7 +1529,7 @@ const SizeChangeComponent = _ref => {
     className: "product-setting-item-component"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-range"
-  }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}, maxHeight: ${productMaxHeight})` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}, minHeight: ${productMinHeight})` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}”, maxHeight: ${productMaxHeight}”)` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}”, minHeight: ${productMinHeight}”)` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-settings-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "width-wrapper d-flex"

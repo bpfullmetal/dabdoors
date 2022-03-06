@@ -11,8 +11,8 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = useState(false);
 
   useEffect(() => {
-    let totalWidth = width1 + width2 / 10;
-    let totalHeight = height1 + height2 / 10;
+    let totalWidth = width1 * 12 + width2;
+    let totalHeight = height1 * 12 + height2;
     setHasWidthRangeError(false);
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
@@ -51,8 +51,8 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
         Size 
       </label>
       <div className='size-range'>
-        { typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}, maxHeight: ${productMaxHeight})` : ''} <br/>
-        { typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}, minHeight: ${productMinHeight})` : ''}
+        { typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}”, maxHeight: ${productMaxHeight}”)` : ''} <br/>
+        { typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}”, minHeight: ${productMinHeight}”)` : ''}
       </div>
       <div className="size-settings-wrapper">
         <div className="width-wrapper d-flex">
