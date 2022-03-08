@@ -1,11 +1,11 @@
 <?php
 /**
- *                  _   _             _   
- *  __      ___ __ | | | | ___   ___ | |_ 
+ *                  _   _             _
+ *  __      ___ __ | | | | ___   ___ | |_
  *  \ \ /\ / / '_ \| |_| |/ _ \ / _ \| __|
- *   \ V  V /| |_) |  _  | (_) | (_) | |_ 
+ *   \ V  V /| |_) |  _  | (_) | (_) | |_
  *    \_/\_/ | .__/|_| |_|\___/ \___/ \__|
- *           |_|                          
+ *           |_|
  * -------------------------------------------
  * -- HOOT THEME BUILT ON HYBRID FRAMEWORK ---
  * -------------------------------------------
@@ -18,7 +18,7 @@
  * :: Initialize and setup the theme framework, helper functions and objects ::
  *
  * To modify this theme, its a good idea to create a child theme. This way you can easily update
- * the main theme without loosing your changes. To know more about how to create child themes 
+ * the main theme without loosing your changes. To know more about how to create child themes
  * @see http://codex.wordpress.org/Theme_Development
  * @see http://codex.wordpress.org/Child_Themes
  *
@@ -34,7 +34,7 @@
  * Uncomment the line below to load unminified CSS and JS, and add other developer data to code.
  * - You can set this to true (default) for loading unminified files (useful for development/debugging)
  * - Or set it to false for loading minified files (for production i.e. live site)
- * 
+ *
  * NOTE: If you uncomment this line, HYBRIDEXTEND_DEBUG value will override any option for minifying
  * files (if available) set via the theme options (customizer) in WordPress Admin
  */
@@ -114,14 +114,18 @@ function my_theme_enqueue_styles() {
     ['wp-element'],
     time(), //For production use wp_get_theme()->get('Version'),
     true
-  ); 
+  );
+  wp_enqueue_style(
+    'product-builder',
+    get_template_directory_uri() . '/build/style-index.css'
+  );
   wp_enqueue_script(
     'my-theme-frontend',
     get_stylesheet_directory_uri() . '/build/index.js',
     ['wp-element'],
     time(), //For production use wp_get_theme()->get('Version'),
     true
-  ); 
+  );
 }
 
 function testHook($item_id, $values) {
@@ -138,7 +142,7 @@ function ajaxHandleForTestHook() {
 add_action( 'wp_ajax_nopriv_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
 add_action( 'wp_ajax_ajaxHandleForTestHook', 'ajaxHandleForTestHook' );
 if( function_exists('acf_add_options_page') ) {
-	
+
 	acf_add_options_page(array(
 		'page_title' 	=> 'Product Builder Options',
 		'menu_title'	=> 'Product Builder Options',
@@ -179,19 +183,19 @@ function getAdminProperties() {
 add_action( 'wp_ajax_nopriv_getAdminProperties', 'getAdminProperties' );
 add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
 
-function createProduct() { 
+function createProduct() {
   $image_id = 1626;
   $price = $_POST['price'];
   $product = new WC_Product_Simple();
   $product->set_name( 'Custom Product' );
-  $product->set_status( 'publish' ); 
+  $product->set_status( 'publish' );
   $product->set_catalog_visibility( 'visible' );
   $product->set_price( $price );
   $product->set_regular_price( $price );
   $product->set_sold_individually( true );
   $product->set_image_id( $image_id );
   $product->set_downloadable( true );
-  $product->set_virtual( true );      
+  $product->set_virtual( true );
   $src_img = wp_get_attachment_image_src( $image_id, 'full' );
   $file_url = reset( $src_img );
   $file_md5 = md5( $file_url );
