@@ -11,12 +11,51 @@ import TrackRadiusSettingComponent from "./SettingsComponents/TrackRadiusSetting
 import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent";
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
+import PressureSettingsComponent from './SettingsComponents/PressureSettingsComponent';
 import Switch from "react-switch";
 
 
 const Builder = ({ adminProperties }) => {
-  // console.log(adminProperties);
-  const [price, setPrice] = useState(500);
+  const [metaObj, setMetaObject] = useState({
+    size: {
+      width: 10.0,
+      height: 16.2
+    },
+    windows: {
+      hasWindow: false,
+      position: []
+    },
+    lock_placement: {
+      hasLock: false,
+      placement: ''
+    },
+    insulation: {
+      hasInsulation: false
+    },
+    vents: {
+      hasVents: false
+    },
+    panelType: {
+      type: ''
+    },
+    trackRadius:  {
+      radius: 12
+    },
+    rollerType: {
+      type: ''
+    },
+    standardColor: {
+      color: '',
+    },
+    premiumColor: {
+      color: ''
+    },
+    ubarSettings: {
+      count: 0,
+      preesure_option: ''
+    }
+  })
+  const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
   const [colorIndex, setColorIndex] = useState(
@@ -26,32 +65,57 @@ const Builder = ({ adminProperties }) => {
       return option.default == true
     }) : 0
   );
+  const [hasSizeValidationError, setSizeValidationError] = useState(false);
   const [windowCnt, setWindowCnt] = useState(0); 
-  const [isLoaded, setLoadingStatus] = useState(false);
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
   const [changedPriceWithPanel, setChangedPriceWithPanel] = useState(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
+  const [changedPriceWithPressure, setChangedPriceWithPressure] = useState(0);
+  const [windowRowsCols, setWindowRowsCols] = useState({
+    rows: 4,
+    cols: 4
+  });
   const [windowSize, changeWindowSize] = useState({
-    height1: 16,
-    height2: 2,
-    width1: 10,
+    height1: Math.floor(initHeight),
+    height2: 0,
+    width1: Math.floor(initWidth),
     width2: 0
   })
   const [isAdding, setIsAdding] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [productUrl, setProductUrl] = useState('');
   const [showCustomPanel, setShowCustomPanel] = useState(false);
-  const changeWindowsCount = (e) => {
+  const [pressureIndex, setPressureIndex] = useState(0);
+  const [selectedUbarSetting, setSelectedUbarSetting] = useState({
+    ubar_counts: 0,
+    ubar_costs: 0
+  });
+  const [availablePressures, setAvailablePressures] = useState([]);
+  const changeWindowsCount = (e, index) => {
+    let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
+    let rowIndex = Math.floor(index / windowRowsCols.cols);
+    let colIndex = Math.floor(index % windowRowsCols.cols);
+    let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
+    let windwsObj = metaObj.windows;
+    let windowsPos = metaObj.windows.position;
+
     if (hasWindow) {
       if (e === true) {
+        windowsPos.push(selectedWindowPos);
         setPrice(price + Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt + 1);
       } else {
+        windowsPos.splice(windowsPos.indexOf(selectedWindowPos), 1);
         setPrice(price - Number(adminProperties.window_group.additional_price_$_per_window));
         setWindowCnt(windowCnt - 1);
       }
+      windwsObj.position = windowsPos;
+      setMetaObject({
+        ...metaObj,
+        windows: windwsObj
+      });
     }
   }
 
@@ -63,17 +127,36 @@ const Builder = ({ adminProperties }) => {
     }
   }, [showCustomPanel])
 
-  const changePricewithLock = (e) => {
+  const changePricewithLock = (option, e) => {
+    let lock_placement = metaObj.lock_placement;
+    lock_placement.hasLock = true;
+    lock_placement.placement = option == 1 ? 'inside' : 'outside';
+    setMetaObject({
+      ...metaObj,
+      lock_placement
+    })
     setPrice(price - changedPriceWithLock + e);
     setChangedPriceWithLock(e);
   }
 
-  const changePriceWithPanelGroup = (e) => {
+  const changePriceWithPanelGroup = (option, e) => {
     setPrice(price - changedPriceWithPanel + e);
     setChangedPriceWithPanel(e);
+    setMetaObject({
+      ...metaObj,
+      panelType: {
+        type: option == 1 ? 'raised' : 'flush'
+      }
+    });
   }
 
-  const changePriceWithRollerType = (e) => {
+  const changePriceWithRollerType = (type, e) => {
+    setMetaObject({
+      ...metaObj,
+      rollerType: {
+        type: type
+      }
+    });
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
   }
@@ -85,7 +168,13 @@ const Builder = ({ adminProperties }) => {
     }
   }
 
-  const changePriceWithTrackRadius = (e) => {
+  const changePriceWithTrackRadius = (radius, e) => {
+    setMetaObject({
+      ...metaObj,
+      trackRadius: {
+        radius: radius
+      }
+    })
     if ( e === true) {
       setPrice(price - changedPriceWithTrackRadius + Number(adminProperties.track_radius_group.additional_price_$));
       setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
@@ -96,58 +185,64 @@ const Builder = ({ adminProperties }) => {
   }
 
   const createProduct = (e) => {
+    if (hasSizeValidationError) {
+      window.alert('Product size has some errors. Please check before create the request.');
+      return false;
+    }
     setIsAdding(true);
+    metaObj.price = price;
+    metaObj.size = {
+      width: windowSize.width1 * 12 + windowSize.width2,
+      height: windowSize.height1 * 12 + windowSize.height2
+    }
+
     let formData = {
-      action: 'createProduct',
-      price: price
+      action: 'addProductToCart',
+      item_id: productId,
+      meta_data: metaObj
     };
     jQuery.ajax({
       type: "post",
       dataType: "json",
       url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
-      success: function(response){
-        if (response && response.id) {
-          jQuery.ajax({
-            type: "post",
-            dataType: "json",
-            url: `${baseUrl}/wp-admin/admin-ajax.php`,
-            data: {
-              action: 'addProductToCart',
-              item_id: response.id
-            },
-          }).done(function(res) {
-            console.log(res);
-            if (res.error == false) {
-              setIsAdding(false);
-              setShowAlerts(true);
-              setProductUrl(res.product_url);
-            } else {
-              setIsAdding(false);
-              alert("Error was occured!");
-              setProductUrl('');
-              setShowAlerts(false);
-            }
-          })
-        }
-      }
-    });
+    }).then(res => {
+      setIsAdding(false);
+      setShowAlerts(true);
+      console.log(res);
+    }) 
   }
 
   React.useEffect(() => {
+    console.log(adminProperties);
       let initialPrice = price;
+      let lock_placement = metaObj.lock_placement;
+      let panelType = metaObj.panelType;
+      let trackRadius = metaObj.trackRadius;
+      let rollerType = metaObj.rollerType;
+      let standardColor = metaObj.standardColor;
+      let premiumColor = metaObj.premiumColor;
       if (adminProperties.lock_placement_group.inside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'inside';
         initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
       } else if (adminProperties.lock_placement_group.outside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'outside';
         initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
         setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      } else {
+        lock_placement.hasLock = false;
+        lock_placement.placement = '';
       }
 
       if (adminProperties.panel_group.raised.default === true) {
+        panelType.type = 'raised';
         initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
         setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
       } else if (adminProperties.panel_group.flush.default === true) {
+        panelType.type = 'flush';
         initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
         setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
       }
@@ -157,9 +252,11 @@ const Builder = ({ adminProperties }) => {
           return e.default == true;
         });
         if (index > -1) {
+          rollerType.type = adminProperties.roller_type_group.select_button_options[index].button_name;
           initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
           setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
         } else {
+          rollerType.type = '';
           setChangedPriceWithRollerType(0);
         }
       }
@@ -171,12 +268,14 @@ const Builder = ({ adminProperties }) => {
         if (index > -1) {
           initialPrice += Number(adminProperties.premium_colors_group.additional_price);
           setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+          premiumColor.color = adminProperties.premium_colors_group.select_button_options[index].select_color;
         } else {
           setChangedPriceWithPremiumColor(0);
         }
       }
 
       if (adminProperties.track_radius_group) {
+        trackRadius.radius = adminProperties.track_radius_group.minimum;
         if ( Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_) ) {
           initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
           setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
@@ -185,8 +284,99 @@ const Builder = ({ adminProperties }) => {
         }
       }
 
+      if(adminProperties.standard_colors_group) {
+        let index = adminProperties.standard_colors_group.select_button_options.findIndex((e) => {
+          return e.default == true;
+        });
+        if (index > -1) {
+          standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
+        }
+      }
+      setMetaObject({
+        ...metaObj,
+        lock_placement,
+        panelType,
+        trackRadius,
+        rollerType,
+        standardColor,
+        premiumColor
+      });
       setPrice(initialPrice);
-  }, [])
+  }, []);
+
+  useEffect(() => {
+      let pressureOptions =  adminProperties.pressure_group.pressure_options;
+      let windowWidth = windowSize.width1 * 12 + windowSize.width2;
+      let index = 0;
+      let indexList = [];
+      pressureOptions.forEach(it => {
+        if (Number(it.min_width) <= windowWidth && Number(it.max_width) >= windowWidth) {
+          indexList.push(index);
+        }
+        index++;
+      });
+      if ( indexList.length > 0 ) {
+        setAvailablePressures(indexList);
+      } else {
+        setAvailablePressures([]);
+      }
+  }, [windowSize])
+
+  useEffect(() => {
+    // console.log(pressureIndex);
+    if (pressureIndex > -1) {
+      let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
+      let windowHeight = windowSize.height1 * 12 + windowSize.height2;
+      let ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+      let ubarIndex = ubarSettings.findIndex(it => {
+        return Number(it.min_height) <= windowHeight && Number(it.max_height) > windowHeight;
+      });
+      if (ubarIndex > -1) {
+        setSelectedUbarSetting({
+          ubar_counts: Number(ubarSettings[ubarIndex].ubar_counts),
+          ubar_costs: Number(ubarSettings[ubarIndex].per_ubar_costs)
+        });
+        let additional_price_with_pressure = Number(ubarSettings[ubarIndex].ubar_counts) * Number(ubarSettings[ubarIndex].per_ubar_costs);
+        setPrice(price - changedPriceWithPressure + additional_price_with_pressure);
+        setChangedPriceWithPressure(additional_price_with_pressure);
+        setMetaObject({
+          ...metaObj,
+          ubarSettings: {
+            count: Number(ubarSettings[ubarIndex].ubar_counts),
+            preesure_option: selectedPressure.pressure_range
+          }
+        });
+      } else {
+        setSelectedUbarSetting({
+          ubar_counts: 0,
+          ubar_costs: 0
+        });
+        setPrice(price - changedPriceWithPressure);
+        setChangedPriceWithPressure(0);
+        setMetaObject({
+          ...metaObj,
+          ubarSettings: {
+            count: 0,
+            preesure_option: null
+          }
+        });
+      }
+    } else {
+      setSelectedUbarSetting({
+        ubar_counts: 0,
+        ubar_costs: 0
+      });
+      setPrice(price - changedPriceWithPressure);
+      setChangedPriceWithPressure(0);
+      setMetaObject({
+        ...metaObj,
+        ubarSettings: {
+          count: 0,
+          preesure_option: null
+        }
+      });
+    }
+  }, [pressureIndex, windowSize]);
 
   return (
     <div className="product-builder">
@@ -201,12 +391,14 @@ const Builder = ({ adminProperties }) => {
             hasVents={hasVents}
             colorIndex={colorIndex}
             windowSize={windowSize}
+            lockPlacement={metaObj.lock_placement}
             colors={
               adminProperties.standard_colors_group.select_button_options.map((option, index) => {
                 return option.select_color;
               })
             }
-            changeWindowsCount={(e) => {changeWindowsCount(e);}}
+            changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
+            changeWindowRowsCols={(e) => {setWindowRowsCols(e)}}
           />
           <div className='mobile-switch-button'>
             <span>Customization</span>
@@ -220,9 +412,11 @@ const Builder = ({ adminProperties }) => {
           <span className="times btn-times" onClick={(e) => {setShowCustomPanel(false)}}>&times;</span>
           <SizeChangeComponent
             onChangeWindowSize = {(e) => {changeWindowSize(e);}}
+            hasSizeError = {(e) => { setSizeValidationError(e); }}
           />
           <WindowsSettingComponent
             hasWindow={hasWindow}
+            additional_price={windowCnt * Number(adminProperties.window_group.additional_price_$_per_window)}
             onChange={(e) => {
               if (e === true) {
                 setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
@@ -233,52 +427,94 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
           />
+          <PressureSettingsComponent
+            availablePressures={availablePressures}
+            properties={adminProperties.pressure_group && adminProperties.pressure_group}
+            onSelectPressure={(e)=>{
+              setPressureIndex(e)
+            }}
+            selectedUbarSetting={selectedUbarSetting}
+          />
           <InsulationSettingComponent 
             properties={adminProperties.insulation_group}
+            additional_price = {Number(adminProperties.insulation_group.additional_price_$_if_added)}
             enableInsulation={(e) => {
               if (e == true) {
                 setPrice(price + Number(adminProperties.insulation_group.additional_price_$_if_added));
               } else {
                 setPrice(price - Number(adminProperties.insulation_group.additional_price_$_if_added));
               }
+              setMetaObject({
+                ...metaObj,
+                insulation: {
+                  hasInsulation: e
+                }
+              });
             }}
           />
           <VentsSettingComponent
             hasVents={hasVents}
+            additional_price = {Number(adminProperties.vents_group.additional_price_$_if_added)}
             onChange={(e) => {
               if (e == true) {
                 setPrice(price + Number(adminProperties.vents_group.additional_price_$_if_added));
               } else {
                 setPrice(price - Number(adminProperties.vents_group.additional_price_$_if_added));
               }
+              setMetaObject({
+                ...metaObj,
+                vents: {
+                  hasVents: e
+                }
+              });
               setHasVents(e);
             }}
             properties={adminProperties.vents_group && adminProperties.vents_group}
           />
           <LockPlacementSettingComponent
-            setAdditionalPriceForLock={(e) => changePricewithLock(e)}
+            additional_price={changedPriceWithLock}
+            setAdditionalPriceForLock={(option, e) => changePricewithLock(option, e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
           />
           <PanelSettingComponent
-            setAdditionalPriceForPanelGroup = {(e) => changePriceWithPanelGroup(e)}
+            additional_price={changedPriceWithPanel}
+            setAdditionalPriceForPanelGroup = {(option, e) => changePriceWithPanelGroup(option, e)}
             properties={adminProperties.panel_group && adminProperties.panel_group}
           />
           <RollerTypeSettingComponent
+            additional_price={changedPriceWithRollerType}
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
-            setAdditionalPriceForRollerType={(e) => changePriceWithRollerType(e)}
+            setAdditionalPriceForRollerType={(type, e) => changePriceWithRollerType(type, e)}
           />
           <TrackRadiusSettingComponent
+            additional_price={changedPriceWithTrackRadius}
             properties={adminProperties.track_radius_group}
-            enablePrice={(e) => changePriceWithTrackRadius(e)}
+            enablePrice={(radius, e) => changePriceWithTrackRadius(radius, e)}
           />
           <ColorsSettingComponent
             colorIndex={colorIndex}
-            onChange={(e) => setColorIndex(e)}
+            onChange={(color, e) => {
+              setMetaObject({
+                ...metaObj,
+                standardColor: {
+                  color: color
+                }
+              })
+              setColorIndex(e);
+            }}
             properties={adminProperties.standard_colors_group}
           />
           <PremiumColorsSettingComponent
             properties={adminProperties.premium_colors_group}
-            enablePrice={(e) => changePriceWithPremiumColor(e)}
+            enablePrice={(color, e) => {
+              setMetaObject({
+                ...metaObj,
+                premiumColor: {
+                  color: color
+                }
+              })
+              changePriceWithPremiumColor(e);
+            }}
           />
           <div className="product-setting-item-component price-section">
             <label>Total</label>
