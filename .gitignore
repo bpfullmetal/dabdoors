@@ -6,13 +6,11 @@
 *.swp
 *.htaccess
 Thumbs.db
-
 node_modules
 wp-content/themes/twentynineteen
 wp-content/themes/twentytwenty
 wp-content/themes/twentytwentyone
 wp-content/themes/twentytwentytwo
-
 .idea
 .sass-cache
 tmp
@@ -23,7 +21,6 @@ vendor
 tests/php/_support/_generated
 yarn-error.log
 npm-debug.log
-
 # wordpress specific
 */.htaccess
 !www/.htaccess
@@ -37,7 +34,6 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 wp-content/cache/*
 wp-content/cache/supercache/*
-
 # wpengine specific
 .smushit-status
 .gitattributes
@@ -49,7 +45,6 @@ wp-content/mu-plugins/slt-force-strong-passwords.php
 wp-content/mu-plugins/limit-login-attempts
 wp-content/mu-plugins/wpengine-common
 wp-content/mysql.sql
-
 # wp core (as of 3.4.1)
 /db-config.php
 /index.php
@@ -83,7 +78,6 @@ wp-content/mysql.sql
 /wp-content/themes/twentyten
 /wp-content/themes/index.php
 /wp-content/plugins/index.php
-
 # large/disallowed file types
 # a CDN should be used for these
 *.hqx
