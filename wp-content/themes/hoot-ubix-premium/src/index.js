@@ -2,6 +2,7 @@ const { render, useState, useEffect } = wp.element;
 import Builder from './ProductBuilder/Builder';
 import "./style.scss";
 const Votes = () => {
+  document.getElementById('main').classList.add('single-product-main-wrapper');
   const [adminProperties, setAdminProperties] = useState(null);
   const getAdminProperties = () => {
     let formData = {

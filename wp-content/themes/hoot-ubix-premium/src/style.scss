@@ -1,5 +1,8 @@
 
 body {
+  #main.main.single-product-main-wrapper {
+    overflow: unset;
+  }
   #single-product-builder {
     padding: 85px 80px 80px;
     background: #FAFBFB;
@@ -49,6 +52,11 @@ body {
       display: flex;
       flex-wrap: wrap;
       .product-container {
+        @media (min-width: 800px) {
+          position: sticky;
+          align-self: flex-start;
+          top: 120px;
+        }
         flex: 1;
         background: #F2F2F2;
         padding: 30px 50px;

@@ -1992,6 +1992,7 @@ const {
 
 
 const Votes = () => {
+  document.getElementById('main').classList.add('single-product-main-wrapper');
   const [adminProperties, setAdminProperties] = useState(null);
 
   const getAdminProperties = () => {
