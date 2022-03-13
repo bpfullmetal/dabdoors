@@ -4,31 +4,31 @@ export const getWindowRowsCols = (windowSize) => {
     const height = height1 * 12 + height2;
     let rows = 4;
     let cols = 4;
-    if (height >= 6.6 && height < 7.6) {
+    if (height >= 78 && height < 90) {
         rows = 4;
-    } else if (width >= 7.6 && height < 8.9) {
+    } else if (width >= 90 && height < 105) {
         rows = 5;
-    } else if (height >= 8.9 && height < 10.8) {
+    } else if (height >= 105 && height < 128) {
         rows = 6;
-    } else if (height >= 10.9 && height < 12.5) {
+    } else if (height >= 128 && height < 149) {
         rows = 7;
-    } else if (height >= 12.6 && height < 14.2) {
+    } else if (height >= 149 && height < 170) {
         rows = 8;
-    } else if (height >= 14.3 && height < 15.11) {
+    } else if (height >= 170 && height < 191) {
         rows = 9;
     } else {
         rows = 10;
     }
 
-    if (width >= 8 && width < 9.11) {
+    if (width >= 96 && width < 107) {
         cols = 4;
-    } else if (width >= 9.11 && width < 11.11) {
+    } else if (width >= 107 && width < 143) {
         cols = 5;
-    } else if (width >= 11.11 && width < 13.11) {
+    } else if (width >= 143 && width < 167) {
         cols = 6;
-    } else if (width >= 13.11 && width < 15.10) {
+    } else if (width >= 167 && width < 190) {
         cols = 7;
-    } else {
+    } else if (width >= 190) {
         cols = 8;
     }
 

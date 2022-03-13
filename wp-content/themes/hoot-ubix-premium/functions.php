@@ -235,40 +235,6 @@ function getAdminProperties() {
 add_action( 'wp_ajax_nopriv_getAdminProperties', 'getAdminProperties' );
 add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
 
-<<<<<<< HEAD
-function createProduct() {
-  $image_id = 1626;
-  $price = $_POST['price'];
-  $product = new WC_Product_Simple();
-  $product->set_name( 'Custom Product' );
-  $product->set_status( 'publish' );
-  $product->set_catalog_visibility( 'visible' );
-  $product->set_price( $price );
-  $product->set_regular_price( $price );
-  $product->set_sold_individually( true );
-  $product->set_image_id( $image_id );
-  $product->set_downloadable( true );
-  $product->set_virtual( true );
-  $src_img = wp_get_attachment_image_src( $image_id, 'full' );
-  $file_url = reset( $src_img );
-  $file_md5 = md5( $file_url );
-  $download = new WC_Product_Download();
-  $download->set_name( get_the_title( $image_id ) );
-  $download->set_id( $file_md5 );
-  $download->set_file( $file_url );
-  $downloads[$file_md5] = $download;
-  $product->set_downloads( $downloads );
-  $product->save();
-  echo json_encode(array(
-    'id' => $product->get_id()
-  ));
-  wp_die();
-}
-
-add_action( 'wp_ajax_nopriv_createProduct', 'createProduct' );
-add_action( 'wp_ajax_createProduct', 'createProduct' );
-=======
->>>>>>> ed3bb1efbb5031160f585302479bd3aad653e418
 
 function addProductToCart() {
   session_start();    
@@ -304,8 +270,6 @@ function addProductToCart() {
 }
 add_action( 'wp_ajax_nopriv_addProductToCart', 'addProductToCart' );
 add_action( 'wp_ajax_addProductToCart', 'addProductToCart' );
-<<<<<<< HEAD
-=======
 
 add_filter('woocommerce_get_cart_item_from_session', 'wdm_get_cart_items_from_session', 1, 3 );
 if(!function_exists('wdm_get_cart_items_from_session'))
@@ -362,4 +326,3 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
         }
     }
 }
->>>>>>> ed3bb1efbb5031160f585302479bd3aad653e418
