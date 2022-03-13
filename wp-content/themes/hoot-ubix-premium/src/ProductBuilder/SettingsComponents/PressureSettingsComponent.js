@@ -1,12 +1,13 @@
 const { render, useState, useEffect } = wp.element;
 
 const PressureSettingsComponent = ({availablePressures, properties, onSelectPressure, selectedUbarSetting}) => {
-  const [pressureIndex, setPressureIndex] = useState();
+  const [pressureIndex, setPressureIndex] = useState(-1);
   useEffect(() => {
     if (availablePressures.length > 0) {
       setPressureIndex(availablePressures[0]);
       onSelectPressure(availablePressures[0]);
     } else {
+      console.log('HERE');
       setPressureIndex(-1);
       onSelectPressure(-1);
     }
@@ -23,6 +24,9 @@ const PressureSettingsComponent = ({availablePressures, properties, onSelectPres
           setPressureIndex(e.target.value);
           onSelectPressure(e.target.value);
         }}>
+          { pressureIndex == -1 &&
+            <option key="-1" value="-1">Not Available</option>
+          }
           {
             properties.pressure_options.map((it, index) => {
               return (<option key={index} value={index} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);

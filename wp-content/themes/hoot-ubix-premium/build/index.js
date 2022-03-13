@@ -1356,12 +1356,13 @@ const PressureSettingsComponent = _ref => {
     onSelectPressure,
     selectedUbarSetting
   } = _ref;
-  const [pressureIndex, setPressureIndex] = useState();
+  const [pressureIndex, setPressureIndex] = useState(-1);
   useEffect(() => {
     if (availablePressures.length > 0) {
       setPressureIndex(availablePressures[0]);
       onSelectPressure(availablePressures[0]);
     } else {
+      console.log('HERE');
       setPressureIndex(-1);
       onSelectPressure(-1);
     }
@@ -1379,7 +1380,10 @@ const PressureSettingsComponent = _ref => {
       setPressureIndex(e.target.value);
       onSelectPressure(e.target.value);
     }
-  }, properties.pressure_options.map((it, index) => {
+  }, pressureIndex == -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: "-1",
+    value: "-1"
+  }, "Not Available"), properties.pressure_options.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
       value: index,
