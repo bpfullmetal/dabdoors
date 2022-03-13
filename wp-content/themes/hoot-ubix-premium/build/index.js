@@ -1471,10 +1471,10 @@ const SizeChangeComponent = _ref => {
     onChangeWindowSize,
     hasSizeError
   } = _ref;
-  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(24);
+  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initWidth);
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(16);
-  const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(2);
+  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initHeight);
+  const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [hasWidthRangeError, setHasWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -1524,11 +1524,44 @@ const SizeChangeComponent = _ref => {
       height2
     });
   }, [width1, width2, height1, height2]);
+
+  const checkValidation = (e, type) => {
+    var max = 20;
+    console.log(e.target.value);
+    console.log(e.which);
+
+    if (e.which >= 48 && e.which <= 57) {
+      let newValue = Number(`${e.target.value}${e.which - 48}`);
+
+      if (type == 1) {
+        let width = newValue * 12 + width2;
+
+        if (width > productMaxWidth) {
+          e.preventDefault();
+        }
+      } else if (type == 2) {
+        let width = width1 * 12 + newValue;
+      } else if (type == 3) {
+        let height = newValue * 12 + height2;
+      } else if (type == 4) {
+        let height = height1 * 12 + newValue;
+      }
+
+      console.log(width, height); // console.log(newValue);
+    } else {
+      e.preventDefault();
+    } // if (parseInt(e.target.value) > max) {
+    //     // e.target.value = max; 
+    //     return false;
+    // }
+
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-range"
-  }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}”, maxHeight: ${productMaxHeight}”)` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}”, minHeight: ${productMinHeight}”)` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${Math.floor(productMaxWidth / 12)}’ ${Math.floor(productMaxWidth % 12)}”, maxHeight: ${Math.floor(productMaxHeight / 12)}’ ${Math.floor(productMaxHeight % 12)}”)` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${Math.floor(productMinWidth / 12)}’ ${Math.floor(productMinWidth % 12)}”, minHeight: ${Math.floor(productMinHeight / 12)}’ ${Math.floor(productMinHeight % 12)}”)` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-settings-wrapper"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "width-wrapper d-flex"
@@ -1540,6 +1573,9 @@ const SizeChangeComponent = _ref => {
     type: "number",
     name: "width_1",
     value: width1,
+    onKeyPress: e => {
+      checkValidation(e, 1);
+    },
     onChange: e => {
       setWidth1(Number(e.target.value));
     }

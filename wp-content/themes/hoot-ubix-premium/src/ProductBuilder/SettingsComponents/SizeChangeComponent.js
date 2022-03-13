@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
-  const [width1, setWidth1] = useState(24);
+  const [width1, setWidth1] = useState(initWidth);
   const [width2, setWidth2] = useState(0);
-  const [height1, setHeight1] = useState(16);
-  const [height2, setHeight2] = useState(2);
+  const [height1, setHeight1] = useState(initHeight);
+  const [height2, setHeight2] = useState(0);
   const [hasWidthRangeError, setHasWidthRangeError] = useState(false);
   const [hasHeightRangeError, setHasHeightRangeError] = useState(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = useState(false);
@@ -44,21 +44,58 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     }
     hasSizeError(false);
     onChangeWindowSize({width1, width2, height1, height2});
-  }, [width1, width2, height1, height2])
+  }, [width1, width2, height1, height2]);
+
+  const checkValidation = (e, type) => {
+    var max = 20;
+    console.log(e.target.value);
+    console.log(e.which);
+    if (e.which >= 48 && e.which <= 57) {
+      let newValue = Number(`${e.target.value}${e.which - 48}`);
+
+      if (type == 1) {
+        let width = newValue * 12 + width2;
+        if (width > productMaxWidth) {
+          e.preventDefault();
+        }
+      } else if (type == 2) {
+        let width = width1 * 12 + newValue;
+      } else if (type == 3) {
+        let height = newValue * 12 + height2;
+      } else if (type == 4) {
+        let height = height1 * 12 + newValue;
+      }
+      console.log(width, height);
+      // console.log(newValue);
+    } else {
+      e.preventDefault();
+    }
+    // if (parseInt(e.target.value) > max) {
+    //     // e.target.value = max; 
+    //     return false;
+    // }
+  }
+
   return (
     <div className="product-setting-item-component">
       <label>
         Size 
       </label>
       <div className='size-range'>
-        { typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${productMaxWidth}”, maxHeight: ${productMaxHeight}”)` : ''} <br/>
-        { typeof productMinWidth !== 'undefined' ? ` (minWidth: ${productMinWidth}”, minHeight: ${productMinHeight}”)` : ''}
+        { typeof productMaxWidth !== 'undefined'
+          ? ` (maxWidth: ${Math.floor(productMaxWidth / 12)}’ ${Math.floor(productMaxWidth % 12)}”, maxHeight: ${Math.floor(productMaxHeight / 12)}’ ${Math.floor(productMaxHeight % 12)}”)`
+          : ''} <br/>
+        { typeof productMinWidth !== 'undefined'
+          ? ` (minWidth: ${Math.floor(productMinWidth / 12)}’ ${Math.floor(productMinWidth % 12)}”, minHeight: ${Math.floor(productMinHeight / 12)}’ ${Math.floor(productMinHeight % 12)}”)`
+          : ''}
       </div>
       <div className="size-settings-wrapper">
         <div className="width-wrapper d-flex">
           <span className="label">W</span>
           <div className="d-flex align-items-center input-wrapper">
-            <input type="number" name="width_1" value={width1} onChange={(e) => {
+            <input type="number" name="width_1" value={width1} onKeyPress={(e) => {
+              checkValidation(e, 1);
+            }} onChange={(e) => {
               setWidth1(Number(e.target.value))
             }}></input>
             <span>’</span>

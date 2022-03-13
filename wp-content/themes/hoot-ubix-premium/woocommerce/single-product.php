@@ -147,6 +147,7 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 			let productId = '.$product_id.';
 			let initWidth = '.$_product->get_width().';
 			let initHeight = '.$_product->get_height().';
+			console.log(initWidth, initHeight);
 		</script>';
 ?>
 <div class="hgrid main-content-grid">
