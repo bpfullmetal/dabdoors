@@ -1,19 +1,14 @@
 import ImgVent from './../../assets/img_vent_background.png';
-const VentsComponent = () => {
+const VentsComponent = ({ columns }) => {
+  // console.log('HERE');
+  // console.log(columns);
   return (
     <div className="vents-wrapper">
-      <div className="vent-item">
-        <img src={ImgVent} />
-      </div>
-      <div className="vent-item">
-        <img src={ImgVent} />
-      </div>
-      <div className="vent-item">
-        <img src={ImgVent} />
-      </div>
-      <div className="vent-item">
-        <img src={ImgVent} />
-      </div>
+      {Array(columns).fill(0).map((_column, i) => (
+        <div key={i} className="vent-item">
+          <img src={ImgVent} />
+        </div>
+      ))}
     </div>
   )
 }

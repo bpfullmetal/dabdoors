@@ -846,7 +846,9 @@ const ProductContainerComponent = _ref => {
       rx: "2",
       fill: "#C4C4C4",
       stroke: "black"
-    }))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], null)))))));
+    }))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      columns: windowsRectRange.cols
+    })))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     tileIndex: tileIndex,
     onChange: e => setTileIndex(e),
@@ -872,26 +874,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const VentsComponent = () => {
+const VentsComponent = _ref => {
+  let {
+    columns
+  } = _ref;
+  // console.log('HERE');
+  // console.log(columns);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "vents-wrapper"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, Array(columns).fill(0).map((_column, i) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    key: i,
     className: "vent-item"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vent-item"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vent-item"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vent-item"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
-  })));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (VentsComponent);
@@ -1872,31 +1868,31 @@ const getWindowRowsCols = windowSize => {
   let rows = 4;
   let cols = 4;
 
-  if (height >= 6.6 && height < 7.6) {
+  if (height >= 78 && height < 90) {
     rows = 4;
-  } else if (width >= 7.6 && height < 8.9) {
+  } else if (width >= 90 && height < 105) {
     rows = 5;
-  } else if (height >= 8.9 && height < 10.8) {
+  } else if (height >= 105 && height < 128) {
     rows = 6;
-  } else if (height >= 10.9 && height < 12.5) {
+  } else if (height >= 128 && height < 149) {
     rows = 7;
-  } else if (height >= 12.6 && height < 14.2) {
+  } else if (height >= 149 && height < 170) {
     rows = 8;
-  } else if (height >= 14.3 && height < 15.11) {
+  } else if (height >= 170 && height < 191) {
     rows = 9;
   } else {
     rows = 10;
   }
 
-  if (width >= 8 && width < 9.11) {
+  if (width >= 96 && width < 107) {
     cols = 4;
-  } else if (width >= 9.11 && width < 11.11) {
+  } else if (width >= 107 && width < 143) {
     cols = 5;
-  } else if (width >= 11.11 && width < 13.11) {
+  } else if (width >= 143 && width < 167) {
     cols = 6;
-  } else if (width >= 13.11 && width < 15.10) {
+  } else if (width >= 167 && width < 190) {
     cols = 7;
-  } else {
+  } else if (width >= 190) {
     cols = 8;
   }
 
