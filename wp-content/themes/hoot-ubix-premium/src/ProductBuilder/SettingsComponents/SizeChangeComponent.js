@@ -52,18 +52,28 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     console.log(e.which);
     if (e.which >= 48 && e.which <= 57) {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
-
+      let width = 0;
+      let height = 0;
       if (type == 1) {
-        let width = newValue * 12 + width2;
+        width = newValue * 12 + width2;
         if (width > productMaxWidth) {
           e.preventDefault();
         }
       } else if (type == 2) {
-        let width = width1 * 12 + newValue;
+        width = width1 * 12 + newValue;
+        if (width > productMaxWidth) {
+          e.preventDefault();
+        }
       } else if (type == 3) {
-        let height = newValue * 12 + height2;
+        height = newValue * 12 + height2;
+        if (height > productMaxHeight) {
+          e.preventDefault();
+        }
       } else if (type == 4) {
-        let height = height1 * 12 + newValue;
+        height = height1 * 12 + newValue;
+        if (height > productMaxHeight) {
+          e.preventDefault();
+        }
       }
       console.log(width, height);
       // console.log(newValue);
@@ -96,11 +106,13 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
             <input type="number" name="width_1" value={width1} onKeyPress={(e) => {
               checkValidation(e, 1);
             }} onChange={(e) => {
-              setWidth1(Number(e.target.value))
+              setWidth1((e.target.value))
             }}></input>
             <span>’</span>
-            <input type="number" name="width_2" value={width2} onChange={(e) => {
-              setWidth2(Number(e.target.value))
+            <input type="number" name="width_2" value={width2} onKeyPress={(e) => {
+              checkValidation(e, 2);
+            }} onChange={(e) => {
+              setWidth2((e.target.value))
             }}></input>
             <span>”</span>
           </div>
@@ -108,12 +120,16 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
         <div className="height-wrapper d-flex">
           <span className="label">H</span>
           <div className="d-flex align-items-center input-wrapper">
-            <input type="number" name="height_1" value={height1} onChange={(e) => {
-              setHeight1(Number(e.target.value))
+            <input type="number" name="height_1" value={height1} onKeyPress={(e) => {
+              checkValidation(e, 3);
+            }} onChange={(e) => {
+              setHeight1((e.target.value))
             }}></input>
             <span>’</span>
-            <input type="number" name="height_2" value={height2} onChange={(e) => {
-              setHeight2(Number(e.target.value))
+            <input type="number" name="height_2" value={height2} onKeyPress={(e) => {
+              checkValidation(e, 4);
+            }} onChange={(e) => {
+              setHeight2((e.target.value))
             }}></input>
             <span>”</span>
           </div>

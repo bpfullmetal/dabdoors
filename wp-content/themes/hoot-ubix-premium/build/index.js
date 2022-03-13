@@ -1532,19 +1532,33 @@ const SizeChangeComponent = _ref => {
 
     if (e.which >= 48 && e.which <= 57) {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
+      let width = 0;
+      let height = 0;
 
       if (type == 1) {
-        let width = newValue * 12 + width2;
+        width = newValue * 12 + width2;
 
         if (width > productMaxWidth) {
           e.preventDefault();
         }
       } else if (type == 2) {
-        let width = width1 * 12 + newValue;
+        width = width1 * 12 + newValue;
+
+        if (width > productMaxWidth) {
+          e.preventDefault();
+        }
       } else if (type == 3) {
-        let height = newValue * 12 + height2;
+        height = newValue * 12 + height2;
+
+        if (height > productMaxHeight) {
+          e.preventDefault();
+        }
       } else if (type == 4) {
-        let height = height1 * 12 + newValue;
+        height = height1 * 12 + newValue;
+
+        if (height > productMaxHeight) {
+          e.preventDefault();
+        }
       }
 
       console.log(width, height); // console.log(newValue);
@@ -1577,14 +1591,17 @@ const SizeChangeComponent = _ref => {
       checkValidation(e, 1);
     },
     onChange: e => {
-      setWidth1(Number(e.target.value));
+      setWidth1(e.target.value);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "width_2",
     value: width2,
+    onKeyPress: e => {
+      checkValidation(e, 2);
+    },
     onChange: e => {
-      setWidth2(Number(e.target.value));
+      setWidth2(e.target.value);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "height-wrapper d-flex"
@@ -1596,15 +1613,21 @@ const SizeChangeComponent = _ref => {
     type: "number",
     name: "height_1",
     value: height1,
+    onKeyPress: e => {
+      checkValidation(e, 3);
+    },
     onChange: e => {
-      setHeight1(Number(e.target.value));
+      setHeight1(e.target.value);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
     name: "height_2",
     value: height2,
+    onKeyPress: e => {
+      checkValidation(e, 4);
+    },
     onChange: e => {
-      setHeight2(Number(e.target.value));
+      setHeight2(e.target.value);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), hasWidthRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "range-error"
