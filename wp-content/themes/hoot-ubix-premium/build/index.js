@@ -1597,6 +1597,8 @@ const SizeChangeComponent = _ref => {
     type: "number",
     name: "width_1",
     value: width1,
+    max: Math.floor(productMaxWidth / 12),
+    min: Math.floor(productMinWidth / 12),
     onKeyPress: e => {
       checkValidation(e, 1);
     },
@@ -1623,6 +1625,8 @@ const SizeChangeComponent = _ref => {
     type: "number",
     name: "height_1",
     value: height1,
+    max: Math.floor(productMaxHeight / 12),
+    min: Math.floor(productMinHeight / 12),
     onKeyPress: e => {
       checkValidation(e, 3);
     },

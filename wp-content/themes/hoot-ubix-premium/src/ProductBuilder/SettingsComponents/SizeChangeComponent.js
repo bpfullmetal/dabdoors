@@ -103,34 +103,58 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
         <div className="width-wrapper d-flex">
           <span className="label">W</span>
           <div className="d-flex align-items-center input-wrapper">
-            <input type="number" name="width_1" value={width1} onKeyPress={(e) => {
-              checkValidation(e, 1);
-            }} onChange={(e) => {
-              setWidth1((e.target.value))
-            }}></input>
+            <input
+              type="number"
+              name="width_1"
+              value={width1}
+              max={Math.floor(productMaxWidth / 12)}
+              min={Math.floor(productMinWidth / 12)}
+              onKeyPress={(e) => {
+                checkValidation(e, 1);
+              }}
+              onChange={(e) => {
+                setWidth1((e.target.value))
+              }}></input>
             <span>’</span>
-            <input type="number" name="width_2" value={width2} onKeyPress={(e) => {
-              checkValidation(e, 2);
-            }} onChange={(e) => {
-              setWidth2((e.target.value))
-            }}></input>
+            <input
+              type="number"
+              name="width_2"
+              value={width2}
+              onKeyPress={(e) => {
+                checkValidation(e, 2);
+              }}
+              onChange={(e) => {
+                setWidth2((e.target.value))
+              }}></input>
             <span>”</span>
           </div>
         </div>
         <div className="height-wrapper d-flex">
           <span className="label">H</span>
           <div className="d-flex align-items-center input-wrapper">
-            <input type="number" name="height_1" value={height1} onKeyPress={(e) => {
-              checkValidation(e, 3);
-            }} onChange={(e) => {
-              setHeight1((e.target.value))
-            }}></input>
+            <input
+              type="number"
+              name="height_1"
+              value={height1}
+              max={Math.floor(productMaxHeight / 12)}
+              min={Math.floor(productMinHeight / 12)}
+              onKeyPress={(e) => {
+                checkValidation(e, 3);
+              }}
+              onChange={(e) => {
+                setHeight1((e.target.value))
+              }}></input>
             <span>’</span>
-            <input type="number" name="height_2" value={height2} onKeyPress={(e) => {
-              checkValidation(e, 4);
-            }} onChange={(e) => {
-              setHeight2((e.target.value))
-            }}></input>
+            <input
+              type="number"
+              name="height_2"
+              value={height2}
+              onKeyPress={(e) => {
+                checkValidation(e, 4);
+              }}
+              onChange={(e) => {
+                setHeight2((e.target.value))
+              }}></input>
             <span>”</span>
           </div>
         </div>
