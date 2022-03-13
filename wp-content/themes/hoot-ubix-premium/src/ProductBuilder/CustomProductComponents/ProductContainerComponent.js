@@ -16,13 +16,19 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
   const [windowsRectRange, setWindowsRectRange] = useState({
     rows: 4,
     cols: 4
-  })
+  });
+
+  const [texturePercent, setTexturePercent] = useState(100);
 
   useEffect(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
     let width = maxWidth;
     let settingWidth = windowSize.width1 * 12 + windowSize.width2;
     let settingHeight = windowSize.height1 * 12 + windowSize.height2;
+    let initWidthInches = initWidth / 2.54;
+    let initHeightInches = initHeight / 2.54;
+    let percent = 100 / ((settingWidth / initWidthInches) * (settingHeight / initHeightInches));
+    setTexturePercent(percent);
     let height = (width / settingWidth) * settingHeight;
     if (height > 410) {
       width  = maxWidth * (410 / height);
@@ -75,7 +81,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
             <TransformComponent>
               <div
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
-                style={{backgroundColor: bgColor}}
+                style={{backgroundColor: bgColor, backgroundSize: `auto ${texturePercent}%`}}
               >
                 <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">

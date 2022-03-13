@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
 const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
-  const [width1, setWidth1] = useState(initWidth);
+  const [width1, setWidth1] = useState(Math.floor(initWidth / 30.48));
   const [width2, setWidth2] = useState(0);
-  const [height1, setHeight1] = useState(initHeight);
+  const [height1, setHeight1] = useState(Math.floor(initHeight / 30.48));
   const [height2, setHeight2] = useState(0);
   const [hasWidthRangeError, setHasWidthRangeError] = useState(false);
   const [hasHeightRangeError, setHasHeightRangeError] = useState(false);

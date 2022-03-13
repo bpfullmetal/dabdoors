@@ -78,9 +78,9 @@ const Builder = ({ adminProperties }) => {
     cols: 4
   });
   const [windowSize, changeWindowSize] = useState({
-    height1: Math.floor(initHeight),
+    height1: Math.floor(Math.floor(initHeight / 30.48)),
     height2: 0,
-    width1: Math.floor(initWidth),
+    width1: Math.floor(Math.floor(initWidth / 30.48)),
     width2: 0
   })
   const [isAdding, setIsAdding] = useState(false);

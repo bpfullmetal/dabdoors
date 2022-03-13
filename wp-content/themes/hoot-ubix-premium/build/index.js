@@ -204,9 +204,9 @@ const Builder = _ref => {
     cols: 4
   });
   const [windowSize, changeWindowSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    height1: Math.floor(initHeight),
+    height1: Math.floor(Math.floor(initHeight / 30.48)),
     height2: 0,
-    width1: Math.floor(initWidth),
+    width1: Math.floor(Math.floor(initWidth / 30.48)),
     width2: 0
   });
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -729,11 +729,16 @@ const ProductContainerComponent = _ref => {
     rows: 4,
     cols: 4
   });
+  const [texturePercent, setTexturePercent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
     let width = maxWidth;
     let settingWidth = windowSize.width1 * 12 + windowSize.width2;
     let settingHeight = windowSize.height1 * 12 + windowSize.height2;
+    let initWidthInches = initWidth / 2.54;
+    let initHeightInches = initHeight / 2.54;
+    let percent = 100 / (settingWidth / initWidthInches * (settingHeight / initHeightInches));
+    setTexturePercent(percent);
     let height = width / settingWidth * settingHeight;
 
     if (height > 410) {
@@ -797,7 +802,8 @@ const ProductContainerComponent = _ref => {
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `wall-wrapper ${tileIndex == 0 ? 'grid-wall' : tileIndex == 1 ? 'single-grid-wall' : 'single'}`,
       style: {
-        backgroundColor: bgColor
+        backgroundColor: bgColor,
+        backgroundSize: `auto ${texturePercent}%`
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "outline-door",
@@ -1475,9 +1481,9 @@ const SizeChangeComponent = _ref => {
     onChangeWindowSize,
     hasSizeError
   } = _ref;
-  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initWidth);
+  const [width1, setWidth1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Math.floor(initWidth / 30.48));
   const [width2, setWidth2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initHeight);
+  const [height1, setHeight1] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Math.floor(initHeight / 30.48));
   const [height2, setHeight2] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [hasWidthRangeError, setHasWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
