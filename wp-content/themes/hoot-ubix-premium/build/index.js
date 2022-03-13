@@ -881,7 +881,10 @@ const VentsComponent = _ref => {
   // console.log('HERE');
   // console.log(columns);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vents-wrapper"
+    className: "vents-wrapper",
+    style: {
+      gridTemplateColumns: `repeat(${columns}, 1fr)`
+    }
   }, Array(columns).fill(0).map((_column, i) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: i,
     className: "vent-item"
@@ -21353,7 +21356,7 @@ module.exports = __webpack_require__.p + "images/img_logo.4f15490d.png";
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-module.exports = __webpack_require__.p + "images/img_vent_background.cc04b1db.png";
+module.exports = __webpack_require__.p + "images/img_vent_background.648751fa.png";
 
 /***/ }),
 
