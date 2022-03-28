@@ -5,6 +5,7 @@ import VentsComponent from "./VentsComponent";
 import WallSettingsComponent from "../WallSettingsComponents/WallSettingsComponent";
 import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import WindowShape1 from "../../assets/img_window_shape_1.png";
 import { getWindowRowsCols } from '../../helper';
 const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement, changeWindowRowsCols }) => {
   const [windows, setWindows] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
@@ -95,6 +96,10 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                           })
                         }
                       </div>
+                      <div className={`background-layer ${hasWindow ? 'enabled' : 'disabled'}`}>
+                        <img src={WindowShape1} />
+                      </div>
+                      {/* <div className='background-generator' style={{ backgroundImage: `url(${WindowShape1})` }}></div> */}
                       {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock'>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>

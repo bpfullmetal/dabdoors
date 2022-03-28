@@ -426,6 +426,7 @@ const Builder = ({ adminProperties }) => {
               setHasWindow(e)
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
+            windowRowsCols={windowRowsCols}
           />
           <PressureSettingsComponent
             availablePressures={availablePressures}

@@ -570,7 +570,8 @@ const Builder = _ref => {
 
       setHasWindow(e);
     },
-    properties: adminProperties.window_group && adminProperties.window_group
+    properties: adminProperties.window_group && adminProperties.window_group,
+    windowRowsCols: windowRowsCols
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     availablePressures: availablePressures,
     properties: adminProperties.pressure_group && adminProperties.pressure_group,
@@ -698,7 +699,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../WallSettingsComponents/WallSettingsComponent */ "./src/ProductBuilder/WallSettingsComponents/WallSettingsComponent.js");
 /* harmony import */ var _ZoomControlComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ZoomControlComponent */ "./src/ProductBuilder/CustomProductComponents/ZoomControlComponent.js");
 /* harmony import */ var react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-zoom-pan-pinch */ "./node_modules/react-zoom-pan-pinch/dist/index.esm.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../helper */ "./src/helper.js");
+/* harmony import */ var _assets_img_window_shape_1_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/img_window_shape_1.png */ "./src/assets/img_window_shape_1.png");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../helper */ "./src/helper.js");
+
 
 
 
@@ -753,7 +756,7 @@ const ProductContainerComponent = _ref => {
 
     setRealWidth(width);
     setRealHeight(height);
-    let rectRange = (0,_helper__WEBPACK_IMPORTED_MODULE_7__.getWindowRowsCols)(windowSize);
+    let rectRange = (0,_helper__WEBPACK_IMPORTED_MODULE_8__.getWindowRowsCols)(windowSize);
     setWindowsRectRange(rectRange);
     changeWindowRowsCols(rectRange);
   }, [windowSize]);
@@ -830,6 +833,10 @@ const ProductContainerComponent = _ref => {
           changeWindowsCount(e, index);
         }
       });
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: `background-layer ${hasWindow ? 'enabled' : 'disabled'}`
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: _assets_img_window_shape_1_png__WEBPACK_IMPORTED_MODULE_7__
     })), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "lock"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
@@ -1773,12 +1780,11 @@ const VentsSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
-const {
-  render,
-  useState
-} = wp.element;
+
 
 
 const WindowsSettingComponent = _ref => {
@@ -1786,15 +1792,21 @@ const WindowsSettingComponent = _ref => {
     additional_price,
     properties,
     hasWindow,
-    onChange
+    onChange,
+    windowRowsCols
   } = _ref;
+  console.log(windowRowsCols);
+  const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    setCols(windowRowsCols.cols);
+  }, [windowRowsCols]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties?.label, hasWindow && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, "+$", additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "+$", additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onChange: e => {
       onChange(e);
     },
@@ -1806,7 +1818,19 @@ const WindowsSettingComponent = _ref => {
     uncheckedIcon: ''
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "description"
-  }, "Click on a window space to add or delete windows."));
+  }, "Click on a window space to add or delete windows."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", null, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    disabled: cols !== 8
+  }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    disabled: cols !== 4 && cols !== 8
+  }, "305 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    disabled: cols !== 2 && cols !== 4 && cols !== 8
+  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    disabled: true
+  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    disabled: true
+  }, "306 Sherwood"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WindowsSettingComponent);
@@ -21431,6 +21455,17 @@ module.exports = __webpack_require__.p + "images/img_logo.4f15490d.png";
 
 "use strict";
 module.exports = __webpack_require__.p + "images/img_vent_background.648751fa.png";
+
+/***/ }),
+
+/***/ "./src/assets/img_window_shape_1.png":
+/*!*******************************************!*\
+  !*** ./src/assets/img_window_shape_1.png ***!
+  \*******************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/img_window_shape_1.ec9b7f08.png";
 
 /***/ }),
 

@@ -804,6 +804,9 @@ body.no-scroll {
     img {
       height: 100%;
     }
+    &.disabled {
+      display: none;
+    }
   }
   .window-item {
     position: relative;

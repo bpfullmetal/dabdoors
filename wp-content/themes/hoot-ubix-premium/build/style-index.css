@@ -795,4 +795,42 @@ body.no-scroll {
   overflow: hidden;
 }
 
+.mt-1 {
+  margin-top: 10px;
+}
+
+.window-layout-settings.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.inline-wrapper {
+  position: relative;
+}
+.inline-wrapper .background-layer {
+  position: absolute;
+  width: calc(100% - 40px);
+  height: calc((100% - 44px - 30px) / 4);
+  left: 20px;
+  top: 24px;
+}
+.inline-wrapper .background-layer img {
+  height: 100%;
+}
+.inline-wrapper .background-layer.disabled {
+  display: none;
+}
+.inline-wrapper .window-item {
+  position: relative;
+}
+.inline-wrapper .window-item::after {
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #eddeb9;
+  content: "";
+  right: -11px;
+  top: 0px;
+}
+
 /*# sourceMappingURL=style-index.css.map*/
