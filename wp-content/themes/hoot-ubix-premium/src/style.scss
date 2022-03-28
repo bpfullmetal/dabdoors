@@ -781,3 +781,41 @@ body {
 body.no-scroll {
   overflow: hidden;
 }
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.window-layout-settings {
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}
+
+.inline-wrapper {
+  position: relative;
+  .background-layer {
+    position: absolute;
+    width: calc(100% - 40px);
+    height: calc((100% - 44px - 30px) / 4);
+    left: 20px;
+    top: 24px;
+    img {
+      height: 100%;
+    }
+  }
+  .window-item {
+    position: relative;
+    &::after {
+      position: absolute;
+      width: 10px;
+      height: 100%;
+      background-color: #eddeb9;
+      content: '';
+      right: -11px;
+      top: 0px;
+    }
+
+  }
+}
