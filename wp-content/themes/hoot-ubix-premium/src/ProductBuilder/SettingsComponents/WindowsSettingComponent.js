@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import Switch from "react-switch";
 
-const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onChange, windowRowsCols }) => {
+const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onChange, windowRowsCols, onSelectWindowLayout }) => {
   console.log(windowRowsCols);
   const [cols, setCols] = useState(windowRowsCols?windowRowsCols.cols:4);
   useEffect(() => {
@@ -22,13 +22,13 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
         Click on a window space to add or delete windows.
       </span>
       <div className={`window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`}>
-        <select>
-          <option>None</option>
-          <option disabled={cols!==8}>405 Williamsburg</option>
-          <option disabled={cols!==4 && cols !== 8}>305 Williamsburg</option>
-          <option disabled={cols!==2 && cols!==4 && cols !== 8}>306 Sherwood</option>
-          <option disabled>306 Sherwood</option>
-          <option disabled>306 Sherwood</option>
+        <select name="window-layout" onChange={(e) => {onSelectWindowLayout(e.target.value)}}>
+          <option value={-1}>None</option>
+          <option value={0} disabled={cols!==8}>405 Williamsburg</option>
+          <option value={1} disabled={cols!==4 && cols !== 8}>305 Williamsburg</option>
+          <option value={2} disabled={cols!==2 && cols!==4 && cols !== 8}>306 Sherwood</option>
+          <option value={3} disabled>306 Sherwood</option>
+          <option value={4} disabled>306 Sherwood</option>
         </select>
       </div>
     </div>

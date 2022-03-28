@@ -1,7 +1,17 @@
-const { render, useState } = wp.element;
+const { render, useState, useEffect } = wp.element;
 
-const WindowComponent = ({ enableWindow, addedWindow }) => {
+const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption }) => {
   const [hasWindow, setHasWindow] = useState(false);
+
+  useEffect(() => {
+    if (layoutOption == 0) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    }
+  
+  }, [windowIndex, layoutOption])
+
   return (
     <div className={`window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
@@ -16,7 +26,7 @@ const WindowComponent = ({ enableWindow, addedWindow }) => {
         </span>
       }
       {
-        hasWindow == true && <span className="btn btn-remove" onClick={(e) => {
+        (hasWindow == true && windowIndex > 7) && <span className="btn btn-remove" onClick={(e) => {
           if (enableWindow === true) {
             setHasWindow(false); addedWindow(false);
           }

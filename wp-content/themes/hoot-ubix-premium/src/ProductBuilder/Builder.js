@@ -93,6 +93,7 @@ const Builder = ({ adminProperties }) => {
     ubar_costs: 0
   });
   const [availablePressures, setAvailablePressures] = useState([]);
+  const [layoutOption, setLayoutOption] = useState(-1);
   const changeWindowsCount = (e, index) => {
     let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
     let rowIndex = Math.floor(index / windowRowsCols.cols);
@@ -399,6 +400,7 @@ const Builder = ({ adminProperties }) => {
             }
             changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
             changeWindowRowsCols={(e) => {setWindowRowsCols(e)}}
+            layoutOption={layoutOption}
           />
           <div className='mobile-switch-button'>
             <span>Customization</span>
@@ -427,6 +429,9 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
             windowRowsCols={windowRowsCols}
+            onSelectWindowLayout={(e) => {
+              setLayoutOption(e);
+            }}
           />
           <PressureSettingsComponent
             availablePressures={availablePressures}

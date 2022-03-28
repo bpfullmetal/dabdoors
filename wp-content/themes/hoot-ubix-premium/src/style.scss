@@ -134,7 +134,7 @@ body {
                       gap: 10px;
                       flex: 1;
                       > .window-item {
-                        border: 1.04035px dashed #FFFFFF;
+                        border: 1px dashed #FFFFFF;
                         box-sizing: border-box;
                         position: relative;
                         .btn {
@@ -813,12 +813,17 @@ body.no-scroll {
     &::after {
       position: absolute;
       width: 10px;
-      height: 100%;
+      height: calc(100% + 10px);
       background-color: #eddeb9;
       content: '';
       right: -11px;
-      top: 0px;
+      top: -5px;
+      z-index: 1;
     }
-
+    &.active-window {
+      &::after {
+        right: -14px;
+      }
+    }
   }
 }

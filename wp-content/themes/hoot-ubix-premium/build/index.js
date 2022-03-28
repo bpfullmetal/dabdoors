@@ -219,6 +219,7 @@ const Builder = _ref => {
     ubar_costs: 0
   });
   const [availablePressures, setAvailablePressures] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  const [layoutOption, setLayoutOption] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
 
   const changeWindowsCount = (e, index) => {
     let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
@@ -529,7 +530,8 @@ const Builder = _ref => {
     },
     changeWindowRowsCols: e => {
       setWindowRowsCols(e);
-    }
+    },
+    layoutOption: layoutOption
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -571,7 +573,10 @@ const Builder = _ref => {
       setHasWindow(e);
     },
     properties: adminProperties.window_group && adminProperties.window_group,
-    windowRowsCols: windowRowsCols
+    windowRowsCols: windowRowsCols,
+    onSelectWindowLayout: e => {
+      setLayoutOption(e);
+    }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     availablePressures: availablePressures,
     properties: adminProperties.pressure_group && adminProperties.pressure_group,
@@ -720,7 +725,8 @@ const ProductContainerComponent = _ref => {
     colorIndex,
     changeWindowsCount,
     lockPlacement,
-    changeWindowRowsCols
+    changeWindowRowsCols,
+    layoutOption
   } = _ref;
   const [windows, setWindows] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -828,12 +834,14 @@ const ProductContainerComponent = _ref => {
       }
     }, windows.map((e, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        windowIndex: index,
         enableWindow: hasWindow,
+        layoutOption: layoutOption,
         addedWindow: e => {
           changeWindowsCount(e, index);
         }
       });
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    })), layoutOption == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `background-layer ${hasWindow ? 'enabled' : 'disabled'}`
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: _assets_img_window_shape_1_png__WEBPACK_IMPORTED_MODULE_7__
@@ -923,15 +931,25 @@ __webpack_require__.r(__webpack_exports__);
 
 const {
   render,
-  useState
+  useState,
+  useEffect
 } = wp.element;
 
 const WindowComponent = _ref => {
   let {
     enableWindow,
-    addedWindow
+    addedWindow,
+    windowIndex,
+    layoutOption
   } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
+  useEffect(() => {
+    if (layoutOption == 0) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    }
+  }, [windowIndex, layoutOption]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -951,7 +969,7 @@ const WindowComponent = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8.15625 6.34375V0H6.34375V6.34375H0V8.15625H6.34375V14.5H8.15625V8.15625H14.5V6.34375H8.15625Z",
     fill: "#1D1E1D"
-  }))), hasWindow == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }))), hasWindow == true && windowIndex > 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-remove",
     onClick: e => {
       if (enableWindow === true) {
@@ -1793,7 +1811,8 @@ const WindowsSettingComponent = _ref => {
     properties,
     hasWindow,
     onChange,
-    windowRowsCols
+    windowRowsCols,
+    onSelectWindowLayout
   } = _ref;
   console.log(windowRowsCols);
   const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
@@ -1820,15 +1839,27 @@ const WindowsSettingComponent = _ref => {
     className: "description"
   }, "Click on a window space to add or delete windows."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", null, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    name: "window-layout",
+    onChange: e => {
+      onSelectWindowLayout(e.target.value);
+    }
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: -1
+  }, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 0,
     disabled: cols !== 8
   }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 1,
     disabled: cols !== 4 && cols !== 8
   }, "305 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 2,
     disabled: cols !== 2 && cols !== 4 && cols !== 8
   }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 3,
     disabled: true
   }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: 4,
     disabled: true
   }, "306 Sherwood"))));
 };

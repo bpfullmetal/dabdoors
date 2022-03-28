@@ -161,7 +161,7 @@ body #single-product-builder .product-builder-content .product-container #produc
   flex: 1;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item {
-  border: 1.04035px dashed #FFFFFF;
+  border: 1px dashed #FFFFFF;
   box-sizing: border-box;
   position: relative;
 }
@@ -826,11 +826,15 @@ body.no-scroll {
 .inline-wrapper .window-item::after {
   position: absolute;
   width: 10px;
-  height: 100%;
+  height: calc(100% + 10px);
   background-color: #eddeb9;
   content: "";
   right: -11px;
-  top: 0px;
+  top: -5px;
+  z-index: 1;
+}
+.inline-wrapper .window-item.active-window::after {
+  right: -14px;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
