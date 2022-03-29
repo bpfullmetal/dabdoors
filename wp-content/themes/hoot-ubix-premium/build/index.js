@@ -2013,19 +2013,19 @@ const WindowsSettingComponent = _ref => {
   }, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 0,
     disabled: cols !== 8 && cols !== 7 && cols !== 5
-  }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, "Williamsburg 405"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 1,
     disabled: cols !== 4 && cols !== 8
-  }, "305 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, "Williamsburg 305"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 2,
     disabled: cols !== 2 && cols !== 4 && cols !== 8
-  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, "Winston 392"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 3,
     disabled: true
-  }, "306 Sherwood"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, "Stockton 397"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 4,
     disabled: true
-  }, "306 Sherwood"))));
+  }, "Sherwood 306"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (WindowsSettingComponent);
