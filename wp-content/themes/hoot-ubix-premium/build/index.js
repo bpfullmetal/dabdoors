@@ -785,6 +785,12 @@ const ProductContainerComponent = _ref => {
       } else if (windowsRectRange.cols == 5) {
         setWindowsWrapperClass('williamburge-5');
       }
+    } else if (layout == 1) {
+      if (windowsRectRange.cols == 8) {
+        setWindowsWrapperClass('williamburge-305-8');
+      } else if (windowsRectRange.cols == 4) {
+        setWindowsWrapperClass('williamburge-305-4');
+      }
     }
   }, [layoutOption, windowsRectRange]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
