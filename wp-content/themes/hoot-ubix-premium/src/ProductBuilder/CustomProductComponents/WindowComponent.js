@@ -27,6 +27,8 @@ import WilliamBurg_305_2 from "../../assets/WilliamBurg-305/row-1-column-2.png";
 import WilliamBurg_305_3 from "../../assets/WilliamBurg-305/row-1-column-3.png";
 import WilliamBurg_305_4 from "../../assets/WilliamBurg-305/row-1-column-4.png";
 
+import Winstone_1 from "../../assets/Winston/row-1-column-1.png";
+import Winstone_2 from "../../assets/Winston/row-1-column-2.png";
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
@@ -37,6 +39,10 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         setHasWindow(true);
       }
     } else if (layoutOption == 1) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    } else if (layoutOption == 2) {
       if (windowIndex < 8) {
         setHasWindow(true);
       }
@@ -108,6 +114,20 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       { cols == 4 && layoutOption == 1 && windowIndex == 1 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
       { cols == 4 && layoutOption == 1 && windowIndex == 2 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
       { cols == 4 && layoutOption == 1 && windowIndex == 3 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
+
+      { cols == 8 && layoutOption == 2 && windowIndex == 0 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 1 && <img src={Winstone_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 2 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 3 && <img src={Winstone_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 4 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 5 && <img src={Winstone_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 6 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 2 && windowIndex == 7 && <img src={Winstone_2} className="window-layout-img" />}
+
+      { cols == 4 && layoutOption == 2 && windowIndex == 0 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 2 && windowIndex == 1 && <img src={Winstone_2} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 2 && windowIndex == 2 && <img src={Winstone_1} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 2 && windowIndex == 3 && <img src={Winstone_2} className="window-layout-img" />}
     </div>
   )
 }

@@ -958,5 +958,19 @@ body.no-scroll {
         }
       }
     }
+    &.winstone-8 {
+      .window-item {
+        &:nth-child(n+9) {
+          visibility: hidden;
+        }
+      }
+    }
+    &.winstone-4 {
+      .window-item {
+        &:nth-child(n+5) {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }
