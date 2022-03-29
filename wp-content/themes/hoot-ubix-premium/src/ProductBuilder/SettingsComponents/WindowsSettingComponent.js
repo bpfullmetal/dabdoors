@@ -4,10 +4,22 @@ import { useState, useEffect } from 'react';
 import Switch from "react-switch";
 
 const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onChange, windowRowsCols, onSelectWindowLayout }) => {
-  console.log(windowRowsCols);
+  const [value, setValue] = useState(-1);
   const [cols, setCols] = useState(windowRowsCols?windowRowsCols.cols:4);
   useEffect(() => {
     setCols(windowRowsCols.cols);
+    let cols = windowRowsCols.cols;
+    if (value == 0) {
+      if (cols !== 8 && cols !== 7 && cols !== 5) {
+        setValue(-1);
+        onSelectWindowLayout(-1);
+      }
+    } else if (value > 0) {
+      if (cols !== 8 && cols !== 4) {
+        setValue(-1);
+        onSelectWindowLayout(-1);
+      }
+    }
   }, [windowRowsCols])
   return (
     <div className="product-setting-item-component window-settings">
@@ -22,7 +34,7 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
         Click on a window space to add or delete windows.
       </span>
       <div className={`window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`}>
-        <select name="window-layout" onChange={(e) => {onSelectWindowLayout(e.target.value)}}>
+        <select name="window-layout" value={value} onChange={(e) => {setValue(e.target.value); onSelectWindowLayout(e.target.value)}}>
           <option value={-1}>None</option>
           <option value={0} disabled={cols!==8 && cols!==7 && cols!==5}>Williamsburg 405</option>
           <option value={1} disabled={cols!==4 && cols !== 8}>Williamsburg 305</option>

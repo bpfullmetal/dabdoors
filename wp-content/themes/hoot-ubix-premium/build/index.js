@@ -2132,10 +2132,23 @@ const WindowsSettingComponent = _ref => {
     windowRowsCols,
     onSelectWindowLayout
   } = _ref;
-  console.log(windowRowsCols);
+  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
   const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     setCols(windowRowsCols.cols);
+    let cols = windowRowsCols.cols;
+
+    if (value == 0) {
+      if (cols !== 8 && cols !== 7 && cols !== 5) {
+        setValue(-1);
+        onSelectWindowLayout(-1);
+      }
+    } else if (value > 0) {
+      if (cols !== 8 && cols !== 4) {
+        setValue(-1);
+        onSelectWindowLayout(-1);
+      }
+    }
   }, [windowRowsCols]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
@@ -2159,7 +2172,9 @@ const WindowsSettingComponent = _ref => {
     className: `window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     name: "window-layout",
+    value: value,
     onChange: e => {
+      setValue(e.target.value);
       onSelectWindowLayout(e.target.value);
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
