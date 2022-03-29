@@ -782,6 +782,8 @@ const ProductContainerComponent = _ref => {
         setWindowsWrapperClass('williamburge-8');
       } else if (windowsRectRange.cols == 7) {
         setWindowsWrapperClass('williamburge-7');
+      } else if (windowsRectRange.cols == 5) {
+        setWindowsWrapperClass('williamburge-5');
       }
     }
   }, [layoutOption, windowsRectRange]);
@@ -950,12 +952,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-5.png */ "./src/assets/WilliamBurg/Column7/row-1-column-5.png");
 /* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_6_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-6.png */ "./src/assets/WilliamBurg/Column7/row-1-column-6.png");
 /* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-7.png */ "./src/assets/WilliamBurg/Column7/row-1-column-7.png");
+/* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-1.png */ "./src/assets/WilliamBurg/Column5/row-1-column-1.png");
+/* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-2.png */ "./src/assets/WilliamBurg/Column5/row-1-column-2.png");
+/* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-3.png */ "./src/assets/WilliamBurg/Column5/row-1-column-3.png");
+/* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-4.png */ "./src/assets/WilliamBurg/Column5/row-1-column-4.png");
+/* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-5.png */ "./src/assets/WilliamBurg/Column5/row-1-column-5.png");
 
 const {
   render,
   useState,
   useEffect
 } = wp.element;
+
+
+
+
+
 
 
 
@@ -1095,6 +1107,21 @@ const WindowComponent = _ref => {
     className: "window-layout-img"
   }), cols == 7 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_15__,
+    className: "window-layout-img"
+  }), cols == 5 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column5_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_16__,
+    className: "window-layout-img"
+  }), cols == 5 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column5_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_17__,
+    className: "window-layout-img"
+  }), cols == 5 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column5_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_18__,
+    className: "window-layout-img"
+  }), cols == 5 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column5_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_19__,
+    className: "window-layout-img"
+  }), cols == 5 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column5_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_20__,
     className: "window-layout-img"
   }));
 };
@@ -21547,6 +21574,61 @@ else {}
 
 })(Math);
 
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column5/row-1-column-1.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column5/row-1-column-1.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-1.10d6e332.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column5/row-1-column-2.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column5/row-1-column-2.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-2.2da1bd29.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column5/row-1-column-3.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column5/row-1-column-3.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-3.75f333c7.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column5/row-1-column-4.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column5/row-1-column-4.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-4.65b1c316.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column5/row-1-column-5.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column5/row-1-column-5.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-5.2b86fad9.png";
 
 /***/ }),
 

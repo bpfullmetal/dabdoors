@@ -16,6 +16,12 @@ import WilliamBurg7_5 from "../../assets/WilliamBurg/Column7/row-1-column-5.png"
 import WilliamBurg7_6 from "../../assets/WilliamBurg/Column7/row-1-column-6.png";
 import WilliamBurg7_7 from "../../assets/WilliamBurg/Column7/row-1-column-7.png";
 
+import WilliamBurg5_1 from "../../assets/WilliamBurg/Column5/row-1-column-1.png";
+import WilliamBurg5_2 from "../../assets/WilliamBurg/Column5/row-1-column-2.png";
+import WilliamBurg5_3 from "../../assets/WilliamBurg/Column5/row-1-column-3.png";
+import WilliamBurg5_4 from "../../assets/WilliamBurg/Column5/row-1-column-4.png";
+import WilliamBurg5_5 from "../../assets/WilliamBurg/Column5/row-1-column-5.png";
+
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
@@ -73,6 +79,12 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       { cols == 7 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg7_5} className="window-layout-img" />}
       { cols == 7 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg7_6} className="window-layout-img" />}
       { cols == 7 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg7_7} className="window-layout-img" />}
+
+      { cols == 5 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg5_1} className="window-layout-img" />}
+      { cols == 5 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg5_2} className="window-layout-img" />}
+      { cols == 5 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg5_3} className="window-layout-img" />}
+      { cols == 5 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg5_4} className="window-layout-img" />}
+      { cols == 5 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg5_5} className="window-layout-img" />}
 
     </div>
   )

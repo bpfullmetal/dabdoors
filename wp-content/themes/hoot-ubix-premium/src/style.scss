@@ -864,7 +864,36 @@ body.no-scroll {
         }
         &:nth-child(n+8) {
           visibility: hidden;
-          // display: none;
+        }
+
+      }
+    }
+    &.williamburge-5 {
+      .window-item {
+        border: none !important;
+        overflow: hidden;
+        &:nth-child(1) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            right: -5px;
+          }
+        }
+        &:nth-child(5) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            left: -5px;
+          }
+        }
+
+        &:not(:nth-child(1)):not(:nth-child(5)):not(:nth-child(n+6)) {
+          .window-layout-img {
+            width: calc(100% + 10px);
+            left: -5px;
+            right: -5px;
+          }
+        }
+        &:nth-child(n+6) {
+          visibility: hidden;
         }
 
       }
