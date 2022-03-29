@@ -77,6 +77,12 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('winstone-4');
       }
+    } else if (layoutOption == 3) {
+      if (windowsRectRange.cols == 8) {
+        setWindowsWrapperClass('stockton-8');
+      } else if (windowsRectRange.cols == 4) {
+        setWindowsWrapperClass('stockton-4');
+      }
     } else if (layoutOption == 4) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('sherwood-8');

@@ -33,6 +33,9 @@ import Winstone_2 from "../../assets/Winston/row-1-column-2.png";
 import SherWood_1 from "../../assets/Sherwood/row-1-column-1.png";
 import SherWood_2 from "../../assets/Sherwood/row-1-column-2.png";
 
+import Stockton from "../../assets/Stockton/stockton-tile.png";
+
+
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
 
@@ -46,6 +49,10 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         setHasWindow(true);
       }
     } else if (layoutOption == 2) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    } else if (layoutOption == 3) {
       if (windowIndex < 8) {
         setHasWindow(true);
       }
@@ -135,6 +142,20 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       { cols == 4 && layoutOption == 2 && windowIndex == 1 && <img src={Winstone_2} className="window-layout-img" />}
       { cols == 4 && layoutOption == 2 && windowIndex == 2 && <img src={Winstone_1} className="window-layout-img" />}
       { cols == 4 && layoutOption == 2 && windowIndex == 3 && <img src={Winstone_2} className="window-layout-img" />}
+
+      { cols == 8 && layoutOption == 3 && windowIndex == 0 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 1 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 2 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 3 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 4 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 5 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 6 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 3 && windowIndex == 7 && <img src={Stockton} className="window-layout-img" />}
+
+      { cols == 4 && layoutOption == 3 && windowIndex == 0 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 3 && windowIndex == 1 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 3 && windowIndex == 2 && <img src={Stockton} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 3 && windowIndex == 3 && <img src={Stockton} className="window-layout-img" />}
 
 
       { cols == 8 && layoutOption == 4 && windowIndex == 0 && <img src={SherWood_1} className="window-layout-img" />}

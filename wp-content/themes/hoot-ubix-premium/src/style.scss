@@ -986,5 +986,19 @@ body.no-scroll {
         }
       }
     }
+    &.stockton-8 {
+      .window-item {
+        &:nth-child(n+9) {
+          visibility: hidden;
+        }
+      }
+    }
+    &.stockton-4 {
+      .window-item {
+        &:nth-child(n+5) {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }
