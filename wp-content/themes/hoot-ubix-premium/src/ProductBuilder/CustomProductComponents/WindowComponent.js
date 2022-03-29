@@ -1,12 +1,12 @@
 const { render, useState, useEffect } = wp.element;
-import WilliamBurg8_1 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-1.png";
-import WilliamBurg8_2 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-2.png";
-import WilliamBurg8_3 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-3.png";
-import WilliamBurg8_4 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-4.png";
-import WilliamBurg8_5 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-5.png";
-import WilliamBurg8_6 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-6.png";
-import WilliamBurg8_7 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-7.png";
-import WilliamBurg8_8 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-8.png";
+import WilliamBurg8_1 from "../../assets/WilliamBurg/Column8/row-1-column-1.png";
+import WilliamBurg8_2 from "../../assets/WilliamBurg/Column8/row-1-column-2.png";
+import WilliamBurg8_3 from "../../assets/WilliamBurg/Column8/row-1-column-3.png";
+import WilliamBurg8_4 from "../../assets/WilliamBurg/Column8/row-1-column-4.png";
+import WilliamBurg8_5 from "../../assets/WilliamBurg/Column8/row-1-column-5.png";
+import WilliamBurg8_6 from "../../assets/WilliamBurg/Column8/row-1-column-6.png";
+import WilliamBurg8_7 from "../../assets/WilliamBurg/Column8/row-1-column-7.png";
+import WilliamBurg8_8 from "../../assets/WilliamBurg/Column8/row-1-column-8.png";
 
 import WilliamBurg7_1 from "../../assets/WilliamBurg/Column7/row-1-column-1.png";
 import WilliamBurg7_2 from "../../assets/WilliamBurg/Column7/row-1-column-2.png";
