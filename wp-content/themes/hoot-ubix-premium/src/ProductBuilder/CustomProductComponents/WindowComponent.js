@@ -22,12 +22,21 @@ import WilliamBurg5_3 from "../../assets/WilliamBurg/Column5/row-1-column-3.png"
 import WilliamBurg5_4 from "../../assets/WilliamBurg/Column5/row-1-column-4.png";
 import WilliamBurg5_5 from "../../assets/WilliamBurg/Column5/row-1-column-5.png";
 
+import WilliamBurg_305_1 from "../../assets/WilliamBurg-305/row-1-column-1.png";
+import WilliamBurg_305_2 from "../../assets/WilliamBurg-305/row-1-column-2.png";
+import WilliamBurg_305_3 from "../../assets/WilliamBurg-305/row-1-column-3.png";
+import WilliamBurg_305_4 from "../../assets/WilliamBurg-305/row-1-column-4.png";
+
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
 
   useEffect(() => {
     if (layoutOption == 0) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    } else if (layoutOption == 1) {
       if (windowIndex < 8) {
         setHasWindow(true);
       }
@@ -86,6 +95,19 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       { cols == 5 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg5_4} className="window-layout-img" />}
       { cols == 5 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg5_5} className="window-layout-img" />}
 
+      { cols == 8 && layoutOption == 1 && windowIndex == 0 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 1 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 2 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 3 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 4 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 5 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 6 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 1 && windowIndex == 7 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
+
+      { cols == 4 && layoutOption == 1 && windowIndex == 0 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 1 && windowIndex == 1 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 1 && windowIndex == 2 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
+      { cols == 4 && layoutOption == 1 && windowIndex == 3 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
     </div>
   )
 }

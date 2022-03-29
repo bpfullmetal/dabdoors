@@ -785,7 +785,7 @@ const ProductContainerComponent = _ref => {
       } else if (windowsRectRange.cols == 5) {
         setWindowsWrapperClass('williamburge-5');
       }
-    } else if (layout == 1) {
+    } else if (layoutOption == 1) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('williamburge-305-8');
       } else if (windowsRectRange.cols == 4) {
@@ -963,12 +963,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-3.png */ "./src/assets/WilliamBurg/Column5/row-1-column-3.png");
 /* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-4.png */ "./src/assets/WilliamBurg/Column5/row-1-column-4.png");
 /* harmony import */ var _assets_WilliamBurg_Column5_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column5/row-1-column-5.png */ "./src/assets/WilliamBurg/Column5/row-1-column-5.png");
+/* harmony import */ var _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../assets/WilliamBurg-305/row-1-column-1.png */ "./src/assets/WilliamBurg-305/row-1-column-1.png");
+/* harmony import */ var _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../assets/WilliamBurg-305/row-1-column-2.png */ "./src/assets/WilliamBurg-305/row-1-column-2.png");
+/* harmony import */ var _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../assets/WilliamBurg-305/row-1-column-3.png */ "./src/assets/WilliamBurg-305/row-1-column-3.png");
+/* harmony import */ var _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../assets/WilliamBurg-305/row-1-column-4.png */ "./src/assets/WilliamBurg-305/row-1-column-4.png");
 
 const {
   render,
   useState,
   useEffect
 } = wp.element;
+
+
+
+
 
 
 
@@ -1001,6 +1009,10 @@ const WindowComponent = _ref => {
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (layoutOption == 0) {
+      if (windowIndex < 8) {
+        setHasWindow(true);
+      }
+    } else if (layoutOption == 1) {
       if (windowIndex < 8) {
         setHasWindow(true);
       }
@@ -1128,6 +1140,42 @@ const WindowComponent = _ref => {
     className: "window-layout-img"
   }), cols == 5 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_20__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
+    className: "window-layout-img"
+  }), cols == 8 && layoutOption == 1 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
+    className: "window-layout-img"
+  }), cols == 4 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
+    className: "window-layout-img"
+  }), cols == 4 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
+    className: "window-layout-img"
+  }), cols == 4 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
+    className: "window-layout-img"
+  }), cols == 4 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
     className: "window-layout-img"
   }));
 };
@@ -21580,6 +21628,50 @@ else {}
 
 })(Math);
 
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg-305/row-1-column-1.png":
+/*!*******************************************************!*\
+  !*** ./src/assets/WilliamBurg-305/row-1-column-1.png ***!
+  \*******************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-1.80e1a11b.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg-305/row-1-column-2.png":
+/*!*******************************************************!*\
+  !*** ./src/assets/WilliamBurg-305/row-1-column-2.png ***!
+  \*******************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-2.adb1699e.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg-305/row-1-column-3.png":
+/*!*******************************************************!*\
+  !*** ./src/assets/WilliamBurg-305/row-1-column-3.png ***!
+  \*******************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-3.4964afca.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg-305/row-1-column-4.png":
+/*!*******************************************************!*\
+  !*** ./src/assets/WilliamBurg-305/row-1-column-4.png ***!
+  \*******************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-4.ee26d206.png";
 
 /***/ }),
 

@@ -898,5 +898,65 @@ body.no-scroll {
 
       }
     }
+    &.williamburge-305-8 {
+      .window-item {
+        border: none !important;
+        overflow: hidden;
+        &:nth-child(1),
+        &:nth-child(5) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            right: -5px;
+          }
+        }
+        &:nth-child(4),
+        &:nth-child(8) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            left: -5px;
+          }
+        }
+
+        &:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(8)):not(:nth-child(n+9)) {
+          .window-layout-img {
+            width: calc(100% + 10px);
+            left: -5px;
+            right: -5px;
+          }
+        }
+        &:nth-child(n+9) {
+          visibility: hidden;
+        }
+      }
+    }
+    &.williamburge-305-4 {
+      .window-item {
+        border: none !important;
+        overflow: hidden;
+        &:nth-child(1) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            right: -5px;
+          }
+        }
+        &:nth-child(4) {
+          .window-layout-img {
+            width: calc(100% + 5px);
+            left: -5px;
+          }
+        }
+
+        &:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(n+5)) {
+          .window-layout-img {
+            width: calc(100% + 10px);
+            left: -5px;
+            right: -5px;
+          }
+        }
+        &:nth-child(n+5) {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }
