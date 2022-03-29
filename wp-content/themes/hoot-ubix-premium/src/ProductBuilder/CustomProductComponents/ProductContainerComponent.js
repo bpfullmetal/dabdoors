@@ -64,31 +64,43 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
         setWindowsWrapperClass('williamburge-7');
       } else if (windowsRectRange.cols == 5) {
         setWindowsWrapperClass('williamburge-5');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 1) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('williamburge-305-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('williamburge-305-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 2) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('winstone-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('winstone-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 3) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('stockton-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('stockton-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 4) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('sherwood-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('sherwood-4');
-      }      
+      } else {
+        setWindowsWrapperClass('');
+      } 
+    } else if (layoutOption == -1) {
+      setWindowsWrapperClass('');
     }
   }, [layoutOption, windowsRectRange])
 

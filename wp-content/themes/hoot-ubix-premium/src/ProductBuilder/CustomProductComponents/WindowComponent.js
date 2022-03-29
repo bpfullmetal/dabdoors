@@ -41,25 +41,19 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
 
   useEffect(() => {
     if (layoutOption == 0) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
+      if (cols == 8 || cols == 7 || cols == 5) {
+        if (windowIndex < cols) {
+          setHasWindow(true);
+        }
       }
-    } else if (layoutOption == 1) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
+    } else if (layoutOption == 1 || layoutOption == 2 || layoutOption == 3 || layoutOption == 4) {
+      if (cols == 8 || cols == 4) {
+        if (windowIndex < cols) {
+          setHasWindow(true);
+        }
       }
-    } else if (layoutOption == 2) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
-    } else if (layoutOption == 3) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
-    } else if (layoutOption == 4) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
+    } else {
+      setHasWindow(false);
     }
   
   }, [windowIndex, layoutOption])

@@ -784,31 +784,43 @@ const ProductContainerComponent = _ref => {
         setWindowsWrapperClass('williamburge-7');
       } else if (windowsRectRange.cols == 5) {
         setWindowsWrapperClass('williamburge-5');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 1) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('williamburge-305-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('williamburge-305-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 2) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('winstone-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('winstone-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 3) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('stockton-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('stockton-4');
+      } else {
+        setWindowsWrapperClass('');
       }
     } else if (layoutOption == 4) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('sherwood-8');
       } else if (windowsRectRange.cols == 4) {
         setWindowsWrapperClass('sherwood-4');
+      } else {
+        setWindowsWrapperClass('');
       }
+    } else if (layoutOption == -1) {
+      setWindowsWrapperClass('');
     }
   }, [layoutOption, windowsRectRange]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1037,25 +1049,19 @@ const WindowComponent = _ref => {
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
     if (layoutOption == 0) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
+      if (cols == 8 || cols == 7 || cols == 5) {
+        if (windowIndex < cols) {
+          setHasWindow(true);
+        }
       }
-    } else if (layoutOption == 1) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
+    } else if (layoutOption == 1 || layoutOption == 2 || layoutOption == 3 || layoutOption == 4) {
+      if (cols == 8 || cols == 4) {
+        if (windowIndex < cols) {
+          setHasWindow(true);
+        }
       }
-    } else if (layoutOption == 2) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
-    } else if (layoutOption == 3) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
-    } else if (layoutOption == 4) {
-      if (windowIndex < 8) {
-        setHasWindow(true);
-      }
+    } else {
+      setHasWindow(false);
     }
   }, [windowIndex, layoutOption]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
