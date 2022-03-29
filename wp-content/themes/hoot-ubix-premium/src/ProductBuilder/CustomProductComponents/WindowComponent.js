@@ -1,4 +1,12 @@
 const { render, useState, useEffect } = wp.element;
+import WilliamBurg8_1 from "../../assets/WilliamBurg/william-burg-405-8-column-1.png";
+import WilliamBurg8_2 from "../../assets/WilliamBurg/william-burg-405-8-column-2.png";
+import WilliamBurg8_3 from "../../assets/WilliamBurg/william-burg-405-8-column-3.png";
+import WilliamBurg8_4 from "../../assets/WilliamBurg/william-burg-405-8-column-4.png";
+import WilliamBurg8_5 from "../../assets/WilliamBurg/william-burg-405-8-column-5.png";
+import WilliamBurg8_6 from "../../assets/WilliamBurg/william-burg-405-8-column-6.png";
+import WilliamBurg8_7 from "../../assets/WilliamBurg/william-burg-405-8-column-7.png";
+import WilliamBurg8_8 from "../../assets/WilliamBurg/william-burg-405-8-column-8.png";
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption }) => {
   const [hasWindow, setHasWindow] = useState(false);
@@ -40,6 +48,14 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption 
           </svg>
         </span>
       }
+      { layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg8_1} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg8_2} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg8_3} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg8_4} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg8_5} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg8_6} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg8_7} className="window-layout-img" />}
+      { layoutOption == 0 && windowIndex == 7 && <img src={WilliamBurg8_8} className="window-layout-img" />}
     </div>
   )
 }

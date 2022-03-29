@@ -96,9 +96,9 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                           })
                         }
                       </div>
-                      {layoutOption == 0 && <div className={`background-layer ${hasWindow ? 'enabled' : 'disabled'}`}>
+                      {/* {layoutOption == 0 && <div className={`background-layer ${hasWindow ? 'enabled' : 'disabled'}`}>
                         <img src={WindowShape1} />
-                      </div>}
+                      </div>} */}
                       {/* <div className='background-generator' style={{ backgroundImage: `url(${WindowShape1})` }}></div> */}
                       {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock'>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
