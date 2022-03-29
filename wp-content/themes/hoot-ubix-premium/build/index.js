@@ -738,6 +738,7 @@ const ProductContainerComponent = _ref => {
     rows: 4,
     cols: 4
   });
+  const [windowsWrapperClass, setWindowsWrapperClass] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const [texturePercent, setTexturePercent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
@@ -775,6 +776,13 @@ const ProductContainerComponent = _ref => {
 
     setWindows(array);
   }, [windowsRectRange]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (layoutOption == 0) {
+      if (windowsRectRange.cols == 8) {
+        setWindowsWrapperClass('williamburge-8');
+      }
+    }
+  }, [layoutOption, windowsRectRange]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
@@ -828,7 +836,7 @@ const ProductContainerComponent = _ref => {
         backgroundColor: colors[colorIndex]
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "window-wrapper",
+      className: `window-wrapper ${windowsWrapperClass}`,
       style: {
         gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)`
       }
@@ -837,6 +845,7 @@ const ProductContainerComponent = _ref => {
         windowIndex: index,
         enableWindow: hasWindow,
         layoutOption: layoutOption,
+        cols: windowsRectRange.cols,
         addedWindow: e => {
           changeWindowsCount(e, index);
         }
@@ -952,7 +961,8 @@ const WindowComponent = _ref => {
     enableWindow,
     addedWindow,
     windowIndex,
-    layoutOption
+    layoutOption,
+    cols
   } = _ref;
   const [hasWindow, setHasWindow] = useState(false);
   useEffect(() => {
@@ -963,7 +973,7 @@ const WindowComponent = _ref => {
     }
   }, [windowIndex, layoutOption]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`
+    className: `window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => {
@@ -1025,28 +1035,28 @@ const WindowComponent = _ref => {
     "stroke-width": "1.92708",
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
-  }))), layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }))), cols == 8 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_1_png__WEBPACK_IMPORTED_MODULE_1__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_2_png__WEBPACK_IMPORTED_MODULE_2__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_3_png__WEBPACK_IMPORTED_MODULE_3__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_4_png__WEBPACK_IMPORTED_MODULE_4__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_5_png__WEBPACK_IMPORTED_MODULE_5__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_6_png__WEBPACK_IMPORTED_MODULE_6__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_7_png__WEBPACK_IMPORTED_MODULE_7__,
     className: "window-layout-img"
-  }), layoutOption == 0 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), cols == 8 && layoutOption == 0 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_william_burg_405_8_column_8_png__WEBPACK_IMPORTED_MODULE_8__,
     className: "window-layout-img"
   }));

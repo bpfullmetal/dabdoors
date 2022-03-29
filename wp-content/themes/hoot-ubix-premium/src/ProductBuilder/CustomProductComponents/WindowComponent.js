@@ -8,7 +8,7 @@ import WilliamBurg8_6 from "../../assets/WilliamBurg/william-burg-405-8-column-6
 import WilliamBurg8_7 from "../../assets/WilliamBurg/william-burg-405-8-column-7.png";
 import WilliamBurg8_8 from "../../assets/WilliamBurg/william-burg-405-8-column-8.png";
 
-const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption }) => {
+const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption 
   }, [windowIndex, layoutOption])
 
   return (
-    <div className={`window-item ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
+    <div className={`window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
         hasWindow == false && <span className="btn btn-add" onClick={(e) => { 
           if (enableWindow === true) {
@@ -48,14 +48,14 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption 
           </svg>
         </span>
       }
-      { layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg8_1} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg8_2} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg8_3} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg8_4} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg8_5} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg8_6} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg8_7} className="window-layout-img" />}
-      { layoutOption == 0 && windowIndex == 7 && <img src={WilliamBurg8_8} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg8_1} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg8_2} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg8_3} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg8_4} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg8_5} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg8_6} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg8_7} className="window-layout-img" />}
+      { cols == 8 && layoutOption == 0 && windowIndex == 7 && <img src={WilliamBurg8_8} className="window-layout-img" />}
     </div>
   )
 }

@@ -19,6 +19,8 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     cols: 4
   });
 
+  const [windowsWrapperClass, setWindowsWrapperClass] = useState(''); 
+
   const [texturePercent, setTexturePercent] = useState(100);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     let rectRange = getWindowRowsCols(windowSize);
     setWindowsRectRange(rectRange);
     changeWindowRowsCols(rectRange);
-  }, [windowSize])
+  }, [windowSize]);
 
   useEffect(() => {
     let array = [];
@@ -54,6 +56,13 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     setWindows(array);
   }, [windowsRectRange]);
 
+  useEffect(() => {
+    if (layoutOption == 0) {
+      if (windowsRectRange.cols == 8) {
+        setWindowsWrapperClass('williamburge-8');
+      }
+    }
+  }, [layoutOption, windowsRectRange])
 
   return (
     <div id="product-container">
@@ -87,19 +96,20 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                 <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">
                     <div className="inline-wrapper" style={{ backgroundColor: colors[colorIndex] }}>
-                      <div className="window-wrapper" style={{ gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)` }}>
+                      <div className={`window-wrapper ${windowsWrapperClass}`} style={{ gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)` }}>
                         {
                           windows.map((e, index) => {
-                            return <WindowComponent windowIndex={index} enableWindow={hasWindow} layoutOption={layoutOption} addedWindow={(e) => {
-                              changeWindowsCount(e, index);
-                            }}/>
+                            return <WindowComponent
+                              windowIndex={index}
+                              enableWindow={hasWindow}
+                              layoutOption={layoutOption}
+                              cols={windowsRectRange.cols}
+                              addedWindow={(e) => {
+                                changeWindowsCount(e, index);
+                              }}/>
                           })
                         }
                       </div>
-                      {/* {layoutOption == 0 && <div className={`background-layer ${hasWindow ? 'enabled' : 'disabled'}`}>
-                        <img src={WindowShape1} />
-                      </div>} */}
-                      {/* <div className='background-generator' style={{ backgroundImage: `url(${WindowShape1})` }}></div> */}
                       {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock'>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>
