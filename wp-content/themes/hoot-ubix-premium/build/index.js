@@ -780,6 +780,8 @@ const ProductContainerComponent = _ref => {
     if (layoutOption == 0) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('williamburge-8');
+      } else if (windowsRectRange.cols == 7) {
+        setWindowsWrapperClass('williamburge-7');
       }
     }
   }, [layoutOption, windowsRectRange]);
@@ -933,20 +935,34 @@ const VentsComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_1_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-1.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-1.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_2_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-2.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-2.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_3_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-3.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-3.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_4_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-4.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-4.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_5_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-5.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-5.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_6_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-6.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-6.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_7_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-7.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-7.png");
-/* harmony import */ var _assets_WilliamBurg_william_burg_405_8_column_8_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/WilliamBurg/william-burg-405-8-column-8.png */ "./src/assets/WilliamBurg/william-burg-405-8-column-8.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_1_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-1.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-1.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_2_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-2.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-2.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_3_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-3.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-3.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_4_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-4.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-4.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_5_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-5.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-5.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_6_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-6.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-6.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_7_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-7.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-7.png");
+/* harmony import */ var _assets_WilliamBurg_Column8_william_burg_405_8_column_8_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column8/william-burg-405-8-column-8.png */ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-8.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-1.png */ "./src/assets/WilliamBurg/Column7/row-1-column-1.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-2.png */ "./src/assets/WilliamBurg/Column7/row-1-column-2.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-3.png */ "./src/assets/WilliamBurg/Column7/row-1-column-3.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-4.png */ "./src/assets/WilliamBurg/Column7/row-1-column-4.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-5.png */ "./src/assets/WilliamBurg/Column7/row-1-column-5.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_6_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-6.png */ "./src/assets/WilliamBurg/Column7/row-1-column-6.png");
+/* harmony import */ var _assets_WilliamBurg_Column7_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/WilliamBurg/Column7/row-1-column-7.png */ "./src/assets/WilliamBurg/Column7/row-1-column-7.png");
 
 const {
   render,
   useState,
   useEffect
 } = wp.element;
+
+
+
+
+
+
+
 
 
 
@@ -1036,28 +1052,49 @@ const WindowComponent = _ref => {
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
   }))), cols == 8 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_1_png__WEBPACK_IMPORTED_MODULE_1__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_1_png__WEBPACK_IMPORTED_MODULE_1__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_2_png__WEBPACK_IMPORTED_MODULE_2__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_2_png__WEBPACK_IMPORTED_MODULE_2__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_3_png__WEBPACK_IMPORTED_MODULE_3__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_3_png__WEBPACK_IMPORTED_MODULE_3__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_4_png__WEBPACK_IMPORTED_MODULE_4__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_4_png__WEBPACK_IMPORTED_MODULE_4__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_5_png__WEBPACK_IMPORTED_MODULE_5__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_5_png__WEBPACK_IMPORTED_MODULE_5__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_6_png__WEBPACK_IMPORTED_MODULE_6__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_6_png__WEBPACK_IMPORTED_MODULE_6__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_7_png__WEBPACK_IMPORTED_MODULE_7__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_7_png__WEBPACK_IMPORTED_MODULE_7__,
     className: "window-layout-img"
   }), cols == 8 && layoutOption == 0 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_WilliamBurg_william_burg_405_8_column_8_png__WEBPACK_IMPORTED_MODULE_8__,
+    src: _assets_WilliamBurg_Column8_william_burg_405_8_column_8_png__WEBPACK_IMPORTED_MODULE_8__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_9__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_10__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_11__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_12__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_13__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_6_png__WEBPACK_IMPORTED_MODULE_14__,
+    className: "window-layout-img"
+  }), cols == 7 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: _assets_WilliamBurg_Column7_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_15__,
     className: "window-layout-img"
   }));
 };
@@ -1894,7 +1931,7 @@ const WindowsSettingComponent = _ref => {
     value: -1
   }, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 0,
-    disabled: cols !== 8
+    disabled: cols !== 8 && cols !== 7 && cols !== 5
   }, "405 Williamsburg"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 1,
     disabled: cols !== 4 && cols !== 8
@@ -21513,10 +21550,87 @@ else {}
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-1.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-1.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-1.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-1.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-1.2dac40d2.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-2.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-2.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-2.10d6e332.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-3.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-3.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-3.2da1bd29.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-4.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-4.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-4.75f333c7.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-5.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-5.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-5.65b1c316.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-6.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-6.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-6.2b86fad9.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column7/row-1-column-7.png":
+/*!***********************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column7/row-1-column-7.png ***!
+  \***********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+module.exports = __webpack_require__.p + "images/row-1-column-7.dad3aef7.png";
+
+/***/ }),
+
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-1.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-1.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21524,10 +21638,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-1.f87
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-2.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-2.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-2.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-2.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21535,10 +21649,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-2.198
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-3.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-3.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-3.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-3.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21546,10 +21660,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-3.e80
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-4.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-4.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-4.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-4.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21557,10 +21671,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-4.5ae
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-5.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-5.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-5.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-5.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21568,10 +21682,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-5.db1
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-6.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-6.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-6.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-6.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21579,10 +21693,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-6.9f7
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-7.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-7.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-7.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-7.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -21590,10 +21704,10 @@ module.exports = __webpack_require__.p + "images/william-burg-405-8-column-7.cab
 
 /***/ }),
 
-/***/ "./src/assets/WilliamBurg/william-burg-405-8-column-8.png":
-/*!****************************************************************!*\
-  !*** ./src/assets/WilliamBurg/william-burg-405-8-column-8.png ***!
-  \****************************************************************/
+/***/ "./src/assets/WilliamBurg/Column8/william-burg-405-8-column-8.png":
+/*!************************************************************************!*\
+  !*** ./src/assets/WilliamBurg/Column8/william-burg-405-8-column-8.png ***!
+  \************************************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";

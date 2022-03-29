@@ -838,5 +838,25 @@ body.no-scroll {
 .inline-wrapper .window-wrapper.williamburge-8 .window-item:nth-child(n+9) {
   visibility: hidden;
 }
+.inline-wrapper .window-wrapper.williamburge-7 .window-item {
+  border: none !important;
+  overflow: hidden;
+}
+.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(1) .window-layout-img {
+  width: calc(100% + 5px);
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(7) .window-layout-img {
+  width: calc(100% + 5px);
+  left: -5px;
+}
+.inline-wrapper .window-wrapper.williamburge-7 .window-item:not(:nth-child(1)):not(:nth-child(7)):not(:nth-child(n+8)) .window-layout-img {
+  width: calc(100% + 10px);
+  left: -5px;
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(n+8) {
+  visibility: hidden;
+}
 
 /*# sourceMappingURL=style-index.css.map*/

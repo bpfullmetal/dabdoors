@@ -60,6 +60,8 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
     if (layoutOption == 0) {
       if (windowsRectRange.cols == 8) {
         setWindowsWrapperClass('williamburge-8');
+      } else if (windowsRectRange.cols == 7) {
+        setWindowsWrapperClass('williamburge-7');
       }
     }
   }, [layoutOption, windowsRectRange])

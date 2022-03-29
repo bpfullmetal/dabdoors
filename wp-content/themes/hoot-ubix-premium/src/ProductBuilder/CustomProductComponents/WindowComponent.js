@@ -1,12 +1,21 @@
 const { render, useState, useEffect } = wp.element;
-import WilliamBurg8_1 from "../../assets/WilliamBurg/william-burg-405-8-column-1.png";
-import WilliamBurg8_2 from "../../assets/WilliamBurg/william-burg-405-8-column-2.png";
-import WilliamBurg8_3 from "../../assets/WilliamBurg/william-burg-405-8-column-3.png";
-import WilliamBurg8_4 from "../../assets/WilliamBurg/william-burg-405-8-column-4.png";
-import WilliamBurg8_5 from "../../assets/WilliamBurg/william-burg-405-8-column-5.png";
-import WilliamBurg8_6 from "../../assets/WilliamBurg/william-burg-405-8-column-6.png";
-import WilliamBurg8_7 from "../../assets/WilliamBurg/william-burg-405-8-column-7.png";
-import WilliamBurg8_8 from "../../assets/WilliamBurg/william-burg-405-8-column-8.png";
+import WilliamBurg8_1 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-1.png";
+import WilliamBurg8_2 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-2.png";
+import WilliamBurg8_3 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-3.png";
+import WilliamBurg8_4 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-4.png";
+import WilliamBurg8_5 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-5.png";
+import WilliamBurg8_6 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-6.png";
+import WilliamBurg8_7 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-7.png";
+import WilliamBurg8_8 from "../../assets/WilliamBurg/Column8/william-burg-405-8-column-8.png";
+
+import WilliamBurg7_1 from "../../assets/WilliamBurg/Column7/row-1-column-1.png";
+import WilliamBurg7_2 from "../../assets/WilliamBurg/Column7/row-1-column-2.png";
+import WilliamBurg7_3 from "../../assets/WilliamBurg/Column7/row-1-column-3.png";
+import WilliamBurg7_4 from "../../assets/WilliamBurg/Column7/row-1-column-4.png";
+import WilliamBurg7_5 from "../../assets/WilliamBurg/Column7/row-1-column-5.png";
+import WilliamBurg7_6 from "../../assets/WilliamBurg/Column7/row-1-column-6.png";
+import WilliamBurg7_7 from "../../assets/WilliamBurg/Column7/row-1-column-7.png";
+
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
   const [hasWindow, setHasWindow] = useState(false);
@@ -56,6 +65,15 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       { cols == 8 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg8_6} className="window-layout-img" />}
       { cols == 8 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg8_7} className="window-layout-img" />}
       { cols == 8 && layoutOption == 0 && windowIndex == 7 && <img src={WilliamBurg8_8} className="window-layout-img" />}
+
+      { cols == 7 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg7_1} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg7_2} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg7_3} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg7_4} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg7_5} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg7_6} className="window-layout-img" />}
+      { cols == 7 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg7_7} className="window-layout-img" />}
+
     </div>
   )
 }

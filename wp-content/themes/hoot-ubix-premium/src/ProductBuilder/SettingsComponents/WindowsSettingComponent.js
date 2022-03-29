@@ -24,7 +24,7 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
       <div className={`window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`}>
         <select name="window-layout" onChange={(e) => {onSelectWindowLayout(e.target.value)}}>
           <option value={-1}>None</option>
-          <option value={0} disabled={cols!==8}>405 Williamsburg</option>
+          <option value={0} disabled={cols!==8 && cols!==7 && cols!==5}>405 Williamsburg</option>
           <option value={1} disabled={cols!==4 && cols !== 8}>305 Williamsburg</option>
           <option value={2} disabled={cols!==2 && cols!==4 && cols !== 8}>306 Sherwood</option>
           <option value={3} disabled>306 Sherwood</option>
