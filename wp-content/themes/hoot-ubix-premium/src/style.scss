@@ -972,5 +972,19 @@ body.no-scroll {
         }
       }
     }
+    &.sherwood-8 {
+      .window-item {
+        &:nth-child(n+9) {
+          visibility: hidden;
+        }
+      }
+    }
+    &.sherwood-4 {
+      .window-item {
+        &:nth-child(n+5) {
+          visibility: hidden;
+        }
+      }
+    }
   }
 }
