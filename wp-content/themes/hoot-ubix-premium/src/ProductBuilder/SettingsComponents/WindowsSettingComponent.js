@@ -27,8 +27,8 @@ const WindowsSettingComponent = ({ additional_price, properties, hasWindow, onCh
           <option value={0} disabled={cols!==8 && cols!==7 && cols!==5}>Williamsburg 405</option>
           <option value={1} disabled={cols!==4 && cols !== 8}>Williamsburg 305</option>
           <option value={2} disabled={cols!==2 && cols!==4 && cols !== 8}>Winston 392</option>
-          <option value={3} disabled>Stockton 397</option>
-          <option value={4} disabled>Sherwood 306</option>
+          <option value={3} disabled={cols!==4 && cols !== 8}>Stockton 397</option>
+          <option value={4} disabled={cols!==4 && cols !== 8}>Sherwood 306</option>
         </select>
       </div>
     </div>

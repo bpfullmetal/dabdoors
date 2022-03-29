@@ -2021,10 +2021,10 @@ const WindowsSettingComponent = _ref => {
     disabled: cols !== 2 && cols !== 4 && cols !== 8
   }, "Winston 392"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 3,
-    disabled: true
+    disabled: cols !== 4 && cols !== 8
   }, "Stockton 397"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 4,
-    disabled: true
+    disabled: cols !== 4 && cols !== 8
   }, "Sherwood 306"))));
 };
 
