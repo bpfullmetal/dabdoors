@@ -2409,6 +2409,7 @@ const Votes = () => {
       url: `${baseUrl}/wp-admin/admin-ajax.php`,
       data: formData,
       success: function (response) {
+        console.log(response);
         setAdminProperties(response);
       }
     });

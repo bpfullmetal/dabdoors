@@ -215,6 +215,12 @@ function getAdminProperties() {
   $standard_colors_group = get_field('standard_colors', 'option');
   $premium_colors_group = get_field('premium_colors', 'option');
   $pressure_group = get_field('design_pressure_settings', 'option');
+  $custom_window_williamburge_405 = get_field('williamburgs_405', 'option');
+  $custom_window_williamburge_305 = get_field('williamburgs_305', 'option');
+  $custom_window_winston_392 = get_field('winston_392', 'option');
+  $custom_window_stockton_397 = get_field('stockton_397', 'option');
+  $custom_window_sherwood_306 = get_field('sherwood_306', 'option');
+
   $adminProperties = array(
     'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
     'panel_group' => $panel_group,
@@ -226,7 +232,14 @@ function getAdminProperties() {
     'track_radius_group' => $track_radius_group,
     'standard_colors_group' => $standard_colors_group,
     'premium_colors_group' => $premium_colors_group,
-    'pressure_group' => $pressure_group
+    'pressure_group' => $pressure_group,
+    'custom_window' => [
+      'custom_window_williamburge_405' => $custom_window_williamburge_405,
+      'custom_window_williamburge_305' => $custom_window_williamburge_305,
+      'custom_window_winston_392' => $custom_window_winston_392,
+      'custom_window_stockton_397' => $custom_window_stockton_397,
+      'custom_window_sherwood_306' => $custom_window_sherwood_306
+    ]
   );
   echo json_encode($adminProperties);
   wp_die();
