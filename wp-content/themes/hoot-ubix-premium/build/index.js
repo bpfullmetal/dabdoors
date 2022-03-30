@@ -777,52 +777,56 @@ const ProductContainerComponent = _ref => {
     setWindows(array);
   }, [windowsRectRange]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (layoutOption == 0) {
-      if (windowsRectRange.cols == 8) {
-        setWindowsWrapperClass('williamburge-8');
-      } else if (windowsRectRange.cols == 7) {
-        setWindowsWrapperClass('williamburge-7');
-      } else if (windowsRectRange.cols == 5) {
-        setWindowsWrapperClass('williamburge-5');
-      } else {
+    if (hasWindow === true) {
+      if (layoutOption == 0) {
+        if (windowsRectRange.cols == 8) {
+          setWindowsWrapperClass('williamburge-8');
+        } else if (windowsRectRange.cols == 7) {
+          setWindowsWrapperClass('williamburge-7');
+        } else if (windowsRectRange.cols == 5) {
+          setWindowsWrapperClass('williamburge-5');
+        } else {
+          setWindowsWrapperClass('');
+        }
+      } else if (layoutOption == 1) {
+        if (windowsRectRange.cols == 8) {
+          setWindowsWrapperClass('williamburge-305-8');
+        } else if (windowsRectRange.cols == 4) {
+          setWindowsWrapperClass('williamburge-305-4');
+        } else {
+          setWindowsWrapperClass('');
+        }
+      } else if (layoutOption == 2) {
+        if (windowsRectRange.cols == 8) {
+          setWindowsWrapperClass('winstone-8');
+        } else if (windowsRectRange.cols == 4) {
+          setWindowsWrapperClass('winstone-4');
+        } else {
+          setWindowsWrapperClass('');
+        }
+      } else if (layoutOption == 3) {
+        if (windowsRectRange.cols == 8) {
+          setWindowsWrapperClass('stockton-8');
+        } else if (windowsRectRange.cols == 4) {
+          setWindowsWrapperClass('stockton-4');
+        } else {
+          setWindowsWrapperClass('');
+        }
+      } else if (layoutOption == 4) {
+        if (windowsRectRange.cols == 8) {
+          setWindowsWrapperClass('sherwood-8');
+        } else if (windowsRectRange.cols == 4) {
+          setWindowsWrapperClass('sherwood-4');
+        } else {
+          setWindowsWrapperClass('');
+        }
+      } else if (layoutOption == -1) {
         setWindowsWrapperClass('');
       }
-    } else if (layoutOption == 1) {
-      if (windowsRectRange.cols == 8) {
-        setWindowsWrapperClass('williamburge-305-8');
-      } else if (windowsRectRange.cols == 4) {
-        setWindowsWrapperClass('williamburge-305-4');
-      } else {
-        setWindowsWrapperClass('');
-      }
-    } else if (layoutOption == 2) {
-      if (windowsRectRange.cols == 8) {
-        setWindowsWrapperClass('winstone-8');
-      } else if (windowsRectRange.cols == 4) {
-        setWindowsWrapperClass('winstone-4');
-      } else {
-        setWindowsWrapperClass('');
-      }
-    } else if (layoutOption == 3) {
-      if (windowsRectRange.cols == 8) {
-        setWindowsWrapperClass('stockton-8');
-      } else if (windowsRectRange.cols == 4) {
-        setWindowsWrapperClass('stockton-4');
-      } else {
-        setWindowsWrapperClass('');
-      }
-    } else if (layoutOption == 4) {
-      if (windowsRectRange.cols == 8) {
-        setWindowsWrapperClass('sherwood-8');
-      } else if (windowsRectRange.cols == 4) {
-        setWindowsWrapperClass('sherwood-4');
-      } else {
-        setWindowsWrapperClass('');
-      }
-    } else if (layoutOption == -1) {
+    } else {
       setWindowsWrapperClass('');
     }
-  }, [layoutOption, windowsRectRange]);
+  }, [layoutOption, windowsRectRange, hasWindow]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
@@ -1127,208 +1131,208 @@ const WindowComponent = _ref => {
     "stroke-width": "1.92708",
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
-  }))), cols == 8 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }))), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_1__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_2__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_3__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_4__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_5__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_6_png__WEBPACK_IMPORTED_MODULE_6__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_7__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 0 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column8_row_1_column_8_png__WEBPACK_IMPORTED_MODULE_8__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_9__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_10__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_11__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_12__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_13__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_6_png__WEBPACK_IMPORTED_MODULE_14__,
     className: "window-layout-img"
-  }), cols == 7 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column7_row_1_column_7_png__WEBPACK_IMPORTED_MODULE_15__,
     className: "window-layout-img"
-  }), cols == 5 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_16__,
     className: "window-layout-img"
-  }), cols == 5 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_17__,
     className: "window-layout-img"
-  }), cols == 5 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_18__,
     className: "window-layout-img"
-  }), cols == 5 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_19__,
     className: "window-layout-img"
-  }), cols == 5 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_Column5_row_1_column_5_png__WEBPACK_IMPORTED_MODULE_20__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 1 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_21__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_22__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_3_png__WEBPACK_IMPORTED_MODULE_23__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_WilliamBurg_305_row_1_column_4_png__WEBPACK_IMPORTED_MODULE_24__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 2 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 2 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 2 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 2 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_25__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 2 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Winston_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_26__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 3 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 3 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 3 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 3 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 3 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Stockton_stockton_tile_png__WEBPACK_IMPORTED_MODULE_29__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 4 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 5 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 6 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 8 && layoutOption == 4 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 4 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 4 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 4 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 2 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_1_png__WEBPACK_IMPORTED_MODULE_27__,
     className: "window-layout-img"
-  }), cols == 4 && layoutOption == 4 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+  }), hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 3 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: _assets_Sherwood_row_1_column_2_png__WEBPACK_IMPORTED_MODULE_28__,
     className: "window-layout-img"
   }));
