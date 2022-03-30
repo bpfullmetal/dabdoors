@@ -1073,6 +1073,8 @@ const WindowComponent = _ref => {
   }, hasWindow == false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => {
+      console.log(enableWindow);
+
       if (enableWindow === true) {
         setHasWindow(true);
         addedWindow(true);
@@ -1087,7 +1089,7 @@ const WindowComponent = _ref => {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
     d: "M8.15625 6.34375V0H6.34375V6.34375H0V8.15625H6.34375V14.5H8.15625V8.15625H14.5V6.34375H8.15625Z",
     fill: "#1D1E1D"
-  }))), hasWindow == true && windowIndex > 7 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }))), (hasWindow == true && windowIndex > cols && layoutOption != -1 || hasWindow == true && layoutOption == -1) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-remove",
     onClick: e => {
       if (enableWindow === true) {

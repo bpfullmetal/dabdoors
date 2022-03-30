@@ -62,9 +62,10 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
     <div className={`window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
         hasWindow == false && <span className="btn btn-add" onClick={(e) => { 
+          console.log(enableWindow);
           if (enableWindow === true) {
             setHasWindow(true);
-            addedWindow(true)
+            addedWindow(true);
           }
         }}>
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +74,7 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         </span>
       }
       {
-        (hasWindow == true && windowIndex > 7) && <span className="btn btn-remove" onClick={(e) => {
+        ((hasWindow == true && windowIndex > cols && layoutOption != -1) || (hasWindow == true && layoutOption == -1)) && <span className="btn btn-remove" onClick={(e) => {
           if (enableWindow === true) {
             setHasWindow(false); addedWindow(false);
           }
