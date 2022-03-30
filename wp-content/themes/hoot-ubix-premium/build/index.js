@@ -2324,7 +2324,8 @@ const WallSettingsComponent = _ref => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getWindowRowsCols": function() { return /* binding */ getWindowRowsCols; }
+/* harmony export */   "getWindowRowsCols": function() { return /* binding */ getWindowRowsCols; },
+/* harmony export */   "getAvailableColumnsForLayoutOption": function() { return /* binding */ getAvailableColumnsForLayoutOption; }
 /* harmony export */ });
 const getWindowRowsCols = windowSize => {
   let {
@@ -2370,6 +2371,42 @@ const getWindowRowsCols = windowSize => {
     rows,
     cols
   };
+};
+const getAvailableColumnsForLayoutOption = (layoutOption, customWindowproperties) => {
+  let columns = [];
+  let properties = {};
+
+  switch (layoutOption) {
+    case 0:
+      properties = customWindowproperties.custom_window_williamburge_405;
+      columns = properties['5_pack_colums'].concat(properties['7_pack_colums'], properties['8_pack_colums']);
+      break;
+
+    case 1:
+      properties = customWindowproperties.custom_window_williamburge_305;
+      columns = properties['4_pack_colums'].concat(properties['8_pack_colums']);
+      break;
+
+    case 2:
+      properties = customWindowproperties.custom_window_winston_392;
+      columns = properties['4_pack_colums'].concat(properties['8_pack_colums']);
+      break;
+
+    case 3:
+      properties = customWindowproperties.custom_window_stockton_397;
+      columns = properties['4_pack_colums'].concat(properties['8_pack_colums']);
+      break;
+
+    case 4:
+      properties = customWindowproperties.custom_window_sherwood_306;
+      columns = properties['4_pack_colums'].concat(properties['8_pack_colums']);
+      break;
+
+    default:
+      break;
+  }
+
+  return columns;
 };
 
 /***/ }),
