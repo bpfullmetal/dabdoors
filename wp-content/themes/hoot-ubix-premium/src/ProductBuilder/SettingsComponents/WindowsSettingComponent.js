@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Switch from "react-switch";
 import { getAvailableOptions, getPriceForCustomWindow, getPack } from '../../helper';
 
-const WindowsSettingComponent = ({ additional_price, properties, customWindowProperties, hasWindow, onChange, windowRowsCols, onSelectWindowLayout }) => {
+const WindowsSettingComponent = ({ additional_price, properties, customWindowProperties, hasWindow, onChange, windowRowsCols, onSelectWindowLayout, onChangePriceByCustomWindow }) => {
   const [value, setValue] = useState(-1);
   const [cols, setCols] = useState(windowRowsCols?windowRowsCols.cols:4);
   const [availableOptions, setAvaiableOptions] = useState([]);
@@ -25,9 +25,13 @@ const WindowsSettingComponent = ({ additional_price, properties, customWindowPro
     }
   }, [windowRowsCols, customWindowProperties]);
   useEffect(() => {
-    let pack = getPack(value, windowRowsCols, customWindowProperties);
-    let customWindowPrice = getPriceForCustomWindow(value, pack, customWindowProperties);
-    console.log(customWindowPrice);
+    if (value > -1) {
+      let pack = getPack(value, windowRowsCols.cols, customWindowProperties);
+      let customWindowPrice = getPriceForCustomWindow(value, pack, customWindowProperties, windowRowsCols.cols);
+      onChangePriceByCustomWindow(customWindowPrice);
+    } else {
+      onChangePriceByCustomWindow(0);
+    }
   }, [windowRowsCols, customWindowProperties, value])
 
   return (

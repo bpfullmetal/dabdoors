@@ -175,6 +175,7 @@ export const getPack = (layoutOption, columnsCount, customWindowProperties) => {
 }
 
 export const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties, cols) => {
+    console.log(layoutOption, packCount, cols);
     if (layoutOption == 0) {
         if (packCount == 5) {
             let perPrice = customWindowProperties.custom_window_williamburge_405['5_pack_price'];

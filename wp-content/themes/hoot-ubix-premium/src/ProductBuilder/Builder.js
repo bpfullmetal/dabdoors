@@ -437,7 +437,10 @@ const Builder = ({ adminProperties }) => {
             onSelectWindowLayout={(e) => {
               setLayoutOption(e);
             }}
-            
+            onChangePriceByCustomWindow={(e) => {
+              setPrice(price - addtionalPriceWithCustomWindow + e);
+              setAddtionalPriceWithCustomWindow(e);
+            }}
           />
           <PressureSettingsComponent
             availablePressures={availablePressures}

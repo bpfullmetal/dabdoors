@@ -579,6 +579,10 @@ const Builder = _ref => {
     windowRowsCols: windowRowsCols,
     onSelectWindowLayout: e => {
       setLayoutOption(e);
+    },
+    onChangePriceByCustomWindow: e => {
+      setPrice(price - addtionalPriceWithCustomWindow + e);
+      setAddtionalPriceWithCustomWindow(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     availablePressures: availablePressures,
@@ -1990,7 +1994,8 @@ const WindowsSettingComponent = _ref => {
     hasWindow,
     onChange,
     windowRowsCols,
-    onSelectWindowLayout
+    onSelectWindowLayout,
+    onChangePriceByCustomWindow
   } = _ref;
   const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
   const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
@@ -2013,9 +2018,13 @@ const WindowsSettingComponent = _ref => {
     }
   }, [windowRowsCols, customWindowProperties]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    let pack = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPack)(value, windowRowsCols, customWindowProperties);
-    let customWindowPrice = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPriceForCustomWindow)(value, pack, customWindowProperties);
-    console.log(customWindowPrice);
+    if (value > -1) {
+      let pack = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPack)(value, windowRowsCols.cols, customWindowProperties);
+      let customWindowPrice = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPriceForCustomWindow)(value, pack, customWindowProperties, windowRowsCols.cols);
+      onChangePriceByCustomWindow(customWindowPrice);
+    } else {
+      onChangePriceByCustomWindow(0);
+    }
   }, [windowRowsCols, customWindowProperties, value]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
@@ -2319,7 +2328,6 @@ const getPack = (layoutOption, columnsCount, customWindowProperties) => {
 
     if (williamburge405Properties) {
       let pack_columns_5 = williamburge405Properties['5_pack_columns'] ? williamburge405Properties['5_pack_columns'] : [];
-      console.log(pack_columns_5);
 
       if (pack_columns_5.indexOf(String(columnsCount)) > -1) {
         return 5;
@@ -2401,8 +2409,106 @@ const getPack = (layoutOption, columnsCount, customWindowProperties) => {
 
   return null;
 };
-const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties) => {
-  return 10;
+const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties, cols) => {
+  console.log(layoutOption, packCount, cols);
+
+  if (layoutOption == 0) {
+    if (packCount == 5) {
+      let perPrice = customWindowProperties.custom_window_williamburge_405['5_pack_price'];
+      let packGroundCount = Math.floor(cols / 5) + 1;
+
+      if (cols % 5 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    } else if (packCount == 7) {
+      let perPrice = customWindowProperties.custom_window_williamburge_405['7_pack_price'];
+      let packGroundCount = Math.floor(cols / 7) + 1;
+
+      if (cols % 7 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    } else if (packCount == 8) {
+      let perPrice = customWindowProperties.custom_window_williamburge_405['8_pack_price'];
+      let packGroundCount = Math.floor(cols / 8) + 1;
+
+      if (cols % 8 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    }
+  } else if (layoutOption == 1) {
+    if (packCount == 4) {
+      let perPrice = customWindowProperties.custom_window_williamburge_305['4_pack_price'];
+      let packGroundCount = Math.floor(cols / 4) + 1;
+
+      if (cols % 4 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    } else if (packCount == 8) {
+      let perPrice = customWindowProperties.custom_window_williamburge_305['8_pack_price'];
+      let packGroundCount = Math.floor(cols / 8) + 1;
+
+      if (cols % 8 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    }
+  } else if (layoutOption == 2) {
+    if (packCount == 4) {
+      let perPrice = customWindowProperties.custom_window_winston_392['4_pack_price'];
+      let packGroundCount = Math.floor(cols / 4) + 1;
+
+      if (cols % 4 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    } else if (packCount == 8) {
+      let perPrice = customWindowProperties.custom_window_winston_392['8_pack_price'];
+      let packGroundCount = Math.floor(cols / 8) + 1;
+
+      if (cols % 8 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    }
+  } else if (layoutOption == 3) {
+    if (packCount == 1) {
+      let perPrice = customWindowProperties.custom_window_stockton_397['1_pack_price'];
+      return perPrice * cols;
+    }
+  } else if (layoutOption == 4) {
+    if (packCount == 4) {
+      let perPrice = customWindowProperties.custom_window_sherwood_306['4_pack_price'];
+      let packGroundCount = Math.floor(cols / 4) + 1;
+
+      if (cols % 4 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    } else if (packCount == 8) {
+      let perPrice = customWindowProperties.custom_window_sherwood_306['8_pack_price'];
+      let packGroundCount = Math.floor(cols / 8) + 1;
+
+      if (cols % 8 == 0) {
+        packGroundCount = packGroundCount - 1;
+      }
+
+      return perPrice * packGroundCount;
+    }
+  }
+
+  return 0;
 };
 
 /***/ }),
