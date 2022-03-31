@@ -227,8 +227,6 @@ const Builder = ({ adminProperties }) => {
       width: windowSize.width1 * 12 + windowSize.width2,
       height: windowSize.height1 * 12 + windowSize.height2
     }
-    console.log(metaObj);
-    return;
     let formData = {
       action: 'addProductToCart',
       item_id: productId,

@@ -90,6 +90,11 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
             'window_placement' => implode(",", $option['windows']['position'])
           );
         }
+        if ($option['customWindowLayout']) {
+          $metaData[] = array(
+            'custom_layout' => $option['customWindowLayout']['name']. ' ('.$option['customWindowLayout']['cols'].') Columns'
+          );
+        }
         if ($option['lock_placement']['hasLock'] == true) {
           $metaData[] = array(
             'lock_placement' => implode(",", $option['lock_placement']['placement'])
@@ -311,6 +316,8 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
 
             if (isset($metaItem['size'])) {
               $metaDataString .= '<span class="meta-item"><b>Size: </b>'.$metaItem['size'].'</span>';
+            } else if (isset($metaItem['custom_layout']) && $metaItem['custom_layout']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Custom Window: </b>'.$metaItem['custom_layout'].'</span>';
             } else if (isset($metaItem['window_placement']) && $metaItem['window_placement']) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Window placement: </b>'.$metaItem['window_placement'].'</span>';
             } else if (isset($metaItem['lock_placement']) && $metaItem['lock_placement']) {
