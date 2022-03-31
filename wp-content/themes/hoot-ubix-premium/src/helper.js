@@ -107,3 +107,74 @@ export const getAvailableOptions = (columnsCount, customWindowproperties) => {
     }
     return availableOptions;
 }
+
+export const getPack = (layoutOption, columnsCount, customWindowProperties) => {
+    if (layoutOption == 0) {
+        let williamburge405Properties = customWindowProperties.custom_window_williamburge_405;
+        if (williamburge405Properties) {
+            let pack_columns_5 = williamburge405Properties['5_pack_columns'] ? williamburge405Properties['5_pack_columns'] : [];
+            if (pack_columns_5.indexOf(String(columnsCount)) > -1) {
+                return 5;
+            }
+            let pack_columns_7 = williamburge405Properties['7_pack_columns'] ? williamburge405Properties['7_pack_columns'] : [];
+            if ( pack_columns_7.indexOf(String(columnsCount)) > -1) {
+                return 7;
+            }
+            let pack_columns_8 = williamburge405Properties['8_pack_columns'] ? williamburge405Properties['8_pack_columns'] : [];
+            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
+                return 8;
+            }
+        }
+    } else if (layoutOption == 1) {
+        let properties = customWindowProperties.custom_window_williamburge_305;
+        if (properties) {
+            let pack_columns_4 = properties['4_pack_columns'];
+            if ( pack_columns_4.indexOf(String(columnsCount)) > -1 ) {
+                return 4;
+            }
+            let pack_columns_8 = properties['8_pack_columns'];
+            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
+                return 8;
+            }
+        }
+    } else if (layoutOption == 2) {
+        let properties = customWindowProperties.custom_window_winston_392;
+        if (properties) {
+            let pack_columns_4 = properties['4_pack_columns'];
+            if ( pack_columns_4.indexOf(String(columnsCount)) > -1 ) {
+                return 4;
+            }
+            let pack_columns_8 = properties['8_pack_columns'];
+            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
+                return 8;
+            }
+        }
+    } else if (layoutOption == 3) {
+        let properties = customWindowProperties.custom_window_stockton_397;
+        if (properties) {
+            let pack_columns_4 = properties['4_pack_columns'];
+            if ( pack_columns_4.indexOf(String(columnsCount)) > -1 ) {
+                return 4;
+            }
+            let pack_columns_8 = properties['8_pack_columns'];
+            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
+                return 8;
+            }
+        }
+    } else if (layoutOption == 4) {
+        let properties = customWindowProperties.custom_window_sherwood_306;
+        if (properties) {
+            let pack_columns_4 = properties['4_pack_columns'];
+            if ( pack_columns_4.indexOf(String(columnsCount)) > -1 ) {
+                return 4;
+            }
+            let pack_columns_8 = properties['8_pack_columns'];
+            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
+                return 8;
+            }
+        }
+    } else {
+        return null;
+    }
+    return null;
+}
