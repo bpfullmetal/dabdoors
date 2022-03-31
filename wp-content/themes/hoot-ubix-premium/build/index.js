@@ -249,6 +249,11 @@ const Builder = _ref => {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (layoutOption == -1) {
+      setPrice(price - addtionalPriceWithCustomWindow);
+    }
+  }, [layoutOption]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (showCustomPanel === true) {
       jQuery('body').addClass('no-scroll');
     } else {
@@ -2004,18 +2009,8 @@ const WindowsSettingComponent = _ref => {
     setCols(windowRowsCols.cols);
     let cols = windowRowsCols.cols;
     setAvaiableOptions((0,_helper__WEBPACK_IMPORTED_MODULE_3__.getAvailableOptions)(cols, customWindowProperties));
-
-    if (value == 0) {
-      if (cols !== 8 && cols !== 7 && cols !== 5) {
-        setValue(-1);
-        onSelectWindowLayout(-1);
-      }
-    } else if (value > 0) {
-      if (cols !== 8 && cols !== 4) {
-        setValue(-1);
-        onSelectWindowLayout(-1);
-      }
-    }
+    setValue(-1);
+    onSelectWindowLayout(-1);
   }, [windowRowsCols, customWindowProperties]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (value > -1) {

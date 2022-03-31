@@ -122,6 +122,12 @@ const Builder = ({ adminProperties }) => {
   }
 
   useEffect(() => {
+    if (layoutOption == -1) {
+      setPrice(price - addtionalPriceWithCustomWindow);
+    }
+  }, [layoutOption])
+
+  useEffect(() => {
     if (showCustomPanel === true ) {
       jQuery('body').addClass('no-scroll');
     } else {
