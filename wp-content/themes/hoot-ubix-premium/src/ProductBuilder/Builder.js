@@ -124,6 +124,30 @@ const Builder = ({ adminProperties }) => {
   useEffect(() => {
     if (layoutOption == -1) {
       setPrice(price - addtionalPriceWithCustomWindow);
+      if (metaObj.customWindowLayout) {
+        delete metaObj.customWindowLayout;
+      }
+    } else {
+      let layoutName = '';
+      if (layoutOption == 0) {
+        layoutName = 'Williamsburg 405';
+      } else if (layoutOption == 1) {
+        layoutName = 'Williamsburg 305';
+      } else if (layoutOption == 2) {
+        layoutName = 'Winston 392';
+      } else if (layoutOption == 3) {
+        layoutName = 'Stockton 397';
+      } else if (layoutOption == 4) {
+        layoutName = 'Sherwood 306';
+      }
+      let customWindowLayout = {
+        name: layoutName,
+        cols: windowRowsCols.cols
+      };
+      setMetaObject({
+        ...metaObj,
+        customWindowLayout
+      });
     }
   }, [layoutOption])
 
@@ -203,7 +227,8 @@ const Builder = ({ adminProperties }) => {
       width: windowSize.width1 * 12 + windowSize.width2,
       height: windowSize.height1 * 12 + windowSize.height2
     }
-
+    console.log(metaObj);
+    return;
     let formData = {
       action: 'addProductToCart',
       item_id: productId,
