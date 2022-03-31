@@ -37,7 +37,7 @@ export const getWindowRowsCols = (windowSize) => {
     }
 }
 
-export const getAvailableColumnsForLayoutOption = (layoutOption, customWindowproperties) => {
+export const getAvailablecolumnsForLayoutOption = (layoutOption, customWindowproperties) => {
     let columns = [];
     let properties = {};
     switch (layoutOption) {
@@ -69,28 +69,40 @@ export const getAvailableColumnsForLayoutOption = (layoutOption, customWindowpro
 export const getAvailableOptions = (columnsCount, customWindowproperties) => {
     let availableOptions = [];
     let custom_window_williamburge_405 = customWindowproperties.custom_window_williamburge_405;
-    let customWilliamburget405Columns = custom_window_williamburge_405['5_pack_colums'].concat(custom_window_williamburge_405['7_pack_colums'], custom_window_williamburge_405['8_pack_colums']);
-    if (customWilliamburget405Columns.indexOf(columnsCount) > -1) {
+    let customWilliamburget405columns = (custom_window_williamburge_405['5_pack_columns'] ? custom_window_williamburge_405['5_pack_columns'] : []).concat(
+        custom_window_williamburge_405['7_pack_colums'] ? custom_window_williamburge_405['7_pack_colums'] : [],
+        custom_window_williamburge_405['8_pack_colums'] ? custom_window_williamburge_405['8_pack_colums'] : []
+    );
+    console.log(customWilliamburget405columns);
+    if (customWilliamburget405columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(0);
     }
     let custom_window_williamburge_305 = customWindowproperties.custom_window_williamburge_305;
-    let customWilliamburget305Columns = custom_window_williamburge_305['4_pack_colums'].concat(custom_window_williamburge_305['8_pack_colums']);
-    if (customWilliamburget305Columns.indexOf(columnsCount) > -1) {
+    let customWilliamburget305columns = (custom_window_williamburge_305['4_pack_columns'] ? custom_window_williamburge_305['4_pack_columns'] : []).concat(
+        custom_window_williamburge_305['8_pack_colums'] ? custom_window_williamburge_305['8_pack_colums'] : []
+    );
+    if (customWilliamburget305columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(1);
     }
     let custom_window_winston_392 = customWindowproperties.custom_window_winston_392;
-    let customWinston392Columns = custom_window_winston_392['4_pack_colums'].concat(custom_window_winston_392['8_pack_colums']);
-    if (customWinston392Columns.indexOf(columnsCount) > -1) {
+    let customWinston392columns = (custom_window_winston_392['4_pack_colums'] ? custom_window_winston_392['4_pack_colums'] : []).concat(
+        custom_window_winston_392['8_pack_colums'] ? custom_window_winston_392['8_pack_colums'] : []
+    );
+    if (customWinston392columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(2);
     }
     let custom_window_stockton_397 = customWindowproperties.custom_window_stockton_397;
-    let customStockton397Columns = custom_window_stockton_397['4_pack_colums'].concat(custom_window_stockton_397['8_pack_colums']);
-    if (customStockton397Columns.indexOf(columnsCount) > -1) {
+    let customStockton397columns = (custom_window_stockton_397['4_pack_colums'] ? custom_window_stockton_397['4_pack_colums'] : []).concat(
+        custom_window_stockton_397['8_pack_colums'] ? custom_window_stockton_397['8_pack_colums'] : []
+    );
+    if (customStockton397columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(3);
     }
     let custom_window_sherwood_306 = customWindowproperties.custom_window_sherwood_306;
-    let customSherwood306Columns = custom_window_sherwood_306['4_pack_colums'].concat(custom_window_sherwood_306['8_pack_colums']);
-    if (customSherwood306Columns.indexOf(columnsCount) > -1) {
+    let customSherwood306columns = (custom_window_sherwood_306['4_pack_colums'] ? custom_window_sherwood_306['4_pack_colums'] : []).concat(
+        custom_window_sherwood_306['8_pack_colums'] ? custom_window_sherwood_306['8_pack_colums'] : []
+    );
+    if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(4);
     }
     return availableOptions;

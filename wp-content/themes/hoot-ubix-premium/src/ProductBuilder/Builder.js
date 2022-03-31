@@ -428,6 +428,7 @@ const Builder = ({ adminProperties }) => {
               setHasWindow(e)
             }}
             properties={adminProperties.window_group && adminProperties.window_group}
+            customWindowProperties = {adminProperties.custom_window && adminProperties.custom_window}
             windowRowsCols={windowRowsCols}
             onSelectWindowLayout={(e) => {
               setLayoutOption(e);

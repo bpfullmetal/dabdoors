@@ -573,6 +573,7 @@ const Builder = _ref => {
       setHasWindow(e);
     },
     properties: adminProperties.window_group && adminProperties.window_group,
+    customWindowProperties: adminProperties.custom_window && adminProperties.custom_window,
     windowRowsCols: windowRowsCols,
     onSelectWindowLayout: e => {
       setLayoutOption(e);
@@ -2125,6 +2126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../helper */ "./src/helper.js");
+
 
 
 
@@ -2133,6 +2136,7 @@ const WindowsSettingComponent = _ref => {
   let {
     additional_price,
     properties,
+    customWindowProperties,
     hasWindow,
     onChange,
     windowRowsCols,
@@ -2140,9 +2144,12 @@ const WindowsSettingComponent = _ref => {
   } = _ref;
   const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
   const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
+  const [availableOptions, setAvaiableOptions] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     setCols(windowRowsCols.cols);
     let cols = windowRowsCols.cols;
+    console.log(customWindowProperties);
+    setAvaiableOptions((0,_helper__WEBPACK_IMPORTED_MODULE_3__.getAvailableOptions)(cols, customWindowProperties));
 
     if (value == 0) {
       if (cols !== 8 && cols !== 7 && cols !== 5) {
@@ -2155,7 +2162,10 @@ const WindowsSettingComponent = _ref => {
         onSelectWindowLayout(-1);
       }
     }
-  }, [windowRowsCols]);
+  }, [windowRowsCols, customWindowProperties]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(availableOptions);
+  }, [availableOptions]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2187,19 +2197,19 @@ const WindowsSettingComponent = _ref => {
     value: -1
   }, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 0,
-    disabled: cols !== 8 && cols !== 7 && cols !== 5
+    disabled: availableOptions.indexOf(0)
   }, "Williamsburg 405"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 1,
-    disabled: cols !== 4 && cols !== 8
+    disabled: availableOptions.indexOf(1)
   }, "Williamsburg 305"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 2,
-    disabled: cols !== 2 && cols !== 4 && cols !== 8
+    disabled: availableOptions.indexOf(2)
   }, "Winston 392"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 3,
-    disabled: cols !== 4 && cols !== 8
+    disabled: availableOptions.indexOf(3)
   }, "Stockton 397"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 4,
-    disabled: cols !== 4 && cols !== 8
+    disabled: availableOptions.indexOf(4)
   }, "Sherwood 306"))));
 };
 
@@ -2325,7 +2335,7 @@ const WallSettingsComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getWindowRowsCols": function() { return /* binding */ getWindowRowsCols; },
-/* harmony export */   "getAvailableColumnsForLayoutOption": function() { return /* binding */ getAvailableColumnsForLayoutOption; },
+/* harmony export */   "getAvailablecolumnsForLayoutOption": function() { return /* binding */ getAvailablecolumnsForLayoutOption; },
 /* harmony export */   "getAvailableOptions": function() { return /* binding */ getAvailableOptions; }
 /* harmony export */ });
 const getWindowRowsCols = windowSize => {
@@ -2373,7 +2383,7 @@ const getWindowRowsCols = windowSize => {
     cols
   };
 };
-const getAvailableColumnsForLayoutOption = (layoutOption, customWindowproperties) => {
+const getAvailablecolumnsForLayoutOption = (layoutOption, customWindowproperties) => {
   let columns = [];
   let properties = {};
 
@@ -2412,37 +2422,38 @@ const getAvailableColumnsForLayoutOption = (layoutOption, customWindowproperties
 const getAvailableOptions = (columnsCount, customWindowproperties) => {
   let availableOptions = [];
   let custom_window_williamburge_405 = customWindowproperties.custom_window_williamburge_405;
-  let customWilliamburget405Columns = custom_window_williamburge_405['5_pack_colums'].concat(custom_window_williamburge_405['7_pack_colums'], custom_window_williamburge_405['8_pack_colums']);
+  let customWilliamburget405columns = (custom_window_williamburge_405['5_pack_columns'] ? custom_window_williamburge_405['5_pack_columns'] : []).concat(custom_window_williamburge_405['7_pack_colums'] ? custom_window_williamburge_405['7_pack_colums'] : [], custom_window_williamburge_405['8_pack_colums'] ? custom_window_williamburge_405['8_pack_colums'] : []);
+  console.log(customWilliamburget405columns);
 
-  if (customWilliamburget405Columns.indexOf(columnsCount) > -1) {
+  if (customWilliamburget405columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(0);
   }
 
   let custom_window_williamburge_305 = customWindowproperties.custom_window_williamburge_305;
-  let customWilliamburget305Columns = custom_window_williamburge_305['4_pack_colums'].concat(custom_window_williamburge_305['8_pack_colums']);
+  let customWilliamburget305columns = (custom_window_williamburge_305['4_pack_columns'] ? custom_window_williamburge_305['4_pack_columns'] : []).concat(custom_window_williamburge_305['8_pack_colums'] ? custom_window_williamburge_305['8_pack_colums'] : []);
 
-  if (customWilliamburget305Columns.indexOf(columnsCount) > -1) {
+  if (customWilliamburget305columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(1);
   }
 
   let custom_window_winston_392 = customWindowproperties.custom_window_winston_392;
-  let customWinston392Columns = custom_window_winston_392['4_pack_colums'].concat(custom_window_winston_392['8_pack_colums']);
+  let customWinston392columns = (custom_window_winston_392['4_pack_colums'] ? custom_window_winston_392['4_pack_colums'] : []).concat(custom_window_winston_392['8_pack_colums'] ? custom_window_winston_392['8_pack_colums'] : []);
 
-  if (customWinston392Columns.indexOf(columnsCount) > -1) {
+  if (customWinston392columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(2);
   }
 
   let custom_window_stockton_397 = customWindowproperties.custom_window_stockton_397;
-  let customStockton397Columns = custom_window_stockton_397['4_pack_colums'].concat(custom_window_stockton_397['8_pack_colums']);
+  let customStockton397columns = (custom_window_stockton_397['4_pack_colums'] ? custom_window_stockton_397['4_pack_colums'] : []).concat(custom_window_stockton_397['8_pack_colums'] ? custom_window_stockton_397['8_pack_colums'] : []);
 
-  if (customStockton397Columns.indexOf(columnsCount) > -1) {
+  if (customStockton397columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(3);
   }
 
   let custom_window_sherwood_306 = customWindowproperties.custom_window_sherwood_306;
-  let customSherwood306Columns = custom_window_sherwood_306['4_pack_colums'].concat(custom_window_sherwood_306['8_pack_colums']);
+  let customSherwood306columns = (custom_window_sherwood_306['4_pack_colums'] ? custom_window_sherwood_306['4_pack_colums'] : []).concat(custom_window_sherwood_306['8_pack_colums'] ? custom_window_sherwood_306['8_pack_colums'] : []);
 
-  if (customSherwood306Columns.indexOf(columnsCount) > -1) {
+  if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(4);
   }
 
