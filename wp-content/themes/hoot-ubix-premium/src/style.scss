@@ -865,6 +865,29 @@ body.no-scroll {
             }
           }
         }
+        &.wrapper-8 {
+          >* {
+            &:nth-child(8n) {
+              .window-layout-img {
+                width: calc(100% + 5px);
+                right: -5px;
+              }
+            }
+            &:nth-child(8n + 7) {
+              .window-layout-img {
+                width: calc(100% + 5px);
+                left: -5px;
+              }
+            }
+            &:not(:nth-child(8n)):not(:nth-child(8n+7)) {
+              .window-layout-img {
+                width: calc(100% + 10px);
+                left: -5px;
+                right: -5px;
+              }
+            }
+          }
+        }
       }
       &.williams-1 {
         > * {
