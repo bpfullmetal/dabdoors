@@ -39,6 +39,7 @@ import PackComponent from "./PackComponents";
 
 const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols, customWindowProperties }) => {
   const [hasWindow, setHasWindow] = useState(false);
+  const [customClassName, setCustomClassName] = usetState('');
   const [pack, setPack] = useState(null);
   const [packItems, setPackItems] = useState([]);
   const williamBurgs405_8Pack = [ WilliamBurg8_1, WilliamBurg8_2, WilliamBurg8_3, WilliamBurg8_4, WilliamBurg8_5, WilliamBurg8_6, WilliamBurg8_7, WilliamBurg8_8 ];
@@ -91,6 +92,16 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
     }
   }, [customWindowProperties, layoutOption, cols])
 
+  useEffect(() => {
+    if (windowIndex == 0) {
+      setCustomClassName('first-item');
+    } else if (windowIndex == cols - 1) {
+      setCustomClassName('last-item');
+    } else {
+      setCustomClassName('middle-item');
+    }
+  }, [layoutOption, windowIndex, cols])
+
   return (
     <div className={`window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
@@ -121,7 +132,10 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         </span>
       }
 
-      { layoutOption >= 0 && windowIndex < cols && <PackComponent cols={cols} layoutOption={layoutOption} windowIndex={windowIndex} pack={pack} packItems={packItems} /> }
+      {
+        layoutOption >= 0 && windowIndex < cols && 
+        <PackComponent customClassName={customClassName} cols={cols} layoutOption={layoutOption} windowIndex={windowIndex} pack={pack} packItems={packItems} />
+      }
     </div>
   )
 }
