@@ -819,19 +819,6 @@ body.no-scroll {
   top: 0px;
   left: 0px;
 }
-.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.first-item {
-  width: calc(100% + 5px);
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.last-item {
-  width: calc(100% + 5px);
-  left: -5px;
-}
-.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.middle-item {
-  width: calc(100% + 10px);
-  left: -5px;
-  right: -5px;
-}
 .inline-wrapper .window-wrapper.custom-windows-wrapper .window-item:not(.custom-window) {
   visibility: hidden;
 }

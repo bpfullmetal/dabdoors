@@ -55,6 +55,7 @@ const Builder = ({ adminProperties }) => {
       preesure_option: ''
     }
   })
+  const [addtionalPriceWithCustomWindow, setAddtionalPriceWithCustomWindow] = useState(0);
   const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
   const [hasVents, setHasVents] = useState(false);
@@ -419,7 +420,9 @@ const Builder = ({ adminProperties }) => {
           />
           <WindowsSettingComponent
             hasWindow={hasWindow}
-            additional_price={windowCnt * Number(adminProperties.window_group.additional_price_$_per_window)}
+            additional_price={
+              layoutOption == -1 ? (windowCnt * Number(adminProperties.window_group.additional_price_$_per_window)) : addtionalPriceWithCustomWindow
+            }
             onChange={(e) => {
               if (e === true) {
                 setPrice(price + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
@@ -434,6 +437,7 @@ const Builder = ({ adminProperties }) => {
             onSelectWindowLayout={(e) => {
               setLayoutOption(e);
             }}
+            
           />
           <PressureSettingsComponent
             availablePressures={availablePressures}

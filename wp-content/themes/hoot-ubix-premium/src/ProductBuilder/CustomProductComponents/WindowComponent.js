@@ -49,8 +49,8 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
   const williamBurgs305_4Pack = [ WilliamBurg_305_1, WilliamBurg_305_2, WilliamBurg_305_3, WilliamBurg_305_4 ];
   const winston_8Pack = [ Winstone_1, Winstone_2, Winstone_1, Winstone_2, Winstone_1, Winstone_2, Winstone_1, Winstone_2 ];
   const winston_4Pack = [ Winstone_1, Winstone_2, Winstone_1, Winstone_2 ];
-  const Stockton_8Pack = [ Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton ];
-  const Stockton_4Pack = [ Stockton, Stockton, Stockton, Stockton ];
+  // const Stockton_8Pack = [ Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton ];
+  const Stockton_1Pack = [ Stockton  ];
   const Sherwood_8Pack = [ SherWood_1, SherWood_2, SherWood_1, SherWood_2, SherWood_1, SherWood_2, SherWood_1, SherWood_2 ];
   const Sherwood_4Pack = [ SherWood_1, SherWood_2, SherWood_1, SherWood_2 ];
 
@@ -78,10 +78,8 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         setPackItems(winston_8Pack);
       }
     } else if (layoutOption == 3) {
-      if (pack == 4) {
-        setPackItems(Stockton_4Pack);
-      } else if (pack == 8) {
-        setPackItems(Stockton_8Pack);
+      if (pack == 1) {
+        setPackItems(Stockton_1Pack);
       }
     } else if (layoutOption == 4) {
       if (pack == 4) {

@@ -807,19 +807,19 @@ body.no-scroll {
           position: absolute;
           top: 0px;
           left: 0px;
-          &.first-item {
-            width: calc(100% + 5px);
-            right: -5px;
-          }
-          &.last-item {
-            width: calc(100% + 5px);
-            left: -5px;
-          }
-          &.middle-item {
-            width: calc(100% + 10px);
-            left: -5px;
-            right: -5px;
-          }
+          // &.first-item {
+          //   width: calc(100% + 5px);
+          //   right: -5px;
+          // }
+          // &.last-item {
+          //   width: calc(100% + 5px);
+          //   left: -5px;
+          // }
+          // &.middle-item {
+          //   width: calc(100% + 10px);
+          //   left: -5px;
+          //   right: -5px;
+          // }
         }
         &:not(.custom-window) {
           visibility: hidden;

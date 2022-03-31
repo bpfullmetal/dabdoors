@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 import Switch from "react-switch";
-import { getAvailableOptions } from '../../helper';
+import { getAvailableOptions, getPriceForCustomWindow, getPack } from '../../helper';
 
 const WindowsSettingComponent = ({ additional_price, properties, customWindowProperties, hasWindow, onChange, windowRowsCols, onSelectWindowLayout }) => {
   const [value, setValue] = useState(-1);
@@ -11,7 +11,6 @@ const WindowsSettingComponent = ({ additional_price, properties, customWindowPro
   useEffect(() => {
     setCols(windowRowsCols.cols);
     let cols = windowRowsCols.cols;
-    // console.log(customWindowProperties);
     setAvaiableOptions(getAvailableOptions(cols, customWindowProperties));
     if (value == 0) {
       if (cols !== 8 && cols !== 7 && cols !== 5) {
@@ -26,8 +25,11 @@ const WindowsSettingComponent = ({ additional_price, properties, customWindowPro
     }
   }, [windowRowsCols, customWindowProperties]);
   useEffect(() => {
-    console.log(availableOptions);
-  }, [availableOptions]);
+    let pack = getPack(value, windowRowsCols, customWindowProperties);
+    let customWindowPrice = getPriceForCustomWindow(value, pack, customWindowProperties);
+    console.log(customWindowPrice);
+  }, [windowRowsCols, customWindowProperties, value])
+
   return (
     <div className="product-setting-item-component window-settings">
       <div class="d-flex align-items-center justify-content-between">
@@ -43,11 +45,11 @@ const WindowsSettingComponent = ({ additional_price, properties, customWindowPro
       <div className={`window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`}>
         <select name="window-layout" value={value} onChange={(e) => {setValue(e.target.value); onSelectWindowLayout(e.target.value)}}>
           <option value={-1}>None</option>
-          <option value={0} disabled={availableOptions.indexOf(0)}>Williamsburg 405</option>
-          <option value={1} disabled={availableOptions.indexOf(1)}>Williamsburg 305</option>
-          <option value={2} disabled={availableOptions.indexOf(2)}>Winston 392</option>
-          <option value={3} disabled={availableOptions.indexOf(3)}>Stockton 397</option>
-          <option value={4} disabled={availableOptions.indexOf(4)}>Sherwood 306</option>
+          <option value={0} disabled={!(availableOptions.indexOf(0) > -1)}>Williamsburg 405</option>
+          <option value={1} disabled={!(availableOptions.indexOf(1) > -1)}>Williamsburg 305</option>
+          <option value={2} disabled={!(availableOptions.indexOf(2) > -1)}>Winston 392</option>
+          <option value={3} disabled={!(availableOptions.indexOf(3) > -1)}>Stockton 397</option>
+          <option value={4} disabled={!(availableOptions.indexOf(4) > -1)}>Sherwood 306</option>
         </select>
       </div>
     </div>

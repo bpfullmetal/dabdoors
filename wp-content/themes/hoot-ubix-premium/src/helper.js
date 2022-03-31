@@ -55,7 +55,7 @@ export const getAvailablecolumnsForLayoutOption = (layoutOption, customWindowpro
             break;
         case 3: 
             properties = customWindowproperties.custom_window_stockton_397;
-            columns = properties['4_pack_columns'].concat(properties['8_pack_columns']);
+            columns = properties['1_pack_columns'];
             break;
         case 4: 
             properties = customWindowproperties.custom_window_sherwood_306;
@@ -92,9 +92,7 @@ export const getAvailableOptions = (columnsCount, customWindowproperties) => {
         availableOptions.push(2);
     }
     let custom_window_stockton_397 = customWindowproperties.custom_window_stockton_397;
-    let customStockton397columns = (custom_window_stockton_397['4_pack_columns'] ? custom_window_stockton_397['4_pack_columns'] : []).concat(
-        custom_window_stockton_397['8_pack_columns'] ? custom_window_stockton_397['8_pack_columns'] : []
-    );
+    let customStockton397columns = custom_window_stockton_397['1_pack_columns'] ? custom_window_stockton_397['1_pack_columns'] : [];
     if (customStockton397columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(3);
     }
@@ -105,6 +103,7 @@ export const getAvailableOptions = (columnsCount, customWindowproperties) => {
     if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(4);
     }
+    console.log(availableOptions);
     return availableOptions;
 }
 
@@ -153,13 +152,9 @@ export const getPack = (layoutOption, columnsCount, customWindowProperties) => {
     } else if (layoutOption == 3) {
         let properties = customWindowProperties.custom_window_stockton_397;
         if (properties) {
-            let pack_columns_4 = properties['4_pack_columns'];
-            if ( pack_columns_4.indexOf(String(columnsCount)) > -1 ) {
-                return 4;
-            }
-            let pack_columns_8 = properties['8_pack_columns'];
-            if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
-                return 8;
+            let pack_columns_1 = properties['1_pack_columns'];
+            if ( pack_columns_1.indexOf(String(columnsCount)) > -1 ) {
+                return 1;
             }
         }
     } else if (layoutOption == 4) {
@@ -178,4 +173,8 @@ export const getPack = (layoutOption, columnsCount, customWindowProperties) => {
         return null;
     }
     return null;
+}
+
+export const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties) => {
+    return 10;
 }
