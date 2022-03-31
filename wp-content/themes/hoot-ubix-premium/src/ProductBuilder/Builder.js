@@ -125,7 +125,7 @@ const Builder = ({ adminProperties }) => {
 
   useEffect(() => {
     if (layoutOption == -1) {
-      setPrice(price - addtionalPriceWithCustomWindow);
+      setPrice(price - addtionalPriceWithCustomWindow + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
       if (metaObj.customWindowLayout) {
         delete metaObj.customWindowLayout;
       }
@@ -470,7 +470,7 @@ const Builder = ({ adminProperties }) => {
               setLayoutOption(e);
             }}
             onChangePriceByCustomWindow={(e) => {
-              setPrice(price - addtionalPriceWithCustomWindow + e);
+              setPrice(price - windowCnt * Number(adminProperties.window_group.additional_price_$_per_window) - addtionalPriceWithCustomWindow + e);
               setAddtionalPriceWithCustomWindow(e);
             }}
             onChangePack={(e) => {

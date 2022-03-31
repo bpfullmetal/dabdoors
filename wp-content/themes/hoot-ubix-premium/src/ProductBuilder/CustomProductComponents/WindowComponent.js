@@ -101,7 +101,7 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
   // }, [layoutOption, windowIndex, cols])
 
   return (
-    <div className={`window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`}>
+    <div className={`window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`}>
       {
         hasWindow == false && layoutOption == -1 && <span className="btn btn-add" onClick={(e) => { 
           if (enableWindow === true) {

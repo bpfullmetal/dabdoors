@@ -251,7 +251,7 @@ const Builder = _ref => {
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (layoutOption == -1) {
-      setPrice(price - addtionalPriceWithCustomWindow);
+      setPrice(price - addtionalPriceWithCustomWindow + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
 
       if (metaObj.customWindowLayout) {
         delete metaObj.customWindowLayout;
@@ -614,7 +614,7 @@ const Builder = _ref => {
       setLayoutOption(e);
     },
     onChangePriceByCustomWindow: e => {
-      setPrice(price - addtionalPriceWithCustomWindow + e);
+      setPrice(price - windowCnt * Number(adminProperties.window_group.additional_price_$_per_window) - addtionalPriceWithCustomWindow + e);
       setAddtionalPriceWithCustomWindow(e);
     },
     onChangePack: e => {
@@ -1164,7 +1164,7 @@ const WindowComponent = _ref => {
   // }, [layoutOption, windowIndex, cols])
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`
+    className: `window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`
   }, hasWindow == false && layoutOption == -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => {
