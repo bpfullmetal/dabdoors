@@ -34,35 +34,67 @@ import SherWood_1 from "../../assets/Sherwood/row-1-column-1.png";
 import SherWood_2 from "../../assets/Sherwood/row-1-column-2.png";
 
 import Stockton from "../../assets/Stockton/stockton-tile.png";
+import { getPack } from "../../helper";
+import PackComponent from "./PackComponents";
 
-
-const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols }) => {
+const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols, customWindowProperties }) => {
   const [hasWindow, setHasWindow] = useState(false);
+  const [pack, setPack] = useState(null);
+  const [packItems, setPackItems] = useState([]);
+  const williamBurgs405_8Pack = [ WilliamBurg8_1, WilliamBurg8_2, WilliamBurg8_3, WilliamBurg8_4, WilliamBurg8_5, WilliamBurg8_6, WilliamBurg8_7, WilliamBurg8_8 ];
+  const williamBurgs405_7Pack = [ WilliamBurg7_1, WilliamBurg7_2, WilliamBurg7_3, WilliamBurg7_4, WilliamBurg7_5, WilliamBurg7_6, WilliamBurg7_7 ];
+  const williamBurgs405_5Pack = [ WilliamBurg5_1, WilliamBurg5_2, WilliamBurg5_3, WilliamBurg5_4, WilliamBurg5_5 ];
+  const williamBurgs305_8Pack = [ WilliamBurg_305_1, WilliamBurg_305_2, WilliamBurg_305_3, WilliamBurg_305_4, WilliamBurg_305_1, WilliamBurg_305_2, WilliamBurg_305_3, WilliamBurg_305_4 ];
+  const williamBurgs305_4Pack = [ WilliamBurg_305_1, WilliamBurg_305_2, WilliamBurg_305_3, WilliamBurg_305_4 ];
+  const winston_8Pack = [ Winstone_1, Winstone_2, Winstone_1, Winstone_2, Winstone_1, Winstone_2, Winstone_1, Winstone_2 ];
+  const winston_4Pack = [ Winstone_1, Winstone_2, Winstone_1, Winstone_2 ];
+  const Stockton_8Pack = [ Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton, Stockton ];
+  const Stockton_4Pack = [ Stockton, Stockton, Stockton, Stockton ];
+  const Sherwood_8Pack = [ SherWood_1, SherWood_2, SherWood_1, SherWood_2, SherWood_1, SherWood_2, SherWood_1, SherWood_2 ];
+  const Sherwood_4Pack = [ SherWood_1, SherWood_2, SherWood_1, SherWood_2 ];
 
   useEffect(() => {
+    let pack = getPack(layoutOption, cols, customWindowProperties);
+    setPack(pack);
     if (layoutOption == 0) {
-      if (cols == 8 || cols == 7 || cols == 5) {
-        if (windowIndex < cols) {
-          setHasWindow(true);
-        }
+      if (pack == 5) {
+        setPackItems(williamBurgs405_5Pack);
+      } else if (pack == 7) {
+        setPackItems(williamBurgs405_7Pack);
+      } else if (pack == 8) {
+        setPackItems(williamBurgs405_8Pack);
       }
-    } else if (layoutOption == 1 || layoutOption == 2 || layoutOption == 3 || layoutOption == 4) {
-      if (cols == 8 || cols == 4) {
-        if (windowIndex < cols) {
-          setHasWindow(true);
-        }
+    } else if (layoutOption == 1) {
+      if (pack == 4) {
+        setPackItems(williamBurgs305_4Pack);
+      } else if (pack == 8) {
+        setPackItems(williamBurgs305_8Pack);
       }
-    } else {
-      setHasWindow(false);
+    } else if (layoutOption == 2) {
+      if (pack == 4) {
+        setPackItems(winston_4Pack);
+      } else if (pack == 8) {
+        setPackItems(winston_8Pack);
+      }
+    } else if (layoutOption == 3) {
+      if (pack == 4) {
+        setPackItems(Stockton_4Pack);
+      } else if (pack == 8) {
+        setPackItems(Stockton_8Pack);
+      }
+    } else if (layoutOption == 4) {
+      if (pack == 4) {
+        setPackItems(Sherwood_4Pack);
+      } else if (pack == 8) {
+        setPackItems(Sherwood_8Pack);
+      }      
     }
-  
-  }, [windowIndex, layoutOption])
+  }, [customWindowProperties, layoutOption, cols])
 
   return (
     <div className={`window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'}`}>
       {
-        hasWindow == false && <span className="btn btn-add" onClick={(e) => { 
-          console.log(enableWindow);
+        hasWindow == false && layoutOption == -1 && <span className="btn btn-add" onClick={(e) => { 
           if (enableWindow === true) {
             setHasWindow(true);
             addedWindow(true);
@@ -74,7 +106,7 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
         </span>
       }
       {
-        ((hasWindow == true && windowIndex > cols && layoutOption != -1) || (hasWindow == true && layoutOption == -1)) && <span className="btn btn-remove" onClick={(e) => {
+        ((hasWindow == true && layoutOption == -1)) && <span className="btn btn-remove" onClick={(e) => {
           if (enableWindow === true) {
             setHasWindow(false); addedWindow(false);
           }
@@ -88,85 +120,8 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
           </svg>
         </span>
       }
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg8_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg8_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg8_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg8_4} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg8_5} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg8_6} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg8_7} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 0 && windowIndex == 7 && <img src={WilliamBurg8_8} className="window-layout-img" />}
 
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg7_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg7_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg7_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg7_4} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg7_5} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 5 && <img src={WilliamBurg7_6} className="window-layout-img" />}
-      { hasWindow == true && cols == 7 && layoutOption == 0 && windowIndex == 6 && <img src={WilliamBurg7_7} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 0 && <img src={WilliamBurg5_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 1 && <img src={WilliamBurg5_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 2 && <img src={WilliamBurg5_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 3 && <img src={WilliamBurg5_4} className="window-layout-img" />}
-      { hasWindow == true && cols == 5 && layoutOption == 0 && windowIndex == 4 && <img src={WilliamBurg5_5} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 0 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 1 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 2 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 3 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 4 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 5 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 6 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 1 && windowIndex == 7 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 0 && <img src={WilliamBurg_305_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 1 && <img src={WilliamBurg_305_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 2 && <img src={WilliamBurg_305_3} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 1 && windowIndex == 3 && <img src={WilliamBurg_305_4} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 0 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 1 && <img src={Winstone_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 2 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 3 && <img src={Winstone_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 4 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 5 && <img src={Winstone_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 6 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 2 && windowIndex == 7 && <img src={Winstone_2} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 0 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 1 && <img src={Winstone_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 2 && <img src={Winstone_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 2 && windowIndex == 3 && <img src={Winstone_2} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 0 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 1 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 2 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 3 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 4 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 5 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 6 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 3 && windowIndex == 7 && <img src={Stockton} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 0 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 1 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 2 && <img src={Stockton} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 3 && windowIndex == 3 && <img src={Stockton} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 0 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 1 && <img src={SherWood_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 2 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 3 && <img src={SherWood_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 4 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 5 && <img src={SherWood_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 6 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 8 && layoutOption == 4 && windowIndex == 7 && <img src={SherWood_2} className="window-layout-img" />}
-
-      { hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 0 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 1 && <img src={SherWood_2} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 2 && <img src={SherWood_1} className="window-layout-img" />}
-      { hasWindow == true && cols == 4 && layoutOption == 4 && windowIndex == 3 && <img src={SherWood_2} className="window-layout-img" />}
-
+      { layoutOption >= 0 && windowIndex < cols && <PackComponent cols={cols} layoutOption={layoutOption} windowIndex={windowIndex} pack={pack} packItems={packItems} /> }
     </div>
   )
 }
