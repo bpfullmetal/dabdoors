@@ -1182,7 +1182,7 @@ const WindowComponent = _ref => {
     "stroke-width": "1.92708",
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
-  }))), layoutOption >= 0 && windowIndex < cols && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PackComponents__WEBPACK_IMPORTED_MODULE_31__["default"], {
+  }))), enableWindow === true && layoutOption >= 0 && windowIndex < cols && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_PackComponents__WEBPACK_IMPORTED_MODULE_31__["default"], {
     customClassName: customClassName,
     cols: cols,
     layoutOption: layoutOption,

@@ -133,7 +133,7 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
       }
 
       {
-        layoutOption >= 0 && windowIndex < cols && 
+        enableWindow===true && layoutOption >= 0 && windowIndex < cols && 
         <PackComponent customClassName={customClassName} cols={cols} layoutOption={layoutOption} windowIndex={windowIndex} pack={pack} packItems={packItems} />
       }
     </div>
