@@ -807,10 +807,11 @@ body.no-scroll {
 .inline-wrapper {
   position: relative;
 }
-.inline-wrapper .window-wrapper .window-item {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item {
   position: relative;
+  overflow: hidden;
 }
-.inline-wrapper .window-wrapper .window-item .window-layout-img {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img {
   height: 100%;
   width: 100%;
   max-width: unset;
@@ -818,123 +819,27 @@ body.no-scroll {
   top: 0px;
   left: 0px;
 }
-.inline-wrapper .window-wrapper.williamburge-8 .window-item {
-  border: none !important;
-  overflow: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-8 .window-item:nth-child(1) .window-layout-img {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.first-item {
   width: calc(100% + 5px);
   right: -5px;
 }
-.inline-wrapper .window-wrapper.williamburge-8 .window-item:nth-child(8) .window-layout-img {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.last-item {
   width: calc(100% + 5px);
   left: -5px;
 }
-.inline-wrapper .window-wrapper.williamburge-8 .window-item:not(:nth-child(1)):not(:nth-child(8)):not(:nth-child(n+9)) .window-layout-img {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img.middle-item {
   width: calc(100% + 10px);
   left: -5px;
   right: -5px;
 }
-.inline-wrapper .window-wrapper.williamburge-8 .window-item:nth-child(n+9) {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item:not(.custom-window) {
   visibility: hidden;
 }
-.inline-wrapper .window-wrapper.williamburge-7 .window-item {
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item.custom-window {
+  pointer-events: none;
+  cursor: pointer;
+  background-color: rgba(95, 82, 80, 0.6);
   border: none !important;
-  overflow: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(1) .window-layout-img {
-  width: calc(100% + 5px);
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(7) .window-layout-img {
-  width: calc(100% + 5px);
-  left: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-7 .window-item:not(:nth-child(1)):not(:nth-child(7)):not(:nth-child(n+8)) .window-layout-img {
-  width: calc(100% + 10px);
-  left: -5px;
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-7 .window-item:nth-child(n+8) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-5 .window-item {
-  border: none !important;
-  overflow: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-5 .window-item:nth-child(1) .window-layout-img {
-  width: calc(100% + 5px);
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-5 .window-item:nth-child(5) .window-layout-img {
-  width: calc(100% + 5px);
-  left: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-5 .window-item:not(:nth-child(1)):not(:nth-child(5)):not(:nth-child(n+6)) .window-layout-img {
-  width: calc(100% + 10px);
-  left: -5px;
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-5 .window-item:nth-child(n+6) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-305-8 .window-item {
-  border: none !important;
-  overflow: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-305-8 .window-item:nth-child(1) .window-layout-img, .inline-wrapper .window-wrapper.williamburge-305-8 .window-item:nth-child(5) .window-layout-img {
-  width: calc(100% + 5px);
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-8 .window-item:nth-child(4) .window-layout-img, .inline-wrapper .window-wrapper.williamburge-305-8 .window-item:nth-child(8) .window-layout-img {
-  width: calc(100% + 5px);
-  left: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-8 .window-item:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(5)):not(:nth-child(8)):not(:nth-child(n+9)) .window-layout-img {
-  width: calc(100% + 10px);
-  left: -5px;
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-8 .window-item:nth-child(n+9) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-305-4 .window-item {
-  border: none !important;
-  overflow: hidden;
-}
-.inline-wrapper .window-wrapper.williamburge-305-4 .window-item:nth-child(1) .window-layout-img {
-  width: calc(100% + 5px);
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-4 .window-item:nth-child(4) .window-layout-img {
-  width: calc(100% + 5px);
-  left: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-4 .window-item:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(n+5)) .window-layout-img {
-  width: calc(100% + 10px);
-  left: -5px;
-  right: -5px;
-}
-.inline-wrapper .window-wrapper.williamburge-305-4 .window-item:nth-child(n+5) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.winstone-8 .window-item:nth-child(n+9) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.winstone-4 .window-item:nth-child(n+5) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.sherwood-8 .window-item:nth-child(n+9) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.sherwood-4 .window-item:nth-child(n+5) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.stockton-8 .window-item:nth-child(n+9) {
-  visibility: hidden;
-}
-.inline-wrapper .window-wrapper.stockton-4 .window-item:nth-child(n+5) {
-  visibility: hidden;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

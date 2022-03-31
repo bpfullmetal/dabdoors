@@ -398,6 +398,7 @@ const Builder = ({ adminProperties }) => {
                 return option.select_color;
               })
             }
+            customWindowProperties = {adminProperties.custom_window && adminProperties.custom_window}
             changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
             changeWindowRowsCols={(e) => {setWindowRowsCols(e)}}
             layoutOption={layoutOption}

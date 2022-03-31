@@ -11,7 +11,7 @@ const WindowsSettingComponent = ({ additional_price, properties, customWindowPro
   useEffect(() => {
     setCols(windowRowsCols.cols);
     let cols = windowRowsCols.cols;
-    console.log(customWindowProperties);
+    // console.log(customWindowProperties);
     setAvaiableOptions(getAvailableOptions(cols, customWindowProperties));
     if (value == 0) {
       if (cols !== 8 && cols !== 7 && cols !== 5) {

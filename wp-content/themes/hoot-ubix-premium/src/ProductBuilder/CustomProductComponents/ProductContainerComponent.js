@@ -7,7 +7,7 @@ import ZoomControlComponent from './ZoomControlComponent';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import WindowShape1 from "../../assets/img_window_shape_1.png";
 import { getWindowRowsCols } from '../../helper';
-const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement, changeWindowRowsCols, layoutOption }) => {
+const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, colorIndex, changeWindowsCount, lockPlacement, customWindowProperties, changeWindowRowsCols, layoutOption }) => {
   const [windows, setWindows] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
   const [tileIndex, setTileIndex] = useState(0);
   const [scale, setScale] = useState(100);
@@ -58,49 +58,9 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
 
   useEffect(() => {
     if (hasWindow === true) {
-      if (layoutOption == 0) {
-        if (windowsRectRange.cols == 8) {
-          setWindowsWrapperClass('williamburge-8');
-        } else if (windowsRectRange.cols == 7) {
-          setWindowsWrapperClass('williamburge-7');
-        } else if (windowsRectRange.cols == 5) {
-          setWindowsWrapperClass('williamburge-5');
-        } else {
-          setWindowsWrapperClass('');
-        }
-      } else if (layoutOption == 1) {
-        if (windowsRectRange.cols == 8) {
-          setWindowsWrapperClass('williamburge-305-8');
-        } else if (windowsRectRange.cols == 4) {
-          setWindowsWrapperClass('williamburge-305-4');
-        } else {
-          setWindowsWrapperClass('');
-        }
-      } else if (layoutOption == 2) {
-        if (windowsRectRange.cols == 8) {
-          setWindowsWrapperClass('winstone-8');
-        } else if (windowsRectRange.cols == 4) {
-          setWindowsWrapperClass('winstone-4');
-        } else {
-          setWindowsWrapperClass('');
-        }
-      } else if (layoutOption == 3) {
-        if (windowsRectRange.cols == 8) {
-          setWindowsWrapperClass('stockton-8');
-        } else if (windowsRectRange.cols == 4) {
-          setWindowsWrapperClass('stockton-4');
-        } else {
-          setWindowsWrapperClass('');
-        }
-      } else if (layoutOption == 4) {
-        if (windowsRectRange.cols == 8) {
-          setWindowsWrapperClass('sherwood-8');
-        } else if (windowsRectRange.cols == 4) {
-          setWindowsWrapperClass('sherwood-4');
-        } else {
-          setWindowsWrapperClass('');
-        } 
-      } else if (layoutOption == -1) {
+      if (layoutOption > -1) {
+        setWindowsWrapperClass('custom-windows-wrapper');
+      } else {
         setWindowsWrapperClass('');
       }
     } else {
@@ -148,9 +108,12 @@ const ProductContainerComponent = ({ windowSize, colors, hasWindow, hasVents, co
                               enableWindow={hasWindow}
                               layoutOption={layoutOption}
                               cols={windowsRectRange.cols}
+                              customWindowProperties={customWindowProperties}
                               addedWindow={(e) => {
                                 changeWindowsCount(e, index);
-                              }}/>
+                              }}
+                              isAvailableForCustomWindow={index < windowsRectRange.cols}
+                            />
                           })
                         }
                       </div>
