@@ -54,7 +54,8 @@ const Builder = ({ adminProperties }) => {
       count: 0,
       preesure_option: ''
     }
-  })
+  });
+  const [pack, setPack] = useState(0);
   const [addtionalPriceWithCustomWindow, setAddtionalPriceWithCustomWindow] = useState(0);
   const [price, setPrice] = useState(basePrice);
   const [hasWindow, setHasWindow] = useState(false);
@@ -83,7 +84,8 @@ const Builder = ({ adminProperties }) => {
     height2: 0,
     width1: Math.floor(Math.floor(initWidth / 30.48)),
     width2: 0
-  })
+  });
+
   const [isAdding, setIsAdding] = useState(false);
   const [showAlerts, setShowAlerts] = useState(false);
   const [productUrl, setProductUrl] = useState('');
@@ -432,6 +434,7 @@ const Builder = ({ adminProperties }) => {
             changeWindowsCount={(e, index) => {changeWindowsCount(e, index);}}
             changeWindowRowsCols={(e) => {setWindowRowsCols(e)}}
             layoutOption={layoutOption}
+            pack={pack}
           />
           <div className='mobile-switch-button'>
             <span>Customization</span>
@@ -469,6 +472,9 @@ const Builder = ({ adminProperties }) => {
             onChangePriceByCustomWindow={(e) => {
               setPrice(price - addtionalPriceWithCustomWindow + e);
               setAddtionalPriceWithCustomWindow(e);
+            }}
+            onChangePack={(e) => {
+              setPack(e);
             }}
           />
           <PressureSettingsComponent

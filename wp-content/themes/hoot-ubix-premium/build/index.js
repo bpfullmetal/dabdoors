@@ -183,6 +183,7 @@ const Builder = _ref => {
       preesure_option: ''
     }
   });
+  const [pack, setPack] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [addtionalPriceWithCustomWindow, setAddtionalPriceWithCustomWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(basePrice);
   const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -564,7 +565,8 @@ const Builder = _ref => {
     changeWindowRowsCols: e => {
       setWindowRowsCols(e);
     },
-    layoutOption: layoutOption
+    layoutOption: layoutOption,
+    pack: pack
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -614,6 +616,9 @@ const Builder = _ref => {
     onChangePriceByCustomWindow: e => {
       setPrice(price - addtionalPriceWithCustomWindow + e);
       setAddtionalPriceWithCustomWindow(e);
+    },
+    onChangePack: e => {
+      setPack(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     availablePressures: availablePressures,
@@ -801,7 +806,8 @@ const ProductContainerComponent = _ref => {
     lockPlacement,
     customWindowProperties,
     changeWindowRowsCols,
-    layoutOption
+    layoutOption,
+    pack
   } = _ref;
   const [windows, setWindows] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -854,7 +860,11 @@ const ProductContainerComponent = _ref => {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (hasWindow === true) {
       if (layoutOption > -1) {
-        setWindowsWrapperClass('custom-windows-wrapper');
+        if (layoutOption < 3) {
+          setWindowsWrapperClass(`custom-windows-wrapper williams-${layoutOption}`);
+        } else {
+          setWindowsWrapperClass('custom-windows-wrapper');
+        }
       } else {
         setWindowsWrapperClass('');
       }
@@ -915,7 +925,7 @@ const ProductContainerComponent = _ref => {
         backgroundColor: colors[colorIndex]
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: `window-wrapper ${windowsWrapperClass}`,
+      className: `window-wrapper ${windowsWrapperClass} wrapper-${pack}`,
       style: {
         gridTemplateColumns: `repeat(${windowsRectRange.cols}, 1fr)`
       }
@@ -1143,16 +1153,16 @@ const WindowComponent = _ref => {
         setPackItems(Sherwood_8Pack);
       }
     }
-  }, [customWindowProperties, layoutOption, cols]);
-  useEffect(() => {
-    if (windowIndex == 0) {
-      setCustomClassName('first-item');
-    } else if (windowIndex == cols - 1) {
-      setCustomClassName('last-item');
-    } else {
-      setCustomClassName('middle-item');
-    }
-  }, [layoutOption, windowIndex, cols]);
+  }, [customWindowProperties, layoutOption, cols]); // useEffect(() => {
+  //   if (windowIndex == 0) {
+  //     setCustomClassName('first-item');
+  //   } else if (windowIndex == cols - 1) {
+  //     setCustomClassName('last-item');
+  //   } else {
+  //     setCustomClassName('middle-item');
+  //   }
+  // }, [layoutOption, windowIndex, cols])
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `window-item item-${windowIndex} ${hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`
   }, hasWindow == false && layoutOption == -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -2026,7 +2036,8 @@ const WindowsSettingComponent = _ref => {
     onChange,
     windowRowsCols,
     onSelectWindowLayout,
-    onChangePriceByCustomWindow
+    onChangePriceByCustomWindow,
+    onChangePack
   } = _ref;
   const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
   const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowRowsCols ? windowRowsCols.cols : 4);
@@ -2041,6 +2052,7 @@ const WindowsSettingComponent = _ref => {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (value > -1) {
       let pack = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPack)(value, windowRowsCols.cols, customWindowProperties);
+      onChangePack(pack);
       let customWindowPrice = (0,_helper__WEBPACK_IMPORTED_MODULE_3__.getPriceForCustomWindow)(value, pack, customWindowProperties, windowRowsCols.cols);
       onChangePriceByCustomWindow(customWindowPrice);
     } else {

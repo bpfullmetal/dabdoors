@@ -12,7 +12,8 @@ const WindowsSettingComponent = ({
     onChange,
     windowRowsCols,
     onSelectWindowLayout,
-    onChangePriceByCustomWindow
+    onChangePriceByCustomWindow,
+    onChangePack
   }) => {
   const [value, setValue] = useState(-1);
   const [cols, setCols] = useState(windowRowsCols?windowRowsCols.cols:4);
@@ -27,6 +28,7 @@ const WindowsSettingComponent = ({
   useEffect(() => {
     if (value > -1) {
       let pack = getPack(value, windowRowsCols.cols, customWindowProperties);
+      onChangePack(pack);
       let customWindowPrice = getPriceForCustomWindow(value, pack, customWindowProperties, windowRowsCols.cols);
       onChangePriceByCustomWindow(customWindowPrice);
     } else {

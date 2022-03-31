@@ -828,5 +828,44 @@ body.no-scroll {
   background-color: rgba(95, 82, 80, 0.6);
   border: none !important;
 }
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-5 > *:nth-child(5n) .window-layout-img {
+  width: calc(100% + 5px);
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-5 > *:nth-child(5n+4) .window-layout-img {
+  width: calc(100% + 5px);
+  left: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-5 > *:not(:nth-child(5n)):not(:nth-child(5n+4)) .window-layout-img {
+  width: calc(100% + 10px);
+  left: -5px;
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-7 > *:nth-child(7n) .window-layout-img {
+  width: calc(100% + 5px);
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-7 > *:nth-child(7n+6) .window-layout-img {
+  width: calc(100% + 5px);
+  left: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-7 > *:not(:nth-child(7n)):not(:nth-child(7n+6)) .window-layout-img {
+  width: calc(100% + 10px);
+  left: -5px;
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-1 > *:nth-child(4n) .window-layout-img {
+  width: calc(100% + 5px);
+  right: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-1 > *:nth-child(4n+3) .window-layout-img {
+  width: calc(100% + 5px);
+  left: -5px;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper.williams-1 > *:not(:nth-child(4n)):not(:nth-child(4n+3)) .window-layout-img {
+  width: calc(100% + 10px);
+  left: -5px;
+  right: -5px;
+}
 
 /*# sourceMappingURL=style-index.css.map*/
