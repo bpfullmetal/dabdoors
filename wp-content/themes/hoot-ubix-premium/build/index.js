@@ -1852,6 +1852,7 @@ const SizeChangeComponent = _ref => {
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u2019"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "number",
+    step: 2,
     name: "width_2",
     value: width2,
     onKeyPress: e => {

@@ -118,6 +118,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
             <span>’</span>
             <input
               type="number"
+              step={2}
               name="width_2"
               value={width2}
               onKeyPress={(e) => {
