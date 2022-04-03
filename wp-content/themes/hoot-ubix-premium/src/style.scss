@@ -800,14 +800,6 @@ body.no-scroll {
       .window-item {
         position: relative;
         overflow: hidden;
-        .window-layout-img {
-          height: 100%;
-          width: 100%;
-          max-width: unset;
-          position: absolute;
-          top: 0px;
-          left: 0px;
-        }
         &:not(.custom-window) {
           visibility: hidden;
         }
@@ -816,6 +808,15 @@ body.no-scroll {
           cursor: pointer;
           background-color: rgba(95, 82, 80, 0.6);
           border: none !important;
+          height: fit-content;
+          .window-layout-img {
+            height: auto;
+            width: 100%;
+            // max-width: unset;
+            // position: absolute;
+            // top: 0px;
+            // left: 0px;
+          }
         }
       }
       &.williams-0 {

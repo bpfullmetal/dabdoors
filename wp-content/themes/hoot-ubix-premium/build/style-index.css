@@ -811,14 +811,6 @@ body.no-scroll {
   position: relative;
   overflow: hidden;
 }
-.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item .window-layout-img {
-  height: 100%;
-  width: 100%;
-  max-width: unset;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
 .inline-wrapper .window-wrapper.custom-windows-wrapper .window-item:not(.custom-window) {
   visibility: hidden;
 }
@@ -827,6 +819,13 @@ body.no-scroll {
   cursor: pointer;
   background-color: rgba(95, 82, 80, 0.6);
   border: none !important;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.inline-wrapper .window-wrapper.custom-windows-wrapper .window-item.custom-window .window-layout-img {
+  height: auto;
+  width: 100%;
 }
 .inline-wrapper .window-wrapper.custom-windows-wrapper.williams-0.wrapper-5 > *:nth-child(5n) .window-layout-img {
   width: calc(100% + 5px);
