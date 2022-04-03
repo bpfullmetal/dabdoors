@@ -9,6 +9,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const [hasHeightRangeError, setHasHeightRangeError] = useState(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = useState(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = useState(false);
+  const [changedTime, setChangedTime] = useState(0);
 
   useEffect(() => {
     let totalWidth = width1 * 12 + width2;
@@ -44,12 +45,10 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     }
     hasSizeError(false);
     onChangeWindowSize({width1, width2, height1, height2});
-  }, [width1, width2, height1, height2]);
+  }, [width1, width2, height1, height2, changedTime]);
+
 
   const checkValidation = (e, type) => {
-    var max = 20;
-    console.log(e.target.value);
-    console.log(e.which);
     if (e.which >= 48 && e.which <= 57) {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
       let width = 0;
@@ -60,6 +59,9 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
           e.preventDefault();
         }
       } else if (type == 2) {
+        if (newValue % 2 == 1) {
+          newValue ++;
+        }
         width = width1 * 12 + newValue;
         if (width > productMaxWidth) {
           e.preventDefault();
@@ -75,15 +77,10 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
           e.preventDefault();
         }
       }
-      console.log(width, height);
-      // console.log(newValue);
+
     } else {
       e.preventDefault();
     }
-    // if (parseInt(e.target.value) > max) {
-    //     // e.target.value = max; 
-    //     return false;
-    // }
   }
 
   return (
@@ -125,8 +122,10 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
                 checkValidation(e, 2);
               }}
               onChange={(e) => {
-                setWidth2((e.target.value))
-              }}></input>
+                  setWidth2(Number(e.target.value%2==1?(Number(e.target.value) + 1):(e.target.value)))
+                }
+              }
+            ></input>
             <span>”</span>
           </div>
         </div>

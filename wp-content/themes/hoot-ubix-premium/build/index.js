@@ -1734,6 +1734,7 @@ const SizeChangeComponent = _ref => {
   const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [changedTime, setChangedTime] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let totalWidth = width1 * 12 + width2;
     let totalHeight = height1 * 12 + height2;
@@ -1778,13 +1779,9 @@ const SizeChangeComponent = _ref => {
       height1,
       height2
     });
-  }, [width1, width2, height1, height2]);
+  }, [width1, width2, height1, height2, changedTime]);
 
   const checkValidation = (e, type) => {
-    var max = 20;
-    console.log(e.target.value);
-    console.log(e.which);
-
     if (e.which >= 48 && e.which <= 57) {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
       let width = 0;
@@ -1797,6 +1794,10 @@ const SizeChangeComponent = _ref => {
           e.preventDefault();
         }
       } else if (type == 2) {
+        if (newValue % 2 == 1) {
+          newValue++;
+        }
+
         width = width1 * 12 + newValue;
 
         if (width > productMaxWidth) {
@@ -1815,15 +1816,9 @@ const SizeChangeComponent = _ref => {
           e.preventDefault();
         }
       }
-
-      console.log(width, height); // console.log(newValue);
     } else {
       e.preventDefault();
-    } // if (parseInt(e.target.value) > max) {
-    //     // e.target.value = max; 
-    //     return false;
-    // }
-
+    }
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1859,7 +1854,7 @@ const SizeChangeComponent = _ref => {
       checkValidation(e, 2);
     },
     onChange: e => {
-      setWidth2(e.target.value);
+      setWidth2(Number(e.target.value % 2 == 1 ? Number(e.target.value) + 1 : e.target.value));
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "height-wrapper d-flex"
