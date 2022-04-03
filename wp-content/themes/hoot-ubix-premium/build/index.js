@@ -1718,6 +1718,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -1734,7 +1737,8 @@ const SizeChangeComponent = _ref => {
   const [hasHeightRangeError, setHasHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [changedTime, setChangedTime] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const setWindowWidth2ValueDebounced = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(lodash__WEBPACK_IMPORTED_MODULE_2___default().debounce(setWidth2, 300), []);
+  const setWindowHeight2ValueDebounced = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(lodash__WEBPACK_IMPORTED_MODULE_2___default().debounce(setHeight2, 300), []);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let totalWidth = width1 * 12 + width2;
     let totalHeight = height1 * 12 + height2;
@@ -1779,7 +1783,7 @@ const SizeChangeComponent = _ref => {
       height1,
       height2
     });
-  }, [width1, width2, height1, height2, changedTime]);
+  }, [width1, width2, height1, height2]);
 
   const checkValidation = (e, type) => {
     if (e.which >= 48 && e.which <= 57) {
@@ -1821,6 +1825,18 @@ const SizeChangeComponent = _ref => {
     }
   };
 
+  const changeWidth2Value = e => {
+    setWidth2(Number(e.target.value));
+    let value = e.target.value % 2 == 1 ? Number(e.target.value) + 1 : Number(e.target.value);
+    setWindowWidth2ValueDebounced(value);
+  };
+
+  const changeHeight2Value = e => {
+    setHeight2(Number(e.target.value));
+    let value = e.target.value % 2 == 1 ? Number(e.target.value) + 1 : Number(e.target.value);
+    setWindowHeight2ValueDebounced(value);
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -1853,9 +1869,7 @@ const SizeChangeComponent = _ref => {
     onKeyPress: e => {
       checkValidation(e, 2);
     },
-    onChange: e => {
-      setWidth2(Number(e.target.value % 2 == 1 ? Number(e.target.value) + 1 : e.target.value));
-    }
+    onChange: e => changeWidth2Value(e)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "height-wrapper d-flex"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -1881,9 +1895,10 @@ const SizeChangeComponent = _ref => {
     onKeyPress: e => {
       checkValidation(e, 4);
     },
-    onChange: e => {
-      setHeight2(e.target.value);
-    }
+    onChange: e => changeHeight2Value(e) // onChange={(e) => {
+    // setHeight2((e.target.value))
+    // }}
+
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "\u201D"))), hasWidthRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "range-error"
   }, "Width is bigger than maxWidth.") : '', hasHeightRangeError ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -2313,8 +2328,7 @@ const getAvailablecolumnsForLayoutOption = (layoutOption, customWindowproperties
 const getAvailableOptions = (columnsCount, customWindowproperties) => {
   let availableOptions = [];
   let custom_window_williamburge_405 = customWindowproperties.custom_window_williamburge_405;
-  let customWilliamburget405columns = (custom_window_williamburge_405['5_pack_columns'] ? custom_window_williamburge_405['5_pack_columns'] : []).concat(custom_window_williamburge_405['7_pack_columns'] ? custom_window_williamburge_405['7_pack_columns'] : [], custom_window_williamburge_405['8_pack_columns'] ? custom_window_williamburge_405['8_pack_columns'] : []);
-  console.log(customWilliamburget405columns);
+  let customWilliamburget405columns = (custom_window_williamburge_405['5_pack_columns'] ? custom_window_williamburge_405['5_pack_columns'] : []).concat(custom_window_williamburge_405['7_pack_columns'] ? custom_window_williamburge_405['7_pack_columns'] : [], custom_window_williamburge_405['8_pack_columns'] ? custom_window_williamburge_405['8_pack_columns'] : []); // console.log(customWilliamburget405columns);
 
   if (customWilliamburget405columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(0);
@@ -2346,9 +2360,9 @@ const getAvailableOptions = (columnsCount, customWindowproperties) => {
 
   if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
     availableOptions.push(4);
-  }
+  } // console.log(availableOptions);
 
-  console.log(availableOptions);
+
   return availableOptions;
 };
 const getPack = (layoutOption, columnsCount, customWindowProperties) => {
@@ -2439,8 +2453,7 @@ const getPack = (layoutOption, columnsCount, customWindowProperties) => {
   return null;
 };
 const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties, cols) => {
-  console.log(layoutOption, packCount, cols);
-
+  // console.log(layoutOption, packCount, cols);
   if (layoutOption == 0) {
     if (packCount == 5) {
       let perPrice = customWindowProperties.custom_window_williamburge_405['5_pack_price'];
@@ -22335,6 +22348,17 @@ module.exports = __webpack_require__.p + "images/img_window_shape_1.ec9b7f08.png
 
 "use strict";
 module.exports = window["React"];
+
+/***/ }),
+
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = window["lodash"];
 
 /***/ }),
 

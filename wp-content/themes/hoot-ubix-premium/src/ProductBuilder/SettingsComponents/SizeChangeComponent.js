@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import _ from 'lodash';
 
 const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const [width1, setWidth1] = useState(Math.floor(initWidth / 30.48));
@@ -9,7 +10,15 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const [hasHeightRangeError, setHasHeightRangeError] = useState(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = useState(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = useState(false);
-  const [changedTime, setChangedTime] = useState(0);
+
+  const setWindowWidth2ValueDebounced = useCallback(_.debounce(
+    setWidth2, 300
+  ), []);
+
+  const setWindowHeight2ValueDebounced = useCallback(_.debounce(
+    setHeight2, 300
+  ), []);
+
 
   useEffect(() => {
     let totalWidth = width1 * 12 + width2;
@@ -45,7 +54,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     }
     hasSizeError(false);
     onChangeWindowSize({width1, width2, height1, height2});
-  }, [width1, width2, height1, height2, changedTime]);
+  }, [width1, width2, height1, height2]);
 
 
   const checkValidation = (e, type) => {
@@ -82,6 +91,19 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
       e.preventDefault();
     }
   }
+
+  const changeWidth2Value = (e) => {
+    setWidth2(Number(e.target.value));
+    let value = e.target.value % 2 == 1 ? (Number(e.target.value) + 1) : Number(e.target.value);
+    setWindowWidth2ValueDebounced(value);
+  }
+
+  const changeHeight2Value = (e) => {
+    setHeight2(Number(e.target.value));
+    let value = e.target.value % 2 == 1 ? (Number(e.target.value) + 1) : Number(e.target.value);
+    setWindowHeight2ValueDebounced(value);
+  }
+
 
   return (
     <div className="product-setting-item-component">
@@ -121,10 +143,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
               onKeyPress={(e) => {
                 checkValidation(e, 2);
               }}
-              onChange={(e) => {
-                  setWidth2(Number(e.target.value%2==1?(Number(e.target.value) + 1):(e.target.value)))
-                }
-              }
+              onChange={(e) => changeWidth2Value(e)}
             ></input>
             <span>”</span>
           </div>
@@ -152,9 +171,11 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
               onKeyPress={(e) => {
                 checkValidation(e, 4);
               }}
-              onChange={(e) => {
-                setHeight2((e.target.value))
-              }}></input>
+              onChange={(e) => changeHeight2Value(e)}
+              // onChange={(e) => {
+                // setHeight2((e.target.value))
+              // }}
+            ></input>
             <span>”</span>
           </div>
         </div>

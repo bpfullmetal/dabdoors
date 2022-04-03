@@ -73,7 +73,7 @@ export const getAvailableOptions = (columnsCount, customWindowproperties) => {
         custom_window_williamburge_405['7_pack_columns'] ? custom_window_williamburge_405['7_pack_columns'] : [],
         custom_window_williamburge_405['8_pack_columns'] ? custom_window_williamburge_405['8_pack_columns'] : []
     );
-    console.log(customWilliamburget405columns);
+    // console.log(customWilliamburget405columns);
     if (customWilliamburget405columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(0);
     }
@@ -103,7 +103,7 @@ export const getAvailableOptions = (columnsCount, customWindowproperties) => {
     if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
         availableOptions.push(4);
     }
-    console.log(availableOptions);
+    // console.log(availableOptions);
     return availableOptions;
 }
 
@@ -175,7 +175,7 @@ export const getPack = (layoutOption, columnsCount, customWindowProperties) => {
 }
 
 export const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties, cols) => {
-    console.log(layoutOption, packCount, cols);
+    // console.log(layoutOption, packCount, cols);
     if (layoutOption == 0) {
         if (packCount == 5) {
             let perPrice = customWindowProperties.custom_window_williamburge_405['5_pack_price'];
