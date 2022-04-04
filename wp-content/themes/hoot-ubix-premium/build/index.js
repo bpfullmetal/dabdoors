@@ -144,10 +144,8 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
-  const hideSettings = adminProperties.hide_settings; // useEffect(() => {
-  //   console.log('Hide Settings', hideSettings);
-  // }, [hideSettings])
-
+  const hideSettings = adminProperties.hide_settings;
+  console.log(basePrice);
   const [metaObj, setMetaObject] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     size: {
       width: 10.0,
@@ -376,7 +374,7 @@ const Builder = _ref => {
   };
 
   React.useEffect(() => {
-    // console.log(adminProperties);
+    console.log('test');
     let initialPrice = price;
     let lock_placement = metaObj.lock_placement;
     let panelType = metaObj.panelType;
@@ -484,7 +482,6 @@ const Builder = _ref => {
 
     if (hideSettings.hide_vents_settings.hide_from_builder === true) {
       if (hideSettings.hide_vents_settings.default == "add") {
-        console.log(adminProperties.vents_group.additional_price_$_if_added, price);
         initialPrice += Number(adminProperties.vents_group.additional_price_$_if_added);
         setHasVents(true);
       }
@@ -519,10 +516,12 @@ const Builder = _ref => {
       standardColor,
       premiumColor
     });
+    console.log(initialPrice);
     setPrice(initialPrice);
-  }, []); // useEffect(() => {
-  // }, [hideSettings])
-
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(price);
+  }, [price]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let pressureOptions = adminProperties.pressure_group.pressure_options;
     let windowWidth = windowSize.width1 * 12 + windowSize.width2;

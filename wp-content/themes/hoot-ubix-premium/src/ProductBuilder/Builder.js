@@ -17,9 +17,7 @@ import Switch from "react-switch";
 
 const Builder = ({ adminProperties }) => {
   const hideSettings = adminProperties.hide_settings;
-  // useEffect(() => {
-  //   console.log('Hide Settings', hideSettings);
-  // }, [hideSettings])
+  console.log(basePrice);
   const [metaObj, setMetaObject] = useState({
     size: {
       width: 10.0,
@@ -251,152 +249,151 @@ const Builder = ({ adminProperties }) => {
   }
 
   React.useEffect(() => {
-    // console.log(adminProperties);
-      let initialPrice = price;
-      let lock_placement = metaObj.lock_placement;
-      let panelType = metaObj.panelType;
-      let trackRadius = metaObj.trackRadius;
-      let rollerType = metaObj.rollerType;
-      let standardColor = metaObj.standardColor;
-      let premiumColor = metaObj.premiumColor;
-      if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
-        if (adminProperties.lock_placement_group.inside.default === true) {
-          lock_placement.hasLock = true;
-          lock_placement.placement = 'inside';
-          initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
-          setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-        } else if (adminProperties.lock_placement_group.outside.default === true) {
-          lock_placement.hasLock = true;
-          lock_placement.placement = 'outside';
-          initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
-          setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
-        } else {
-          lock_placement.hasLock = false;
-          lock_placement.placement = '';
-        }
-      } else if (hideSettings.hide_lock_placement_settings.hide_from_builder == true) {
-        if (hideSettings.hide_lock_placement_settings.default == "inside") {
-          lock_placement.hasLock = true;
-          lock_placement.placement = 'inside';
-          initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
-          setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-        } else if (hideSettings.hide_lock_placement_settings.default == "outside") {
-          lock_placement.hasLock = true;
-          lock_placement.placement = 'outside';
-          initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
-          setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
-        }
+    console.log('test');
+    let initialPrice = price;
+    let lock_placement = metaObj.lock_placement;
+    let panelType = metaObj.panelType;
+    let trackRadius = metaObj.trackRadius;
+    let rollerType = metaObj.rollerType;
+    let standardColor = metaObj.standardColor;
+    let premiumColor = metaObj.premiumColor;
+    if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
+      if (adminProperties.lock_placement_group.inside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'inside';
+        initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else if (adminProperties.lock_placement_group.outside.default === true) {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'outside';
+        initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
+      } else {
+        lock_placement.hasLock = false;
+        lock_placement.placement = '';
       }
-
-      if (hideSettings.hide_panel_settings.hide_from_builder == false) {
-        if (adminProperties.panel_group.raised.default === true) {
-          panelType.type = 'raised';
-          initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-          setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-        } else if (adminProperties.panel_group.flush.default === true) {
-          panelType.type = 'flush';
-          initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-          setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
-        }
-      } else if (hideSettings.hide_panel_settings.hide_from_builder == true) {
-        if (hideSettings.hide_panel_settings.default_value == 'raised') {
-          panelType.type = 'raised';
-          initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-          setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-        } else {
-          panelType.type = 'flush';
-          initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-          setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
-        }
+    } else if (hideSettings.hide_lock_placement_settings.hide_from_builder == true) {
+      if (hideSettings.hide_lock_placement_settings.default == "inside") {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'inside';
+        initialPrice += Number(adminProperties.lock_placement_group.inside.additional_price_$);
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else if (hideSettings.hide_lock_placement_settings.default == "outside") {
+        lock_placement.hasLock = true;
+        lock_placement.placement = 'outside';
+        initialPrice += Number(adminProperties.lock_placement_group.outside.additional_price_$);
+        setChangedPriceWithLock(Number(adminProperties.lock_placement_group.outside.additional_price_$));
       }
+    }
 
-      if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
-        if (adminProperties.roller_type_group) {
-          let index = adminProperties.roller_type_group.select_button_options.findIndex((e) => {
-            return e.default == true;
-          });
-          if (index > -1) {
-            rollerType.type = adminProperties.roller_type_group.select_button_options[index].button_name;
-            initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
-            setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
-          } else {
-            rollerType.type = '';
-            setChangedPriceWithRollerType(0);
-          }
-        }
+    if (hideSettings.hide_panel_settings.hide_from_builder == false) {
+      if (adminProperties.panel_group.raised.default === true) {
+        panelType.type = 'raised';
+        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
+        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else if (adminProperties.panel_group.flush.default === true) {
+        panelType.type = 'flush';
+        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
+        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
       }
-
-      if (hideSettings.hide_premium_colors_settings.hide_from_builder == false) {
-        if (adminProperties.premium_colors_group) {
-          let index = adminProperties.premium_colors_group.select_button_options.findIndex((e) => {
-            return e.default == true;
-          });
-          if (index > -1) {
-            initialPrice += Number(adminProperties.premium_colors_group.additional_price);
-            setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
-            premiumColor.color = adminProperties.premium_colors_group.select_button_options[index].select_color;
-          } else {
-            setChangedPriceWithPremiumColor(0);
-          }
-        }
+    } else if (hideSettings.hide_panel_settings.hide_from_builder == true) {
+      if (hideSettings.hide_panel_settings.default_value == 'raised') {
+        panelType.type = 'raised';
+        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
+        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
+      } else {
+        panelType.type = 'flush';
+        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
+        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
       }
+    }
 
-      if (hideSettings.hide_track_radius_settings.hide_from_builder === false) {
-        if (adminProperties.track_radius_group) {
-          trackRadius.radius = adminProperties.track_radius_group.minimum;
-          if ( Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_) ) {
-            initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
-            setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
-          } else {
-            setChangedPriceWithTrackRadius(0);
-          }
-        }
-      }
-
-      if (hideSettings.hide_vents_settings.hide_from_builder === true) {
-        if (hideSettings.hide_vents_settings.default == "add") {
-          console.log(adminProperties.vents_group.additional_price_$_if_added, price);
-          initialPrice += Number(adminProperties.vents_group.additional_price_$_if_added);
-          setHasVents(true);
-        }
-      }
-
-      if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
-        if (hideSettings.hide_insulation_settings.default == "add") {
-          initialPrice += Number(adminProperties.insulation_group.additional_price_$_if_added);
-          setMetaObject({
-            ...metaObj,
-            insulation: {
-              hasInsulation: true
-            }
-          });
-        }
-      }
-
-      if(adminProperties.standard_colors_group) {
-        let index = adminProperties.standard_colors_group.select_button_options.findIndex((e) => {
+    if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
+      if (adminProperties.roller_type_group) {
+        let index = adminProperties.roller_type_group.select_button_options.findIndex((e) => {
           return e.default == true;
         });
         if (index > -1) {
-          standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
+          rollerType.type = adminProperties.roller_type_group.select_button_options[index].button_name;
+          initialPrice += Number(adminProperties.roller_type_group.select_button_options[index].additional_price);
+          setChangedPriceWithRollerType(Number(adminProperties.roller_type_group.select_button_options[index].additional_price));
+        } else {
+          rollerType.type = '';
+          setChangedPriceWithRollerType(0);
         }
       }
-      setMetaObject({
-        ...metaObj,
-        lock_placement,
-        panelType,
-        trackRadius,
-        rollerType,
-        standardColor,
-        premiumColor
+    }
+
+    if (hideSettings.hide_premium_colors_settings.hide_from_builder == false) {
+      if (adminProperties.premium_colors_group) {
+        let index = adminProperties.premium_colors_group.select_button_options.findIndex((e) => {
+          return e.default == true;
+        });
+        if (index > -1) {
+          initialPrice += Number(adminProperties.premium_colors_group.additional_price);
+          setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+          premiumColor.color = adminProperties.premium_colors_group.select_button_options[index].select_color;
+        } else {
+          setChangedPriceWithPremiumColor(0);
+        }
+      }
+    }
+
+    if (hideSettings.hide_track_radius_settings.hide_from_builder === false) {
+      if (adminProperties.track_radius_group) {
+        trackRadius.radius = adminProperties.track_radius_group.minimum;
+        if ( Number(adminProperties.track_radius_group.minimum) > Number(adminProperties.track_radius_group.if_over_) ) {
+          initialPrice += Number(adminProperties.track_radius_group.additional_price_$);
+          setChangedPriceWithTrackRadius(Number(adminProperties.track_radius_group.additional_price_$));
+        } else {
+          setChangedPriceWithTrackRadius(0);
+        }
+      }
+    }
+
+    if (hideSettings.hide_vents_settings.hide_from_builder === true) {
+      if (hideSettings.hide_vents_settings.default == "add") {
+        initialPrice += Number(adminProperties.vents_group.additional_price_$_if_added);
+        setHasVents(true);
+      }
+    }
+
+    if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
+      if (hideSettings.hide_insulation_settings.default == "add") {
+        initialPrice += Number(adminProperties.insulation_group.additional_price_$_if_added);
+        setMetaObject({
+          ...metaObj,
+          insulation: {
+            hasInsulation: true
+          }
+        });
+      }
+    }
+
+    if(adminProperties.standard_colors_group) {
+      let index = adminProperties.standard_colors_group.select_button_options.findIndex((e) => {
+        return e.default == true;
       });
-      setPrice(initialPrice);
+      if (index > -1) {
+        standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
+      }
+    }
+    setMetaObject({
+      ...metaObj,
+      lock_placement,
+      panelType,
+      trackRadius,
+      rollerType,
+      standardColor,
+      premiumColor
+    });
+    console.log(initialPrice);
+    setPrice(initialPrice);
   }, []);
 
-  // useEffect(() => {
-
-  // }, [hideSettings])
-
+  useEffect(() => {
+    console.log(price);
+  }, [price]);
   useEffect(() => {
       let pressureOptions =  adminProperties.pressure_group.pressure_options;
       let windowWidth = windowSize.width1 * 12 + windowSize.width2;

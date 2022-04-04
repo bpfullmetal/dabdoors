@@ -21,7 +21,7 @@ const Votes = () => {
   };
   useEffect(() => {
     getAdminProperties();
-  }, [])
+  }, []);
   return (
     adminProperties && <Builder adminProperties={adminProperties} />
   );
