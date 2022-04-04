@@ -144,6 +144,10 @@ const Builder = _ref => {
   let {
     adminProperties
   } = _ref;
+  const hideSettings = adminProperties.hide_settings;
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log('Hide Settings', hideSettings);
+  }, [hideSettings]);
   const [metaObj, setMetaObject] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     size: {
       width: 10.0,
@@ -595,7 +599,7 @@ const Builder = _ref => {
     hasSizeError: e => {
       setSizeValidationError(e);
     }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     hasWindow: hasWindow,
     additional_price: layoutOption == -1 ? windowCnt * Number(adminProperties.window_group.additional_price_$_per_window) : addtionalPriceWithCustomWindow,
     onChange: e => {
@@ -627,7 +631,7 @@ const Builder = _ref => {
       setPressureIndex(e);
     },
     selectedUbarSetting: selectedUbarSetting
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     properties: adminProperties.insulation_group,
     additional_price: Number(adminProperties.insulation_group.additional_price_$_if_added),
     enableInsulation: e => {
@@ -643,7 +647,7 @@ const Builder = _ref => {
         }
       });
     }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
     hasVents: hasVents,
     additional_price: Number(adminProperties.vents_group.additional_price_$_if_added),
     onChange: e => {
@@ -661,19 +665,19 @@ const Builder = _ref => {
       setHasVents(e);
     },
     properties: adminProperties.vents_group && adminProperties.vents_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
     additional_price: changedPriceWithLock,
     setAdditionalPriceForLock: (option, e) => changePricewithLock(option, e),
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     additional_price: changedPriceWithPanel,
     setAdditionalPriceForPanelGroup: (option, e) => changePriceWithPanelGroup(option, e),
     properties: adminProperties.panel_group && adminProperties.panel_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     additional_price: changedPriceWithRollerType,
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
     setAdditionalPriceForRollerType: (type, e) => changePriceWithRollerType(type, e)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
     additional_price: changedPriceWithTrackRadius,
     properties: adminProperties.track_radius_group,
     enablePrice: (radius, e) => changePriceWithTrackRadius(radius, e)
@@ -688,7 +692,7 @@ const Builder = _ref => {
       setColorIndex(e);
     },
     properties: adminProperties.standard_colors_group
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), hideSettings.hide_premium_colors_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
     properties: adminProperties.premium_colors_group,
     enablePrice: (color, e) => {
       setMetaObject({ ...metaObj,

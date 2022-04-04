@@ -16,6 +16,10 @@ import Switch from "react-switch";
 
 
 const Builder = ({ adminProperties }) => {
+  const hideSettings = adminProperties.hide_settings;
+  useEffect(() => {
+    console.log('Hide Settings', hideSettings);
+  }, [hideSettings])
   const [metaObj, setMetaObject] = useState({
     size: {
       width: 10.0,
@@ -450,7 +454,7 @@ const Builder = ({ adminProperties }) => {
             onChangeWindowSize = {(e) => {changeWindowSize(e);}}
             hasSizeError = {(e) => { setSizeValidationError(e); }}
           />
-          <WindowsSettingComponent
+          {hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && <WindowsSettingComponent
             hasWindow={hasWindow}
             additional_price={
               layoutOption == -1 ? (windowCnt * Number(adminProperties.window_group.additional_price_$_per_window)) : addtionalPriceWithCustomWindow
@@ -476,7 +480,7 @@ const Builder = ({ adminProperties }) => {
             onChangePack={(e) => {
               setPack(e);
             }}
-          />
+          />}
           <PressureSettingsComponent
             availablePressures={availablePressures}
             properties={adminProperties.pressure_group && adminProperties.pressure_group}
@@ -485,7 +489,7 @@ const Builder = ({ adminProperties }) => {
             }}
             selectedUbarSetting={selectedUbarSetting}
           />
-          <InsulationSettingComponent 
+          {hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && <InsulationSettingComponent 
             properties={adminProperties.insulation_group}
             additional_price = {Number(adminProperties.insulation_group.additional_price_$_if_added)}
             enableInsulation={(e) => {
@@ -501,8 +505,8 @@ const Builder = ({ adminProperties }) => {
                 }
               });
             }}
-          />
-          <VentsSettingComponent
+          />}
+          {hideSettings.hide_vents_settings.hide_from_builder === false && <VentsSettingComponent
             hasVents={hasVents}
             additional_price = {Number(adminProperties.vents_group.additional_price_$_if_added)}
             onChange={(e) => {
@@ -520,27 +524,27 @@ const Builder = ({ adminProperties }) => {
               setHasVents(e);
             }}
             properties={adminProperties.vents_group && adminProperties.vents_group}
-          />
-          <LockPlacementSettingComponent
+          />}
+          {hideSettings.hide_lock_placement_settings.hide_from_builder === false && <LockPlacementSettingComponent
             additional_price={changedPriceWithLock}
             setAdditionalPriceForLock={(option, e) => changePricewithLock(option, e)}
             properties={adminProperties.lock_placement_group && adminProperties.lock_placement_group}
-          />
-          <PanelSettingComponent
+          />}
+          {hideSettings.hide_panel_settings.hide_from_builder === false && <PanelSettingComponent
             additional_price={changedPriceWithPanel}
             setAdditionalPriceForPanelGroup = {(option, e) => changePriceWithPanelGroup(option, e)}
             properties={adminProperties.panel_group && adminProperties.panel_group}
-          />
-          <RollerTypeSettingComponent
+          />}
+          {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent
             additional_price={changedPriceWithRollerType}
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}
             setAdditionalPriceForRollerType={(type, e) => changePriceWithRollerType(type, e)}
-          />
-          <TrackRadiusSettingComponent
+          />}
+          {hideSettings.hide_track_radius_settings.hide_from_builder === false && <TrackRadiusSettingComponent
             additional_price={changedPriceWithTrackRadius}
             properties={adminProperties.track_radius_group}
             enablePrice={(radius, e) => changePriceWithTrackRadius(radius, e)}
-          />
+          />}
           <ColorsSettingComponent
             colorIndex={colorIndex}
             onChange={(color, e) => {
@@ -554,7 +558,7 @@ const Builder = ({ adminProperties }) => {
             }}
             properties={adminProperties.standard_colors_group}
           />
-          <PremiumColorsSettingComponent
+          {hideSettings.hide_premium_colors_settings.hide_from_builder === false && <PremiumColorsSettingComponent
             properties={adminProperties.premium_colors_group}
             enablePrice={(color, e) => {
               setMetaObject({
@@ -565,7 +569,7 @@ const Builder = ({ adminProperties }) => {
               })
               changePriceWithPremiumColor(e);
             }}
-          />
+          />}
           <div className="product-setting-item-component price-section">
             <label>Total</label>
             <p>$ {price}</p>
