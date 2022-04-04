@@ -226,6 +226,16 @@ function getAdminProperties() {
   $custom_window_stockton_397 = get_field('stockton_397', 'option');
   $custom_window_sherwood_306 = get_field('sherwood_306', 'option');
 
+  $hide_panel_settings = get_field('hide_panel_settings', 'option');
+  $hide_windows_settings = get_field('hide_windows_settings', 'option');
+  $hide_vents_settings = get_field('hide_vents_settings', 'option');
+  $hide_insulation_settings = get_field('hide_insulation_settings', 'option');
+  $hide_roller_type_settings = get_field('hide_roller_type_settings', 'option');
+  $hide_lock_placement_settings = get_field('hide_lock_placement_settings', 'option');
+  $hide_track_radius_settings = get_field('hide_track_radius_settings', 'option');
+  $hide_standard_colors = get_field('hide_standard_colors', 'option');
+  $hide_premium_colors_settings = get_field('hide_premium_colors_settings', 'option');
+
   $adminProperties = array(
     'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
     'panel_group' => $panel_group,
@@ -244,6 +254,17 @@ function getAdminProperties() {
       'custom_window_winston_392' => $custom_window_winston_392,
       'custom_window_stockton_397' => $custom_window_stockton_397,
       'custom_window_sherwood_306' => $custom_window_sherwood_306
+    ],
+    'hide_settings' => [
+      'hide_panel_settings' => $hide_panel_settings,
+      'hide_windows_settings' => $hide_windows_settings,
+      'hide_vents_settings' => $hide_vents_settings,
+      'hide_insulation_settings' => $hide_insulation_settings,
+      'hide_roller_type_settings' => $hide_roller_type_settings,
+      'hide_lock_placement_settings' => $hide_lock_placement_settings,
+      'hide_track_radius_settings' => $hide_track_radius_settings,
+      'hide_standard_colors' => $hide_standard_colors,
+      'hide_premium_colors_settings' => $hide_premium_colors_settings
     ]
   );
   echo json_encode($adminProperties);
