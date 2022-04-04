@@ -17,7 +17,6 @@ import Switch from "react-switch";
 
 const Builder = ({ adminProperties }) => {
   const hideSettings = adminProperties.hide_settings;
-  console.log(basePrice);
   const [metaObj, setMetaObject] = useState({
     size: {
       width: 10.0,
@@ -124,6 +123,8 @@ const Builder = ({ adminProperties }) => {
       });
     }
   }
+
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (layoutOption == -1) {
@@ -249,7 +250,10 @@ const Builder = ({ adminProperties }) => {
   }
 
   React.useEffect(() => {
-    console.log('test');
+    // console.log('test');
+    if (isInitialized) {
+      return;
+    }
     let initialPrice = price;
     let lock_placement = metaObj.lock_placement;
     let panelType = metaObj.panelType;
@@ -389,11 +393,10 @@ const Builder = ({ adminProperties }) => {
     });
     console.log(initialPrice);
     setPrice(initialPrice);
-  }, []);
+    setIsInitialized(true);
+  }, [isInitialized]);
 
-  useEffect(() => {
-    console.log(price);
-  }, [price]);
+
   useEffect(() => {
       let pressureOptions =  adminProperties.pressure_group.pressure_options;
       let windowWidth = windowSize.width1 * 12 + windowSize.width2;
@@ -413,7 +416,9 @@ const Builder = ({ adminProperties }) => {
   }, [windowSize])
 
   useEffect(() => {
-    // console.log(pressureIndex);
+    if (!isInitialized) {
+      return;
+    }
     if (pressureIndex > -1) {
       let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
       let windowHeight = windowSize.height1 * 12 + windowSize.height2;

@@ -145,7 +145,6 @@ const Builder = _ref => {
     adminProperties
   } = _ref;
   const hideSettings = adminProperties.hide_settings;
-  console.log(basePrice);
   const [metaObj, setMetaObject] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     size: {
       width: 10.0,
@@ -251,6 +250,7 @@ const Builder = _ref => {
     }
   };
 
+  const [isInitialized, setIsInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (layoutOption == -1) {
       setPrice(price - addtionalPriceWithCustomWindow + windowCnt * Number(adminProperties.window_group.additional_price_$_per_window));
@@ -374,7 +374,11 @@ const Builder = _ref => {
   };
 
   React.useEffect(() => {
-    console.log('test');
+    // console.log('test');
+    if (isInitialized) {
+      return;
+    }
+
     let initialPrice = price;
     let lock_placement = metaObj.lock_placement;
     let panelType = metaObj.panelType;
@@ -518,10 +522,8 @@ const Builder = _ref => {
     });
     console.log(initialPrice);
     setPrice(initialPrice);
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log(price);
-  }, [price]);
+    setIsInitialized(true);
+  }, [isInitialized]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let pressureOptions = adminProperties.pressure_group.pressure_options;
     let windowWidth = windowSize.width1 * 12 + windowSize.width2;
@@ -542,7 +544,10 @@ const Builder = _ref => {
     }
   }, [windowSize]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    // console.log(pressureIndex);
+    if (!isInitialized) {
+      return;
+    }
+
     if (pressureIndex > -1) {
       let selectedPressure = adminProperties.pressure_group.pressure_options[pressureIndex];
       let windowHeight = windowSize.height1 * 12 + windowSize.height2;
