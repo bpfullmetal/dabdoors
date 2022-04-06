@@ -805,17 +805,16 @@ body.no-scroll {
         }
         &.custom-window {
           pointer-events: none;
+          border-style: solid !important;
           cursor: pointer;
           background-color: rgba(95, 82, 80, 0.6);
-          border: none !important;
-          height: fit-content;
           .window-layout-img {
-            height: auto;
+            height: 100%;
             width: 100%;
-            // max-width: unset;
-            // position: absolute;
-            // top: 0px;
-            // left: 0px;
+            max-width: unset;
+            position: absolute;
+            top: 0px;
+            left: 0px;
           }
         }
       }

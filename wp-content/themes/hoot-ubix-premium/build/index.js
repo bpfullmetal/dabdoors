@@ -2160,7 +2160,7 @@ const WindowsSettingComponent = _ref => {
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: -1
-  }, "None"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+  }, "Custom"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 0,
     disabled: !(availableOptions.indexOf(0) > -1)
   }, "Williamsburg 405"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
