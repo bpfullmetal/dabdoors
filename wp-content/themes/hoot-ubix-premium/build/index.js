@@ -1040,7 +1040,10 @@ const ProductContainerComponent = _ref => {
         isAvailableForCustomWindow: index < windowsRectRange.cols
       });
     }), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "lock"
+      className: "lock",
+      style: {
+        top: `calc(${100 / windowsRectRange.rows * Math.floor(windowsRectRange.rows / 2)}% - 5px)`
+      }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       width: "21",
       height: "16",

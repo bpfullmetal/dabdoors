@@ -227,7 +227,6 @@ body #single-product-builder .product-builder-content .product-container #produc
   align-items: center;
   position: absolute;
   left: calc(50% - 13px);
-  top: calc(50% - 5px);
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .lock svg {
   height: 10px;
