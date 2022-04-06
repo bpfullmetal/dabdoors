@@ -382,7 +382,6 @@ const Builder = _ref => {
   };
 
   React.useEffect(() => {
-    // console.log('test');
     if (isInitialized) {
       return;
     }
@@ -517,6 +516,11 @@ const Builder = _ref => {
 
       if (index > -1) {
         standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
+
+        if (premiumColorIndex == -1) {
+          standardColor.color = '';
+          setColorIndex(index);
+        }
       }
     }
 
@@ -527,8 +531,8 @@ const Builder = _ref => {
       rollerType,
       standardColor,
       premiumColor
-    });
-    console.log(initialPrice);
+    }); // console.log(initialPrice);
+
     setPrice(initialPrice);
     setIsInitialized(true);
   }, [isInitialized]);
@@ -607,6 +611,16 @@ const Builder = _ref => {
       });
     }
   }, [pressureIndex, windowSize]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    if (isInitialized) {
+      if (premiumColorIndex > -1) {
+        changePriceWithPremiumColor(true);
+        setColorIndex(-1);
+      } else {
+        changePriceWithPremiumColor(false);
+      }
+    }
+  }, [premiumColorIndex, isInitialized]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -775,13 +789,10 @@ const Builder = _ref => {
           color: color
         }
       });
-      setPremiumColorIndex(index);
-
-      if (index > -1) {
-        setColorIndex(-1);
-      }
-
-      changePriceWithPremiumColor(e);
+      setPremiumColorIndex(index); // if (index > -1) {
+      //   setColorIndex(-1);
+      // }
+      // changePriceWithPremiumColor(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component price-section"

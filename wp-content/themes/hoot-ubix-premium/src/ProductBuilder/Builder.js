@@ -109,6 +109,7 @@ const Builder = ({ adminProperties }) => {
   });
   const [availablePressures, setAvailablePressures] = useState([]);
   const [layoutOption, setLayoutOption] = useState(-1);
+
   const changeWindowsCount = (e, index) => {
     let rows = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
     let rowIndex = Math.floor(index / windowRowsCols.cols);
@@ -264,7 +265,6 @@ const Builder = ({ adminProperties }) => {
   }
 
   React.useEffect(() => {
-    // console.log('test');
     if (isInitialized) {
       return;
     }
@@ -394,6 +394,10 @@ const Builder = ({ adminProperties }) => {
       });
       if (index > -1) {
         standardColor.color = adminProperties.standard_colors_group.select_button_options[index].select_color;
+        if (premiumColorIndex == -1) {
+          standardColor.color = '';
+          setColorIndex(index);
+        }
       }
     }
     setMetaObject({
@@ -405,7 +409,7 @@ const Builder = ({ adminProperties }) => {
       standardColor,
       premiumColor
     });
-    console.log(initialPrice);
+    // console.log(initialPrice);
     setPrice(initialPrice);
     setIsInitialized(true);
   }, [isInitialized]);
@@ -486,6 +490,17 @@ const Builder = ({ adminProperties }) => {
       });
     }
   }, [pressureIndex, windowSize]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      if (premiumColorIndex > -1) {
+        changePriceWithPremiumColor(true);
+        setColorIndex(-1);
+      } else {
+        changePriceWithPremiumColor(false);
+      }
+    }
+  }, [premiumColorIndex, isInitialized])
 
   return (
     <div className="product-builder">
@@ -650,10 +665,10 @@ const Builder = ({ adminProperties }) => {
                 }
               });
               setPremiumColorIndex(index);
-              if (index > -1) {
-                setColorIndex(-1);
-              }
-              changePriceWithPremiumColor(e);
+              // if (index > -1) {
+              //   setColorIndex(-1);
+              // }
+              // changePriceWithPremiumColor(e);
             }}
           />}
           <div className="product-setting-item-component price-section">
