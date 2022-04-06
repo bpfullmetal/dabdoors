@@ -194,6 +194,11 @@ const Builder = _ref => {
   }) > -1 ? adminProperties.standard_colors_group.select_button_options.findIndex(option => {
     return option.default == true;
   }) : 0);
+  const [premiumColorIndex, setPremiumColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProperties.premium_colors_group.select_button_options.findIndex(option => {
+    return option.default == true;
+  }) > -1 ? adminProperties.premium_colors_group.select_button_options.findIndex(option => {
+    return option.default == true;
+  }) : -1);
   const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -325,6 +330,9 @@ const Builder = _ref => {
     if (e == true) {
       setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
       setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+    } else {
+      setPrice(price - changedPriceWithPremiumColor);
+      setChangedPriceWithPremiumColor(0);
     }
   };
 
@@ -614,9 +622,13 @@ const Builder = _ref => {
     hasWindow: hasWindow,
     hasVents: hasVents,
     colorIndex: colorIndex,
+    premiumColorIndex: premiumColorIndex,
     windowSize: windowSize,
     lockPlacement: metaObj.lock_placement,
     colors: adminProperties.standard_colors_group.select_button_options.map((option, index) => {
+      return option.select_color;
+    }),
+    premiumColors: adminProperties.premium_colors_group.select_button_options.map((option, index) => {
       return option.select_color;
     }),
     customWindowProperties: adminProperties.custom_window && adminProperties.custom_window,
@@ -746,17 +758,29 @@ const Builder = _ref => {
           color: color
         }
       });
+
+      if (e > -1) {
+        setPremiumColorIndex(-1);
+      }
+
       setColorIndex(e);
     },
     properties: adminProperties.standard_colors_group
   }), hideSettings.hide_premium_colors_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
     properties: adminProperties.premium_colors_group,
-    enablePrice: (color, e) => {
+    colorIndex: premiumColorIndex,
+    enablePrice: (color, e, index) => {
       setMetaObject({ ...metaObj,
         premiumColor: {
           color: color
         }
       });
+      setPremiumColorIndex(index);
+
+      if (index > -1) {
+        setColorIndex(-1);
+      }
+
       changePriceWithPremiumColor(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -860,9 +884,11 @@ const ProductContainerComponent = _ref => {
   let {
     windowSize,
     colors,
+    premiumColors,
     hasWindow,
     hasVents,
     colorIndex,
+    premiumColorIndex,
     changeWindowsCount,
     lockPlacement,
     customWindowProperties,
@@ -983,7 +1009,7 @@ const ProductContainerComponent = _ref => {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "inline-wrapper",
       style: {
-        backgroundColor: colors[colorIndex]
+        backgroundColor: colorIndex > -1 ? colors[colorIndex] : premiumColors[premiumColorIndex]
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `window-wrapper ${windowsWrapperClass} wrapper-${pack}`,
@@ -1593,30 +1619,27 @@ const PanelSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 const {
   render,
   useState
 } = wp.element;
 
-
 const PremiumColorsSettingComponent = _ref => {
   let {
     properties,
+    colorIndex,
     enablePrice
   } = _ref;
   let colors = properties.select_button_options.map((option, index) => {
     return option.select_color;
-  });
-  const [option, setOption] = useState(properties.select_button_options.findIndex(option => {
-    return option.default == true;
-  }));
+  }); // const [option, setOption] = useState(colorIndex);
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component colors-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex justify-content-beteen align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " \xA0"), properties.additional_price && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " \xA0"), properties.additional_price && colorIndex > -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "addPrice"
   }, "+$", properties.additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex align-items-center colors-wrapper"
@@ -1624,7 +1647,7 @@ const PremiumColorsSettingComponent = _ref => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "color-item",
       style: {
-        border: `2px solid ${option === index ? e : '#FFF'}`
+        border: `2px solid ${colorIndex === index ? e : '#FFF'}`
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       type: "button",
@@ -1633,8 +1656,8 @@ const PremiumColorsSettingComponent = _ref => {
         backgroundColor: `${e}`
       },
       onClick: evt => {
-        setOption(index);
-        enablePrice(e, true);
+        /*setOption(index);*/
+        enablePrice(e, true, index);
       }
     }));
   })));

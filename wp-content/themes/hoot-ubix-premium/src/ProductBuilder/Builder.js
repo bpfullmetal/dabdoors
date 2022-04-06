@@ -17,6 +17,7 @@ import Switch from "react-switch";
 
 const Builder = ({ adminProperties }) => {
   const hideSettings = adminProperties.hide_settings;
+
   const [metaObj, setMetaObject] = useState({
     size: {
       width: 10.0,
@@ -68,6 +69,15 @@ const Builder = ({ adminProperties }) => {
       return option.default == true
     }) : 0
   );
+
+  const [premiumColorIndex, setPremiumColorIndex] = useState(
+    adminProperties.premium_colors_group.select_button_options.findIndex(option => {
+      return option.default == true
+    }) > -1 ? adminProperties.premium_colors_group.select_button_options.findIndex(option => {
+      return option.default == true
+    }) : -1
+  )
+
   const [hasSizeValidationError, setSizeValidationError] = useState(false);
   const [windowCnt, setWindowCnt] = useState(0); 
   const [changedPriceWithLock, setChangedPriceWithLock] = useState(0);
@@ -76,6 +86,7 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const [changedPriceWithPressure, setChangedPriceWithPressure] = useState(0);
+
   const [windowRowsCols, setWindowRowsCols] = useState({
     rows: 4,
     cols: 4
@@ -202,6 +213,9 @@ const Builder = ({ adminProperties }) => {
     if (e == true) {
       setPrice(price - changedPriceWithPremiumColor + Number(adminProperties.premium_colors_group.additional_price));
       setChangedPriceWithPremiumColor(Number(adminProperties.premium_colors_group.additional_price));
+    } else {
+      setPrice(price - changedPriceWithPremiumColor);
+      setChangedPriceWithPremiumColor(0);
     }
   }
 
@@ -485,10 +499,16 @@ const Builder = ({ adminProperties }) => {
             hasWindow={hasWindow}
             hasVents={hasVents}
             colorIndex={colorIndex}
+            premiumColorIndex={premiumColorIndex}
             windowSize={windowSize}
             lockPlacement={metaObj.lock_placement}
             colors={
               adminProperties.standard_colors_group.select_button_options.map((option, index) => {
+                return option.select_color;
+              })
+            }
+            premiumColors={
+              adminProperties.premium_colors_group.select_button_options.map((option, index) => {
                 return option.select_color;
               })
             }
@@ -611,20 +631,28 @@ const Builder = ({ adminProperties }) => {
                 standardColor: {
                   color: color
                 }
-              })
+              });
+              if (e > -1) {
+                setPremiumColorIndex(-1);
+              }
               setColorIndex(e);
             }}
             properties={adminProperties.standard_colors_group}
           />
           {hideSettings.hide_premium_colors_settings.hide_from_builder === false && <PremiumColorsSettingComponent
             properties={adminProperties.premium_colors_group}
-            enablePrice={(color, e) => {
+            colorIndex={premiumColorIndex}
+            enablePrice={(color, e, index) => {
               setMetaObject({
                 ...metaObj,
                 premiumColor: {
                   color: color
                 }
-              })
+              });
+              setPremiumColorIndex(index);
+              if (index > -1) {
+                setColorIndex(-1);
+              }
               changePriceWithPremiumColor(e);
             }}
           />}
