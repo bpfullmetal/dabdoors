@@ -66,14 +66,6 @@ body #single-product-builder .product-builder-content .product-container {
   position: relative;
   overflow: hidden;
 }
-@media (min-width: 800px) {
-  body #single-product-builder .product-builder-content .product-container {
-    position: -webkit-sticky;
-    position: sticky;
-    align-self: flex-start;
-    top: 120px;
-  }
-}
 @media (max-width: 1023px) {
   body #single-product-builder .product-builder-content .product-container {
     padding: 30px 20px;
@@ -375,6 +367,12 @@ body #single-product-builder .product-builder-content .product-container #produc
 body #single-product-builder .product-builder-content .product-custom-bar {
   width: 270px;
   background-color: #FFF;
+}
+@media (min-width: 800px) {
+  body #single-product-builder .product-builder-content .product-custom-bar {
+    max-height: 735px;
+    overflow: auto;
+  }
 }
 body #single-product-builder .product-builder-content .product-custom-bar .btn-times {
   display: none;

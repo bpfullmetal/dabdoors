@@ -53,9 +53,9 @@ body {
       flex-wrap: wrap;
       .product-container {
         @media (min-width: 800px) {
-          position: sticky;
-          align-self: flex-start;
-          top: 120px;
+          // position: sticky;
+          // align-self: flex-start;
+          // top: 120px;
         }
         flex: 1;
         background: #F2F2F2;
@@ -351,6 +351,10 @@ body {
       .product-custom-bar {
         width: 270px;
         background-color: #FFF;
+        @media (min-width: 800px) {          
+          max-height: 735px;
+          overflow: auto;
+        }
         .btn-times {
           display: none;
         }
