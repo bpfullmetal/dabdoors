@@ -120,13 +120,13 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
                             />
                           })
                         }
+                        {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock'>
+                          <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>
+                            <rect x="0.5" y="6.5" width="20" height="4" rx="2" fill="#C4C4C4" stroke="black"/>
+                          </svg>
+                          </span>}
                       </div>
-                      {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock'>
-                        <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>
-                          <rect x="0.5" y="6.5" width="20" height="4" rx="2" fill="#C4C4C4" stroke="black"/>
-                        </svg>
-                        </span>}
                       {hasVents && <VentsComponent columns={windowsRectRange.cols} />}
                     </div>
                   </div>

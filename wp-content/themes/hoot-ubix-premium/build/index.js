@@ -1039,7 +1039,7 @@ const ProductContainerComponent = _ref => {
         },
         isAvailableForCustomWindow: index < windowsRectRange.cols
       });
-    })), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "lock"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       width: "21",
@@ -1061,7 +1061,7 @@ const ProductContainerComponent = _ref => {
       rx: "2",
       fill: "#C4C4C4",
       stroke: "black"
-    }))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    })))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
       columns: windowsRectRange.cols
     })))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1251,16 +1251,7 @@ const WindowComponent = _ref => {
         setPackItems(Sherwood_8Pack);
       }
     }
-  }, [customWindowProperties, layoutOption, cols]); // useEffect(() => {
-  //   if (windowIndex == 0) {
-  //     setCustomClassName('first-item');
-  //   } else if (windowIndex == cols - 1) {
-  //     setCustomClassName('last-item');
-  //   } else {
-  //     setCustomClassName('middle-item');
-  //   }
-  // }, [layoutOption, windowIndex, cols])
-
+  }, [customWindowProperties, layoutOption, cols]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`
   }, hasWindow == false && layoutOption == -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {

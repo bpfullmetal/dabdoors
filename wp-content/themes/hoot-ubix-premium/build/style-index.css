@@ -151,6 +151,7 @@ body #single-product-builder .product-builder-content .product-container #produc
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   flex: 1;
+  position: relative;
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .window-wrapper > .window-item {
   border: 1px dashed #FFFFFF;
@@ -220,13 +221,16 @@ body #single-product-builder .product-builder-content .product-container #produc
 }
 body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .lock {
   width: 26px;
-  height: 24px;
+  height: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   left: calc(50% - 13px);
-  top: calc(50% - 12px);
+  top: calc(50% - 5px);
+}
+body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper .outline-door .inline-door .inline-wrapper .lock svg {
+  height: 10px;
 }
 @media (max-width: 799px) {
   body #single-product-builder .product-builder-content .product-container #product-container .react-transform-wrapper .wall-wrapper {

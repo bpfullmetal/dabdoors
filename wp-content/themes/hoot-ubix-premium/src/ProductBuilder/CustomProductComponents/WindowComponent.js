@@ -90,15 +90,6 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
     }
   }, [customWindowProperties, layoutOption, cols])
 
-  // useEffect(() => {
-  //   if (windowIndex == 0) {
-  //     setCustomClassName('first-item');
-  //   } else if (windowIndex == cols - 1) {
-  //     setCustomClassName('last-item');
-  //   } else {
-  //     setCustomClassName('middle-item');
-  //   }
-  // }, [layoutOption, windowIndex, cols])
 
   return (
     <div className={`window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`}>

@@ -133,6 +133,7 @@ body {
                       grid-template-columns: repeat(4, 1fr);
                       gap: 10px;
                       flex: 1;
+                      position: relative;
                       > .window-item {
                         border: 1px dashed #FFFFFF;
                         box-sizing: border-box;
@@ -209,13 +210,16 @@ body {
                     }
                     .lock {
                       width: 26px;
-                      height: 24px;
+                      height: 10px;
                       display: flex;
                       justify-content: center;
                       align-items: center;
                       position: absolute;
                       left: calc(50% - 13px);
-                      top: calc(50% - 12px);
+                      top: calc(50% - 5px);
+                      svg {
+                        height: 10px;
+                      }
                     }
                   }
                 }
