@@ -14,6 +14,11 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
   const [realWidth, setRealWidth] = useState(0);
   const [realHeight, setRealHeight] = useState(0);
   const [bgColor, setBgColor] = useState('#CCAC7B');
+  const [perWidth, setPerWidth] = useState(0);
+  const [perSize, setPerSize] = useState({
+    width: 0,
+    height: 0
+  })
   const [windowsRectRange, setWindowsRectRange] = useState({
     rows: 4,
     cols: 4
@@ -72,6 +77,25 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
     }
   }, [layoutOption, windowsRectRange, hasWindow])
 
+  useEffect(() => {
+    console.log(realWidth);
+    console.log(realWidth - 92);
+
+    let perWidth = ((realWidth - 92) - (10 * (windowsRectRange.cols - 1))) / windowsRectRange.cols;
+    let perHeight =  perWidth * 0.6;
+    console.log(perHeight * windowsRectRange.rows + (10 * (windowsRectRange.rows - 1)), realHeight - 96);
+    if (perHeight * windowsRectRange.rows + (10 * (windowsRectRange.rows - 1)) > realHeight - 96) {
+      perHeight = (realHeight - 96 - (10 * (windowsRectRange.rows - 1))) / windowsRectRange.rows;
+      perWidth = perHeight / 0.6;
+    }
+    setPerSize({
+      width: perWidth,
+      height: perHeight
+    })
+
+    // }
+  }, [realHeight, realWidth, windowsRectRange]);
+
   return (
     <div id="product-container">
       <TransformWrapper
@@ -99,7 +123,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
             <TransformComponent>
               <div
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
-                style={{backgroundColor: bgColor, backgroundSize: `auto ${texturePercent}%`}}
+                style={{backgroundColor: bgColor, backgroundSize: `auto ${texturePercent}%` }}
               >
                 <div className="outline-door" style={{width: realWidth, height: realHeight}}>
                   <div className="inline-door">
@@ -108,6 +132,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
                         {
                           windows.map((e, index) => {
                             return <WindowComponent
+                              perSize={perSize}
                               windowIndex={index}
                               enableWindow={hasWindow}
                               layoutOption={layoutOption}
@@ -127,7 +152,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
                           </svg>
                           </span>}
                       </div>
-                      {hasVents && <VentsComponent columns={windowsRectRange.cols} />}
+                      <VentsComponent columns={windowsRectRange.cols} hasVents={hasVents} />
                     </div>
                   </div>
                 </div>

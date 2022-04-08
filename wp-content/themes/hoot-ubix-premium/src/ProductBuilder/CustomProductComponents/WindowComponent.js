@@ -37,7 +37,7 @@ import Stockton from "../../assets/Stockton/stockton-tile.png";
 import { getPack } from "../../helper";
 import PackComponent from "./PackComponents";
 
-const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption, cols, customWindowProperties, isAvailableForCustomWindow }) => {
+const WindowComponent = ({ perSize, enableWindow, addedWindow, windowIndex, layoutOption, cols, customWindowProperties, isAvailableForCustomWindow }) => {
   const [hasWindow, setHasWindow] = useState(false);
   const [customClassName, setCustomClassName] = useState('');
   const [pack, setPack] = useState(null);
@@ -92,7 +92,10 @@ const WindowComponent = ({ enableWindow, addedWindow, windowIndex, layoutOption,
 
 
   return (
-    <div className={`window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`}>
+    <div
+      className={`window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`}
+      style={{ height: perSize.height, width: perSize.width }}
+    >
       {
         hasWindow == false && layoutOption == -1 && <span className="btn btn-add" onClick={(e) => { 
           if (enableWindow === true) {

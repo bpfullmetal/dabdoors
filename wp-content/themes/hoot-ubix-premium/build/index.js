@@ -913,6 +913,11 @@ const ProductContainerComponent = _ref => {
   const [realWidth, setRealWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [realHeight, setRealHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [bgColor, setBgColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('#CCAC7B');
+  const [perWidth, setPerWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [perSize, setPerSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    width: 0,
+    height: 0
+  });
   const [windowsRectRange, setWindowsRectRange] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     rows: 4,
     cols: 4
@@ -970,6 +975,23 @@ const ProductContainerComponent = _ref => {
       setWindowsWrapperClass('');
     }
   }, [layoutOption, windowsRectRange, hasWindow]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(realWidth);
+    console.log(realWidth - 92);
+    let perWidth = (realWidth - 92 - 10 * (windowsRectRange.cols - 1)) / windowsRectRange.cols;
+    let perHeight = perWidth * 0.6;
+    console.log(perHeight * windowsRectRange.rows + 10 * (windowsRectRange.rows - 1), realHeight - 96);
+
+    if (perHeight * windowsRectRange.rows + 10 * (windowsRectRange.rows - 1) > realHeight - 96) {
+      perHeight = (realHeight - 96 - 10 * (windowsRectRange.rows - 1)) / windowsRectRange.rows;
+      perWidth = perHeight / 0.6;
+    }
+
+    setPerSize({
+      width: perWidth,
+      height: perHeight
+    }); // }
+  }, [realHeight, realWidth, windowsRectRange]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "product-container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformWrapper, {
@@ -1029,6 +1051,7 @@ const ProductContainerComponent = _ref => {
       }
     }, windows.map((e, index) => {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WindowComponent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        perSize: perSize,
         windowIndex: index,
         enableWindow: hasWindow,
         layoutOption: layoutOption,
@@ -1064,8 +1087,9 @@ const ProductContainerComponent = _ref => {
       rx: "2",
       fill: "#C4C4C4",
       stroke: "black"
-    })))), hasVents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      columns: windowsRectRange.cols
+    })))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      columns: windowsRectRange.cols,
+      hasVents: hasVents
     })))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
     tileIndex: tileIndex,
@@ -1088,18 +1112,23 @@ const ProductContainerComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../assets/img_vent_background.png */ "./src/assets/img_vent_background.png");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../assets/img_vent_background.png */ "./src/assets/img_vent_background.png");
+
 
 
 
 const VentsComponent = _ref => {
   let {
-    columns
+    columns,
+    hasVents
   } = _ref;
-  // console.log('HERE');
-  // console.log(columns);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    console.log(hasVents);
+  }, [hasVents]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "vents-wrapper",
+    className: `vents-wrapper ${hasVents ? '' : 'hidden'}`,
     style: {
       gridTemplateColumns: `repeat(${columns}, 1fr)`
     }
@@ -1107,7 +1136,7 @@ const VentsComponent = _ref => {
     key: i,
     className: "vent-item"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_1__
+    src: _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_2__
   }))));
 };
 
@@ -1196,6 +1225,7 @@ const {
 
 const WindowComponent = _ref => {
   let {
+    perSize,
     enableWindow,
     addedWindow,
     windowIndex,
@@ -1256,7 +1286,11 @@ const WindowComponent = _ref => {
     }
   }, [customWindowProperties, layoutOption, cols]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`
+    className: `window-item item-${windowIndex} ${layoutOption == -1 && hasWindow ? 'active-window' : 'no-window'} ${enableWindow ? '' : 'disableWindow'} ${isAvailableForCustomWindow ? 'custom-window' : ''}`,
+    style: {
+      height: perSize.height,
+      width: perSize.width
+    }
   }, hasWindow == false && layoutOption == -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "btn btn-add",
     onClick: e => {
