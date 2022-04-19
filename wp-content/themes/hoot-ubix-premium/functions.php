@@ -358,7 +358,7 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
             $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
             $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
             $return_string .= "</table></dl>"; 
-            $return_string .= '<b><u>Meta Data:</u></b><br/>'.$metaDataString;
+            $return_string .= '<b><u>Door Spec:</u></b><br/>'.$metaDataString;
             return $return_string;
         }
         else
