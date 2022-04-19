@@ -68,6 +68,9 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
           e.preventDefault();
         }
       } else if (type == 2) {
+        if (newValue > 12) {
+          e.preventDefault();
+        }
         if (newValue % 2 == 1) {
           newValue ++;
         }
@@ -81,6 +84,9 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
           e.preventDefault();
         }
       } else if (type == 4) {
+        if (newValue > 12) {
+          e.preventDefault();
+        }
         height = height1 * 12 + newValue;
         if (height > productMaxHeight) {
           e.preventDefault();
@@ -140,6 +146,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
               step={2}
               name="width_2"
               value={width2}
+              max={12}
               onKeyPress={(e) => {
                 checkValidation(e, 2);
               }}
@@ -171,6 +178,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
               onKeyPress={(e) => {
                 checkValidation(e, 4);
               }}
+              max={12}
               onChange={(e) => changeHeight2Value(e)}
               // onChange={(e) => {
                 // setHeight2((e.target.value))

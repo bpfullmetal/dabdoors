@@ -1921,6 +1921,10 @@ const SizeChangeComponent = _ref => {
           e.preventDefault();
         }
       } else if (type == 2) {
+        if (newValue > 12) {
+          e.preventDefault();
+        }
+
         if (newValue % 2 == 1) {
           newValue++;
         }
@@ -1937,6 +1941,10 @@ const SizeChangeComponent = _ref => {
           e.preventDefault();
         }
       } else if (type == 4) {
+        if (newValue > 12) {
+          e.preventDefault();
+        }
+
         height = height1 * 12 + newValue;
 
         if (height > productMaxHeight) {
@@ -1989,6 +1997,7 @@ const SizeChangeComponent = _ref => {
     step: 2,
     name: "width_2",
     value: width2,
+    max: 12,
     onKeyPress: e => {
       checkValidation(e, 2);
     },
@@ -2018,6 +2027,7 @@ const SizeChangeComponent = _ref => {
     onKeyPress: e => {
       checkValidation(e, 4);
     },
+    max: 12,
     onChange: e => changeHeight2Value(e) // onChange={(e) => {
     // setHeight2((e.target.value))
     // }}
