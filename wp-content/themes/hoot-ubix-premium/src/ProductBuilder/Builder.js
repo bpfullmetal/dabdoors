@@ -208,6 +208,21 @@ const Builder = ({ adminProperties }) => {
     }
   }
 
+  const changePriceWithHeadRoom = (e) => {
+    let selectedOption = adminProperties.headroom.options[e];
+    if (selectedOption) {
+      let additionalPrice = Number(selectedOption.additional_price);
+      setPrice(price - changedPriceWithHeadRoom + additionalPrice);
+      setChangedPriceWithHeadRoom(additionalPrice);
+      setMetaObject({
+        ...metaObj,
+        headroom: {
+          type: selectedOption.option_label
+        }
+      })
+    }
+  }
+
   const changePriceWithRollerType = (type, e) => {
     setMetaObject({
       ...metaObj,
@@ -629,10 +644,10 @@ const Builder = ({ adminProperties }) => {
             }}
           />}
           <HeadroomSettingComponent
-            additional_price={0}
+            additional_price={changedPriceWithHeadRoom}
             headroomProperty={adminProperties.headroom}
             onSelectHeadroomType={(e) => {
-              console.log(e)
+              changePriceWithHeadRoom(e);
             }}
           />
           {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent

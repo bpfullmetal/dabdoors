@@ -327,6 +327,21 @@ const Builder = _ref => {
     }
   };
 
+  const changePriceWithHeadRoom = e => {
+    let selectedOption = adminProperties.headroom.options[e];
+
+    if (selectedOption) {
+      let additionalPrice = Number(selectedOption.additional_price);
+      setPrice(price - changedPriceWithHeadRoom + additionalPrice);
+      setChangedPriceWithHeadRoom(additionalPrice);
+      setMetaObject({ ...metaObj,
+        headroom: {
+          type: selectedOption.option_label
+        }
+      });
+    }
+  };
+
   const changePriceWithRollerType = (type, e) => {
     setMetaObject({ ...metaObj,
       rollerType: {
@@ -759,10 +774,10 @@ const Builder = _ref => {
       changePriceWithPanelGroup(e);
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    additional_price: 0,
+    additional_price: changedPriceWithHeadRoom,
     headroomProperty: adminProperties.headroom,
     onSelectHeadroomType: e => {
-      console.log(e);
+      changePriceWithHeadRoom(e);
     }
   }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     additional_price: changedPriceWithRollerType,
