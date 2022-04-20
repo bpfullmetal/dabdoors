@@ -419,6 +419,7 @@ const Builder = _ref => {
     let rollerType = metaObj.rollerType;
     let standardColor = metaObj.standardColor;
     let premiumColor = metaObj.premiumColor;
+    let headroom = metaObj.headroom;
 
     if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
       if (adminProperties.lock_placement_group.inside.default === true) {
@@ -457,6 +458,13 @@ const Builder = _ref => {
         initialPrice += Number(adminProperties.panels[defaultPanelIndex].additional_price);
         setChangedPriceWithPanel(Number(adminProperties.panels[defaultPanelIndex].additional_price));
       }
+    }
+
+    if (adminProperties.headroom.options.length) {
+      let defaultOptionIndex = adminProperties.headroom.options.findIndex(it => it.default === true);
+      defaultOptionIndex = defaultOptionIndex > -1 ? defaultOptionIndex : 0;
+      initialPrice += Number(adminProperties.headroom.options[defaultOptionIndex].additional_price);
+      setChangedPriceWithHeadRoom(Number(adminProperties.headroom.options[defaultOptionIndex].additional_price));
     }
 
     if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
