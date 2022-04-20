@@ -306,14 +306,19 @@ const Builder = _ref => {
     setChangedPriceWithLock(e);
   };
 
-  const changePriceWithPanelGroup = (option, e) => {
-    setPrice(price - changedPriceWithPanel + e);
-    setChangedPriceWithPanel(e);
-    setMetaObject({ ...metaObj,
-      panelType: {
-        type: option == 1 ? 'raised' : 'flush'
-      }
-    });
+  const changePriceWithPanelGroup = e => {
+    let selectedPanel = adminProperties.panels[e];
+
+    if (selectedPanel) {
+      let panelPrice = Number(selectedPanel.additional_price);
+      setPrice(price - changedPriceWithPanel + panelPrice);
+      setChangedPriceWithPanel(panelPrice);
+      setMetaObject({ ...metaObj,
+        panelType: {
+          type: selectedPanel.panel_type
+        }
+      });
+    }
   };
 
   const changePriceWithRollerType = (type, e) => {
@@ -424,24 +429,12 @@ const Builder = _ref => {
     }
 
     if (hideSettings.hide_panel_settings.hide_from_builder == false) {
-      if (adminProperties.panel_group.raised.default === true) {
-        panelType.type = 'raised';
-        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-      } else if (adminProperties.panel_group.flush.default === true) {
-        panelType.type = 'flush';
-        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
-      }
-    } else if (hideSettings.hide_panel_settings.hide_from_builder == true) {
-      if (hideSettings.hide_panel_settings.default_value == 'raised') {
-        panelType.type = 'raised';
-        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-      } else {
-        panelType.type = 'flush';
-        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
+      if (adminProperties.panels.length) {
+        let defaultPanelIndex = adminProperties.panels.findIndex(it => it.default === true);
+        defaultPanelIndex = defaultPanelIndex > -1 ? defaultPanelIndex : 0;
+        panelType.type = adminProperties.panels[defaultPanelIndex].panel_type;
+        initialPrice += Number(adminProperties.panels[defaultPanelIndex].additional_price);
+        setChangedPriceWithPanel(Number(adminProperties.panels[defaultPanelIndex].additional_price));
       }
     }
 
@@ -754,9 +747,11 @@ const Builder = _ref => {
     properties: adminProperties.lock_placement_group && adminProperties.lock_placement_group
   }), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     additional_price: changedPriceWithPanel,
-    setAdditionalPriceForPanelGroup: (option, e) => changePriceWithPanelGroup(option, e),
-    properties: adminProperties.panel_group && adminProperties.panel_group,
-    panels: adminProperties.panels
+    panels: adminProperties.panels,
+    onSelectPanelType: e => {
+      console.log(e);
+      changePriceWithPanelGroup(e);
+    }
   }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     additional_price: changedPriceWithRollerType,
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
@@ -1624,25 +1619,23 @@ const {
 const PanelSettingComponent = _ref => {
   let {
     additional_price,
-    properties,
-    setAdditionalPriceForPanelGroup,
+    onSelectPanelType,
     panels
   } = _ref;
-  const [option, setOption] = useState(properties.raised.default == true ? 1 : properties.flush.default == true ? 2 : -1);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Panel Type", additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
   }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "button-wrapper",
     onChange: e => {
-      // setPressureIndex(e.target.value);
       onSelectPanelType(e.target.value);
     }
   }, panels.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
-      value: index
+      value: index,
+      selected: it.default === true
     }, it.panel_type, " (+$", it.additional_price, ")");
   })));
 };

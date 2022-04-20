@@ -188,15 +188,19 @@ const Builder = ({ adminProperties }) => {
     setChangedPriceWithLock(e);
   }
 
-  const changePriceWithPanelGroup = (option, e) => {
-    setPrice(price - changedPriceWithPanel + e);
-    setChangedPriceWithPanel(e);
-    setMetaObject({
-      ...metaObj,
-      panelType: {
-        type: option == 1 ? 'raised' : 'flush'
-      }
-    });
+  const changePriceWithPanelGroup = (e) => {
+    let selectedPanel = adminProperties.panels[e];
+    if (selectedPanel) {
+      let panelPrice = Number(selectedPanel.additional_price);
+      setPrice(price - changedPriceWithPanel + panelPrice);
+      setChangedPriceWithPanel(panelPrice);
+      setMetaObject({
+        ...metaObj,
+        panelType: {
+          type: selectedPanel.panel_type
+        }
+      });
+    }
   }
 
   const changePriceWithRollerType = (type, e) => {
@@ -305,24 +309,12 @@ const Builder = ({ adminProperties }) => {
     }
 
     if (hideSettings.hide_panel_settings.hide_from_builder == false) {
-      if (adminProperties.panel_group.raised.default === true) {
-        panelType.type = 'raised';
-        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-      } else if (adminProperties.panel_group.flush.default === true) {
-        panelType.type = 'flush';
-        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
-      }
-    } else if (hideSettings.hide_panel_settings.hide_from_builder == true) {
-      if (hideSettings.hide_panel_settings.default_value == 'raised') {
-        panelType.type = 'raised';
-        initialPrice += Number(adminProperties.panel_group.raised.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.lock_placement_group.inside.additional_price_$));
-      } else {
-        panelType.type = 'flush';
-        initialPrice += Number(adminProperties.panel_group.flush.additional_price_$);
-        setChangedPriceWithPanel(Number(adminProperties.panel_group.flush.additional_price_$));
+      if (adminProperties.panels.length) {
+        let defaultPanelIndex = adminProperties.panels.findIndex(it => it.default === true);
+        defaultPanelIndex = defaultPanelIndex > -1 ? defaultPanelIndex : 0;
+        panelType.type = adminProperties.panels[defaultPanelIndex].panel_type;
+        initialPrice += Number(adminProperties.panels[defaultPanelIndex].additional_price);
+        setChangedPriceWithPanel(Number(adminProperties.panels[defaultPanelIndex].additional_price));
       }
     }
 
@@ -625,9 +617,11 @@ const Builder = ({ adminProperties }) => {
           />}
           {hideSettings.hide_panel_settings.hide_from_builder === false && <PanelSettingComponent
             additional_price={changedPriceWithPanel}
-            setAdditionalPriceForPanelGroup = {(option, e) => changePriceWithPanelGroup(option, e)}
-            properties={adminProperties.panel_group && adminProperties.panel_group}
             panels={adminProperties.panels}
+            onSelectPanelType={(e) => {
+              console.log(e);
+              changePriceWithPanelGroup(e);
+            }}
           />}
           {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent
             additional_price={changedPriceWithRollerType}
