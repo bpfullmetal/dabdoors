@@ -755,7 +755,8 @@ const Builder = _ref => {
   }), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     additional_price: changedPriceWithPanel,
     setAdditionalPriceForPanelGroup: (option, e) => changePriceWithPanelGroup(option, e),
-    properties: adminProperties.panel_group && adminProperties.panel_group
+    properties: adminProperties.panel_group && adminProperties.panel_group,
+    panels: adminProperties.panels
   }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     additional_price: changedPriceWithRollerType,
     properties: adminProperties.roller_type_group && adminProperties.roller_type_group,
@@ -1624,30 +1625,26 @@ const PanelSettingComponent = _ref => {
   let {
     additional_price,
     properties,
-    setAdditionalPriceForPanelGroup
+    setAdditionalPriceForPanelGroup,
+    panels
   } = _ref;
   const [option, setOption] = useState(properties.raised.default == true ? 1 : properties.flush.default == true ? 2 : -1);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "d-flex button-wrapper align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    type: "button",
-    className: `button ${option == 1 ? 'active' : ''}`,
-    onClick: e => {
-      setOption(1);
-      setAdditionalPriceForPanelGroup(1, Number(properties.raised.additional_price_$));
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    className: "button-wrapper",
+    onChange: e => {
+      // setPressureIndex(e.target.value);
+      onSelectPanelType(e.target.value);
     }
-  }, " Raised "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    type: "button",
-    className: `button ${option == 2 ? 'active' : ''}`,
-    onClick: e => {
-      setOption(2);
-      setAdditionalPriceForPanelGroup(2, Number(properties.flush.additional_price_$));
-    }
-  }, " Flush ")));
+  }, panels.map((it, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      key: index,
+      value: index
+    }, it.panel_type, " (+$", it.additional_price, ")");
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PanelSettingComponent);

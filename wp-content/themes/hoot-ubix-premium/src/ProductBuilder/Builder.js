@@ -627,6 +627,7 @@ const Builder = ({ adminProperties }) => {
             additional_price={changedPriceWithPanel}
             setAdditionalPriceForPanelGroup = {(option, e) => changePriceWithPanelGroup(option, e)}
             properties={adminProperties.panel_group && adminProperties.panel_group}
+            panels={adminProperties.panels}
           />}
           {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent
             additional_price={changedPriceWithRollerType}
