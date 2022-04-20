@@ -344,9 +344,9 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
             } else if (isset($metaItem['lock_placement']) && $metaItem['lock_placement']) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Lock placement: </b>'.$metaItem['lock_placement'].'</span>';
             } else if (isset($metaItem['insulation']) && $metaItem['insulation']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Insulation: </b>Enabled</span>';
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Insulation: </b>Yes</span>';
             } else if (isset($metaItem['vents']) && $metaItem['vents']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Enabled</span>';
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Yes</span>';
             } else if (isset($metaItem['panelType']) && $metaItem['panelType']) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Panel: </b>'. $metaItem['panelType'] .'</span>';
             } else if (isset($metaItem['ubarSettings'])) {
