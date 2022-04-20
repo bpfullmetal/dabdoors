@@ -12,6 +12,7 @@ import ColorsSettingComponent from "./SettingsComponents/ColorsSettingComponent"
 import PremiumColorsSettingComponent from "./SettingsComponents/PremiumColorsSettingComponent";
 import ProductContainerComponent from "./CustomProductComponents/ProductContainerComponent";
 import PressureSettingsComponent from './SettingsComponents/PressureSettingsComponent';
+import HeadroomSettingComponent from './SettingsComponents/HeadroomSettingComponent';
 import Switch from "react-switch";
 
 
@@ -38,6 +39,9 @@ const Builder = ({ adminProperties }) => {
       hasVents: false
     },
     panelType: {
+      type: ''
+    },
+    headroom: {
       type: ''
     },
     trackRadius:  {
@@ -86,6 +90,7 @@ const Builder = ({ adminProperties }) => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
   const [changedPriceWithPressure, setChangedPriceWithPressure] = useState(0);
+  const [changedPriceWithHeadRoom, setChangedPriceWithHeadRoom] = useState(0);
 
   const [windowRowsCols, setWindowRowsCols] = useState({
     rows: 4,
@@ -623,6 +628,13 @@ const Builder = ({ adminProperties }) => {
               changePriceWithPanelGroup(e);
             }}
           />}
+          <HeadroomSettingComponent
+            additional_price={0}
+            headroomProperty={adminProperties.headroom}
+            onSelectHeadroomType={(e) => {
+              console.log(e)
+            }}
+          />
           {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent
             additional_price={changedPriceWithRollerType}
             properties={adminProperties.roller_type_group && adminProperties.roller_type_group}

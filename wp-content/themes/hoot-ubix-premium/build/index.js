@@ -122,7 +122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
 /* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
 /* harmony import */ var _SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./SettingsComponents/PressureSettingsComponent */ "./src/ProductBuilder/SettingsComponents/PressureSettingsComponent.js");
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+/* harmony import */ var _SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./SettingsComponents/HeadroomSettingComponent */ "./src/ProductBuilder/SettingsComponents/HeadroomSettingComponent.js");
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+
 
 
 
@@ -167,6 +169,9 @@ const Builder = _ref => {
     panelType: {
       type: ''
     },
+    headroom: {
+      type: ''
+    },
     trackRadius: {
       radius: 12
     },
@@ -207,6 +212,7 @@ const Builder = _ref => {
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPressure, setChangedPriceWithPressure] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+  const [changedPriceWithHeadRoom, setChangedPriceWithHeadRoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [windowRowsCols, setWindowRowsCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     rows: 4,
     cols: 4
@@ -649,7 +655,7 @@ const Builder = _ref => {
     pack: pack
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onChange: e => {
       setShowCustomPanel(e);
     },
@@ -751,6 +757,12 @@ const Builder = _ref => {
     onSelectPanelType: e => {
       console.log(e);
       changePriceWithPanelGroup(e);
+    }
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    additional_price: 0,
+    headroomProperty: adminProperties.headroom,
+    onSelectHeadroomType: e => {
+      console.log(e);
     }
   }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
     additional_price: changedPriceWithRollerType,
@@ -1498,6 +1510,49 @@ const ColorsSettingComponent = _ref => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ColorsSettingComponent);
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/SettingsComponents/HeadroomSettingComponent.js":
+/*!***************************************************************************!*\
+  !*** ./src/ProductBuilder/SettingsComponents/HeadroomSettingComponent.js ***!
+  \***************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  render,
+  useState
+} = wp.element;
+
+const HeadroomSettingComponent = _ref => {
+  let {
+    additional_price,
+    headroomProperty,
+    onSelectHeadroomType
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "product-setting-item-component lock-placement-settings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, headroomProperty.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    className: "button-wrapper",
+    onChange: e => {
+      onSelectHeadroomType(e.target.value);
+    }
+  }, headroomProperty.options.map((it, index) => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      key: index,
+      value: index
+    }, it.option_label, " (+$", it.additional_price, ")");
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HeadroomSettingComponent);
 
 /***/ }),
 
