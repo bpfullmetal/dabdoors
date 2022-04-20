@@ -210,7 +210,6 @@ if( function_exists('acf_add_options_page') ) {
 
 function getAdminProperties() {
   $minimum_area_for_additional_fees = get_field('minimum_area_for_additional_fees', 'option');
-  $panel_group = get_field('panel', 'option');
   $panels = get_field('panels', 'option');
   $window_group = get_field('window', 'option');
   $vents_group = get_field('vents', 'option');
@@ -239,7 +238,6 @@ function getAdminProperties() {
 
   $adminProperties = array(
     'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
-    'panel_group' => $panel_group,
     'panels' => $panels,
     'window_group' => $window_group,
     'vents_group' => $vents_group,
