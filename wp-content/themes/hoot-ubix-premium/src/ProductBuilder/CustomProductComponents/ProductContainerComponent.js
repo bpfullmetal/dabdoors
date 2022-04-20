@@ -120,6 +120,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
               scale={scale}
               windowSize={windowSize}
             />
+            <h3 className='text-center' style={{ textAlign: 'center', marginTop: 0 }}>View From Outside</h3>
             <TransformComponent>
               <div
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
