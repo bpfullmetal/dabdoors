@@ -110,9 +110,14 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
             'vents' => true
           );
         }
-        if ($option['panelType'] == true) {
+        if (isset($option['panelType']) && $option['panelType']['type']) {
           $metaData[] = array(
             'panelType' => $option['panelType']['type']
+          );
+        }
+        if (isset($option['headroom']) && $option['headroom']['type']) {
+          $metaData[] = array(
+            'headroom' => $option['headroom']['type']
           );
         }
         if ($option['ubarSettings']['count'] > 0) {
@@ -353,15 +358,18 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Yes</span>';
             } else if (isset($metaItem['panelType']) && $metaItem['panelType']) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Panel: </b>'. $metaItem['panelType'] .'</span>';
+            } else if (isset($metaItem['headroom']) && $metaItem['headroom']) {
+              $metaDataString .= ',&nbsp;<span class="meta-item"><b>HeadRoom: </b>'. $metaItem['headroom'] .'</span>';
             } else if (isset($metaItem['ubarSettings'])) {
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Ubar Count: </b>'. $metaItem['ubarSettings']['count'] .', <b>Pressure Option: </b>'. $metaItem['ubarSettings']['pressure'] .'</span>';
             }
           }
           // if ($metaData['window_placement'])
-            $return_string = $product_name . "</a><dl class='variation'>";
-            $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
-            $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
-            $return_string .= "</table></dl>"; 
+            $return_string = $product_name . "</a><br /><br />";
+            // "<dl class='variation'>";
+            // $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
+            // $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
+            // $return_string .= "</table></dl>"; 
             $return_string .= '<b><u>Door Spec:</u></b><br/>'.$metaDataString;
             return $return_string;
         }

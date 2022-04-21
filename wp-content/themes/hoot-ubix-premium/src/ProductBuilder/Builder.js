@@ -293,7 +293,6 @@ const Builder = ({ adminProperties }) => {
             setShowAlerts(true);
             console.log(res);
           }) 
-          // console.log(base64data);
         }
         
       });

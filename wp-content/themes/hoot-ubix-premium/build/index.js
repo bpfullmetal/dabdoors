@@ -415,7 +415,7 @@ const Builder = _ref => {
             setIsAdding(false);
             setShowAlerts(true);
             console.log(res);
-          }); // console.log(base64data);
+          });
         };
       });
     }); // setIsAdding(true);
