@@ -377,7 +377,7 @@ body #single-product-builder .product-builder-content .product-custom-bar {
 }
 @media (min-width: 800px) {
   body #single-product-builder .product-builder-content .product-custom-bar {
-    max-height: 735px;
+    max-height: 765px;
     overflow: auto;
   }
 }
