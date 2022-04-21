@@ -14,7 +14,7 @@ import ProductContainerComponent from "./CustomProductComponents/ProductContaine
 import PressureSettingsComponent from './SettingsComponents/PressureSettingsComponent';
 import HeadroomSettingComponent from './SettingsComponents/HeadroomSettingComponent';
 import Switch from "react-switch";
-
+import html2canvas from 'html2canvas';
 
 const Builder = ({ adminProperties }) => {
   const hideSettings = adminProperties.hide_settings;
@@ -266,26 +266,62 @@ const Builder = ({ adminProperties }) => {
       return false;
     }
     setIsAdding(true);
-    metaObj.price = price;
-    metaObj.size = {
-      width: windowSize.width1 * 12 + windowSize.width2,
-      height: windowSize.height1 * 12 + windowSize.height2
-    }
-    let formData = {
-      action: 'addProductToCart',
-      item_id: productId,
-      meta_data: metaObj
-    };
-    jQuery.ajax({
-      type: "post",
-      dataType: "json",
-      url: `${baseUrl}/wp-admin/admin-ajax.php`,
-      data: formData,
-    }).then(res => {
-      setIsAdding(false);
-      setShowAlerts(true);
-      console.log(res);
-    }) 
+    html2canvas(document.getElementById('product-door-wrapper')).then(function(canvas) {  
+      canvas.toBlob(function(blob) {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function() {
+          var base64data = reader.result;
+          metaObj.price = price;
+          metaObj.size = {
+            width: windowSize.width1 * 12 + windowSize.width2,
+            height: windowSize.height1 * 12 + windowSize.height2
+          }
+          let formData = {
+            action: 'addProductToCart',
+            item_id: productId,
+            meta_data: metaObj,
+            thumb_img: base64data
+          };
+          jQuery.ajax({
+            type: "post",
+            dataType: "json",
+            url: `${baseUrl}/wp-admin/admin-ajax.php`,
+            data: formData,
+          }).then(res => {
+            setIsAdding(false);
+            setShowAlerts(true);
+            console.log(res);
+          }) 
+          // console.log(base64data);
+        }
+        
+      });
+    });
+  
+
+    // setIsAdding(true);
+    // metaObj.price = price;
+    // metaObj.size = {
+    //   width: windowSize.width1 * 12 + windowSize.width2,
+    //   height: windowSize.height1 * 12 + windowSize.height2
+    // }
+    // let formData = {
+    //   action: 'addProductToCart',
+    //   item_id: productId,
+    //   meta_data: metaObj,
+    //   thumb_img: base64data
+    // };
+    // jQuery.ajax({
+    //   type: "post",
+    //   dataType: "json",
+    //   url: `${baseUrl}/wp-admin/admin-ajax.php`,
+    //   data: formData,
+    // }).then(res => {
+    //   setIsAdding(false);
+    //   setShowAlerts(true);
+    //   console.log(res);
+    // }) 
   }
 
   React.useEffect(() => {

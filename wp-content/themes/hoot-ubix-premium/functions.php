@@ -76,7 +76,7 @@ add_action('woocommerce_add_order_item_meta', 'add_order_item_meta', 10, 2);
 function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
   $product = wc_get_product( $product_id );
   // $price = $product->get_price();
-  session_start();    
+  session_start();
   if (isset($_SESSION['meta_data'])) {
     $option = $_SESSION['meta_data'];
     $cart_item_data['new_price'] = floatval($option['price']) + 15;
@@ -123,6 +123,7 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
             )
           );
         }
+        $metaData['thumbnail'] = isset($_SESSION['product_thumbimage']) ? $_SESSION['product_thumbimage'] : null;
         $metaData['trackRadius'] = $option['trackRadius']['radius'];
         $metaData['rollerType'] = $option['rollerType']['type'];
         $metaData['standardColor'] = $option['standardColor']['color'];
@@ -142,7 +143,7 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
           return array_merge($cart_item_data,$new_value);
   }
   unset($_SESSION['meta_data']); 
-
+  unset($_SESSION['product_thumbimage']);
   return $cart_item_data;
 }
 
@@ -280,6 +281,7 @@ add_action( 'wp_ajax_getAdminProperties', 'getAdminProperties' );
 function addProductToCart() {
   session_start();    
   $_SESSION['meta_data'] = $_POST['meta_data'];
+  $_SESSION['product_thumbimage'] = $_POST['thumb_img'];
   ob_start();
   $product_id        = $_POST['item_id'];
   $quantity          = 1;
@@ -319,7 +321,7 @@ if(!function_exists('wdm_get_cart_items_from_session'))
     {
         if (array_key_exists( 'meta_data', $values ) )
         {
-        $item['meta_data'] = $values['meta_data'];
+          $item['meta_data'] = $values['meta_data'];
         }       
         return $item;
     }
@@ -355,7 +357,7 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
               $metaDataString .= ',&nbsp;<span class="meta-item"><b>Ubar Count: </b>'. $metaItem['ubarSettings']['count'] .', <b>Pressure Option: </b>'. $metaItem['ubarSettings']['pressure'] .'</span>';
             }
           }
-          if ($metaData['window_placement'])
+          // if ($metaData['window_placement'])
             $return_string = $product_name . "</a><dl class='variation'>";
             $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
             $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
@@ -369,3 +371,20 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
         }
     }
 }
+
+function filter_woocommerce_cart_item_thumbnail( $product_image, $cart_item, $cart_item_key ) {
+  $metaData = $cart_item['meta_data'];
+  $thumbnail_url = null;
+  if (isset($metaData['thumbnail'])) {
+    $thumbnail_url = $metaData['thumbnail'];
+  }
+
+  if ($thumbnail_url) {
+    $product_image = '<span class="product_image"><img src="'.$thumbnail_url.'" style="width: 100px; height: auto;" /></span>';
+  } else {
+    $product_image = '<span class="product_image">' . $product_image . '</span>';
+  }
+  
+  return $product_image;
+}
+add_filter( 'woocommerce_cart_item_thumbnail', 'filter_woocommerce_cart_item_thumbnail', 10, 3 );

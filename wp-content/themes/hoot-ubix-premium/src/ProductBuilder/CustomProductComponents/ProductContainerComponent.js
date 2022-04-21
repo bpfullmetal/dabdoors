@@ -123,6 +123,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
             <h3 className='text-center' style={{ textAlign: 'center', marginTop: 0 }}>View From Outside</h3>
             <TransformComponent>
               <div
+                id="product-door-wrapper"
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
                 style={{backgroundColor: bgColor, backgroundSize: `auto ${texturePercent}%` }}
               >
