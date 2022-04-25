@@ -1096,7 +1096,8 @@ const ProductContainerComponent = _ref => {
       style: {
         textAlign: 'center',
         marginTop: 0,
-        marginBottom: 10
+        marginBottom: 10,
+        userSelect: 'none'
       }
     }, "View From Outside"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_zoom_pan_pinch__WEBPACK_IMPORTED_MODULE_6__.TransformComponent, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       id: "product-door-wrapper",

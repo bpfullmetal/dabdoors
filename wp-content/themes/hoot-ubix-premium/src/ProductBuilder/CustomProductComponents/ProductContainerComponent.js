@@ -120,7 +120,7 @@ const ProductContainerComponent = ({ windowSize, colors, premiumColors, hasWindo
               scale={scale}
               windowSize={windowSize}
             />
-            <h3 className='text-center' style={{ textAlign: 'center', marginTop: 0, marginBottom: 10 }}>View From Outside</h3>
+            <h3 className='text-center' style={{ textAlign: 'center', marginTop: 0, marginBottom: 10, userSelect: 'none' }}>View From Outside</h3>
             <TransformComponent>
               <div
                 id="product-door-wrapper"
