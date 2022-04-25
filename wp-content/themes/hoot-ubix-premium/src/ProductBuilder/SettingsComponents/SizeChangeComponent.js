@@ -147,6 +147,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
               name="width_2"
               value={width2}
               max={12}
+              min={0}
               onKeyPress={(e) => {
                 checkValidation(e, 2);
               }}
@@ -179,6 +180,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
                 checkValidation(e, 4);
               }}
               max={12}
+              min={0}
               onChange={(e) => changeHeight2Value(e)}
               // onChange={(e) => {
                 // setHeight2((e.target.value))
