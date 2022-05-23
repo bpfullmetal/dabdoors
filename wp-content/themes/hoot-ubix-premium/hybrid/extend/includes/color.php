@@ -181,7 +181,7 @@ function hybridext_color( $color, $operation, $intensity1, $intensity2 = 0 ) {
 
 /**
  * The Main Color Manipulation Class
- * 
+ *
  * @since 1.0.0
  * @access public
  */
@@ -197,7 +197,7 @@ class _HybridExtend_Color {
 	 *
 	 * @since 1.0.0
 	 * @access public
-	 * @param string|int $intensity 
+	 * @param string|int $intensity
 	 * @return int
 	 */
 	function sanitize_intensity( $intensity ) {
@@ -224,18 +224,18 @@ class _HybridExtend_Color {
 			return null;
 		$intensity = $this->sanitize_intensity( $intensity );
 
-		$new_hex = ''; 
-		$decs['R'] = hexdec( $hex{1} . $hex{2} ); 
-		$decs['G'] = hexdec( $hex{3} . $hex{4} ); 
-		$decs['B'] = hexdec( $hex{5} . $hex{6} ); 
+		$new_hex = '';
+		$decs['R'] = hexdec( $hex[1] . $hex[2] );
+		$decs['G'] = hexdec( $hex[3] . $hex[4] );
+		$decs['B'] = hexdec( $hex[5] . $hex[6] );
 
 		foreach ( $decs as $i => $dec ) {
 			$new_decimal = $dec + round( ( ( 255 - $dec ) / 100 ) * $intensity );
-			$new_hex_component = dechex( $new_decimal ); 
-			if ( strlen( $new_hex_component) < 2 ) { 
+			$new_hex_component = dechex( $new_decimal );
+			if ( strlen( $new_hex_component) < 2 ) {
 				$new_hex_component = "0" . $new_hex_component;
-			} 
-			$new_hex .= $new_hex_component; 
+			}
+			$new_hex .= $new_hex_component;
 		}
 
 		return '#' . $new_hex;
@@ -256,10 +256,10 @@ class _HybridExtend_Color {
 			return null;
 		$intensity = $this->sanitize_intensity( $intensity );
 
-		$new_hex = ''; 
-		$decs['R'] = hexdec( $hex{1} . $hex{2} ); 
-		$decs['G'] = hexdec( $hex{3} . $hex{4} ); 
-		$decs['B'] = hexdec( $hex{5} . $hex{6} ); 
+		$new_hex = '';
+		$decs['R'] = hexdec( $hex[1] . $hex[2] );
+		$decs['G'] = hexdec( $hex[3] . $hex[4] );
+		$decs['B'] = hexdec( $hex[5] . $hex[6] );
 
 		foreach ( $decs as $i => $dec ) {
 			$new_decimal = $dec - round( ( $dec / 100 ) * $intensity );
