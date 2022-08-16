@@ -730,17 +730,15 @@ const Builder = ({ adminProperties }) => {
                 }
               });
               setPremiumColorIndex(index);
-              // if (index > -1) {
-              //   setColorIndex(-1);
-              // }
-              // changePriceWithPremiumColor(e);
             }}
           />}
-          <div className="product-setting-item-component price-section">
-            <label>Total</label>
-            <p>$ {price}</p>
-          </div>
+          {/* <div className="product-setting-item-component price-section">
+          </div> */}
           <div className="product-setting-item-component addCartButton">
+            <div class="d-flex price-section">
+              <label>Total</label>
+              <p>$ {price}</p>
+            </div>
             <button type="button" className={`btn btn-add-cart ${isAdding ? 'disabled' : ''}`} onClick={(e) => {
               createProduct(e);
             }}>
