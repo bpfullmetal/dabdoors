@@ -116,39 +116,33 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 <?php 
 		$product_id = get_the_ID();
 		$_product = wc_get_product( $product_id );
-		if ($_product->attributes) {
-			$attributes = $_product->attributes;
-			if ($attributes['max-width-height']) {
+		$door_settings = [];
+		$dimensions = $product->get_dimensions(false);
+		log_it($dimensions);
+		if ($_product->get_attributes()) {
+			$attributes = $_product->get_attributes();
+			if (isset($attributes['max-width-height'])) {
 				$value = $attributes['max-width-height']['options'];
 				if ($value) {
-					$max_width = $value[0];
-					$max_height = $value[1];
-					echo '<script>';
-					echo 'let productMaxWidth = '.$max_width.';';
-					echo 'let productMaxHeight = '.$max_height.';';
-					echo '</script>';
+					$door_settings['productMaxWidth'] = $value[0];
+					$door_settings['productMaxHeight'] = $value[1];
 				}
 			}
-			if ($attributes['min-width-height']) {
+			if (isset($attributes['min-width-height'])) {
 				$value = $attributes['min-width-height']['options'];
 				if ($value) {
-					$min_widht = $value[0];
-					$min_widht = $value[1];
-					echo '<script>';
-					echo 'let productMinWidth = '.$min_widht.';';
-					echo 'let productMinHeight = '.$min_widht.';';
-					echo '</script>';
+					$door_settings['productMinWidth'] = $value[0];
+					$door_settings['productMinHeight'] = $value[1];
 				}
 			}
 		}
 		$_base_price = $_product->get_price();
-		echo '<script>
-			let basePrice = '.$_base_price.';
-			let productId = '.$product_id.';
-			let initWidth = '.$_product->get_width().';
-			let initHeight = '.$_product->get_height().';
-			console.log(initWidth, initHeight);
-		</script>';
+		$door_settings['basePrice'] = $_base_price;
+		log_it('base price: '.$_base_price);
+		$door_settings['productId'] = $product_id;
+		$door_settings['initWidth'] = $dimensions['width'];
+		$door_settings['initHeight'] = $dimensions['height'];
+		wp_localize_script('dab-frontend', 'doorSettings', $door_settings);
 ?>
 <div class="hgrid main-content-grid">
 	<div id="single-product-builder"></div>

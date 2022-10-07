@@ -1,17 +1,34 @@
 const { render, useState, useEffect } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
+import { setPressure } from '../actions/pressure'
 
-const PressureSettingsComponent = ({availablePressures, properties, onSelectPressure, selectedUbarSetting}) => {
-  const [pressureIndex, setPressureIndex] = useState(-1);
+const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
+  const dispatch = useDispatch()
+
+  const doorSize = useSelector( state => state.doorSize)
+  const adminProps = useSelector( state => state.adminProps)
+  const pressure = useSelector( state => state.pressure)
+
+  const [availablePressures, setAvailablePressures] = useState([]);
+
   useEffect(() => {
-    if (availablePressures.length > 0) {
-      setPressureIndex(availablePressures[0]);
-      onSelectPressure(availablePressures[0]);
-    } else {
-      console.log('HERE');
-      setPressureIndex(-1);
-      onSelectPressure(-1);
-    }
+    let pressureOptions =  adminProps.pressure_group.pressure_options;
+    const width = doorSize.width
+    let index = 0;
+    let indexList = [];
+    pressureOptions.forEach(it => {
+      if (Number(it.min_width) <= width && Number(it.max_width) >= width) {
+        indexList.push(index);
+      }
+      index++;
+    });
+    setAvailablePressures(indexList.length ? indexList : [])
+  }, [doorSize])
+
+  useEffect(() => {
+    dispatch(setPressure(availablePressures.length ? availablePressures[0] : 'no-pressure'))
   }, [availablePressures])
+
   return (
     <div className="product-setting-item-component pressure-settings">
       <div className="d-flex justify-content-start align-items-center">
@@ -20,16 +37,14 @@ const PressureSettingsComponent = ({availablePressures, properties, onSelectPres
         </label>
       </div>
       <div className="d-flex">
-        <select value={pressureIndex} className="mt-1" onChange={(e) => {
-          setPressureIndex(e.target.value);
-          onSelectPressure(e.target.value);
-        }}>
-          { pressureIndex == -1 &&
-            <option key="-1" value="-1">Not Available</option>
+        <select value={pressure} className="mt-1" onChange={ e => dispatch(setPressure(e.target.value)) }>
+          { pressure === 'no-pressure' &&
+            <option key="no-pressure" value="no-pressure">Not Available</option>
           }
           {
             properties.pressure_options.map((it, index) => {
-              return (<option key={index} value={index} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);
+              console.log('pressure', it)
+              return (<option key={`pressure-${index}`} value={it.pressure_range} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);
             })
           }
         </select>

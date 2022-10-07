@@ -1,7 +1,5 @@
-export const getWindowRowsCols = (windowSize) => {
-    let { width1, width2, height1, height2 } = windowSize;
-    const width = width1 * 12 + width2;
-    const height = height1 * 12 + height2;
+export const getWindowRowsCols = (doorSize) => {
+    let { width, height } = doorSize;
     let rows = 4;
     let cols = 4;
     if (height >= 78 && height < 90) {

@@ -1,9 +1,16 @@
 const { render, useState, useEffect } = wp.element;
 import Builder from './ProductBuilder/Builder';
-import "./style.scss";
-const Votes = () => {
+import { store } from './store'
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { setAdminProps } from './ProductBuilder/actions/admin-props'
+import styles from  "./style.scss";
+
+
+const App = () => {
   document.getElementById('main').classList.add('single-product-main-wrapper');
-  const [adminProperties, setAdminProperties] = useState(null);
+  const dispatch = useDispatch()
+  const adminProps = useSelector((state) => state.adminProps)
+  console.log(adminProps)
   const getAdminProperties = () => {
     let formData = {
       action: 'getAdminProperties'
@@ -15,15 +22,23 @@ const Votes = () => {
       data: formData,
       success: function(response){
         console.log(response);
-        setAdminProperties(response);
+        dispatch(setAdminProps(response));
       }
     });
   };
+
   useEffect(() => {
+    console.log('HELLO')
     getAdminProperties();
   }, []);
+
   return (
-    adminProperties && <Builder adminProperties={adminProperties} />
+    Object.keys(adminProps).length && <Builder />
   );
 };
-render(<Votes />, document.getElementById('single-product-builder'));
+
+render(<React.StrictMode>
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </React.StrictMode>, document.getElementById('single-product-builder'));

@@ -1,8 +1,10 @@
 const { render, useState } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
 
-const ZoomControlComponent = ({windowSize, onZoomIn, onZoomOut, scale}) => {
+const ZoomControlComponent = ({onZoomIn, onZoomOut, scale}) => {
+  const doorSize = useSelector((state) => state.doorSize)
   const [hasWindow, setHasWindow] = useState(false);
-  let {width1, width2, height1, height2} = windowSize;
+  let { width, height } = doorSize;
   return (
     <div className="zoom-control-panel">
       <div className="zoom-control">
@@ -21,7 +23,7 @@ const ZoomControlComponent = ({windowSize, onZoomIn, onZoomOut, scale}) => {
         </span>
       </div>
       <div className="size-section">
-        <span>Size: { `${width1}’ ${width2}” X ${height1}’ ${height2}”` }</span>
+        <span>Size: { `${Math.floor(width / 12)}’ ${width % 12}” X ${Math.floor(height / 12)}’ ${height % 12}”` }</span>
       </div>
     </div>
   )

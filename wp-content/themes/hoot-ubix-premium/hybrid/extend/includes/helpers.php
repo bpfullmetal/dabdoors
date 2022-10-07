@@ -586,7 +586,7 @@ class HybridExtend_Options_Helper {
 function hybridextend_register_image_sizes() {
 	$sizes = array();
 	$sizes = apply_filters( 'hybridextend_custom_image_sizes', $sizes );
-
+	add_image_size( 'DAB Window Preview', 120, 54, false );
 	foreach ( $sizes as $name => $size ) :
 
 		$default_size = array(

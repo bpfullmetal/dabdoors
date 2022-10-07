@@ -1,28 +1,27 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { setDoorSize } from '../actions/door-size';
 import _ from 'lodash';
 
 const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
-  const [width1, setWidth1] = useState(Math.floor(initWidth / 30.48));
-  const [width2, setWidth2] = useState(0);
-  const [height1, setHeight1] = useState(Math.floor(initHeight / 30.48));
-  const [height2, setHeight2] = useState(0);
+  const dispatch = useDispatch()
+
+  const { productMinWidth, productMaxWidth, productMinHeight, productMaxHeight, initWidth, initHeight } = doorSettings
+  const doorSize = useSelector((state) => state.doorSize)
+  const [feetWidth, setFeetWidth] = useState(Math.floor(doorSize.width / 12));
+  const [inchesWidth, setInchesWidth] = useState(doorSize.width % 12);
+  const [feetHeight, setFeetHeight] = useState(Math.floor(doorSize.height / 12));
+  const [inchesHeight, setInchesHeight] = useState(doorSize.height % 12);
   const [hasWidthRangeError, setHasWidthRangeError] = useState(false);
   const [hasHeightRangeError, setHasHeightRangeError] = useState(false);
   const [hasMinWidthRangeError, setHasMinWidthRangeError] = useState(false);
   const [hasMinHeightRangeError, setHasMinHeightRangeError] = useState(false);
 
-  const setWindowWidth2ValueDebounced = useCallback(_.debounce(
-    setWidth2, 300
-  ), []);
-
-  const setWindowHeight2ValueDebounced = useCallback(_.debounce(
-    setHeight2, 300
-  ), []);
-
 
   useEffect(() => {
-    let totalWidth = width1 * 12 + width2;
-    let totalHeight = height1 * 12 + height2;
+    let totalWidth = feetWidth * 12 + inchesWidth;
+    let totalHeight = feetHeight * 12 + inchesHeight;
+    console.log(totalHeight)
     setHasWidthRangeError(false);
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
@@ -53,8 +52,11 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
       }
     }
     hasSizeError(false);
-    onChangeWindowSize({width1, width2, height1, height2});
-  }, [width1, width2, height1, height2]);
+    const width = (feetWidth * 12) + inchesWidth
+    const height = (feetHeight * 12) + inchesHeight
+    console.log('use effect', width, height)
+    dispatch(setDoorSize({ width, height }));
+  }, [feetWidth, inchesWidth, feetHeight, inchesHeight]);
 
 
   const checkValidation = (e, type) => {
@@ -62,8 +64,9 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
       let width = 0;
       let height = 0;
+      console.log(newValue)
       if (type == 1) {
-        width = newValue * 12 + width2;
+        width = newValue * 12 + inchesWidth;
         if (width > productMaxWidth) {
           e.preventDefault();
         }
@@ -74,12 +77,12 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
         if (newValue % 2 == 1) {
           newValue ++;
         }
-        width = width1 * 12 + newValue;
+        width = feetWidth * 12 + newValue;
         if (width > productMaxWidth) {
           e.preventDefault();
         }
       } else if (type == 3) {
-        height = newValue * 12 + height2;
+        height = newValue * 12 + inchesHeight;
         if (height > productMaxHeight) {
           e.preventDefault();
         }
@@ -87,7 +90,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
         if (newValue > 12) {
           e.preventDefault();
         }
-        height = height1 * 12 + newValue;
+        height = feetHeight * 12 + newValue;
         if (height > productMaxHeight) {
           e.preventDefault();
         }
@@ -98,19 +101,15 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     }
   }
 
-  const changeWidth2Value = (e) => {
-    setWidth2(Number(e.target.value));
-    let value = e.target.value % 2 == 1 ? (Number(e.target.value) + 1) : Number(e.target.value);
-    setWindowWidth2ValueDebounced(value);
+  const changeInchesWidth = (e) => {
+    setInchesWidth(Number(e.target.value));
   }
 
-  const changeHeight2Value = (e) => {
-    setHeight2(Number(e.target.value));
-    let value = e.target.value % 2 == 1 ? (Number(e.target.value) + 1) : Number(e.target.value);
-    setWindowHeight2ValueDebounced(value);
+  const changeInchesHeight = (e) => {
+    setInchesHeight(Number(e.target.value));
   }
 
-
+  
   return (
     <div className="product-setting-item-component">
       <label>
@@ -131,27 +130,27 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
             <input
               type="number"
               name="width_1"
-              value={width1}
+              value={Math.floor(doorSize.width / 12)}
               max={Math.floor(productMaxWidth / 12)}
               min={Math.floor(productMinWidth / 12)}
               onKeyPress={(e) => {
                 checkValidation(e, 1);
               }}
               onChange={(e) => {
-                setWidth1((e.target.value))
+                setFeetWidth((e.target.value))
               }}></input>
             <span>’</span>
             <input
               type="number"
               step={2}
               name="width_2"
-              value={width2}
+              value={doorSize.width % 12}
               max={12}
               min={0}
               onKeyPress={(e) => {
                 checkValidation(e, 2);
               }}
-              onChange={(e) => changeWidth2Value(e)}
+              onChange={(e) => changeInchesWidth(e)}
             ></input>
             <span>”</span>
           </div>
@@ -162,28 +161,28 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
             <input
               type="number"
               name="height_1"
-              value={height1}
+              value={Math.floor(doorSize.height / 12)}
               max={Math.floor(productMaxHeight / 12)}
               min={Math.floor(productMinHeight / 12)}
               onKeyPress={(e) => {
                 checkValidation(e, 3);
               }}
               onChange={(e) => {
-                setHeight1((e.target.value))
+                setFeetHeight((e.target.value))
               }}></input>
             <span>’</span>
             <input
               type="number"
               name="height_2"
-              value={height2}
+              value={doorSize.height % 12}
               onKeyPress={(e) => {
                 checkValidation(e, 4);
               }}
               max={12}
               min={0}
-              onChange={(e) => changeHeight2Value(e)}
+              onChange={(e) => changeInchesHeight(e)}
               // onChange={(e) => {
-                // setHeight2((e.target.value))
+                // setInchesHeight((e.target.value))
               // }}
             ></input>
             <span>”</span>
