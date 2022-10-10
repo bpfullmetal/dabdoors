@@ -5,10 +5,10 @@ import { toggleWindow } from '../actions/windows'
 
 const Windows = () => {
     const dispatch = useDispatch()
-    const windows = useSelector((state) => state.windows)
-    const windowsGrid = useSelector((state) => state.windowsGrid)
-    const windowLayout = useSelector((state) => state.windowLayout)
-    const windowsEnabled = useSelector((state) => state.windowsEnabled)
+    const windows = useSelector( state => state.windows)
+    const windowsGrid = useSelector( state => state.windowsGrid)
+    const windowLayout = useSelector( state => state.windowLayout)
+    const windowsEnabled = useSelector( state => state.windowsEnabled)
     
     return (
         <div 
@@ -25,7 +25,7 @@ const Windows = () => {
                         <div 
                             key={`window-${index}`} 
                             className={`window window-${windowLayout}${windowsEnabled ? ' enabled' : ''}${window.selected ? ' selected' : ''}`}
-                            onClick={ () => windowLayout === 'custom' ? dispatch(toggleWindow(index)) : null }>
+                            onClick={ () => (windowLayout === 'custom' && windowsEnabled) ? dispatch(toggleWindow(index)) : false }>
                             <div className="window-wrapper">
                                 <div className="window-content">
                                     <div className="window-image-wrapper">

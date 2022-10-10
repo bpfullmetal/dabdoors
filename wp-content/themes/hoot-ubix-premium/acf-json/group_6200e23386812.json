@@ -267,7 +267,7 @@
                     "key": "field_6200e694db345",
                     "label": "Additional Price ($) per window",
                     "name": "additional_price_$_per_window",
-                    "type": "text",
+                    "type": "number",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -280,7 +280,9 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "min": "",
+                    "max": "",
+                    "step": ""
                 }
             ]
         },
@@ -3031,5 +3033,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1664563570
+    "modified": 1665414868
 }

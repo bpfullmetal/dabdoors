@@ -18,7 +18,7 @@ const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
     let indexList = [];
     pressureOptions.forEach(it => {
       if (Number(it.min_width) <= width && Number(it.max_width) >= width) {
-        indexList.push(index);
+        indexList.push(it.pressure_range);
       }
       index++;
     });
@@ -43,7 +43,6 @@ const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
           }
           {
             properties.pressure_options.map((it, index) => {
-              console.log('pressure', it)
               return (<option key={`pressure-${index}`} value={it.pressure_range} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);
             })
           }

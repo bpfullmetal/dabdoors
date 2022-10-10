@@ -1,13 +1,20 @@
-const { render, useState } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
+import { setTrackRadius } from '../actions/track-radius'
 import ReactSlider from 'react-slider';
 
-const TrackRadiusSettingComponent = ({ additional_price, properties, enablePrice }) => {
-  const [value, setValue] = useState(Number(properties.minimum));
+const TrackRadiusSettingComponent = () => {
+  const dispatch = useDispatch()
+  const trackRadius = useSelector( state => state.trackRadius )
+  const adminProps = useSelector( state => state.adminProps )
+  const additionalCost = useSelector( state => state.additionalCost )
+
+  const trackSettings = adminProps.track_radius_group
+
   return (
-    <div className="product-setting-item-component track-radius-settings slider-bar">
+    <div id="track-radius-settings" className="product-setting-item-component slider-bar">
       <label>
-        { properties.label } ( { `${value}${properties.unit}` } )
-        { additional_price > 0 && <span className='additional_price_alert'>{`+$${additional_price}`}</span> }
+        Track Radius ( { `${trackRadius} ${trackSettings.unit}` } )
+        { additionalCost.trackRadius > 0 && <span className='additional_price_alert'>{`+$${additionalCost.trackRadius}`}</span> }
       </label>
       <div className="d-flex">
         <ReactSlider
@@ -16,18 +23,11 @@ const TrackRadiusSettingComponent = ({ additional_price, properties, enablePrice
           thumbClassName="example-thumb"
           trackClassName="example-track"
           renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-          step={Number(properties.step_count)}
-          min={Number(properties.minimum)}
-          max={Number(properties.maximum)}
-          value={value}
-          onChange={(e) => {
-            setValue(e);
-            if (e > Number(properties.if_over_)) {
-              enablePrice(e, true);
-            } else {
-              enablePrice(e, false);
-            }
-          }}
+          step={Number(trackSettings.step_count)}
+          min={Number(trackSettings.minimum)}
+          max={Number(trackSettings.maximum)}
+          value={trackRadius}
+          onChange={ e => dispatch(setTrackRadius(e)) }
         />
       </div>
     </div>

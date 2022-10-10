@@ -10,7 +10,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import { getWindowRowsCols } from '../../helper';
 
-const ProductContainerComponent = ({ colors, premiumColors, hasWindow, hasVents, colorIndex, premiumColorIndex, changeWindowsCount, lockPlacement, customWindowProperties, layoutOption, pack }) => {
+const ProductContainerComponent = () => {
   
   const dispatch = useDispatch()
 
@@ -20,8 +20,10 @@ const ProductContainerComponent = ({ colors, premiumColors, hasWindow, hasVents,
   const [bgColor, setBgColor] = useState('#CCAC7B');
   const [texturePercent, setTexturePercent] = useState(100);
 
-  const windowsGrid = useSelector((state) => state.windowsGrid)
-  const doorSize = useSelector((state) => state.doorSize)
+  const windowsGrid = useSelector( state => state.windowsGrid )
+  const doorSize = useSelector( state => state.doorSize )
+  const lock = useSelector( state => state.lock )
+  const color = useSelector( state => state.color )
 
   useEffect(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
@@ -32,17 +34,16 @@ const ProductContainerComponent = ({ colors, premiumColors, hasWindow, hasVents,
     let percent = 100 / ((width / initWidthInches) * (height / initHeightInches));
     setTexturePercent(percent);
     let pixelHeight = (pixelWidth / width) * height;
-    if (pixelHeight > 410) {
+    if ( pixelHeight > 410 ) {
       pixelWidth  = maxWidth * (410 / pixelHeight);
       pixelHeight = 410;
     }
-    if (pixelWidth > maxWidth) {
+    if ( pixelWidth > maxWidth ) {
       pixelHeight = ( maxWidth / pixelWidth ) * pixelHeight;
       pixelWidth = maxWidth;
     }
     setDoorSizeInPixels({ width: pixelWidth, height: pixelHeight })
     let rectRange = getWindowRowsCols(doorSize);
-    console.log('rect range', rectRange)
     dispatch(setWindowsGrid(rectRange))
   }, [doorSize]);
 
@@ -76,17 +77,17 @@ const ProductContainerComponent = ({ colors, premiumColors, hasWindow, hasVents,
                 className={`wall-wrapper ${tileIndex == 0 ? 'grid-wall' : (tileIndex == 1 ? 'single-grid-wall' : 'single')}`}
                 style={{backgroundColor: bgColor, backgroundSize: `auto ${texturePercent}%` }}
               >
-                <div id="outline-door" style={doorSizeInPixels}>
-                  <div className="inline-door">
-                    <div className="inline-wrapper" style={{ backgroundColor: colorIndex > -1 ? colors[colorIndex] : premiumColors[premiumColorIndex]}}>
+                <div id="outline-door">
+                  <div className="inline-door" style={{ paddingBottom: (doorSize.height / doorSize.width) * 100 + '%' }}>
+                    <div className="inline-wrapper" style={{ backgroundColor: color.color }}>
                       <Windows/>
-                      {(lockPlacement.hasLock === true && lockPlacement.placement == 'outside') && <span className='lock' style={{top: `calc(${(100 / windowsGrid.rows) * Math.floor(windowsGrid.rows / 2)}% - 5px)`}}>
+                      { lock ==='outside' && <span className='lock' style={{top: `calc(${(100 / windowsGrid.rows) * Math.floor(windowsGrid.rows / 2)}% - 5px)`}}>
                           <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="10" cy="8" r="7.5" fill="#C4C4C4" stroke="black"/>
                             <rect x="0.5" y="6.5" width="20" height="4" rx="2" fill="#C4C4C4" stroke="black"/>
                           </svg>
                           </span>}
-                      <VentsComponent columns={windowsGrid.cols} hasVents={hasVents} />
+                      <VentsComponent />
                     </div>
                   </div>
                 </div>

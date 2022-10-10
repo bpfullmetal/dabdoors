@@ -9,6 +9,7 @@ const windowLayout = store => next => action => {
   const windowCount = windowsGrid.cols * windowsGrid.rows
   switch (action.type) {
     case SET_WINDOW_LAYOUT:
+      console.log('layout w', action.layout)
         if ( action.layout === 'custom' ) {
             for ( let i = 0; i < windowCount; i++ ) {
                 windows.push({ image: null, selected: false })

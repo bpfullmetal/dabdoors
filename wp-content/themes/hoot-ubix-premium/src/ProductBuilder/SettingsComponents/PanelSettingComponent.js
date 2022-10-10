@@ -1,19 +1,23 @@
-const { render, useState } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
+import { setPanel } from '../actions/panel'
 
-const PanelSettingComponent = ({ additional_price, onSelectPanelType, panels }) => {
+const PanelSettingComponent = () => {
+  const dispatch = useDispatch()
+  const panel = useSelector( state => state.panel )
+  const adminProps = useSelector( state => state.adminProps )
+  const additionalCost = useSelector( state => state.additionalCost )
+
   return (
-    <div className="product-setting-item-component lock-placement-settings">
+    <div id="panel-type-settings" className="product-setting-item-component">
       <label>
         Panel Type
-        { additional_price > 0 && <span className="additional_price_alert">{`+$${additional_price}`}</span> }
+        { additionalCost.panel > 0 && <span className="additional_price_alert">{`+$${additionalCost.panel}`}</span> }
       </label>
-      <select className="button-wrapper" onChange={(e) => {
-          onSelectPanelType(e.target.value);
-        }}>
+      <select className="button-wrapper" value={panel} onChange={ e => dispatch(setPanel(e.target.value) )}>
         {
-          panels.map((it, index) => {
+          adminProps.panels.map((it, index) => {
             return (
-              <option key={index} value={index} selected={it.default===true}>{it.panel_type} (+${it.additional_price})</option>
+              <option key={index} value={it.panel_type}>{it.panel_type} (+${it.additional_price})</option>
             );
           })
         }

@@ -2132,23 +2132,7 @@ const Builder = () => {
   const [additionalPriceWithCustomWindow, setAdditionalPriceWithCustomWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Number(doorSettings.basePrice));
   const [baseArea, setBaseArea] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Number(doorSettings.initWidth) * Number(doorSettings.initHeight));
-  const [basePrice, setBasePrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Number(doorSettings.basePrice));
-  const [hasWindow, setHasWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [hasVents, setHasVents] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [colorIndex, setColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProps.standard_colors_group.select_button_options.findIndex(option => {
-    return option.default == true;
-  }) > -1 ? adminProps.standard_colors_group.select_button_options.findIndex(option => {
-    return option.default == true;
-  }) : 0);
-  const [premiumColorIndex, setPremiumColorIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(adminProps.premium_colors_group.select_button_options.findIndex(option => {
-    return option.default == true;
-  }) > -1 ? adminProps.premium_colors_group.select_button_options.findIndex(option => {
-    return option.default == true;
-  }) : -1);
   const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [windowCnt, setWindowCnt] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [changedPriceWithLock, setChangedPriceWithLock] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [changedPriceWithPanel, setChangedPriceWithPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -2161,72 +2145,7 @@ const Builder = () => {
     ubar_counts: 0,
     ubar_costs: 0
   });
-  const [availablePressures, setAvailablePressures] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  const [layoutOption, setLayoutOption] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
-
-  const changeWindowsCount = (e, index) => {
-    let rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
-    let selectedWindowPos = `${rows[rowIndex]}${colIndex}`;
-    let windowsObj = metaObj.windows;
-    let windowsPos = metaObj.windows.position;
-    let newWindowCount = windowCnt;
-
-    if (hasWindow) {
-      if (e === true) {
-        windowsPos.push(selectedWindowPos);
-        newWindowCount++;
-      } else {
-        windowsPos.splice(windowsPos.indexOf(selectedWindowPos), 1);
-        newWindowCount--;
-      }
-
-      setWindowCnt(newWindowCount);
-      windowsObj.position = windowsPos;
-      windowsObj.cost = Number(adminProps.window_group.additional_price_$_per_window) * newWindowCount;
-      setMetaObject({ ...metaObj,
-        windows: windowsObj
-      });
-    }
-  };
-
   const [isInitialized, setIsInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    let newWindowsObj = { ...metaObj,
-      windows: { ...metaObj.windows,
-        cost: additionalPriceWithCustomWindow + windowCnt * Number(adminProps.window_group.additional_price_$_per_window)
-      }
-    };
-    console.log(additionalPriceWithCustomWindow, windowCnt);
-
-    if (layoutOption == -1) {
-      if (metaObj.customWindowLayout) {
-        delete metaObj.customWindowLayout;
-      }
-    } else {
-      let layoutName = '';
-
-      if (layoutOption == 0) {
-        layoutName = 'Williamsburg 405';
-      } else if (layoutOption == 1) {
-        layoutName = 'Williamsburg 305';
-      } else if (layoutOption == 2) {
-        layoutName = 'Winston 392';
-      } else if (layoutOption == 3) {
-        layoutName = 'Stockton 397';
-      } else if (layoutOption == 4) {
-        layoutName = 'Sherwood 306';
-      }
-
-      let customWindowLayout = {
-        name: layoutName,
-        cols: windowsGrid.cols,
-        cost: 0
-      };
-      newWindowsObj.customWindowLayout = customWindowLayout;
-    }
-
-    setMetaObject(newWindowsObj);
-  }, [layoutOption]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (showCustomPanel === true) {
       jQuery('body').addClass('no-scroll');
@@ -2234,47 +2153,6 @@ const Builder = () => {
       jQuery('body').removeClass('no-scroll');
     }
   }, [showCustomPanel]);
-
-  const changePricewithLock = (option, e) => {
-    let lock_placement = metaObj.lock_placement;
-    lock_placement.hasLock = true;
-    lock_placement.placement = option == 1 ? 'inside' : 'outside';
-    setMetaObject({ ...metaObj,
-      lock_placement
-    });
-    setPrice(price - changedPriceWithLock + e);
-    setChangedPriceWithLock(e);
-  };
-
-  const changePriceWithPanelGroup = e => {
-    let selectedPanel = adminProps.panels[e];
-
-    if (selectedPanel) {
-      let panelPrice = Number(selectedPanel.additional_price);
-      setPrice(price - changedPriceWithPanel + panelPrice);
-      setChangedPriceWithPanel(panelPrice);
-      setMetaObject({ ...metaObj,
-        panelType: {
-          type: selectedPanel.panel_type
-        }
-      });
-    }
-  };
-
-  const changePriceWithHeadRoom = e => {
-    let selectedOption = adminProps.headroom.options[e];
-
-    if (selectedOption) {
-      let additionalPrice = Number(selectedOption.additional_price);
-      setPrice(price - changedPriceWithHeadRoom + additionalPrice);
-      setChangedPriceWithHeadRoom(additionalPrice);
-      setMetaObject({ ...metaObj,
-        headroom: {
-          type: selectedOption.option_label
-        }
-      });
-    }
-  };
 
   const changePriceWithRollerType = (type, e) => {
     setMetaObject({ ...metaObj,
@@ -2284,32 +2162,6 @@ const Builder = () => {
     });
     setPrice(price - changedPriceWithRollerType + e);
     setChangedPriceWithRollerType(e);
-  };
-
-  const changePriceWithPremiumColor = e => {
-    if (e == true) {
-      setPrice(price - changedPriceWithPremiumColor + Number(adminProps.premium_colors_group.additional_price));
-      setChangedPriceWithPremiumColor(Number(adminProps.premium_colors_group.additional_price));
-    } else {
-      setPrice(price - changedPriceWithPremiumColor);
-      setChangedPriceWithPremiumColor(0);
-    }
-  };
-
-  const changePriceWithTrackRadius = (radius, e) => {
-    setMetaObject({ ...metaObj,
-      trackRadius: {
-        radius: radius
-      }
-    });
-
-    if (e === true) {
-      setPrice(price - changedPriceWithTrackRadius + Number(adminProps.track_radius_group.additional_price_$));
-      setChangedPriceWithTrackRadius(Number(adminProps.track_radius_group.additional_price_$));
-    } else if (e === false) {
-      setPrice(price - changedPriceWithTrackRadius + 0);
-      setChangedPriceWithTrackRadius(0);
-    }
   };
 
   const createProduct = e => {
@@ -2354,58 +2206,9 @@ const Builder = () => {
     }
 
     let initialPrice = price;
-    let lock_placement = metaObj.lock_placement;
-    let panelType = metaObj.panelType;
-    let trackRadius = metaObj.trackRadius;
     let rollerType = metaObj.rollerType;
-    let standardColor = metaObj.standardColor;
-    let premiumColor = metaObj.premiumColor;
-    let headroom = metaObj.headroom;
 
-    if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
-      if (adminProps.lock_placement_group.inside.default === true) {
-        lock_placement.hasLock = true;
-        lock_placement.placement = 'inside';
-        initialPrice += Number(adminProps.lock_placement_group.inside.additional_price_$);
-        setChangedPriceWithLock(Number(adminProps.lock_placement_group.inside.additional_price_$));
-      } else if (adminProps.lock_placement_group.outside.default === true) {
-        lock_placement.hasLock = true;
-        lock_placement.placement = 'outside';
-        initialPrice += Number(adminProps.lock_placement_group.outside.additional_price_$);
-        setChangedPriceWithLock(Number(adminProps.lock_placement_group.outside.additional_price_$));
-      } else {
-        lock_placement.hasLock = false;
-        lock_placement.placement = '';
-      }
-    } else if (hideSettings.hide_lock_placement_settings.hide_from_builder == true) {
-      if (hideSettings.hide_lock_placement_settings.default == "inside") {
-        lock_placement.hasLock = true;
-        lock_placement.placement = 'inside';
-        initialPrice += Number(adminProps.lock_placement_group.inside.additional_price_$);
-        setChangedPriceWithLock(Number(adminProps.lock_placement_group.inside.additional_price_$));
-      } else if (hideSettings.hide_lock_placement_settings.default == "outside") {
-        lock_placement.hasLock = true;
-        lock_placement.placement = 'outside';
-        initialPrice += Number(adminProps.lock_placement_group.outside.additional_price_$);
-        setChangedPriceWithLock(Number(adminProps.lock_placement_group.outside.additional_price_$));
-      }
-    }
-
-    if (hideSettings.hide_panel_settings.hide_from_builder == false) {
-      if (adminProps.panels.length) {
-        let defaultPanelIndex = adminProps.panels.findIndex(it => it.default === true);
-        defaultPanelIndex = defaultPanelIndex > -1 ? defaultPanelIndex : 0;
-        panelType.type = adminProps.panels[defaultPanelIndex].panel_type;
-        initialPrice += Number(adminProps.panels[defaultPanelIndex].additional_price);
-        setChangedPriceWithPanel(Number(adminProps.panels[defaultPanelIndex].additional_price));
-      }
-    }
-
-    if (adminProps.headroom.options.length) {
-      let defaultOptionIndex = adminProps.headroom.options.findIndex(it => it.default === true);
-      defaultOptionIndex = defaultOptionIndex > -1 ? defaultOptionIndex : 0;
-      initialPrice += Number(adminProps.headroom.options[defaultOptionIndex].additional_price);
-      setChangedPriceWithHeadRoom(Number(adminProps.headroom.options[defaultOptionIndex].additional_price));
+    if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {// Do something with hide lock from builder
     }
 
     if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
@@ -2425,42 +2228,6 @@ const Builder = () => {
       }
     }
 
-    if (hideSettings.hide_premium_colors_settings.hide_from_builder == false) {
-      if (adminProps.premium_colors_group) {
-        let index = adminProps.premium_colors_group.select_button_options.findIndex(e => {
-          return e.default == true;
-        });
-
-        if (index > -1) {
-          initialPrice += Number(adminProps.premium_colors_group.additional_price);
-          setChangedPriceWithPremiumColor(Number(adminProps.premium_colors_group.additional_price));
-          premiumColor.color = adminProps.premium_colors_group.select_button_options[index].select_color;
-        } else {
-          setChangedPriceWithPremiumColor(0);
-        }
-      }
-    }
-
-    if (hideSettings.hide_track_radius_settings.hide_from_builder === false) {
-      if (adminProps.track_radius_group) {
-        trackRadius.radius = adminProps.track_radius_group.minimum;
-
-        if (Number(adminProps.track_radius_group.minimum) > Number(adminProps.track_radius_group.if_over_)) {
-          initialPrice += Number(adminProps.track_radius_group.additional_price_$);
-          setChangedPriceWithTrackRadius(Number(adminProps.track_radius_group.additional_price_$));
-        } else {
-          setChangedPriceWithTrackRadius(0);
-        }
-      }
-    }
-
-    if (hideSettings.hide_vents_settings.hide_from_builder === true) {
-      if (hideSettings.hide_vents_settings.default == "add") {
-        initialPrice += Number(adminProps.vents_group.additional_price_$_if_added);
-        setHasVents(true);
-      }
-    }
-
     if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
       if (hideSettings.hide_insulation_settings.default == "add") {
         initialPrice += Number(adminProps.insulation_group.additional_price_$_if_added);
@@ -2472,28 +2239,8 @@ const Builder = () => {
       }
     }
 
-    if (adminProps.standard_colors_group) {
-      let index = adminProps.standard_colors_group.select_button_options.findIndex(e => {
-        return e.default == true;
-      });
-
-      if (index > -1) {
-        standardColor.color = adminProps.standard_colors_group.select_button_options[index].select_color;
-
-        if (premiumColorIndex == -1) {
-          standardColor.color = '';
-          setColorIndex(index);
-        }
-      }
-    }
-
     setMetaObject({ ...metaObj,
-      lock_placement,
-      panelType,
-      trackRadius,
-      rollerType,
-      standardColor,
-      premiumColor
+      rollerType
     });
     setPrice(initialPrice);
     setIsInitialized(true);
@@ -2545,16 +2292,6 @@ const Builder = () => {
       }
     });
   }, [pressure, doorSize]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (isInitialized) {
-      if (premiumColorIndex > -1) {
-        changePriceWithPremiumColor(true);
-        setColorIndex(-1);
-      } else {
-        changePriceWithPremiumColor(false);
-      }
-    }
-  }, [premiumColorIndex, isInitialized]);
   const total = Object.entries(metaObj).reduce((initialPrice, obj) => {
     return initialPrice + obj[1].cost;
   }, price); // console.log('total', metaObj)
@@ -2570,26 +2307,7 @@ const Builder = () => {
     className: "product-builder-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-container"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    hasWindow: hasWindow,
-    hasVents: hasVents,
-    colorIndex: colorIndex,
-    premiumColorIndex: premiumColorIndex,
-    lockPlacement: metaObj.lock_placement,
-    colors: adminProps.standard_colors_group.select_button_options.map((option, index) => {
-      return option.select_color;
-    }),
-    premiumColors: adminProps.premium_colors_group.select_button_options.map((option, index) => {
-      return option.select_color;
-    }),
-    customWindowProperties: adminProps.custom_window && adminProps.custom_window,
-    windowLayouts: adminProps.custom_window && adminProps.custom_window,
-    changeWindowsCount: (e, index) => {
-      changeWindowsCount(e, index);
-    },
-    layoutOption: layoutOption,
-    pack: pack
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_17__["default"], {
     onChange: e => {
@@ -2614,32 +2332,7 @@ const Builder = () => {
     hasSizeError: e => {
       setSizeValidationError(e);
     }
-  }), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    hasWindow: hasWindow,
-    additional_price: layoutOption == -1 ? windowCnt * Number(adminProps.window_group.additional_price_$_per_window) : additionalPriceWithCustomWindow,
-    onChange: e => {
-      setMetaObject({ ...metaObj,
-        windows: { ...metaObj.windows,
-          cost: windowCnt * Number(adminProps.window_group.additional_price_$_per_window)
-        }
-      });
-      setHasWindow(e);
-    },
-    properties: adminProps.window_group && adminProps.window_group,
-    customWindowProperties: adminProps.custom_window && adminProps.custom_window,
-    windowLayouts: adminProps.window_layouts && adminProps.window_layouts,
-    onSelectWindowLayout: e => {
-      setLayoutOption(e);
-    },
-    onChangePriceByCustomWindow: e => {
-      console.log('additional', e);
-      setPrice(Number(price - windowCnt * Number(adminProps.window_group.additional_price_$_per_window) - additionalPriceWithCustomWindow + e));
-      setAdditionalPriceWithCustomWindow(e);
-    },
-    onChangePack: e => {
-      setPack(e);
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
     properties: adminProps.pressure_group && adminProps.pressure_group,
     selectedUbarSetting: selectedUbarSetting
   }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -2653,78 +2346,11 @@ const Builder = () => {
         }
       });
     }
-  }), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    hasVents: hasVents,
-    additional_price: Number(adminProps.vents_group.additional_price_$_if_added),
-    onChange: e => {
-      if (e == true) {
-        setPrice(Number(price + Number(adminProps.vents_group.additional_price_$_if_added)));
-      } else {
-        setPrice(Number(price - Number(adminProps.vents_group.additional_price_$_if_added)));
-      }
-
-      setMetaObject({ ...metaObj,
-        vents: {
-          hasVents: e
-        }
-      });
-      setHasVents(e);
-    },
-    properties: adminProps.vents_group && adminProps.vents_group
-  }), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    additional_price: changedPriceWithLock,
-    setAdditionalPriceForLock: (option, e) => changePricewithLock(option, e),
-    properties: adminProps.lock_placement_group && adminProps.lock_placement_group
-  }), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    additional_price: changedPriceWithPanel,
-    panels: adminProps.panels,
-    onSelectPanelType: e => {
-      changePriceWithPanelGroup(e);
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    additional_price: changedPriceWithHeadRoom,
-    headroomProperty: adminProps.headroom,
-    onSelectHeadroomType: e => {
-      changePriceWithHeadRoom(e);
-    }
-  }), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_16__["default"], null), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], {
     additional_price: changedPriceWithRollerType,
     properties: adminProps.roller_type_group && adminProps.roller_type_group,
     setAdditionalPriceForRollerType: (type, e) => changePriceWithRollerType(type, e)
-  }), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    additional_price: changedPriceWithTrackRadius,
-    properties: adminProps.track_radius_group,
-    enablePrice: (radius, e) => changePriceWithTrackRadius(radius, e)
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    colorIndex: colorIndex,
-    onChange: (color, e, sku) => {
-      setMetaObject({ ...metaObj,
-        standardColor: { ...metaObj.standardColor,
-          color: color.color,
-          sku: color.sku
-        }
-      });
-
-      if (e > -1) {
-        setPremiumColorIndex(-1);
-      }
-
-      setColorIndex(e);
-    },
-    properties: adminProps.standard_colors_group
-  }), hideSettings.hide_premium_colors_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    properties: adminProps.premium_colors_group,
-    colorIndex: premiumColorIndex,
-    enablePrice: (color, e, index, sku) => {
-      setMetaObject({ ...metaObj,
-        premiumColor: {
-          color: color.color,
-          sku: color.sku
-        }
-      });
-      setPremiumColorIndex(index);
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex price-section"
@@ -2787,20 +2413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ProductContainerComponent = _ref => {
-  let {
-    colors,
-    premiumColors,
-    hasWindow,
-    hasVents,
-    colorIndex,
-    premiumColorIndex,
-    changeWindowsCount,
-    lockPlacement,
-    customWindowProperties,
-    layoutOption,
-    pack
-  } = _ref;
+const ProductContainerComponent = () => {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   const [tileIndex, setTileIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
@@ -2812,6 +2425,8 @@ const ProductContainerComponent = _ref => {
   const [texturePercent, setTexturePercent] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(100);
   const windowsGrid = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.windowsGrid);
   const doorSize = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.doorSize);
+  const lock = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.lock);
+  const color = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.color);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth - 60 : 500;
     let pixelWidth = maxWidth;
@@ -2840,7 +2455,6 @@ const ProductContainerComponent = _ref => {
       height: pixelHeight
     });
     let rectRange = (0,_helper__WEBPACK_IMPORTED_MODULE_9__.getWindowRowsCols)(doorSize);
-    console.log('rect range', rectRange);
     dispatch((0,_actions_windows_grid__WEBPACK_IMPORTED_MODULE_7__.setWindowsGrid)(rectRange));
   }, [doorSize]);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2858,13 +2472,13 @@ const ProductContainerComponent = _ref => {
     onZoomStop: (ref, event) => {
       setScale(ref.state.scale * 100);
     }
-  }, _ref2 => {
+  }, _ref => {
     let {
       zoomIn,
       zoomOut,
       resetTransform,
       ...rest
-    } = _ref2;
+    } = _ref;
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(React.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ZoomControlComponent__WEBPACK_IMPORTED_MODULE_6__["default"], {
       onZoomIn: () => {
         zoomIn(0.5, 200);
@@ -2891,16 +2505,18 @@ const ProductContainerComponent = _ref => {
         backgroundSize: `auto ${texturePercent}%`
       }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      id: "outline-door",
-      style: doorSizeInPixels
+      id: "outline-door"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "inline-door"
+      className: "inline-door",
+      style: {
+        paddingBottom: doorSize.height / doorSize.width * 100 + '%'
+      }
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "inline-wrapper",
       style: {
-        backgroundColor: colorIndex > -1 ? colors[colorIndex] : premiumColors[premiumColorIndex]
+        backgroundColor: color.color
       }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Windows__WEBPACK_IMPORTED_MODULE_3__["default"], null), lockPlacement.hasLock === true && lockPlacement.placement == 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Windows__WEBPACK_IMPORTED_MODULE_3__["default"], null), lock === 'outside' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "lock",
       style: {
         top: `calc(${100 / windowsGrid.rows * Math.floor(windowsGrid.rows / 2)}% - 5px)`
@@ -2925,10 +2541,7 @@ const ProductContainerComponent = _ref => {
       rx: "2",
       fill: "#C4C4C4",
       stroke: "black"
-    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      columns: windowsGrid.cols,
-      hasVents: hasVents
-    })))))));
+    }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_VentsComponent__WEBPACK_IMPORTED_MODULE_4__["default"], null)))))));
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_WallSettingsComponents_WallSettingsComponent__WEBPACK_IMPORTED_MODULE_5__["default"], {
     tileIndex: tileIndex,
     onChange: e => setTileIndex(e),
@@ -2950,26 +2563,21 @@ const ProductContainerComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _assets_img_vent_background_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../assets/img_vent_background.png */ "./src/assets/img_vent_background.png");
 
 
 
 
-const VentsComponent = _ref => {
-  let {
-    columns,
-    hasVents
-  } = _ref;
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {// console.log(hasVents)
-  }, [hasVents]);
+const VentsComponent = () => {
+  const vents = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.vents);
+  const windowsGrid = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.windowsGrid);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `vents-wrapper ${hasVents ? '' : 'hidden'}`,
+    className: `vents-wrapper ${vents ? '' : 'hidden'}`,
     style: {
-      gridTemplateColumns: `repeat(${columns}, 1fr)`
+      gridTemplateColumns: `repeat(${windowsGrid.cols}, 1fr)`
     }
-  }, Array(columns).fill(0).map((_column, i) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, Array(windowsGrid.cols).fill(0).map((_column, i) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     key: i,
     className: "vent-item"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
@@ -3017,7 +2625,7 @@ const Windows = () => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       key: `window-${index}`,
       className: `window window-${windowLayout}${windowsEnabled ? ' enabled' : ''}${window.selected ? ' selected' : ''}`,
-      onClick: () => windowLayout === 'custom' ? dispatch((0,_actions_windows__WEBPACK_IMPORTED_MODULE_4__.toggleWindow)(index)) : null
+      onClick: () => windowLayout === 'custom' && windowsEnabled ? dispatch((0,_actions_windows__WEBPACK_IMPORTED_MODULE_4__.toggleWindow)(index)) : false
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "window-wrapper"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3129,43 +2737,46 @@ const ZoomControlComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/color */ "./src/ProductBuilder/actions/color.js");
 
-const {
-  render,
-  useState
-} = wp.element;
 
-const ColorsSettingComponent = _ref => {
-  let {
-    properties,
-    colorIndex,
-    onChange
-  } = _ref;
-  let colors = properties.select_button_options.map((option, index) => {
-    return {
-      color: option.select_color,
-      sku: option.sku_code
-    };
-  });
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-setting-item-component colors-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "d-flex align-items-center colors-wrapper"
-  }, colors.map((e, index) => {
+
+
+const ColorsSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const color = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.color);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
+  const colorGroups = [adminProps.standard_colors_group, adminProps.premium_colors_group];
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, colorGroups.map((group, groupIndex) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "color-item",
-      style: {
-        border: `2px solid ${colorIndex == index ? e.color : '#FFF'}`
-      }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      className: "btn-color button",
-      style: {
-        backgroundColor: `${e.color}`
-      },
-      onClick: evt => onChange(e, index)
-    }));
-  })));
+      key: `color-group-${groupIndex}`,
+      className: "product-setting-item-component colors-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, group.label, 'additional_price' in group && additionalCost.color > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "additional_price_alert"
+    }, `+$${additionalCost.color}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "d-flex align-items-center colors-wrapper"
+    }, group.select_button_options.map((colorOption, colorIndex) => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: `color-${colorIndex}`,
+        className: "color-item",
+        style: {
+          border: `2px solid ${color.sku === colorOption.sku_code ? 'black' : '#FFF'}`
+        }
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+        type: "button",
+        className: "btn-color button",
+        style: {
+          backgroundColor: colorOption.select_color
+        },
+        onClick: () => dispatch((0,_actions_color__WEBPACK_IMPORTED_MODULE_2__.setColor)({
+          color: colorOption.select_color,
+          sku: colorOption.sku_code
+        }))
+      }));
+    })));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ColorsSettingComponent);
@@ -3182,31 +2793,30 @@ const ColorsSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_head_room__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/head-room */ "./src/ProductBuilder/actions/head-room.js");
 
-const {
-  render,
-  useState
-} = wp.element;
 
-const HeadroomSettingComponent = _ref => {
-  let {
-    additional_price,
-    headroomProperty,
-    onSelectHeadroomType
-  } = _ref;
+
+
+const HeadroomSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const headRoom = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.headRoom);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, headroomProperty.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    id: "head-room-settings",
+    className: "product-setting-item-component"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Head Room", additionalCost.headroom > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+  }, `+$${additionalCost.headroom}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "button-wrapper",
-    onChange: e => {
-      onSelectHeadroomType(e.target.value);
-    }
-  }, headroomProperty.options.map((it, index) => {
+    value: headRoom,
+    onChange: e => dispatch((0,_actions_head_room__WEBPACK_IMPORTED_MODULE_2__.setHeadRoom)(e.target.value))
+  }, adminProps.headroom.options.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
-      value: index
+      value: it.option_label
     }, it.option_label, " (+$", it.additional_price, ")");
   })));
 };
@@ -3274,38 +2884,39 @@ const InsulationSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_lock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/lock */ "./src/ProductBuilder/actions/lock.js");
 
 const {
   render,
   useState
 } = wp.element;
 
-const LockPlacementSettingComponent = _ref => {
-  let {
-    additional_price,
-    properties,
-    setAdditionalPriceForLock
-  } = _ref;
-  const [option, setOption] = useState(properties.inside.default === true ? 1 : properties.outside.default == true ? 2 : -1);
+
+
+const LockPlacementSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const lock = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.lock);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additional_price = adminProps.lock_placement_group[lock].additional_price_$; // const defaultLock = adminProps.lock_placement_group.inside.default
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Lock Placement", additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
   }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex button-wrapper align-items-center"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
-    className: `button ${option == 1 ? 'active' : ''}`,
+    className: `button ${lock == 'inside' ? 'active' : ''}`,
     onClick: e => {
-      setOption(1);
-      setAdditionalPriceForLock(1, Number(properties.inside.additional_price_$));
+      dispatch((0,_actions_lock__WEBPACK_IMPORTED_MODULE_2__.setLockPlacement)('inside'));
     }
   }, "Inside"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
-    className: `button ${option == 2 ? 'active' : ''}`,
+    className: `button ${lock == 'outside' ? 'active' : ''}`,
     onClick: e => {
-      setOption(2);
-      setAdditionalPriceForLock(2, Number(properties.outside.additional_price_$));
+      dispatch((0,_actions_lock__WEBPACK_IMPORTED_MODULE_2__.setLockPlacement)('outside'));
     }
   }, "Outside")));
 };
@@ -3324,32 +2935,30 @@ const LockPlacementSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_panel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/panel */ "./src/ProductBuilder/actions/panel.js");
 
-const {
-  render,
-  useState
-} = wp.element;
 
-const PanelSettingComponent = _ref => {
-  let {
-    additional_price,
-    onSelectPanelType,
-    panels
-  } = _ref;
+
+
+const PanelSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const panel = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.panel);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-setting-item-component lock-placement-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Panel Type", additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    id: "panel-type-settings",
+    className: "product-setting-item-component"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Panel Type", additionalCost.panel > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+  }, `+$${additionalCost.panel}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     className: "button-wrapper",
-    onChange: e => {
-      onSelectPanelType(e.target.value);
-    }
-  }, panels.map((it, index) => {
+    value: panel,
+    onChange: e => dispatch((0,_actions_panel__WEBPACK_IMPORTED_MODULE_2__.setPanel)(e.target.value))
+  }, adminProps.panels.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: index,
-      value: index,
-      selected: it.default === true
+      value: it.panel_type
     }, it.panel_type, " (+$", it.additional_price, ")");
   })));
 };
@@ -3457,7 +3066,7 @@ const PressureSettingsComponent = _ref => {
     let indexList = [];
     pressureOptions.forEach(it => {
       if (Number(it.min_width) <= width && Number(it.max_width) >= width) {
-        indexList.push(index);
+        indexList.push(it.pressure_range);
       }
 
       index++;
@@ -3481,7 +3090,6 @@ const PressureSettingsComponent = _ref => {
     key: "no-pressure",
     value: "no-pressure"
   }, "Not Available"), properties.pressure_options.map((it, index) => {
-    console.log('pressure', it);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: `pressure-${index}`,
       value: it.pressure_range,
@@ -3794,46 +3402,38 @@ const SizeChangeComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-slider */ "./node_modules/react-slider/es/components/ReactSlider/ReactSlider.js");
-
-const {
-  render,
-  useState
-} = wp.element;
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_track_radius__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/track-radius */ "./src/ProductBuilder/actions/track-radius.js");
+/* harmony import */ var react_slider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-slider */ "./node_modules/react-slider/es/components/ReactSlider/ReactSlider.js");
 
 
-const TrackRadiusSettingComponent = _ref => {
-  let {
-    additional_price,
-    properties,
-    enablePrice
-  } = _ref;
-  const [value, setValue] = useState(Number(properties.minimum));
+
+
+
+const TrackRadiusSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const trackRadius = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.trackRadius);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
+  const trackSettings = adminProps.track_radius_group;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-setting-item-component track-radius-settings slider-bar"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " ( ", `${value}${properties.unit}`, " )", additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    id: "track-radius-settings",
+    className: "product-setting-item-component slider-bar"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Track Radius ( ", `${trackRadius} ${trackSettings.unit}`, " )", additionalCost.trackRadius > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, `+$${additionalCost.trackRadius}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_slider__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_slider__WEBPACK_IMPORTED_MODULE_3__["default"], {
     ariaLabelledby: "slider-label",
     className: "horizontal-slider",
     thumbClassName: "example-thumb",
     trackClassName: "example-track",
     renderThumb: (props, state) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", props, state.valueNow),
-    step: Number(properties.step_count),
-    min: Number(properties.minimum),
-    max: Number(properties.maximum),
-    value: value,
-    onChange: e => {
-      setValue(e);
-
-      if (e > Number(properties.if_over_)) {
-        enablePrice(e, true);
-      } else {
-        enablePrice(e, false);
-      }
-    }
+    step: Number(trackSettings.step_count),
+    min: Number(trackSettings.minimum),
+    max: Number(trackSettings.maximum),
+    value: trackRadius,
+    onChange: e => dispatch((0,_actions_track_radius__WEBPACK_IMPORTED_MODULE_2__.setTrackRadius)(e))
   })));
 };
 
@@ -3851,32 +3451,28 @@ const TrackRadiusSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
-
-const {
-  render,
-  useState
-} = wp.element;
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_vents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/vents */ "./src/ProductBuilder/actions/vents.js");
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 
-const VentsSettingComponent = _ref => {
-  let {
-    additional_price,
-    properties,
-    hasVents,
-    onChange
-  } = _ref;
+
+
+
+const VentsSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const vents = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.vents);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const cost = Number(adminProps.vents_group.additional_price_$_if_added);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component vents-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, hasVents && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Vents", vents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${additional_price}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    onChange: e => {
-      onChange(e);
-    },
-    checked: hasVents,
+  }, `+$${cost}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onChange: () => dispatch((0,_actions_vents__WEBPACK_IMPORTED_MODULE_2__.toggleVents)()),
+    checked: vents,
     width: 40,
     height: 20,
     onColor: '#1396E7',
@@ -3899,75 +3495,32 @@ const VentsSettingComponent = _ref => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_window_layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/window-layout */ "./src/ProductBuilder/actions/window-layout.js");
-/* harmony import */ var _actions_windows__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/windows */ "./src/ProductBuilder/actions/windows.js");
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helper */ "./src/helper.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_window_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/window-layout */ "./src/ProductBuilder/actions/window-layout.js");
+/* harmony import */ var _actions_windows__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/windows */ "./src/ProductBuilder/actions/windows.js");
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
 
 
 
 
 
 
-
-
-const WindowsSettingComponent = _ref => {
-  let {
-    additional_price,
-    properties,
-    customWindowProperties,
-    hasWindow,
-    onChange,
-    onSelectWindowLayout,
-    onChangePriceByCustomWindow,
-    onChangePack,
-    windowLayouts
-  } = _ref;
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  const windows = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.windows);
-  const windowLayout = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.windowsLayout);
-  const windowsEnabled = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.windowsEnabled);
-  const windowsGrid = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.windowsGrid);
-  const [value, setValue] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(-1);
-  const [cols, setCols] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(windowsGrid ? windowsGrid.cols : 4);
-  const [availableOptions, setAvaiableOptions] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    setCols(windowsGrid.cols);
-    let cols = windowsGrid.cols;
-    setAvaiableOptions((0,_helper__WEBPACK_IMPORTED_MODULE_6__.getAvailableOptions)(cols, customWindowProperties));
-    console.log((0,_helper__WEBPACK_IMPORTED_MODULE_6__.getAvailableOptions)(cols, customWindowProperties));
-    setValue(-1);
-    onSelectWindowLayout(-1);
-  }, [windowsGrid, customWindowProperties]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (value > -1) {
-      let pack = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.getPack)(value, windowsGrid.cols, customWindowProperties);
-      onChangePack(pack);
-      let customWindowPrice = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.getPriceForCustomWindow)(value, pack, customWindowProperties, windowsGrid.cols);
-      onChangePriceByCustomWindow(customWindowPrice);
-    } else {
-      onChangePriceByCustomWindow(0);
-    }
-  }, [windowsGrid, customWindowProperties, value]);
-
-  const handleSelectLayout = layout => {
-    if (layout === 'custom') {} else {
-      const filteredLayouts = windowLayouts[`columns-${windowsGrid.cols}`].filter(l => l.slug === layout);
-      dispatch((0,_actions_window_layout__WEBPACK_IMPORTED_MODULE_3__.setWindowLayout)(layout));
-    }
-  };
-
+const WindowsSettingComponent = () => {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const windowLayout = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.windowsLayout);
+  const windowsEnabled = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.windowsEnabled);
+  const windowsGrid = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.windowsGrid);
+  const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
+  const windowLayouts = adminProps.window_layouts;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component window-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties === null || properties === void 0 ? void 0 : properties.label, hasWindow && additional_price > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Windows", windowLayout !== 'custom' && additionalCost.windows > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, "+$", additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    onChange: () => dispatch((0,_actions_windows__WEBPACK_IMPORTED_MODULE_4__.toggleWindows)()),
+  }, "+$", additionalCost.windows)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onChange: () => dispatch((0,_actions_windows__WEBPACK_IMPORTED_MODULE_3__.toggleWindows)()),
     checked: windowsEnabled,
     width: 40,
     height: 20,
@@ -3977,17 +3530,14 @@ const WindowsSettingComponent = _ref => {
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "description"
   }, "Click on a window space to add or delete windows."), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `window-layout-settings mt-1 ${hasWindow ? '' : 'disabled'}`
+    className: `window-layout-settings mt-1 ${windowsEnabled ? '' : 'disabled'}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     name: "window-layout",
     value: windowLayout,
-    onChange: e => {
-      handleSelectLayout(e.target.value);
-    }
+    onChange: e => dispatch((0,_actions_window_layout__WEBPACK_IMPORTED_MODULE_2__.setWindowLayout)(e.target.value))
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     value: 'custom'
-  }, "Custom"), windowLayouts[`columns-${windowsGrid.cols}`] !== undefined && windowLayouts[`columns-${windowsGrid.cols}`].map(layout => {
-    console.log('images', layout.images);
+  }, "Custom"), `columns-${windowsGrid.cols}` in windowLayouts && windowLayouts[`columns-${windowsGrid.cols}`].map(layout => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       value: layout.slug
     }, layout.name);
@@ -4106,6 +3656,28 @@ const WallSettingsComponent = _ref => {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/actions/additional-cost.js":
+/*!*******************************************************!*\
+  !*** ./src/ProductBuilder/actions/additional-cost.js ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_ADDITIONAL_COST": function() { return /* binding */ SET_ADDITIONAL_COST; },
+/* harmony export */   "setAdditionalCost": function() { return /* binding */ setAdditionalCost; }
+/* harmony export */ });
+const SET_ADDITIONAL_COST = 'SET_ADDITIONAL_COST';
+const setAdditionalCost = props => {
+  return {
+    type: SET_ADDITIONAL_COST,
+    props
+  };
+};
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/actions/admin-props.js":
 /*!***************************************************!*\
   !*** ./src/ProductBuilder/actions/admin-props.js ***!
@@ -4123,6 +3695,28 @@ const setAdminProps = props => {
   return {
     type: SET_ADMIN_PROPS,
     props
+  };
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/actions/color.js":
+/*!*********************************************!*\
+  !*** ./src/ProductBuilder/actions/color.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_COLOR": function() { return /* binding */ SET_COLOR; },
+/* harmony export */   "setColor": function() { return /* binding */ setColor; }
+/* harmony export */ });
+const SET_COLOR = 'SET_COLOR';
+const setColor = color => {
+  return {
+    type: SET_COLOR,
+    color
   };
 };
 
@@ -4150,6 +3744,72 @@ const setDoorSize = size => {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/actions/head-room.js":
+/*!*************************************************!*\
+  !*** ./src/ProductBuilder/actions/head-room.js ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_HEAD_ROOM": function() { return /* binding */ SET_HEAD_ROOM; },
+/* harmony export */   "setHeadRoom": function() { return /* binding */ setHeadRoom; }
+/* harmony export */ });
+const SET_HEAD_ROOM = 'HEAD_ROOM';
+const setHeadRoom = headRoom => {
+  return {
+    type: SET_HEAD_ROOM,
+    headRoom
+  };
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/actions/lock.js":
+/*!********************************************!*\
+  !*** ./src/ProductBuilder/actions/lock.js ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_LOCK_PLACEMENT": function() { return /* binding */ SET_LOCK_PLACEMENT; },
+/* harmony export */   "setLockPlacement": function() { return /* binding */ setLockPlacement; }
+/* harmony export */ });
+const SET_LOCK_PLACEMENT = 'SET_LOCK_PLACEMENT';
+const setLockPlacement = placement => {
+  return {
+    type: SET_LOCK_PLACEMENT,
+    placement
+  };
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/actions/panel.js":
+/*!*********************************************!*\
+  !*** ./src/ProductBuilder/actions/panel.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_PANEL": function() { return /* binding */ SET_PANEL; },
+/* harmony export */   "setPanel": function() { return /* binding */ setPanel; }
+/* harmony export */ });
+const SET_PANEL = 'SET_PANEL';
+const setPanel = panel => {
+  return {
+    type: SET_PANEL,
+    panel
+  };
+};
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/actions/pressure.js":
 /*!************************************************!*\
   !*** ./src/ProductBuilder/actions/pressure.js ***!
@@ -4167,6 +3827,49 @@ const setPressure = pressure => {
   return {
     type: SET_PRESSURE,
     pressure
+  };
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/actions/track-radius.js":
+/*!****************************************************!*\
+  !*** ./src/ProductBuilder/actions/track-radius.js ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SET_TRACK_RADIUS": function() { return /* binding */ SET_TRACK_RADIUS; },
+/* harmony export */   "setTrackRadius": function() { return /* binding */ setTrackRadius; }
+/* harmony export */ });
+const SET_TRACK_RADIUS = 'SET_TRACK_RADIUS';
+const setTrackRadius = trackRadius => {
+  return {
+    type: SET_TRACK_RADIUS,
+    trackRadius
+  };
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/actions/vents.js":
+/*!*********************************************!*\
+  !*** ./src/ProductBuilder/actions/vents.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TOGGLE_VENTS": function() { return /* binding */ TOGGLE_VENTS; },
+/* harmony export */   "toggleVents": function() { return /* binding */ toggleVents; }
+/* harmony export */ });
+const TOGGLE_VENTS = 'TOGGLE_VENTS';
+const toggleVents = () => {
+  return {
+    type: TOGGLE_VENTS
   };
 };
 
@@ -4248,6 +3951,157 @@ const toggleWindows = () => {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/middleware/additional-cost.js":
+/*!**********************************************************!*\
+  !*** ./src/ProductBuilder/middleware/additional-cost.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_additional_cost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/additional-cost */ "./src/ProductBuilder/actions/additional-cost.js");
+/* harmony import */ var _actions_color__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/color */ "./src/ProductBuilder/actions/color.js");
+/* harmony import */ var _actions_door_size__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/door-size */ "./src/ProductBuilder/actions/door-size.js");
+/* harmony import */ var _actions_head_room__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/head-room */ "./src/ProductBuilder/actions/head-room.js");
+/* harmony import */ var _actions_lock__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/lock */ "./src/ProductBuilder/actions/lock.js");
+/* harmony import */ var _actions_panel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/panel */ "./src/ProductBuilder/actions/panel.js");
+/* harmony import */ var _actions_pressure__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../actions/pressure */ "./src/ProductBuilder/actions/pressure.js");
+/* harmony import */ var _actions_vents__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/vents */ "./src/ProductBuilder/actions/vents.js");
+/* harmony import */ var _actions_track_radius__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/track-radius */ "./src/ProductBuilder/actions/track-radius.js");
+/* harmony import */ var _actions_windows__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../actions/windows */ "./src/ProductBuilder/actions/windows.js");
+
+
+
+
+
+
+
+
+
+
+
+const additionalCost = store => next => action => {
+  next(action);
+  let additionalCost = store.getState().additionalCost;
+  const adminProps = store.getState().adminProps;
+  const windowsEnabled = store.getState().windowsEnabled;
+  const windowsGrid = store.getState().windowsGrid;
+  const windows = store.getState().windows;
+  const windowLayout = store.getState().windowLayout;
+  let windowsCost = 0;
+
+  switch (action.type) {
+    case _actions_color__WEBPACK_IMPORTED_MODULE_1__.SET_COLOR:
+      let colorCost = 0;
+      console.log('COLOR', action.color);
+
+      if ('premium_colors_group' in adminProps) {
+        if (adminProps.premium_colors_group.select_button_options.filter(color => color.sku_code === action.color.sku).length) {
+          colorCost = adminProps.premium_colors_group.additional_price;
+        }
+      }
+
+      additionalCost = { ...additionalCost,
+        color: Number(colorCost)
+      };
+      break;
+
+    case _actions_door_size__WEBPACK_IMPORTED_MODULE_2__.SET_DOOR_SIZE:
+      break;
+
+    case _actions_head_room__WEBPACK_IMPORTED_MODULE_3__.SET_HEAD_ROOM:
+      const headRoomCost = adminProps.headroom.options.filter(headroom => headroom.option_label === action.headRoom)[0].additional_price;
+      additionalCost = { ...additionalCost,
+        headroom: Number(headRoomCost)
+      };
+      break;
+
+    case _actions_lock__WEBPACK_IMPORTED_MODULE_4__.SET_LOCK_PLACEMENT:
+      break;
+
+    case _actions_panel__WEBPACK_IMPORTED_MODULE_5__.SET_PANEL:
+      const panelCost = adminProps.panels.filter(panel => panel.panel_type === action.panel)[0].additional_price;
+      additionalCost = { ...additionalCost,
+        panel: Number(panelCost)
+      };
+      break;
+
+    case _actions_pressure__WEBPACK_IMPORTED_MODULE_6__.SET_PRESSURE:
+      break;
+
+    case _actions_vents__WEBPACK_IMPORTED_MODULE_7__.TOGGLE_VENTS:
+      break;
+
+    case _actions_track_radius__WEBPACK_IMPORTED_MODULE_8__.SET_TRACK_RADIUS:
+      additionalCost = { ...additionalCost,
+        trackRadius: action.trackRadius > Number(adminProps.track_radius_group.if_over_) ? Number(adminProps.track_radius_group.additional_price_$) : 0
+      };
+      break;
+
+    case _actions_windows__WEBPACK_IMPORTED_MODULE_9__.SET_WINDOWS:
+      if (windowsEnabled) {
+        if (windowLayout === 'custom') {
+          windowsCost = action.windows.reduce((cost, window) => {
+            return window.selected ? cost + Number(adminProps.window_group.additional_price_$_per_window) : cost;
+          }, windowsCost);
+        } else {
+          const layout = adminProps.window_layouts[`columns-${windowsGrid.cols}`].filter(layout => layout.slug === windowLayout)[0];
+          windowsCost = layout.cost_per_window * action.windows.length;
+        }
+
+        additionalCost = { ...additionalCost,
+          windows: windowsCost
+        };
+      }
+
+      break;
+
+    case _actions_windows__WEBPACK_IMPORTED_MODULE_9__.TOGGLE_WINDOW:
+      const windows = store.getState().windows;
+      windowsCost = windows.reduce((cost, window) => {
+        return window.selected ? cost + Number(adminProps.window_group.additional_price_$_per_window) : cost;
+      }, windowsCost);
+      additionalCost = { ...additionalCost,
+        windows: windowsCost
+      };
+      break;
+
+    case _actions_windows__WEBPACK_IMPORTED_MODULE_9__.TOGGLE_WINDOWS:
+      if (windowsEnabled) {
+        const windows = store.getState().windows;
+
+        if (windowLayout === 'custom') {
+          windowsCost = windows.reduce((cost, window) => {
+            return window.selected ? cost + Number(adminProps.window_group.additional_price_$_per_window) : cost;
+          }, windowsCost);
+        } else {
+          const selectedLayout = adminProps.window_layouts[`columns-${windowsGrid.cols}`].filter(layout => layout.slug === windowLayout)[0];
+          windowsCost = selectedLayout.cost_per_window * windows.length;
+        }
+      } else {
+        windowsCost = 0;
+      }
+
+      additionalCost = { ...additionalCost,
+        windows: windowsCost
+      };
+      break;
+
+    default:
+      break;
+  }
+
+  console.log('add cost', additionalCost);
+  next({
+    type: _actions_additional_cost__WEBPACK_IMPORTED_MODULE_0__.SET_ADDITIONAL_COST,
+    additionalCost
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (additionalCost);
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/middleware/index.js":
 /*!************************************************!*\
   !*** ./src/ProductBuilder/middleware/index.js ***!
@@ -4258,11 +4112,14 @@ const toggleWindows = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./logger */ "./src/ProductBuilder/middleware/logger.js");
 /* harmony import */ var _window_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./window-layout */ "./src/ProductBuilder/middleware/window-layout.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _additional_cost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./additional-cost */ "./src/ProductBuilder/middleware/additional-cost.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)(_logger__WEBPACK_IMPORTED_MODULE_0__["default"], _window_layout__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/* harmony default export */ __webpack_exports__["default"] = ((0,redux__WEBPACK_IMPORTED_MODULE_3__.applyMiddleware)( // logger,
+_window_layout__WEBPACK_IMPORTED_MODULE_1__["default"], _additional_cost__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -4310,6 +4167,8 @@ const windowLayout = store => next => action => {
 
   switch (action.type) {
     case _actions_window_layout__WEBPACK_IMPORTED_MODULE_0__.SET_WINDOW_LAYOUT:
+      console.log('layout w', action.layout);
+
       if (action.layout === 'custom') {
         for (let i = 0; i < windowCount; i++) {
           windows.push({
@@ -4361,6 +4220,34 @@ const windowLayout = store => next => action => {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/reducers/additional-cost.js":
+/*!********************************************************!*\
+  !*** ./src/ProductBuilder/reducers/additional-cost.js ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "additionalCost": function() { return /* binding */ additionalCost; }
+/* harmony export */ });
+/* harmony import */ var _actions_additional_cost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/additional-cost */ "./src/ProductBuilder/actions/additional-cost.js");
+
+const additionalCost = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_additional_cost__WEBPACK_IMPORTED_MODULE_0__.SET_ADDITIONAL_COST:
+      return action.additionalCost;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/reducers/admin-props.js":
 /*!****************************************************!*\
   !*** ./src/ProductBuilder/reducers/admin-props.js ***!
@@ -4381,6 +4268,37 @@ const adminProps = function () {
   switch (action.type) {
     case _actions_admin_props__WEBPACK_IMPORTED_MODULE_0__.SET_ADMIN_PROPS:
       return action.props;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/reducers/color.js":
+/*!**********************************************!*\
+  !*** ./src/ProductBuilder/reducers/color.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "color": function() { return /* binding */ color; }
+/* harmony export */ });
+/* harmony import */ var _actions_color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/color */ "./src/ProductBuilder/actions/color.js");
+
+const color = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    color: '#eddeb9',
+    sku: 'B'
+  };
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_color__WEBPACK_IMPORTED_MODULE_0__.SET_COLOR:
+      return action.color;
 
     default:
       return state;
@@ -4420,6 +4338,90 @@ const doorSize = function () {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/reducers/head-room.js":
+/*!**************************************************!*\
+  !*** ./src/ProductBuilder/reducers/head-room.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "headRoom": function() { return /* binding */ headRoom; }
+/* harmony export */ });
+/* harmony import */ var _actions_head_room__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/head-room */ "./src/ProductBuilder/actions/head-room.js");
+
+const headRoom = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Low headroom';
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_head_room__WEBPACK_IMPORTED_MODULE_0__.SET_HEAD_ROOM:
+      return action.headRoom;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/reducers/lock.js":
+/*!*********************************************!*\
+  !*** ./src/ProductBuilder/reducers/lock.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "lock": function() { return /* binding */ lock; }
+/* harmony export */ });
+/* harmony import */ var _actions_lock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/lock */ "./src/ProductBuilder/actions/lock.js");
+
+const lock = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'inside';
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_lock__WEBPACK_IMPORTED_MODULE_0__.SET_LOCK_PLACEMENT:
+      return action.placement;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/reducers/panel.js":
+/*!**********************************************!*\
+  !*** ./src/ProductBuilder/reducers/panel.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "panel": function() { return /* binding */ panel; }
+/* harmony export */ });
+/* harmony import */ var _actions_panel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/panel */ "./src/ProductBuilder/actions/panel.js");
+
+const panel = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Flush';
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_panel__WEBPACK_IMPORTED_MODULE_0__.SET_PANEL:
+      return action.panel;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/reducers/pressure.js":
 /*!*************************************************!*\
   !*** ./src/ProductBuilder/reducers/pressure.js ***!
@@ -4448,6 +4450,62 @@ const pressure = function () {
 
 /***/ }),
 
+/***/ "./src/ProductBuilder/reducers/track-radius.js":
+/*!*****************************************************!*\
+  !*** ./src/ProductBuilder/reducers/track-radius.js ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "trackRadius": function() { return /* binding */ trackRadius; }
+/* harmony export */ });
+/* harmony import */ var _actions_track_radius__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/track-radius */ "./src/ProductBuilder/actions/track-radius.js");
+
+const trackRadius = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 12;
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_track_radius__WEBPACK_IMPORTED_MODULE_0__.SET_TRACK_RADIUS:
+      return action.trackRadius;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./src/ProductBuilder/reducers/vents.js":
+/*!**********************************************!*\
+  !*** ./src/ProductBuilder/reducers/vents.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "vents": function() { return /* binding */ vents; }
+/* harmony export */ });
+/* harmony import */ var _actions_vents__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/vents */ "./src/ProductBuilder/actions/vents.js");
+
+const vents = function () {
+  let state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  let action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_vents__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_VENTS:
+      return !state;
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./src/ProductBuilder/reducers/window-layout.js":
 /*!******************************************************!*\
   !*** ./src/ProductBuilder/reducers/window-layout.js ***!
@@ -4467,7 +4525,7 @@ const windowLayout = function () {
 
   switch (action.type) {
     case _actions_window_layout__WEBPACK_IMPORTED_MODULE_0__.SET_WINDOW_LAYOUT:
-      return state;
+      return action.layout;
 
     default:
       return state;
@@ -4909,7 +4967,6 @@ const App = () => {
   document.getElementById('main').classList.add('single-product-main-wrapper');
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
   const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(state => state.adminProps);
-  console.log(adminProps);
 
   const getAdminProperties = () => {
     let formData = {
@@ -4928,7 +4985,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('HELLO');
     getAdminProperties();
   }, []);
   return Object.keys(adminProps).length && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ProductBuilder_Builder__WEBPACK_IMPORTED_MODULE_1__["default"], null);
@@ -4951,14 +5007,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "store": function() { return /* binding */ store; }
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-/* harmony import */ var _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductBuilder/reducers/windows */ "./src/ProductBuilder/reducers/windows.js");
-/* harmony import */ var _ProductBuilder_reducers_windows_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductBuilder/reducers/windows-grid */ "./src/ProductBuilder/reducers/windows-grid.js");
-/* harmony import */ var _ProductBuilder_reducers_window_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductBuilder/reducers/window-layout */ "./src/ProductBuilder/reducers/window-layout.js");
-/* harmony import */ var _ProductBuilder_reducers_admin_props__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductBuilder/reducers/admin-props */ "./src/ProductBuilder/reducers/admin-props.js");
-/* harmony import */ var _ProductBuilder_reducers_door_size__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductBuilder/reducers/door-size */ "./src/ProductBuilder/reducers/door-size.js");
-/* harmony import */ var _ProductBuilder_reducers_pressure__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProductBuilder/reducers/pressure */ "./src/ProductBuilder/reducers/pressure.js");
-/* harmony import */ var _ProductBuilder_middleware_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ProductBuilder/middleware/index */ "./src/ProductBuilder/middleware/index.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _ProductBuilder_reducers_additional_cost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductBuilder/reducers/additional-cost */ "./src/ProductBuilder/reducers/additional-cost.js");
+/* harmony import */ var _ProductBuilder_reducers_admin_props__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductBuilder/reducers/admin-props */ "./src/ProductBuilder/reducers/admin-props.js");
+/* harmony import */ var _ProductBuilder_reducers_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductBuilder/reducers/color */ "./src/ProductBuilder/reducers/color.js");
+/* harmony import */ var _ProductBuilder_reducers_door_size__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductBuilder/reducers/door-size */ "./src/ProductBuilder/reducers/door-size.js");
+/* harmony import */ var _ProductBuilder_reducers_head_room__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductBuilder/reducers/head-room */ "./src/ProductBuilder/reducers/head-room.js");
+/* harmony import */ var _ProductBuilder_reducers_lock__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ProductBuilder/reducers/lock */ "./src/ProductBuilder/reducers/lock.js");
+/* harmony import */ var _ProductBuilder_reducers_panel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ProductBuilder/reducers/panel */ "./src/ProductBuilder/reducers/panel.js");
+/* harmony import */ var _ProductBuilder_reducers_pressure__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ProductBuilder/reducers/pressure */ "./src/ProductBuilder/reducers/pressure.js");
+/* harmony import */ var _ProductBuilder_reducers_track_radius__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ProductBuilder/reducers/track-radius */ "./src/ProductBuilder/reducers/track-radius.js");
+/* harmony import */ var _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ProductBuilder/reducers/windows */ "./src/ProductBuilder/reducers/windows.js");
+/* harmony import */ var _ProductBuilder_reducers_windows_grid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ProductBuilder/reducers/windows-grid */ "./src/ProductBuilder/reducers/windows-grid.js");
+/* harmony import */ var _ProductBuilder_reducers_window_layout__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ProductBuilder/reducers/window-layout */ "./src/ProductBuilder/reducers/window-layout.js");
+/* harmony import */ var _ProductBuilder_reducers_vents__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ProductBuilder/reducers/vents */ "./src/ProductBuilder/reducers/vents.js");
+/* harmony import */ var _ProductBuilder_middleware_index__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ProductBuilder/middleware/index */ "./src/ProductBuilder/middleware/index.js");
 
 
 
@@ -4967,17 +5030,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_7__.configureStore)({
+
+
+
+
+
+
+
+const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_14__.configureStore)({
   reducer: {
-    adminProps: _ProductBuilder_reducers_admin_props__WEBPACK_IMPORTED_MODULE_3__.adminProps,
-    doorSize: _ProductBuilder_reducers_door_size__WEBPACK_IMPORTED_MODULE_4__.doorSize,
-    pressure: _ProductBuilder_reducers_pressure__WEBPACK_IMPORTED_MODULE_5__.pressure,
-    windows: _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_0__.windows,
-    windowsEnabled: _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_0__.windowsEnabled,
-    windowsGrid: _ProductBuilder_reducers_windows_grid__WEBPACK_IMPORTED_MODULE_1__.windowsGrid,
-    windowLayout: _ProductBuilder_reducers_window_layout__WEBPACK_IMPORTED_MODULE_2__.windowLayout
+    additionalCost: _ProductBuilder_reducers_additional_cost__WEBPACK_IMPORTED_MODULE_0__.additionalCost,
+    adminProps: _ProductBuilder_reducers_admin_props__WEBPACK_IMPORTED_MODULE_1__.adminProps,
+    color: _ProductBuilder_reducers_color__WEBPACK_IMPORTED_MODULE_2__.color,
+    doorSize: _ProductBuilder_reducers_door_size__WEBPACK_IMPORTED_MODULE_3__.doorSize,
+    lock: _ProductBuilder_reducers_lock__WEBPACK_IMPORTED_MODULE_5__.lock,
+    headRoom: _ProductBuilder_reducers_head_room__WEBPACK_IMPORTED_MODULE_4__.headRoom,
+    panel: _ProductBuilder_reducers_panel__WEBPACK_IMPORTED_MODULE_6__.panel,
+    pressure: _ProductBuilder_reducers_pressure__WEBPACK_IMPORTED_MODULE_7__.pressure,
+    trackRadius: _ProductBuilder_reducers_track_radius__WEBPACK_IMPORTED_MODULE_8__.trackRadius,
+    windows: _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_9__.windows,
+    windowsEnabled: _ProductBuilder_reducers_windows__WEBPACK_IMPORTED_MODULE_9__.windowsEnabled,
+    windowsGrid: _ProductBuilder_reducers_windows_grid__WEBPACK_IMPORTED_MODULE_10__.windowsGrid,
+    windowLayout: _ProductBuilder_reducers_window_layout__WEBPACK_IMPORTED_MODULE_11__.windowLayout,
+    vents: _ProductBuilder_reducers_vents__WEBPACK_IMPORTED_MODULE_12__.vents
   },
-  enhancers: [_ProductBuilder_middleware_index__WEBPACK_IMPORTED_MODULE_6__["default"]]
+  enhancers: [_ProductBuilder_middleware_index__WEBPACK_IMPORTED_MODULE_13__["default"]]
 });
 
 /***/ }),

@@ -1,15 +1,22 @@
-const { render, useState } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleVents } from '../actions/vents'
 import Switch from "react-switch";
 
-const VentsSettingComponent = ({additional_price, properties, hasVents, onChange}) => {
+const VentsSettingComponent = () => {
+  const dispatch = useDispatch()
+  const vents = useSelector( state => state.vents)
+  const adminProps = useSelector( state => state.adminProps)
+
+  const cost = Number(adminProps.vents_group.additional_price_$_if_added)
+  
   return (
     <div className="product-setting-item-component vents-settings">
       <div class="d-flex align-items-center justify-content-between">
         <label>
-          { properties.label }
-          { hasVents && additional_price > 0 && <span className="additional_price_alert">{`+$${additional_price}`}</span> }
+          Vents
+          { vents && <span className="additional_price_alert">{`+$${cost}`}</span> }
         </label>
-        <Switch onChange={(e) => {onChange(e)}} checked={hasVents} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
+        <Switch onChange={() => dispatch(toggleVents())} checked={vents} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />
       </div>
     </div>
   );

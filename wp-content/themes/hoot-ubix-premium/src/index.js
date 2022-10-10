@@ -10,7 +10,6 @@ const App = () => {
   document.getElementById('main').classList.add('single-product-main-wrapper');
   const dispatch = useDispatch()
   const adminProps = useSelector((state) => state.adminProps)
-  console.log(adminProps)
   const getAdminProperties = () => {
     let formData = {
       action: 'getAdminProperties'
@@ -28,7 +27,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log('HELLO')
     getAdminProperties();
   }, []);
 
