@@ -2127,11 +2127,7 @@ const Builder = () => {
       cost: 0
     }
   });
-  const additionalSqInCost = 5;
-  const [pack, setPack] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [additionalPriceWithCustomWindow, setAdditionalPriceWithCustomWindow] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Number(doorSettings.basePrice));
-  const [baseArea, setBaseArea] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Number(doorSettings.initWidth) * Number(doorSettings.initHeight));
   const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
@@ -2245,21 +2241,6 @@ const Builder = () => {
     setPrice(initialPrice);
     setIsInitialized(true);
   }, [isInitialized]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const {
-      width,
-      height
-    } = doorSize.width;
-    let totalArea = height * width;
-    const additionalArea = totalArea - baseArea > 0 ? totalArea - baseArea : 0;
-    const additionalSizeCost = additionalArea * additionalSqInCost;
-    const newMetaObject = { ...metaObj,
-      size: { ...metaObj.size,
-        cost: additionalSizeCost
-      }
-    };
-    setMetaObject(newMetaObject);
-  }, [doorSize]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (!isInitialized) {
       return;
@@ -3198,6 +3179,7 @@ const SizeChangeComponent = _ref => {
     initHeight
   } = doorSettings;
   const doorSize = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.doorSize);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.additionalCost);
   const [feetWidth, setFeetWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Math.floor(doorSize.width / 12));
   const [inchesWidth, setInchesWidth] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(doorSize.width % 12);
   const [feetHeight, setFeetHeight] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(Math.floor(doorSize.height / 12));
@@ -3313,7 +3295,9 @@ const SizeChangeComponent = _ref => {
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Size", additionalCost.doorSize > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "additional_price_alert"
+  }, `+$${additionalCost.doorSize}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-range"
   }, typeof productMaxWidth !== 'undefined' ? ` (maxWidth: ${Math.floor(productMaxWidth / 12)}’ ${Math.floor(productMaxWidth % 12)}”, maxHeight: ${Math.floor(productMaxHeight / 12)}’ ${Math.floor(productMaxHeight % 12)}”)` : '', " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), typeof productMinWidth !== 'undefined' ? ` (minWidth: ${Math.floor(productMinWidth / 12)}’ ${Math.floor(productMinWidth % 12)}”, minHeight: ${Math.floor(productMinHeight / 12)}’ ${Math.floor(productMinHeight % 12)}”)` : ''), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "size-settings-wrapper"
@@ -3463,14 +3447,14 @@ const VentsSettingComponent = () => {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const vents = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.vents);
   const adminProps = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.adminProps);
-  const cost = Number(adminProps.vents_group.additional_price_$_if_added);
+  const additionalCost = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.additionalCost);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component vents-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "d-flex align-items-center justify-content-between"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Vents", vents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Vents", additionalCost.vents && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "additional_price_alert"
-  }, `+$${cost}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, `+$${additionalCost.vents}`)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onChange: () => dispatch((0,_actions_vents__WEBPACK_IMPORTED_MODULE_2__.toggleVents)()),
     checked: vents,
     width: 40,
@@ -3988,6 +3972,7 @@ const additionalCost = store => next => action => {
   const windowsGrid = store.getState().windowsGrid;
   const windows = store.getState().windows;
   const windowLayout = store.getState().windowLayout;
+  const doorSize = store.getState().doorSize;
   let windowsCost = 0;
 
   switch (action.type) {
@@ -4007,6 +3992,18 @@ const additionalCost = store => next => action => {
       break;
 
     case _actions_door_size__WEBPACK_IMPORTED_MODULE_2__.SET_DOOR_SIZE:
+      const additionalSqInCost = 5;
+      const {
+        width,
+        height
+      } = doorSize;
+      const baseArea = Number(doorSettings.initWidth) * Number(doorSettings.initHeight);
+      let totalArea = height * width;
+      const additionalArea = totalArea - baseArea;
+      console.log('additional area', additionalArea);
+      additionalCost = { ...additionalCost,
+        doorSize: additionalArea > 0 ? Math.floor(additionalArea / 12 * additionalSqInCost * 100) / 100 : 0
+      };
       break;
 
     case _actions_head_room__WEBPACK_IMPORTED_MODULE_3__.SET_HEAD_ROOM:
@@ -4027,9 +4024,33 @@ const additionalCost = store => next => action => {
       break;
 
     case _actions_pressure__WEBPACK_IMPORTED_MODULE_6__.SET_PRESSURE:
+      let pressureCost = 0;
+
+      if (action.pressure !== 'no-pressure') {
+        const selectedPressure = adminProps.pressure_group.pressure_options.filter(pressureOption => pressureOption.pressure_range === action.pressure)[0];
+        console.log(selectedPressure);
+        const ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
+        const height = doorSize.height;
+        const ubarIndex = ubarSettings.findIndex(it => {
+          return Number(it.min_height) <= height && Number(it.max_height) > height;
+        });
+        console.log(ubarIndex);
+        const ubarCount = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].ubar_counts) : 0;
+        const ubarCost = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].per_ubar_costs) : 0;
+        pressureCost = ubarCount * ubarCost;
+        console.log('ubar cost', ubarCount * ubarCost);
+      }
+
+      additionalCost = { ...additionalCost,
+        uBar: pressureCost
+      };
       break;
 
     case _actions_vents__WEBPACK_IMPORTED_MODULE_7__.TOGGLE_VENTS:
+      const ventsCost = store.getState().vents ? adminProps.vents_group.additional_price_$_if_added : 0;
+      additionalCost = { ...additionalCost,
+        vents: Number(ventsCost)
+      };
       break;
 
     case _actions_track_radius__WEBPACK_IMPORTED_MODULE_8__.SET_TRACK_RADIUS:

@@ -7,7 +7,9 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   const dispatch = useDispatch()
 
   const { productMinWidth, productMaxWidth, productMinHeight, productMaxHeight, initWidth, initHeight } = doorSettings
-  const doorSize = useSelector((state) => state.doorSize)
+  const doorSize = useSelector( state => state.doorSize)
+  const additionalCost = useSelector( state => state.additionalCost )
+
   const [feetWidth, setFeetWidth] = useState(Math.floor(doorSize.width / 12));
   const [inchesWidth, setInchesWidth] = useState(doorSize.width % 12);
   const [feetHeight, setFeetHeight] = useState(Math.floor(doorSize.height / 12));
@@ -113,7 +115,8 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   return (
     <div className="product-setting-item-component">
       <label>
-        Size 
+          Size
+        { additionalCost.doorSize > 0 && <span className="additional_price_alert">{`+$${additionalCost.doorSize}`}</span> }
       </label>
       <div className='size-range'>
         { typeof productMaxWidth !== 'undefined'

@@ -82,11 +82,8 @@ const Builder = () => {
       cost: 0
     }
   });
-  const additionalSqInCost = 5
-  const [pack, setPack] = useState(0);
-  const [additionalPriceWithCustomWindow, setAdditionalPriceWithCustomWindow] = useState(0);
+  
   const [price, setPrice] = useState(Number(doorSettings.basePrice));
-  const [baseArea, setBaseArea] = useState(Number(doorSettings.initWidth) * Number(doorSettings.initHeight));
 
   const [hasSizeValidationError, setSizeValidationError] = useState(false);
   
@@ -204,21 +201,6 @@ const Builder = () => {
     setPrice(initialPrice);
     setIsInitialized(true);
   }, [isInitialized]);
-
-  useEffect(() => {
-    const { width, height } = doorSize.width
-    let totalArea = height * width
-    const additionalArea = (totalArea - baseArea) > 0 ? totalArea - baseArea : 0
-    const additionalSizeCost = additionalArea * additionalSqInCost
-    const newMetaObject = { 
-      ...metaObj, 
-      size: { 
-        ...metaObj.size, 
-        cost: additionalSizeCost
-      }
-    }
-    setMetaObject(newMetaObject)
-  }, [doorSize])
 
   useEffect(() => {
     if (!isInitialized) {
