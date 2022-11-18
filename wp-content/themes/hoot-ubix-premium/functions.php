@@ -278,7 +278,7 @@ add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 function my_theme_enqueue_styles() {
   wp_enqueue_script(
     'my-theme-frontend-htmlcanvas',
-    get_stylesheet_directory_uri() . '/js/htmlcanvas.lib.js',
+    get_template_directory_uri() . '/js/htmlcanvas.lib.js',
     ['wp-element'],
     time(), //For production use wp_get_theme()->get('Version'),
     true
@@ -290,7 +290,7 @@ function my_theme_enqueue_styles() {
     );
     wp_enqueue_script(
       'dab-frontend',
-      get_stylesheet_directory_uri() . '/build/index.js',
+      get_template_directory_uri() . '/build/index.js',
       ['wp-element'],
       time(), //For production use wp_get_theme()->get('Version'),
       true
