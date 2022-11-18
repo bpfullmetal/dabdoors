@@ -338,7 +338,7 @@ function getAdminProperties() {
   $hide_track_radius_settings = get_field('hide_track_radius_settings', 'option');
   $hide_standard_colors = get_field('hide_standard_colors', 'option');
   $hide_premium_colors_settings = get_field('hide_premium_colors_settings', 'option');
-  $window_layouts = get_field('custom_window_layouts', 'option');
+  $window_layouts = get_field('custom_window_layouts', 'option') ? get_field('custom_window_layouts', 'option') : [];
   $window_layouts_obj = [];
   foreach( $window_layouts as $window_layout ) {
     foreach( $window_layout['packs'] as $pack ) {
