@@ -17,6 +17,10 @@ if ( hoot_page_header_attop() ) {
 
 // Template modification Hook
 do_action( 'hoot_template_before_content_grid', 'single-product.php' );
+
+$admin_props = getAdminProperties();
+// log_it($admin_props);
+wp_localize_script( 'dab-frontend', 'adminProps', $admin_props );
 ?>
 
 <div class="hgrid main-content-grid">
@@ -118,7 +122,6 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 		$_product = wc_get_product( $product_id );
 		$door_settings = [];
 		$dimensions = $product->get_dimensions(false);
-		log_it($dimensions);
 		if ($_product->get_attributes()) {
 			$attributes = $_product->get_attributes();
 			if (isset($attributes['max-width-height'])) {
@@ -138,7 +141,6 @@ do_action( 'hoot_template_before_content_grid', 'single-product.php' );
 		}
 		$_base_price = $_product->get_price();
 		$door_settings['basePrice'] = $_base_price;
-		log_it('base price: '.$_base_price);
 		$door_settings['productId'] = $product_id;
 		$door_settings['initWidth'] = $dimensions['width'];
 		$door_settings['initHeight'] = $dimensions['height'];

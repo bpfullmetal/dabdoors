@@ -29,8 +29,8 @@ const ProductContainerComponent = () => {
     let maxWidth = document.getElementById('product-container') ? document.getElementById('product-container').clientWidth  - 60 : 500;
     let pixelWidth = maxWidth;
     const { width, height } = doorSize
-    let initWidthInches = doorSettings.initWidth / 2.54;
-    let initHeightInches = doorSettings.initHeight / 2.54;
+    let initWidthInches = doorSettings.initWidth / 1.5;
+    let initHeightInches = doorSettings.initHeight / 1.5;
     let percent = 100 / ((width / initWidthInches) * (height / initHeightInches));
     setTexturePercent(percent);
     let pixelHeight = (pixelWidth / width) * height;

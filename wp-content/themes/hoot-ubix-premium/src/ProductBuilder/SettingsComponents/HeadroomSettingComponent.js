@@ -4,16 +4,15 @@ import { setHeadRoom } from '../actions/head-room'
 const HeadroomSettingComponent = () => {
   const dispatch = useDispatch()
   const headRoom = useSelector( state => state.headRoom)
-  const adminProps = useSelector( state => state.adminProps)
-  const additionalCost = useSelector( state => state.additionalCost )
+  const settingsData = useSelector( state => state.settingsData )
   
   return (
     <div id="head-room-settings" className="product-setting-item-component">
       <label>
         Head Room
-        { additionalCost.headroom > 0 && <span className="additional_price_alert">{`+$${additionalCost.headroom}`}</span> }
+        { settingsData.headroom.cost > 0 && <span className="additional_price_alert">{`+$${settingsData.headroom.cost}`}</span> }
       </label>
-      <select className="button-wrapper" value={headRoom} onChange={ e => dispatch(setHeadRoom(e.target.value))}>
+      <select className="button-wrapper mt-1" value={headRoom} onChange={ e => dispatch(setHeadRoom(e.target.value))}>
         {
           adminProps.headroom.options.map((it, index) => {
             return (

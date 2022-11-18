@@ -1,10 +1,10 @@
 import logger from './logger'
 import windowLayout from './window-layout'
-import additionalCost from './additional-cost'
+import settingsData from './settings-data'
 import { applyMiddleware } from 'redux'
 
 export default applyMiddleware(
   // logger,
   windowLayout,
-  additionalCost
+  settingsData
 )

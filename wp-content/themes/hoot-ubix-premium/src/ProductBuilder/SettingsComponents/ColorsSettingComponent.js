@@ -5,8 +5,7 @@ const ColorsSettingComponent = () => {
 
   const dispatch = useDispatch()
   const color = useSelector( state => state.color)
-  const adminProps = useSelector( state => state.adminProps)
-  const additionalCost = useSelector( state => state.additionalCost )
+  const settingsData = useSelector( state => state.settingsData )
 
   const colorGroups = [ adminProps.standard_colors_group, adminProps.premium_colors_group ]
   
@@ -18,7 +17,7 @@ const ColorsSettingComponent = () => {
             <label>
               { group.label }
               {
-                ( 'additional_price' in group && additionalCost.color > 0 ) && <span className="additional_price_alert">{`+$${additionalCost.color}`}</span>
+                ( 'additional_price' in group && settingsData.color.cost > 0 ) && <span className="additional_price_alert">{`+$${settingsData.color.cost}`}</span>
               }
             </label>
             <div className="d-flex align-items-center colors-wrapper">

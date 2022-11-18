@@ -29,7 +29,7 @@ const WallSettingsComponent = ({tileIndex, onChange, onWallBgColorChange}) => {
   }
 
   return (
-    <div className="wallSettings">
+    <div className="wall-settings">
       <div className="d-flex align-items-center">
         {
           indexes.map((e, index) => {

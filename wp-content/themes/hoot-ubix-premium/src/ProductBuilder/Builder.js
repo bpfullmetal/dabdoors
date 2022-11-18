@@ -19,10 +19,10 @@ import Switch from "react-switch";
 import html2canvas from 'html2canvas';
 
 const Builder = () => {
-  const adminProps = useSelector( state => state.adminProps)
-  const windowsGrid = useSelector( state => state.windowsGrid)
   const doorSize = useSelector( state => state.doorSize)
   const pressure = useSelector( state => state.pressure)
+  const settingsData = useSelector( state => state.settingsData)
+  const metadata = useSelector( state => state.metadata )
   
   const hideSettings = adminProps.hide_settings;
 
@@ -83,24 +83,25 @@ const Builder = () => {
     }
   });
   
-  const [price, setPrice] = useState(Number(doorSettings.basePrice));
+  let initialPrice = Number(doorSettings.basePrice)
+  const [ total, setTotal ] = useState(initialPrice)
 
-  const [hasSizeValidationError, setSizeValidationError] = useState(false);
+  const [ hasSizeValidationError, setSizeValidationError ] = useState(false);
   
-  const [changedPriceWithRollerType, setChangedPriceWithRollerType] = useState(0);
-  const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = useState(0);
-  const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = useState(0);
-  const [changedPriceWithHeadRoom, setChangedPriceWithHeadRoom] = useState(0);
+  const [ changedPriceWithRollerType, setChangedPriceWithRollerType ] = useState(0);
+  const [ changedPriceWithPremiumColor, setChangedPriceWithPremiumColor ] = useState(0);
+  const [ changedPriceWithTrackRadius, setChangedPriceWithTrackRadius ] = useState(0);
+  const [ changedPriceWithHeadRoom, setChangedPriceWithHeadRoom ] = useState(0);
 
-  const [isAdding, setIsAdding] = useState(false);
-  const [showAlerts, setShowAlerts] = useState(false);
-  const [productUrl, setProductUrl] = useState('');
-  const [showCustomPanel, setShowCustomPanel] = useState(false);
-  const [selectedUbarSetting, setSelectedUbarSetting] = useState({
+  const [ isAdding, setIsAdding ] = useState(false);
+  const [ showAlerts, setShowAlerts ] = useState(false);
+  const [ productUrl, setProductUrl ] = useState('');
+  const [ showCustomPanel, setShowCustomPanel ] = useState(false);
+  const [ selectedUbarSetting, setSelectedUbarSetting ] = useState({
     ubar_counts: 0,
     ubar_costs: 0
   });
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [ isInitialized, setIsInitialized ] = useState(false);
 
   useEffect(() => {
     if (showCustomPanel === true ) {
@@ -110,57 +111,18 @@ const Builder = () => {
     }
   }, [showCustomPanel])
 
-  const changePriceWithRollerType = (type, e) => {
-    setMetaObject({
-      ...metaObj,
-      rollerType: {
-        type: type
-      }
-    });
-    setPrice(price - changedPriceWithRollerType + e);
-    setChangedPriceWithRollerType(e);
-  }
+  useEffect(() => {
+    const additionalTotal = Object.entries(settingsData).reduce( (element, obj) => { 
+      return element + obj[1].cost
+    }, initialPrice)
+    setTotal(additionalTotal)
+  }, [settingsData])
 
-  const createProduct = (e) => {
-    if (hasSizeValidationError) {
-      window.alert('Product size has some errors. Please check before create the request.');
-      return false;
-    }
-    setIsAdding(true);
-    html2canvas(document.getElementById('product-door-wrapper')).then(function(canvas) {  
-      canvas.toBlob(function(blob) {
-        var reader = new FileReader();
-        reader.readAsDataURL(blob); 
-        reader.onloadend = function() {
-          var base64data = reader.result;
-          metaObj.price = price;
-          metaObj.size = doorSize
-          let formData = {
-            action: 'addProductToCart',
-            item_id: doorSettings.productId,
-            meta_data: metaObj,
-            thumb_img: base64data
-          };
-          jQuery.ajax({
-            type: "post",
-            dataType: "json",
-            url: `${baseUrl}/wp-admin/admin-ajax.php`,
-            data: formData,
-          }).then(res => {
-            setIsAdding(false);
-            setShowAlerts(true);
-          }) 
-        }
-        
-      });
-    });
-  }
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (isInitialized) {
       return;
     }
-    let initialPrice = price;
+
     let rollerType = metaObj.rollerType;
     if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
       // Do something with hide lock from builder
@@ -173,7 +135,7 @@ const Builder = () => {
         });
         if (index > -1) {
           rollerType.type = adminProps.roller_type_group.select_button_options[index].button_name;
-          initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
+          // initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
           setChangedPriceWithRollerType(Number(adminProps.roller_type_group.select_button_options[index].additional_price));
         } else {
           rollerType.type = '';
@@ -184,7 +146,7 @@ const Builder = () => {
 
     if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
       if (hideSettings.hide_insulation_settings.default == "add") {
-        initialPrice += Number(adminProps.insulation_group.additional_price_$_if_added);
+        // initialPrice += Number(adminProps.insulation_group.additional_price_$_if_added);
         setMetaObject({
           ...metaObj,
           insulation: {
@@ -198,7 +160,7 @@ const Builder = () => {
       ...metaObj,
       rollerType,
     });
-    setPrice(initialPrice);
+
     setIsInitialized(true);
   }, [isInitialized]);
 
@@ -235,13 +197,48 @@ const Builder = () => {
         pressure_option: selectedPressure ? selectedPressure.pressure_range : null
       }
     });
-
-    
   }, [pressure, doorSize]);
 
-  const total = Object.entries(metaObj).reduce(( initialPrice, obj) => { return initialPrice + obj[1].cost }, price);
-  // console.log('total', metaObj)
+  const createProduct = (e) => {
+    if (hasSizeValidationError) {
+      window.alert('Product size has some errors. Please check before create the request.');
+      return false;
+    }
+    setIsAdding(true);
+    html2canvas(document.getElementById('product-door-wrapper'), {
+      scale: .3
+    }).then(function(canvas) {  
+      canvas.toBlob(function(blob) {
+        var reader = new FileReader();
+        reader.readAsDataURL(blob); 
+        reader.onloadend = function() {
+          var base64data = reader.result;
+          settingsData.total = total;
+          settingsData.size = doorSize
+          let formData = {
+            action: 'addProductToCart',
+            item_id: doorSettings.productId,
+            meta_data: settingsData,
+            thumb_img: base64data
+          };
+          jQuery.ajax({
+            type: "post",
+            dataType: "json",
+            url: `${baseUrl}/wp-admin/admin-ajax.php`,
+            data: formData,
+          }).then(res => {
+            setIsAdding(false);
+            setShowAlerts(true);
+          }) 
+        }
+        
+      });
+    });
+  }
 
+  // const total = Object.entries(metaObj).reduce(( initialPrice, obj) => { return initialPrice + obj[1].cost }, price);
+  // console.log('total', metaObj)
+  console.log(adminProps)
   return (
     <div className="product-builder">
       <div className="title-section">
@@ -269,30 +266,12 @@ const Builder = () => {
             properties={adminProps.pressure_group && adminProps.pressure_group}
             selectedUbarSetting={selectedUbarSetting}
           />
-          {hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && <InsulationSettingComponent 
-            properties={adminProps.insulation_group}
-            additional_price = {Number(adminProps.insulation_group.additional_price_$_if_added)}
-            enableInsulation={(e) => {
-              setMetaObject({
-                ...metaObj,
-                insulation: {
-                  hasInsulation: e,
-                  cost: e === true 
-                    ? Number(adminProps.insulation_group.additional_price_$_if_added)
-                    : 0
-                }
-              });
-            }}
-          />}
+          { hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && <InsulationSettingComponent /> }
           { hideSettings.hide_vents_settings.hide_from_builder === false && <VentsSettingComponent /> }
-          { hideSettings.hide_lock_placement_settings.hide_from_builder === false && <LockPlacementSettingComponent />}
-          { hideSettings.hide_panel_settings.hide_from_builder === false && <PanelSettingComponent />}
+          { hideSettings.hide_lock_placement_settings.hide_from_builder === false && <LockPlacementSettingComponent /> }
+          { hideSettings.hide_panel_settings.hide_from_builder === false && <PanelSettingComponent /> }
           <HeadroomSettingComponent/>
-          { hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent
-            additional_price={changedPriceWithRollerType}
-            properties={adminProps.roller_type_group && adminProps.roller_type_group}
-            setAdditionalPriceForRollerType={(type, e) => changePriceWithRollerType(type, e)}
-          />}
+          { hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent/> }
           { hideSettings.hide_track_radius_settings.hide_from_builder === false && <TrackRadiusSettingComponent /> }
           <ColorsSettingComponent />
           {/* <div className="product-setting-item-component price-section">

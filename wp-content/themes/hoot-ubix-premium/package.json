@@ -22,6 +22,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "html2canvas": "^1.4.1",
+    "image-blob-reduce": "^4.1.0",
     "lodash": "^4.17.21",
     "react-color": "^2.19.3",
     "react-debounce-input": "^3.2.5",

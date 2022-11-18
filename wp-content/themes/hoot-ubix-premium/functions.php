@@ -85,78 +85,118 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
 
   if (isset($_SESSION['meta_data'])) {
     $option = $_SESSION['meta_data'];
-    $cart_item_data['new_price'] = floatval($option['price']) + 15;
+    $cart_item_data['new_price'] = floatval($option['total']);
     
     if (!empty($option)) {
 
-      if ($option['insulation']['hasInsulation'] == true) {
-        $metaData[] = array(
-          'insulation' => true
+      $insulation_code = $option['insulation']['enabled'] == true ? 'I' : 'P';
+      $new_sku = $new_sku . $insulation_code;
+      $width_feet = strval(floor($option['doorSize']['width'] / 12));
+      $width_feet_0 = strlen($width_feet) == 1 ? "0{$width_feet}" : "{$width_feet}";
+      $width_inches = strval(floor($option['doorSize']['width'] % 12));
+      $width_inches_0 = strlen($width_inches) == 1 ? "0{$width_inches}" : "{$width_inches}";
+      $height_feet = strval(floor($option['doorSize']['height'] / 12));
+      $height_feet_0 = strlen($height_feet) == 1 ? "0{$height_feet}" : "{$height_feet}";
+      $height_inches = strval(floor($option['doorSize']['height'] % 12));
+      $height_inches_0 = strlen($height_inches) == 1 ? "0{$height_inches}" : "{$height_inches}";
+      $new_sku = $new_sku . $width_feet_0 . "" . $width_inches_0 . "X" . $height_feet_0 . "" . $height_inches_0;
+      $meta_data[] = array(
+        'doorSize' => $width_feet . '\'' . $width_inches . '" x ' . $height_feet . '\'' . $height_inches . '"'
+      );
+
+      if ( isset($option['color'])) {
+        $meta_data[] = array(
+          'color' => $option['color']['color']
         );
       }
-      $insulation_code = $option['insulation']['hasInsulation'] == true ? 'I' : 'P';
-      $new_sku = $new_sku . $insulation_code;
-      $metaData[] = array(
-        'size' => $option['size']['width'].'*'.$option['size']['height']
-      );
-      $width_feet = strval(floor($option['size']['width'] / 12));
-      $width_feet = strlen($width_feet) == 1 ? "0{$width_feet}" : "{$width_feet}";
-      $width_inches = strval(floor($option['size']['width'] % 12));
-      $width_inches = strlen($width_inches) == 1 ? "0{$width_inches}" : "{$width_inches}";
-      $height_feet = strval(floor($option['size']['height'] / 12));
-      $height_feet = strlen($height_feet) == 1 ? "0{$height_feet}" : "{$height_feet}";
-      $height_inches = strval(floor($option['size']['height'] % 12));
-      $height_inches = strlen($height_inches) == 1 ? "0{$height_inches}" : "{$height_inches}";
-      $new_sku = $new_sku . $width_feet . "" . $width_inches . "X" . $height_feet . "" . $height_inches;
-      if ( isset($option['windows']) && $option['windows']['hasWindow'] == true) {
+
+      if ( isset($option['windows']) && $option['windows']['enabled'] == true) {
         if ( isset($option['windows']['position']) ) {
-          $metaData[] = array(
+          $meta_data[] = array(
             'window_placement' => implode(",", $option['windows']['position'])
           );
         }
       }
-      if ( isset($option['customWindowLayout'])) {
-        $metaData[] = array(
-          'custom_layout' => $option['customWindowLayout']['name']. ' ('.$option['customWindowLayout']['cols'].') Columns'
+
+      if ( isset($option['windows'])) {
+        $meta_data[] = array(
+          'custom_layout' => $option['windows']['layout'] == 'Custom' ? null : $option['windows']['layout']
         );
-      }
-      if (isset($option['headroom']) && $option['headroom']['type']) {
-        $metaData[] = array(
-          'headroom' => $option['headroom']['type']
-        );
-      }
-      $metaData['thumbnail'] = isset($_SESSION['product_thumbimage']) ? $_SESSION['product_thumbimage'] : null;
-      $metaData['trackRadius'] = $option['trackRadius']['radius'];
-      $metaData['rollerType'] = $option['rollerType']['type'];
-      $metaData['standardColor'] = $option['standardColor']['color'];
-      if ( isset( $option['standardColor']['sku'] ) ) {
-        $new_sku = $new_sku . $option['standardColor']['sku'];
-      }
-      $metaData['premiumColor'] = $option['premiumColor']['color'];
-      if ( isset( $option['premiumColor']['sku'] ) ) {
-        $new_sku = $new_sku . $option['premiumColor']['sku'];
       }
 
-      if ($option['ubarSettings']['count'] > 0) {
-        $metaData[] = array(
-          'ubarSettings' => array(
-            'count' => $option['ubarSettings']['count'],
-            'pressure' => $option['ubarSettings']['pressure_option'],
+      if ( $option['insulation']['enabled'] == true ) {
+        $meta_data[] = array(
+          'insulation' => true
+        );
+      }
+
+      if ( isset($option['roller']) ) {
+        $meta_data[] = array(
+          'roller' => $option['roller']['value']
+        );
+      }
+
+      if ( isset($option['trackRadius']) ) {
+        $meta_data[] = array(
+          'trackRadius' => $option['trackRadius']['value']
+        );
+      }
+
+      if ( isset($option['headroom']) && $option['headroom']['value'] ) {
+        $meta_data[] = array(
+          'headroom' => $option['headroom']['value']
+        );
+      }
+      $image_url = isset($_SESSION['product_thumbimage']) ? $_SESSION['product_thumbimage'] : null;
+      $upload_dir  = wp_upload_dir();
+      $upload_path = str_replace( '/', DIRECTORY_SEPARATOR, $upload_dir['path'] ) . DIRECTORY_SEPARATOR;
+
+      $img             = str_replace( 'data:image/png;base64,', '', $image_url );
+      $img             = str_replace( ' ', '+', $img );
+      $decoded         = base64_decode( $img );
+      $filename        = 'test' . '.jpeg';
+      $file_type       = 'image/jpeg';
+      $hashed_filename = md5( $filename . microtime() ) . '_' . $filename;
+
+      // Save the image in the uploads directory.
+      $upload_file = file_put_contents( $upload_path . $hashed_filename, $decoded );
+
+      $attachment = array(
+        'post_mime_type' => $file_type,
+        'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $hashed_filename ) ),
+        'post_content'   => '',
+        'post_status'    => 'inherit',
+        'guid'           => $upload_dir['url'] . '/' . basename( $hashed_filename )
+      );
+
+      $attach_id = wp_insert_attachment( $attachment, $upload_dir['path'] . '/' . $hashed_filename );
+      // log_it('attachment: ' . $attach_id);
+      $meta_data['thumbnail'] = $attach_id;
+
+      $new_sku = $new_sku . $option['color']['value'];
+
+      if ( isset($option['uBar']) ) {
+        $meta_data[] = array(
+          'uBar' => array(
+            'count' => $option['uBar']['count'],
+            'pressure' => $option['uBar']['pressure'],
           )
         );
       }
-      $new_sku = $new_sku . str_replace('-', '', $option['ubarSettings']['pressure_option']);
 
-      if (isset($option['panelType']) && $option['panelType']['type']) {
-        $metaData[] = array(
-          'panelType' => $option['panelType']['type']
+      $new_sku = $new_sku . str_replace('-', '', $option['uBar']['pressure']);
+
+      if ( isset($option['panel']) && $option['panel']['value'] ) {
+        $meta_data[] = array(
+          'panel' => $option['panel']['value']
         );
       }
-      $panel_code = isset($option['panelType']) ? $option['panelType']['type'][0] : 'F';
+      $panel_code = isset($option['panel']) ? $option['panel']['value'] : 'Flush';
+      $panel_code = $panel_code == 'Flush' ? 'F' : 'R';
       $new_sku = $new_sku . $panel_code; 
       
-      if ($option['vents']['hasVents'] == true) {
-        $metaData[] = array(
+      if ( $option['vents']['enabled'] == true ) {
+        $meta_data[] = array(
           'vents' => true
         );
         $new_sku = $new_sku . 'V';
@@ -164,20 +204,16 @@ function add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
         $new_sku = $new_sku . 'S';
       }
 
-      if ($option['lock_placement']['hasLock'] == true) {
-        if ( isset($option['lock_placement']['placement']) ) {
-          $metaData[] = array(
-            'lock_placement' => $option['lock_placement']['placement']
-          );
-          $lock_code = $option['lock_placement']['placement'] == 'inside' ? '2' : '3';
-          $new_sku = $new_sku . $lock_code;
-        } 
-      } else {
-        $new_sku = $new_sku . '1';
-      }
+      if ( isset($option['lock']['value']) ) {
+        $meta_data[] = array(
+          'lock' => $option['lock']['value']
+        );
+        $lock_code = $option['lock']['value'] == 'inside' ? '2' : '3';
+        $new_sku = $new_sku . $lock_code;
+      } 
 
       $new_value = array(
-        'meta_data' => $metaData,
+        'meta_data' => $meta_data,
       );
 
       $cart_item_data['new_sku'] = $new_sku;
@@ -247,17 +283,19 @@ function my_theme_enqueue_styles() {
     time(), //For production use wp_get_theme()->get('Version'),
     true
   );
-  wp_enqueue_style(
-    'product-builder',
-    get_template_directory_uri() . '/build/style-index.css'
-  );
-  wp_enqueue_script(
-    'dab-frontend',
-    get_stylesheet_directory_uri() . '/build/index.js',
-    ['wp-element'],
-    time(), //For production use wp_get_theme()->get('Version'),
-    true
-  );
+  if ( is_singular('product') ) {
+    wp_enqueue_style(
+      'product-builder',
+      get_template_directory_uri() . '/build/style-index.css'
+    );
+    wp_enqueue_script(
+      'dab-frontend',
+      get_stylesheet_directory_uri() . '/build/index.js',
+      ['wp-element'],
+      time(), //For production use wp_get_theme()->get('Version'),
+      true
+    );
+  }
 }
 
 
@@ -318,7 +356,6 @@ function getAdminProperties() {
       }
     }
   }
-  log_it($window_layouts_obj);
 
   $adminProperties = array(
     'minimum_area_for_additional_fees' => $minimum_area_for_additional_fees,
@@ -353,7 +390,7 @@ function getAdminProperties() {
       'hide_premium_colors_settings' => $hide_premium_colors_settings
     ]
   );
-  echo json_encode($adminProperties);
+  return $adminProperties;
   wp_die();
 }
 
@@ -430,37 +467,57 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
     {
         if(isset($values['meta_data']))
         {
-          $metaData = $values['meta_data'];
-          $metaDataString = '';
-          foreach($metaData as $metaItem) {
-
-            if (isset($metaItem['size'])) {
-              $metaDataString .= '<span class="meta-item"><b>Size: </b>'.$metaItem['size'].'</span>';
-            } else if (isset($metaItem['custom_layout']) && $metaItem['custom_layout']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Custom Window: </b>'.$metaItem['custom_layout'].'</span>';
-            } else if (isset($metaItem['window_placement']) && $metaItem['window_placement']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Window placement: </b>'.$metaItem['window_placement'].'</span>';
-            } else if (isset($metaItem['lock_placement']) && $metaItem['lock_placement']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Lock placement: </b>'.$metaItem['lock_placement'].'</span>';
-            } else if (isset($metaItem['insulation']) && $metaItem['insulation']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Insulation: </b>Yes</span>';
-            } else if (isset($metaItem['vents']) && $metaItem['vents']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Vents: </b>Yes</span>';
-            } else if (isset($metaItem['panelType']) && $metaItem['panelType']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Panel: </b>'. $metaItem['panelType'] .'</span>';
-            } else if (isset($metaItem['headroom']) && $metaItem['headroom']) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>HeadRoom: </b>'. $metaItem['headroom'] .'</span>';
-            } else if (isset($metaItem['ubarSettings'])) {
-              $metaDataString .= ',&nbsp;<span class="meta-item"><b>Ubar Count: </b>'. $metaItem['ubarSettings']['count'] .', <b>Pressure Option: </b>'. $metaItem['ubarSettings']['pressure'] .'</span>';
+          // log_it($values);
+          $meta_data = $values['meta_data'];
+          $meta_data_string = '<ul>';
+          foreach($meta_data as $meta_item) {
+            if ( isset($meta_item['doorSize']) ) {
+              // log_it($meta_item['doorSize']);
+              $meta_data_string .= '<li class="meta-item"><b>Size: </b>'.$meta_item['doorSize'].'</li>';
+            }
+            if ( isset($meta_item['color']) ) {
+              $meta_data_string .= '<li class="meta-item"><b>Color: </b>'. $meta_item['color'] .'</li>';
+            }
+            if ( isset($meta_item['custom_layout']) && $meta_item['custom_layout'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Window Decals: </b>'.$meta_item['custom_layout'].'</li>';
+            }
+            if ( isset($meta_item['window_placement']) && $meta_item['window_placement'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Window placement: </b>'.$meta_item['window_placement'].'</li>';
+            }
+            if ( isset($meta_item['lock']) && $meta_item['lock'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Lock placement: </b>'.$meta_item['lock'].'</li>';
+            }
+            if ( isset($meta_item['trackRadius']) && $meta_item['trackRadius'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Track Radius: </b>'.$meta_item['trackRadius'].'"</li>';
+            }
+            if ( isset($meta_item['insulation']) && $meta_item['insulation'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Insulation: </b>Yes</li>';
+            }
+            if ( isset($meta_item['roller']) ) {
+              $meta_data_string .= '<li class="meta-item"><b>Roller: </b>' . $meta_item['roller'] . '</li>';
+            }
+            if ( isset($meta_item['vents']) && $meta_item['vents'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Vents: </b>Yes</li>';
+            }
+            if ( isset($meta_item['panel']) && $meta_item['panel'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Panel: </b>'. $meta_item['panel'] .'</li>';
+            }
+            if ( isset($meta_item['headroom']) && $meta_item['headroom'] ) {
+              $meta_data_string .= '<li class="meta-item"><b>Head Room: </b>'. $meta_item['headroom'] .'</li>';
+            }
+            if ( isset($meta_item['uBar']) ) {
+              $meta_data_string .= '<li class="meta-item"><b>Ubar Count: </b>'. $meta_item['uBar']['count'] .'</li><li><b>Pressure: </b>'. $meta_item['uBar']['pressure'] .'</li>';
             }
           }
-          // if ($metaData['window_placement'])
+          $meta_data_string .= '</ul>';
+          $meta_data_string .= '<p style="font-size: .85rem;"><b>SKU:</b> ' . $values['new_sku'] . '</p>';
+          // if ($meta_data['window_placement'])
             $return_string = $product_name . "</a><br /><br />";
             // "<dl class='variation'>";
             // $return_string .= "<table class='wdm_options_table' id='" . $values['product_id'] . "'>";
             // $return_string .= "<tr><td>$" . $values['new_price'] . "</td></tr>";
             // $return_string .= "</table></dl>"; 
-            $return_string .= '<b><u>Door Spec:</u></b><br/>'.$metaDataString;
+            $return_string .= '<b><u>Door Specs:</u></b><br/>'.$meta_data_string;
             return $return_string;
         }
         else
@@ -471,10 +528,11 @@ if(!function_exists('wdm_add_user_custom_option_from_session_into_cart'))
 }
 
 function filter_woocommerce_cart_item_thumbnail( $product_image, $cart_item, $cart_item_key ) {
-  $metaData = isset($cart_item['meta_data']) ? $cart_item['meta_data'] : [];
+  $meta_data = isset($cart_item['meta_data']) ? $cart_item['meta_data'] : [];
   $thumbnail_url = null;
-  if (isset($metaData['thumbnail'])) {
-    $thumbnail_url = $metaData['thumbnail'];
+  if (isset($meta_data['thumbnail'])) {
+    $thumbnail_id = $meta_data['thumbnail'];
+    $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'thumbnail');
   }
 
   if ($thumbnail_url) {

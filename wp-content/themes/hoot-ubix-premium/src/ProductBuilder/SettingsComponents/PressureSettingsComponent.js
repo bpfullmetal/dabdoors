@@ -1,4 +1,4 @@
-const { render, useState, useEffect } = wp.element;
+const { useState, useEffect } = wp.element;
 import { useSelector, useDispatch } from 'react-redux'
 import { setPressure } from '../actions/pressure'
 
@@ -6,7 +6,6 @@ const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
   const dispatch = useDispatch()
 
   const doorSize = useSelector( state => state.doorSize)
-  const adminProps = useSelector( state => state.adminProps)
   const pressure = useSelector( state => state.pressure)
 
   const [availablePressures, setAvailablePressures] = useState([]);

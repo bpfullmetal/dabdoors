@@ -1,20 +1,21 @@
-const { render, useState } = wp.element;
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleInsulation } from '../actions/insulation'
 import Switch from "react-switch";
 
-const InsulationSettingComponent = ({additional_price, properties, enableInsulation}) => {
-  const [insulation, setInsulation] = useState(false);
+const InsulationSettingComponent = () => {
+  const dispatch = useDispatch()
+  const insulation = useSelector( state => state.insulation )
+  const settingsData = useSelector( state => state.settingsData )
+
   return (
     <div className="product-setting-item-component insulation-settings">
       <div class="d-flex align-items-center justify-content-between">
         <label>
-          { properties.label }
-          { insulation && additional_price > 0 && <span className="additional_price_alert">{`+$${additional_price}`}</span> }
+          { adminProps.insulation_group.label }
+          { insulation && settingsData.insulation.cost > 0 && <span className="additional_price_alert">{`+$${settingsData.insulation.cost}`}</span> }
         </label>
         <Switch
-          onChange={(e) => {
-            setInsulation(e);
-            enableInsulation(e);
-          }}
+          onChange={() => dispatch(toggleInsulation())}
           checked={insulation}
           width={40}
           height={20}

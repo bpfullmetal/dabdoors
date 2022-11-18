@@ -5,7 +5,6 @@ import { setLockPlacement } from '../actions/lock'
 const LockPlacementSettingComponent = () => {
   const dispatch = useDispatch()
   const lock = useSelector( state => state.lock)
-  const adminProps = useSelector( state => state.adminProps )
   const additional_price = adminProps.lock_placement_group[lock].additional_price_$
   // const defaultLock = adminProps.lock_placement_group.inside.default
   return (

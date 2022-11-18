@@ -6,11 +6,10 @@ import Switch from "react-switch";
 
 const WindowsSettingComponent = () => {
   const dispatch = useDispatch()
-  const windowLayout = useSelector( state => state.windowsLayout)
+  const windowLayout = useSelector( state => state.windowLayout)
   const windowsEnabled = useSelector( state => state.windowsEnabled)
   const windowsGrid = useSelector( state => state.windowsGrid)
-  const adminProps = useSelector( state => state.adminProps )
-  const additionalCost = useSelector( state => state.additionalCost)
+  const settingsData = useSelector( state => state.settingsData)
   
   const windowLayouts = adminProps.window_layouts
   return (
@@ -19,11 +18,7 @@ const WindowsSettingComponent = () => {
         <label>
           Windows
           {
-            (
-              windowLayout !== 'custom' && 
-              additionalCost.windows > 0
-            ) && 
-            <span className="additional_price_alert">+${additionalCost.windows}</span> 
+            settingsData.windows.cost > 0 && <span className="additional_price_alert">+${settingsData.windows.cost}</span> 
           }
         </label>
         <Switch onChange={ () => dispatch(toggleWindows()) } checked={windowsEnabled} width={40} height={20} onColor={'#1396E7'} checkedIcon={''} uncheckedIcon={''} />

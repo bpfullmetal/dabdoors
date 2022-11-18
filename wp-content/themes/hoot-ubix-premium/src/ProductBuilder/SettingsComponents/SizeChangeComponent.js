@@ -8,7 +8,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
 
   const { productMinWidth, productMaxWidth, productMinHeight, productMaxHeight, initWidth, initHeight } = doorSettings
   const doorSize = useSelector( state => state.doorSize)
-  const additionalCost = useSelector( state => state.additionalCost )
+  const settingsData = useSelector( state => state.settingsData )
 
   const [feetWidth, setFeetWidth] = useState(Math.floor(doorSize.width / 12));
   const [inchesWidth, setInchesWidth] = useState(doorSize.width % 12);
@@ -23,7 +23,7 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
   useEffect(() => {
     let totalWidth = feetWidth * 12 + inchesWidth;
     let totalHeight = feetHeight * 12 + inchesHeight;
-    console.log(totalHeight)
+    
     setHasWidthRangeError(false);
     setHasHeightRangeError(false);
     setHasMinWidthRangeError(false);
@@ -56,7 +56,6 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     hasSizeError(false);
     const width = (feetWidth * 12) + inchesWidth
     const height = (feetHeight * 12) + inchesHeight
-    console.log('use effect', width, height)
     dispatch(setDoorSize({ width, height }));
   }, [feetWidth, inchesWidth, feetHeight, inchesHeight]);
 
@@ -66,7 +65,6 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
       let newValue = Number(`${e.target.value}${e.which - 48}`);
       let width = 0;
       let height = 0;
-      console.log(newValue)
       if (type == 1) {
         width = newValue * 12 + inchesWidth;
         if (width > productMaxWidth) {
@@ -116,16 +114,24 @@ const SizeChangeComponent = ({onChangeWindowSize, hasSizeError}) => {
     <div className="product-setting-item-component">
       <label>
           Size
-        { additionalCost.doorSize > 0 && <span className="additional_price_alert">{`+$${additionalCost.doorSize}`}</span> }
+        { settingsData.doorSize.cost > 0 && <span className="additional_price_alert">{`+$${settingsData.doorSize.cost}`}</span> }
       </label>
-      <div className='size-range'>
-        { typeof productMaxWidth !== 'undefined'
-          ? ` (maxWidth: ${Math.floor(productMaxWidth / 12)}’ ${Math.floor(productMaxWidth % 12)}”, maxHeight: ${Math.floor(productMaxHeight / 12)}’ ${Math.floor(productMaxHeight % 12)}”)`
-          : ''} <br/>
-        { typeof productMinWidth !== 'undefined'
-          ? ` (minWidth: ${Math.floor(productMinWidth / 12)}’ ${Math.floor(productMinWidth % 12)}”, minHeight: ${Math.floor(productMinHeight / 12)}’ ${Math.floor(productMinHeight % 12)}”)`
-          : ''}
-      </div>
+      {
+        (typeof productMaxWidth !== 'undefined' || typeof productMinWidth !== 'undefined') && 
+        <div className='size-range'>
+          { 
+            typeof productMaxWidth !== 'undefined'
+              ? ` (maxWidth: ${Math.floor(productMaxWidth / 12)}’ ${Math.floor(productMaxWidth % 12)}”, maxHeight: ${Math.floor(productMaxHeight / 12)}’ ${Math.floor(productMaxHeight % 12)}”)`
+              : ''
+          } 
+          <br/>
+          { 
+            typeof productMinWidth !== 'undefined'
+              ? ` (minWidth: ${Math.floor(productMinWidth / 12)}’ ${Math.floor(productMinWidth % 12)}”, minHeight: ${Math.floor(productMinHeight / 12)}’ ${Math.floor(productMinHeight % 12)}”)`
+              : ''
+          }
+        </div>
+      }
       <div className="size-settings-wrapper">
         <div className="width-wrapper d-flex">
           <span className="label">W</span>

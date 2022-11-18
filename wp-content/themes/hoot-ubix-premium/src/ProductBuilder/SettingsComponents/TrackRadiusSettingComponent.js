@@ -5,8 +5,7 @@ import ReactSlider from 'react-slider';
 const TrackRadiusSettingComponent = () => {
   const dispatch = useDispatch()
   const trackRadius = useSelector( state => state.trackRadius )
-  const adminProps = useSelector( state => state.adminProps )
-  const additionalCost = useSelector( state => state.additionalCost )
+  const settingsData = useSelector( state => state.settingsData )
 
   const trackSettings = adminProps.track_radius_group
 
@@ -14,7 +13,7 @@ const TrackRadiusSettingComponent = () => {
     <div id="track-radius-settings" className="product-setting-item-component slider-bar">
       <label>
         Track Radius ( { `${trackRadius} ${trackSettings.unit}` } )
-        { additionalCost.trackRadius > 0 && <span className='additional_price_alert'>{`+$${additionalCost.trackRadius}`}</span> }
+        { settingsData.trackRadius.cost > 0 && <span className='additional_price_alert'>{`+$${settingsData.trackRadius.cost}`}</span> }
       </label>
       <div className="d-flex">
         <ReactSlider
