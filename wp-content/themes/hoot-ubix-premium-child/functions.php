@@ -1,8 +1,8 @@
 <?php
 
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles_child' );
 
-function my_theme_enqueue_styles() {
+function my_theme_enqueue_styles_child() {
   if ( is_singular('product') ) {
     wp_enqueue_style(
       'product-builder',
