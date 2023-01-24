@@ -80,7 +80,6 @@ if ( !class_exists( 'Jetpack' ) || !Jetpack::is_module_active( 'tiled-gallery' )
 // Woocommerce support and init load theme woo functions
 if ( class_exists( 'WooCommerce' ) ) {
 	add_theme_support( 'woocommerce' );
-	include_once( HYBRID_PARENT . 'woocommerce/functions.php' );
 }
 
 
