@@ -30,7 +30,7 @@
             "key": "field_6321e748ebba6",
             "label": "Series",
             "name": "dab_series",
-            "type": "number",
+            "type": "taxonomy",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -39,13 +39,14 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "min": 1,
-            "max": 9,
-            "step": 1
+            "taxonomy": "series",
+            "field_type": "select",
+            "allow_null": 0,
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "multiple": 0
         }
     ],
     "location": [
@@ -65,5 +66,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1663187261
+    "modified": 1678982011
 }

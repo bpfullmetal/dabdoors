@@ -2142,14 +2142,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SettingsComponents/RollerTypeSettingComponent */ "./src/ProductBuilder/SettingsComponents/RollerTypeSettingComponent.js");
 /* harmony import */ var _SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SettingsComponents/TrackRadiusSettingComponent */ "./src/ProductBuilder/SettingsComponents/TrackRadiusSettingComponent.js");
 /* harmony import */ var _SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./SettingsComponents/ColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/ColorsSettingComponent.js");
-/* harmony import */ var _SettingsComponents_PremiumColorsSettingComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./SettingsComponents/PremiumColorsSettingComponent */ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js");
-/* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
-/* harmony import */ var _SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./SettingsComponents/PressureSettingsComponent */ "./src/ProductBuilder/SettingsComponents/PressureSettingsComponent.js");
-/* harmony import */ var _SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./SettingsComponents/HeadroomSettingComponent */ "./src/ProductBuilder/SettingsComponents/HeadroomSettingComponent.js");
-/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
-/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js");
-/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_18__);
-
+/* harmony import */ var _CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CustomProductComponents/ProductContainerComponent */ "./src/ProductBuilder/CustomProductComponents/ProductContainerComponent.js");
+/* harmony import */ var _SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./SettingsComponents/PressureSettingsComponent */ "./src/ProductBuilder/SettingsComponents/PressureSettingsComponent.js");
+/* harmony import */ var _SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./SettingsComponents/HeadroomSettingComponent */ "./src/ProductBuilder/SettingsComponents/HeadroomSettingComponent.js");
+/* harmony import */ var react_switch__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-switch */ "./node_modules/react-switch/index.js");
+/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! html2canvas */ "./node_modules/html2canvas/dist/html2canvas.js");
+/* harmony import */ var html2canvas__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(html2canvas__WEBPACK_IMPORTED_MODULE_17__);
 
 
 
@@ -2172,7 +2170,6 @@ const Builder = () => {
   const doorSize = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.doorSize);
   const pressure = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.pressure);
   const settingsData = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.settingsData);
-  const metadata = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(state => state.metadata);
   const hideSettings = adminProps.hide_settings;
   const [metaObj, setMetaObject] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
     size: {
@@ -2234,11 +2231,9 @@ const Builder = () => {
   const [total, setTotal] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(initialPrice);
   const [hasSizeValidationError, setSizeValidationError] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [changedPriceWithPremiumColor, setChangedPriceWithPremiumColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [changedPriceWithTrackRadius, setChangedPriceWithTrackRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [changedPriceWithHeadRoom, setChangedPriceWithHeadRoom] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [showAlerts, setShowAlerts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  const [ubarAvailable, setUbarAvailable] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [productUrl, setProductUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const [showCustomPanel, setShowCustomPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [selectedUbarSetting, setSelectedUbarSetting] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
@@ -2311,10 +2306,11 @@ const Builder = () => {
     }
     const height = doorSize.height;
     const ubarIndex = ubarSettings.findIndex(it => {
-      return Number(it.min_height) <= height && Number(it.max_height) > height;
+      return Number(it.min_height) <= height && Number(it.max_height) >= height;
     });
     const ubarCount = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].ubar_counts) : 0;
     const ubarCost = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].per_ubar_costs) : 0;
+    setUbarAvailable(ubarIndex > -1);
     setSelectedUbarSetting({
       ubar_counts: ubarCount,
       ubar_costs: ubarCost
@@ -2335,7 +2331,7 @@ const Builder = () => {
       return false;
     }
     setIsAdding(true);
-    html2canvas__WEBPACK_IMPORTED_MODULE_18___default()(document.getElementById('product-door-wrapper'), {
+    html2canvas__WEBPACK_IMPORTED_MODULE_17___default()(document.getElementById('product-door-wrapper'), {
       scale: .3
     }).then(function (canvas) {
       canvas.toBlob(function (blob) {
@@ -2367,7 +2363,7 @@ const Builder = () => {
 
   // const total = Object.entries(metaObj).reduce(( initialPrice, obj) => { return initialPrice + obj[1].cost }, price);
   // console.log('total', metaObj)
-  console.log(adminProps);
+  console.log(selectedUbarSetting);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2379,9 +2375,9 @@ const Builder = () => {
     className: "product-builder-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-container"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_14__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_CustomProductComponents_ProductContainerComponent__WEBPACK_IMPORTED_MODULE_13__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mobile-switch-button"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Customization"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_switch__WEBPACK_IMPORTED_MODULE_16__["default"], {
     onChange: e => {
       setShowCustomPanel(e);
     },
@@ -2404,16 +2400,24 @@ const Builder = () => {
     hasSizeError: e => {
       setSizeValidationError(e);
     }
-  }), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }), !ubarAvailable && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "size-error"
+  }, "The selected door size cannot be ordered. Please adjust the width and height or contact us at ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "mailto:info@dabdoors.com"
+  }, "info@dabdoors.com")), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     properties: adminProps.pressure_group && adminProps.pressure_group,
     selectedUbarSetting: selectedUbarSetting
-  }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_16__["default"], null), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "d-flex price-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", total)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    className: "d-flex price-section"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", total)), !ubarAvailable && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "error"
+  }, "The selected door size cannot be ordered. Please adjust the width and height or contact us at ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "mailto:info@dabdoors.com"
+  }, "info@dabdoors.com")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
-    className: `btn btn-add-cart ${isAdding ? 'disabled' : ''}`,
+    className: `btn btn-add-cart ${isAdding || !ubarAvailable ? 'disabled' : ''}`,
     onClick: e => {
       createProduct(e);
     }
@@ -3016,69 +3020,6 @@ const PanelSettingComponent = () => {
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PanelSettingComponent);
-
-/***/ }),
-
-/***/ "./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js":
-/*!********************************************************************************!*\
-  !*** ./src/ProductBuilder/SettingsComponents/PremiumColorsSettingComponent.js ***!
-  \********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-
-const {
-  render,
-  useState
-} = wp.element;
-const PremiumColorsSettingComponent = _ref => {
-  let {
-    properties,
-    colorIndex,
-    enablePrice
-  } = _ref;
-  let colors = properties.select_button_options.map((option, index) => {
-    return {
-      color: option.select_color,
-      sku: option.sku_code
-    };
-  });
-
-  // const [option, setOption] = useState(colorIndex);
-
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "product-setting-item-component colors-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "d-flex justify-content-beteen align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, properties.label, " \xA0"), properties.additional_price && colorIndex > -1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "addPrice"
-  }, "+$", properties.additional_price)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "d-flex align-items-center colors-wrapper"
-  }, colors.map((e, index) => {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "color-item",
-      style: {
-        border: `2px solid ${colorIndex === index ? e.color : '#FFF'}`
-      }
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-      type: "button",
-      className: "btn-color button",
-      style: {
-        backgroundColor: `${e.color}`
-      },
-      onClick: evt => {
-        /*setOption(index);*/enablePrice(e, true, index);
-      }
-    }));
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PremiumColorsSettingComponent);
 
 /***/ }),
 
@@ -5036,10 +4977,6 @@ const windowsEnabled = function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAvailableOptions": () => (/* binding */ getAvailableOptions),
-/* harmony export */   "getAvailablecolumnsForLayoutOption": () => (/* binding */ getAvailablecolumnsForLayoutOption),
-/* harmony export */   "getPack": () => (/* binding */ getPack),
-/* harmony export */   "getPriceForCustomWindow": () => (/* binding */ getPriceForCustomWindow),
 /* harmony export */   "getWindowRowsCols": () => (/* binding */ getWindowRowsCols)
 /* harmony export */ });
 const getWindowRowsCols = doorSize => {
@@ -5079,213 +5016,6 @@ const getWindowRowsCols = doorSize => {
     rows,
     cols
   };
-};
-const getAvailablecolumnsForLayoutOption = (layoutOption, customWindowproperties) => {
-  let columns = [];
-  let properties = {};
-  switch (layoutOption) {
-    case 0:
-      properties = customWindowproperties.custom_window_williamburge_405;
-      columns = properties['5_pack_columns'].concat(properties['7_pack_columns'], properties['8_pack_columns']);
-      break;
-    case 1:
-      properties = customWindowproperties.custom_window_williamburge_305;
-      columns = properties['4_pack_columns'].concat(properties['8_pack_columns']);
-      break;
-    case 2:
-      properties = customWindowproperties.custom_window_winston_392;
-      columns = properties['4_pack_columns'].concat(properties['8_pack_columns']);
-      break;
-    case 3:
-      properties = customWindowproperties.custom_window_stockton_397;
-      columns = properties['1_pack_columns'];
-      break;
-    case 4:
-      properties = customWindowproperties.custom_window_sherwood_306;
-      columns = properties['4_pack_columns'].concat(properties['8_pack_columns']);
-      break;
-    default:
-      break;
-  }
-  return columns;
-};
-const getAvailableOptions = (columnsCount, customWindowproperties) => {
-  let availableOptions = [];
-  let custom_window_williamburge_405 = customWindowproperties.custom_window_williamburge_405;
-  let customWilliamburget405columns = (custom_window_williamburge_405['5_pack_columns'] ? custom_window_williamburge_405['5_pack_columns'] : []).concat(custom_window_williamburge_405['7_pack_columns'] ? custom_window_williamburge_405['7_pack_columns'] : [], custom_window_williamburge_405['8_pack_columns'] ? custom_window_williamburge_405['8_pack_columns'] : []);
-  // console.log(customWilliamburget405columns);
-  if (customWilliamburget405columns.indexOf(String(columnsCount)) > -1) {
-    availableOptions.push(0);
-  }
-  let custom_window_williamburge_305 = customWindowproperties.custom_window_williamburge_305;
-  let customWilliamburget305columns = (custom_window_williamburge_305['4_pack_columns'] ? custom_window_williamburge_305['4_pack_columns'] : []).concat(custom_window_williamburge_305['8_pack_columns'] ? custom_window_williamburge_305['8_pack_columns'] : []);
-  if (customWilliamburget305columns.indexOf(String(columnsCount)) > -1) {
-    availableOptions.push(1);
-  }
-  let custom_window_winston_392 = customWindowproperties.custom_window_winston_392;
-  let customWinston392columns = (custom_window_winston_392['4_pack_columns'] ? custom_window_winston_392['4_pack_columns'] : []).concat(custom_window_winston_392['8_pack_columns'] ? custom_window_winston_392['8_pack_columns'] : []);
-  if (customWinston392columns.indexOf(String(columnsCount)) > -1) {
-    availableOptions.push(2);
-  }
-  let custom_window_stockton_397 = customWindowproperties.custom_window_stockton_397;
-  let customStockton397columns = custom_window_stockton_397['1_pack_columns'] ? custom_window_stockton_397['1_pack_columns'] : [];
-  if (customStockton397columns.indexOf(String(columnsCount)) > -1) {
-    availableOptions.push(3);
-  }
-  let custom_window_sherwood_306 = customWindowproperties.custom_window_sherwood_306;
-  let customSherwood306columns = (custom_window_sherwood_306['4_pack_columns'] ? custom_window_sherwood_306['4_pack_columns'] : []).concat(custom_window_sherwood_306['8_pack_columns'] ? custom_window_sherwood_306['8_pack_columns'] : []);
-  if (customSherwood306columns.indexOf(String(columnsCount)) > -1) {
-    availableOptions.push(4);
-  }
-  // console.log(availableOptions);
-  return availableOptions;
-};
-const getPack = (layoutOption, columnsCount, customWindowProperties) => {
-  if (layoutOption == 0) {
-    let williamburge405Properties = customWindowProperties.custom_window_williamburge_405;
-    if (williamburge405Properties) {
-      let pack_columns_5 = williamburge405Properties['5_pack_columns'] ? williamburge405Properties['5_pack_columns'] : [];
-      if (pack_columns_5.indexOf(String(columnsCount)) > -1) {
-        return 5;
-      }
-      let pack_columns_7 = williamburge405Properties['7_pack_columns'] ? williamburge405Properties['7_pack_columns'] : [];
-      if (pack_columns_7.indexOf(String(columnsCount)) > -1) {
-        return 7;
-      }
-      let pack_columns_8 = williamburge405Properties['8_pack_columns'] ? williamburge405Properties['8_pack_columns'] : [];
-      if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
-        return 8;
-      }
-    }
-  } else if (layoutOption == 1) {
-    let properties = customWindowProperties.custom_window_williamburge_305;
-    if (properties) {
-      let pack_columns_4 = properties['4_pack_columns'];
-      if (pack_columns_4.indexOf(String(columnsCount)) > -1) {
-        return 4;
-      }
-      let pack_columns_8 = properties['8_pack_columns'];
-      if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
-        return 8;
-      }
-    }
-  } else if (layoutOption == 2) {
-    let properties = customWindowProperties.custom_window_winston_392;
-    if (properties) {
-      let pack_columns_4 = properties['4_pack_columns'];
-      if (pack_columns_4.indexOf(String(columnsCount)) > -1) {
-        return 4;
-      }
-      let pack_columns_8 = properties['8_pack_columns'];
-      if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
-        return 8;
-      }
-    }
-  } else if (layoutOption == 3) {
-    let properties = customWindowProperties.custom_window_stockton_397;
-    if (properties) {
-      let pack_columns_1 = properties['1_pack_columns'];
-      if (pack_columns_1.indexOf(String(columnsCount)) > -1) {
-        return 1;
-      }
-    }
-  } else if (layoutOption == 4) {
-    let properties = customWindowProperties.custom_window_sherwood_306;
-    if (properties) {
-      let pack_columns_4 = properties['4_pack_columns'];
-      if (pack_columns_4.indexOf(String(columnsCount)) > -1) {
-        return 4;
-      }
-      let pack_columns_8 = properties['8_pack_columns'];
-      if (pack_columns_8.indexOf(String(columnsCount)) > -1) {
-        return 8;
-      }
-    }
-  } else {
-    return null;
-  }
-  return null;
-};
-const getPriceForCustomWindow = (layoutOption, packCount, customWindowProperties, cols) => {
-  // console.log(layoutOption, packCount, cols);
-  if (layoutOption == 0) {
-    if (packCount == 5) {
-      let perPrice = customWindowProperties.custom_window_williamburge_405['5_pack_price'];
-      let packGroundCount = Math.floor(cols / 5) + 1;
-      if (cols % 5 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    } else if (packCount == 7) {
-      let perPrice = customWindowProperties.custom_window_williamburge_405['7_pack_price'];
-      let packGroundCount = Math.floor(cols / 7) + 1;
-      if (cols % 7 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    } else if (packCount == 8) {
-      let perPrice = customWindowProperties.custom_window_williamburge_405['8_pack_price'];
-      let packGroundCount = Math.floor(cols / 8) + 1;
-      if (cols % 8 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    }
-  } else if (layoutOption == 1) {
-    if (packCount == 4) {
-      let perPrice = customWindowProperties.custom_window_williamburge_305['4_pack_price'];
-      let packGroundCount = Math.floor(cols / 4) + 1;
-      if (cols % 4 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    } else if (packCount == 8) {
-      let perPrice = customWindowProperties.custom_window_williamburge_305['8_pack_price'];
-      let packGroundCount = Math.floor(cols / 8) + 1;
-      if (cols % 8 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    }
-  } else if (layoutOption == 2) {
-    if (packCount == 4) {
-      let perPrice = customWindowProperties.custom_window_winston_392['4_pack_price'];
-      let packGroundCount = Math.floor(cols / 4) + 1;
-      if (cols % 4 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    } else if (packCount == 8) {
-      let perPrice = customWindowProperties.custom_window_winston_392['8_pack_price'];
-      let packGroundCount = Math.floor(cols / 8) + 1;
-      if (cols % 8 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    }
-  } else if (layoutOption == 3) {
-    if (packCount == 1) {
-      let perPrice = customWindowProperties.custom_window_stockton_397['1_pack_price'];
-      return perPrice * cols;
-    }
-  } else if (layoutOption == 4) {
-    if (packCount == 4) {
-      let perPrice = customWindowProperties.custom_window_sherwood_306['4_pack_price'];
-      let packGroundCount = Math.floor(cols / 4) + 1;
-      if (cols % 4 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    } else if (packCount == 8) {
-      let perPrice = customWindowProperties.custom_window_sherwood_306['8_pack_price'];
-      let packGroundCount = Math.floor(cols / 8) + 1;
-      if (cols % 8 == 0) {
-        packGroundCount = packGroundCount - 1;
-      }
-      return perPrice * packGroundCount;
-    }
-  }
-  return 0;
 };
 
 /***/ }),

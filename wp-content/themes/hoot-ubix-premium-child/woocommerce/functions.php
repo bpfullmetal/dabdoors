@@ -238,7 +238,8 @@ function add_order_item_meta($item_id, $values) {
 	$new_sku = $original_sku && $original_sku[0] === 'C' ? 'C' : 'R';
 	$new_sku = '';
 	$new_sku = $new_sku . get_field('dab_residential_commercial', $product_id);
-	$new_sku = $new_sku . get_field('dab_series', $product_id);
+    $series = get_field('dab_series', $product_id);
+	$new_sku = $new_sku . $series->name;
   
 	if (isset($_SESSION['meta_data'])) {
 	  $option = $_SESSION['meta_data'];
@@ -432,12 +433,9 @@ function getAdminProperties() {
   $track_radius_group = get_field('track_radius', 'option');
   $standard_colors_group = get_field('standard_colors', 'option');
   $premium_colors_group = get_field('premium_colors', 'option');
-  $pressure_group = get_field('design_pressure_settings', 'option');
-  $custom_window_williamburge_405 = get_field('williamburgs_405', 'option');
-  $custom_window_williamburge_305 = get_field('williamburgs_305', 'option');
-  $custom_window_winston_392 = get_field('winston_392', 'option');
-  $custom_window_stockton_397 = get_field('stockton_397', 'option');
-  $custom_window_sherwood_306 = get_field('sherwood_306', 'option');
+  $pressure_group = get_field('design_pressure_settings', get_the_ID())
+    ? get_field('design_pressure_settings', get_the_ID())
+    : get_field('design_pressure_settings', 'option');
 
   $hide_panel_settings = get_field('hide_panel_settings', 'option');
   $hide_windows_settings = get_field('hide_windows_settings', 'option');
@@ -480,13 +478,6 @@ function getAdminProperties() {
     'standard_colors_group' => $standard_colors_group,
     'premium_colors_group' => $premium_colors_group,
     'pressure_group' => $pressure_group,
-    'custom_window' => [
-      'custom_window_williamburge_405' => $custom_window_williamburge_405,
-      'custom_window_williamburge_305' => $custom_window_williamburge_305,
-      'custom_window_winston_392' => $custom_window_winston_392,
-      'custom_window_stockton_397' => $custom_window_stockton_397,
-      'custom_window_sherwood_306' => $custom_window_sherwood_306
-    ],
     'window_layouts' => $window_layouts_obj,
     'hide_settings' => [
       'hide_panel_settings' => $hide_panel_settings,
