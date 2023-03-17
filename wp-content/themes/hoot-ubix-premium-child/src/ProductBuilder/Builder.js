@@ -90,13 +90,8 @@ const Builder = () => {
 
     const [isAdding, setIsAdding] = useState(false);
     const [showAlerts, setShowAlerts] = useState(false);
-    const [ubarAvailable, setUbarAvailable] = useState(false);
     const [productUrl, setProductUrl] = useState('');
     const [showCustomPanel, setShowCustomPanel] = useState(false);
-    const [selectedUbarSetting, setSelectedUbarSetting] = useState({
-        ubar_counts: 0,
-        ubar_costs: 0
-    });
     const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
@@ -160,41 +155,6 @@ const Builder = () => {
         setIsInitialized(true);
     }, [isInitialized]);
 
-    useEffect(() => {
-        if (!isInitialized) {
-            return;
-        }
-
-        let selectedPressure = null
-        let ubarSettings = []
-        if (pressure !== 'no-pressure') {
-            selectedPressure = adminProps.pressure_group.pressure_options.filter(pressureOption => pressureOption.pressure_range === pressure)[0]
-            ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
-        }
-        const height = doorSize.height
-        const ubarIndex = ubarSettings.findIndex(it => {
-            return Number(it.min_height) <= height && Number(it.max_height) >= height;
-        });
-        const ubarCount = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].ubar_counts) : 0
-        const ubarCost = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].per_ubar_costs) : 0
-
-        setUbarAvailable(ubarIndex > -1)
-        setSelectedUbarSetting({
-            ubar_counts: ubarCount,
-            ubar_costs: ubarCost
-        });
-
-        const additional_price_with_pressure = ubarCount * ubarCost
-
-        setMetaObject({
-            ...metaObj,
-            ubarSettings: {
-                cost: additional_price_with_pressure,
-                count: ubarCount,
-                pressure_option: selectedPressure ? selectedPressure.pressure_range : null
-            }
-        });
-    }, [pressure, doorSize]);
 
     const createProduct = (e) => {
         if (hasSizeValidationError) {
@@ -235,7 +195,7 @@ const Builder = () => {
 
     // const total = Object.entries(metaObj).reduce(( initialPrice, obj) => { return initialPrice + obj[1].cost }, price);
     // console.log('total', metaObj)
-    console.log(selectedUbarSetting)
+
     return (
         <div className="product-builder">
             <div className="title-section">
@@ -259,12 +219,11 @@ const Builder = () => {
                         hasSizeError={(e) => { setSizeValidationError(e); }}
                     />
                     {
-                        !ubarAvailable && <p className="size-error">The selected door size cannot be ordered. Please adjust the width and height or contact us at <a href="mailto:info@dabdoors.com">info@dabdoors.com</a></p>
+                        !settingsData.uBar && <p className="size-error">The selected door size cannot be ordered. Please adjust the width and height or contact us at <a href="mailto:info@dabdoors.com">info@dabdoors.com</a></p>
                     }
                     {hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && <WindowsSettingComponent />}
                     <PressureSettingsComponent
                         properties={adminProps.pressure_group && adminProps.pressure_group}
-                        selectedUbarSetting={selectedUbarSetting}
                     />
                     {hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && <InsulationSettingComponent />}
                     {hideSettings.hide_vents_settings.hide_from_builder === false && <VentsSettingComponent />}
@@ -282,9 +241,9 @@ const Builder = () => {
                             <p>$ {total}</p>
                         </div>
                         {
-                            !ubarAvailable && <p className="error">The selected door size cannot be ordered. Please adjust the width and height or contact us at <a href="mailto:info@dabdoors.com">info@dabdoors.com</a></p>
+                            !settingsData.uBar && <p className="error">The selected door size cannot be ordered. Please adjust the width and height or contact us at <a href="mailto:info@dabdoors.com">info@dabdoors.com</a></p>
                         }
-                        <button type="button" className={`btn btn-add-cart ${(isAdding || !ubarAvailable) ? 'disabled' : ''}`} onClick={(e) => {
+                        <button type="button" className={`btn btn-add-cart ${(isAdding || !settingsData.uBar) ? 'disabled' : ''}`} onClick={(e) => {
                             createProduct(e);
                         }}>
                             {isAdding ? 'Adding Product...' : 'Add to Cart'}

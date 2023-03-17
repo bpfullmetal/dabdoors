@@ -2,15 +2,17 @@ const { useState, useEffect } = wp.element;
 import { useSelector, useDispatch } from 'react-redux'
 import { setPressure } from '../actions/pressure'
 
-const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
+const PressureSettingsComponent = ({properties}) => {
   const dispatch = useDispatch()
 
-  const doorSize = useSelector( state => state.doorSize)
-  const pressure = useSelector( state => state.pressure)
+  const doorSize = useSelector( state => state.doorSize )
+  const pressure = useSelector( state => state.pressure )
+  const uBarData = useSelector( state => state.settingsData.uBar )
 
   const [availablePressures, setAvailablePressures] = useState([]);
 
   useEffect(() => {
+    
     let pressureOptions =  adminProps.pressure_group.pressure_options;
     const width = doorSize.width
     let index = 0;
@@ -27,6 +29,8 @@ const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
   useEffect(() => {
     dispatch(setPressure(availablePressures.length ? availablePressures[0] : 'no-pressure'))
   }, [availablePressures])
+  
+  console.log(availablePressures)
 
   return (
     <div className="product-setting-item-component pressure-settings">
@@ -41,14 +45,14 @@ const PressureSettingsComponent = ({properties, selectedUbarSetting}) => {
             <option key="no-pressure" value="no-pressure">Not Available</option>
           }
           {
-            properties.pressure_options.map((it, index) => {
-              return (<option key={`pressure-${index}`} value={it.pressure_range} disabled={availablePressures.indexOf(index)>-1?false:true}>{it.pressure_range}</option>);
+            availablePressures.map((it, index) => {
+              return (<option key={`pressure-${index}`} value={it}>{it}</option>);
             })
           }
         </select>
       </div>
-      {selectedUbarSetting.ubar_counts > 0 && <div className="additional_price_alert">
-          Ubar Counts: {selectedUbarSetting.ubar_counts}, &nbsp; &nbsp;Additioanl Price: +${selectedUbarSetting.ubar_counts * selectedUbarSetting.ubar_costs }
+      {uBarData.count > 0 && <div className="additional_price_alert">
+          Ubar Counts: {uBarData.count}, &nbsp; &nbsp;Additioanl Price: +${ uBarData.cost }
       </div>}
     </div>
   );

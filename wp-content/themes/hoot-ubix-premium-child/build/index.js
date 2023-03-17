@@ -2233,13 +2233,8 @@ const Builder = () => {
   const [changedPriceWithRollerType, setChangedPriceWithRollerType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
   const [isAdding, setIsAdding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [showAlerts, setShowAlerts] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [ubarAvailable, setUbarAvailable] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const [productUrl, setProductUrl] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('');
   const [showCustomPanel, setShowCustomPanel] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-  const [selectedUbarSetting, setSelectedUbarSetting] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
-    ubar_counts: 0,
-    ubar_costs: 0
-  });
   const [isInitialized, setIsInitialized] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (showCustomPanel === true) {
@@ -2294,37 +2289,6 @@ const Builder = () => {
     });
     setIsInitialized(true);
   }, [isInitialized]);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    if (!isInitialized) {
-      return;
-    }
-    let selectedPressure = null;
-    let ubarSettings = [];
-    if (pressure !== 'no-pressure') {
-      selectedPressure = adminProps.pressure_group.pressure_options.filter(pressureOption => pressureOption.pressure_range === pressure)[0];
-      ubarSettings = selectedPressure.ubar_settings ? selectedPressure.ubar_settings : [];
-    }
-    const height = doorSize.height;
-    const ubarIndex = ubarSettings.findIndex(it => {
-      return Number(it.min_height) <= height && Number(it.max_height) >= height;
-    });
-    const ubarCount = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].ubar_counts) : 0;
-    const ubarCost = ubarIndex > -1 ? Number(ubarSettings[ubarIndex].per_ubar_costs) : 0;
-    setUbarAvailable(ubarIndex > -1);
-    setSelectedUbarSetting({
-      ubar_counts: ubarCount,
-      ubar_costs: ubarCost
-    });
-    const additional_price_with_pressure = ubarCount * ubarCost;
-    setMetaObject({
-      ...metaObj,
-      ubarSettings: {
-        cost: additional_price_with_pressure,
-        count: ubarCount,
-        pressure_option: selectedPressure ? selectedPressure.pressure_range : null
-      }
-    });
-  }, [pressure, doorSize]);
   const createProduct = e => {
     if (hasSizeValidationError) {
       window.alert('Product size has some errors. Please check before create the request.');
@@ -2363,7 +2327,7 @@ const Builder = () => {
 
   // const total = Object.entries(metaObj).reduce(( initialPrice, obj) => { return initialPrice + obj[1].cost }, price);
   // console.log('total', metaObj)
-  console.log(selectedUbarSetting);
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-builder"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -2400,24 +2364,23 @@ const Builder = () => {
     hasSizeError: e => {
       setSizeValidationError(e);
     }
-  }), !ubarAvailable && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }), !settingsData.uBar && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "size-error"
   }, "The selected door size cannot be ordered. Please adjust the width and height or contact us at ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "mailto:info@dabdoors.com"
   }, "info@dabdoors.com")), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
-    properties: adminProps.pressure_group && adminProps.pressure_group,
-    selectedUbarSetting: selectedUbarSetting
+    properties: adminProps.pressure_group && adminProps.pressure_group
   }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex price-section"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", total)), !ubarAvailable && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", null, "Total"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "$ ", total)), !settingsData.uBar && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "error"
   }, "The selected door size cannot be ordered. Please adjust the width and height or contact us at ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "mailto:info@dabdoors.com"
   }, "info@dabdoors.com")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     type: "button",
-    className: `btn btn-add-cart ${isAdding || !ubarAvailable ? 'disabled' : ''}`,
+    className: `btn btn-add-cart ${isAdding || !settingsData.uBar ? 'disabled' : ''}`,
     onClick: e => {
       createProduct(e);
     }
@@ -3047,12 +3010,12 @@ const {
 
 const PressureSettingsComponent = _ref => {
   let {
-    properties,
-    selectedUbarSetting
+    properties
   } = _ref;
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const doorSize = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.doorSize);
   const pressure = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.pressure);
+  const uBarData = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.settingsData.uBar);
   const [availablePressures, setAvailablePressures] = useState([]);
   useEffect(() => {
     let pressureOptions = adminProps.pressure_group.pressure_options;
@@ -3070,6 +3033,7 @@ const PressureSettingsComponent = _ref => {
   useEffect(() => {
     dispatch((0,_actions_pressure__WEBPACK_IMPORTED_MODULE_2__.setPressure)(availablePressures.length ? availablePressures[0] : 'no-pressure'));
   }, [availablePressures]);
+  console.log(availablePressures);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component pressure-settings"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3083,15 +3047,14 @@ const PressureSettingsComponent = _ref => {
   }, pressure === 'no-pressure' && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: "no-pressure",
     value: "no-pressure"
-  }, "Not Available"), properties.pressure_options.map((it, index) => {
+  }, "Not Available"), availablePressures.map((it, index) => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
       key: `pressure-${index}`,
-      value: it.pressure_range,
-      disabled: availablePressures.indexOf(index) > -1 ? false : true
-    }, it.pressure_range);
-  }))), selectedUbarSetting.ubar_counts > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      value: it
+    }, it);
+  }))), uBarData.count > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "additional_price_alert"
-  }, "Ubar Counts: ", selectedUbarSetting.ubar_counts, ", \xA0 \xA0Additioanl Price: +$", selectedUbarSetting.ubar_counts * selectedUbarSetting.ubar_costs));
+  }, "Ubar Counts: ", uBarData.count, ", \xA0 \xA0Additioanl Price: +$", uBarData.cost));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PressureSettingsComponent);
 

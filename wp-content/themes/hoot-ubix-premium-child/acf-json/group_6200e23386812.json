@@ -1172,7 +1172,7 @@
                     "min": 0,
                     "max": 0,
                     "layout": "block",
-                    "button_label": "",
+                    "button_label": "Add pressure range",
                     "sub_fields": [
                         {
                             "key": "field_621ca6d14f093",
@@ -1188,7 +1188,7 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "placeholder": "",
+                            "placeholder": "ie 27-30",
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
@@ -1197,8 +1197,8 @@
                             "key": "field_62208e3d77c9a",
                             "label": "Min Width",
                             "name": "min_width",
-                            "type": "text",
-                            "instructions": "",
+                            "type": "number",
+                            "instructions": "Minimum width in inches",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1209,15 +1209,17 @@
                             "default_value": "",
                             "placeholder": "",
                             "prepend": "",
-                            "append": "",
-                            "maxlength": ""
+                            "append": "\"",
+                            "min": "",
+                            "max": "",
+                            "step": ""
                         },
                         {
                             "key": "field_622197c76d1e1",
                             "label": "Max Width",
                             "name": "max_width",
-                            "type": "text",
-                            "instructions": "",
+                            "type": "number",
+                            "instructions": "Maximum width in inches",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1228,8 +1230,10 @@
                             "default_value": "",
                             "placeholder": "",
                             "prepend": "",
-                            "append": "",
-                            "maxlength": ""
+                            "append": "\"",
+                            "min": "",
+                            "max": "",
+                            "step": ""
                         },
                         {
                             "key": "field_621ca6e24f094",
@@ -1254,50 +1258,54 @@
                                     "key": "field_621ca7374f095",
                                     "label": "Min Height",
                                     "name": "min_height",
-                                    "type": "text",
-                                    "instructions": "",
+                                    "type": "number",
+                                    "instructions": "Minimum height in inches",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
+                                    "append": "\"",
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
                                 },
                                 {
                                     "key": "field_621ca73e4f096",
                                     "label": "Max Height",
                                     "name": "max_height",
-                                    "type": "text",
-                                    "instructions": "",
+                                    "type": "number",
+                                    "instructions": "Maximum height in inches",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
+                                    "append": "\"",
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
                                 },
                                 {
                                     "key": "field_621ca7434f097",
-                                    "label": "Ubar Counts",
+                                    "label": "Ubar Count",
                                     "name": "ubar_counts",
-                                    "type": "text",
+                                    "type": "number",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
@@ -1305,26 +1313,30 @@
                                     "placeholder": "",
                                     "prepend": "",
                                     "append": "",
-                                    "maxlength": ""
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
                                 },
                                 {
                                     "key": "field_621ca7494f098",
-                                    "label": "Per Ubar Costs",
+                                    "label": "Per Ubar Cost",
                                     "name": "per_ubar_costs",
-                                    "type": "text",
+                                    "type": "number",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
                                     "default_value": "",
                                     "placeholder": "",
-                                    "prepend": "",
+                                    "prepend": "$",
                                     "append": "",
-                                    "maxlength": ""
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
                                 }
                             ]
                         }
@@ -2328,5 +2340,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1678983066
+    "modified": 1678986807
 }
