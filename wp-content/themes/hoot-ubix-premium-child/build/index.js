@@ -2254,33 +2254,17 @@ const Builder = () => {
       return;
     }
     let rollerType = metaObj.rollerType;
-    if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
-      // Do something with hide lock from builder
-    }
-    if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
-      if (adminProps.roller_type_group) {
-        let index = adminProps.roller_type_group.select_button_options.findIndex(e => {
-          return e.default == true;
-        });
-        if (index > -1) {
-          rollerType.type = adminProps.roller_type_group.select_button_options[index].button_name;
-          // initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
-          setChangedPriceWithRollerType(Number(adminProps.roller_type_group.select_button_options[index].additional_price));
-        } else {
-          rollerType.type = '';
-          setChangedPriceWithRollerType(0);
-        }
-      }
-    }
-    if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
-      if (hideSettings.hide_insulation_settings.default == "add") {
-        // initialPrice += Number(adminProps.insulation_group.additional_price_$_if_added);
-        setMetaObject({
-          ...metaObj,
-          insulation: {
-            hasInsulation: true
-          }
-        });
+    if (adminProps.roller_type_group) {
+      let index = adminProps.roller_type_group.select_button_options.findIndex(e => {
+        return e.default == true;
+      });
+      if (index > -1) {
+        rollerType.type = adminProps.roller_type_group.select_button_options[index].button_name;
+        // initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
+        setChangedPriceWithRollerType(Number(adminProps.roller_type_group.select_button_options[index].additional_price));
+      } else {
+        rollerType.type = '';
+        setChangedPriceWithRollerType(0);
       }
     }
     setMetaObject({
@@ -2368,9 +2352,9 @@ const Builder = () => {
     className: "size-error"
   }, "The selected door size cannot be ordered. Please adjust the width and height or contact us at ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "mailto:info@dabdoors.com"
-  }, "info@dabdoors.com")), hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  }, "info@dabdoors.com")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_WindowsSettingComponent__WEBPACK_IMPORTED_MODULE_5__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PressureSettingsComponent__WEBPACK_IMPORTED_MODULE_14__["default"], {
     properties: adminProps.pressure_group && adminProps.pressure_group
-  }), hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), hideSettings.hide_vents_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), hideSettings.hide_lock_placement_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), hideSettings.hide_panel_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), hideSettings.hide_roller_type_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), hideSettings.hide_track_radius_settings.hide_from_builder === false && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_InsulationSettingComponent__WEBPACK_IMPORTED_MODULE_6__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_VentsSettingComponent__WEBPACK_IMPORTED_MODULE_7__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_LockPlacementSettingComponent__WEBPACK_IMPORTED_MODULE_8__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_PanelSettingComponent__WEBPACK_IMPORTED_MODULE_9__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_HeadroomSettingComponent__WEBPACK_IMPORTED_MODULE_15__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_RollerTypeSettingComponent__WEBPACK_IMPORTED_MODULE_10__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_TrackRadiusSettingComponent__WEBPACK_IMPORTED_MODULE_11__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SettingsComponents_ColorsSettingComponent__WEBPACK_IMPORTED_MODULE_12__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "product-setting-item-component addCartButton"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "d-flex price-section"

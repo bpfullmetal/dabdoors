@@ -115,35 +115,18 @@ const Builder = () => {
         }
 
         let rollerType = metaObj.rollerType;
-        if (hideSettings.hide_lock_placement_settings.hide_from_builder == false) {
-            // Do something with hide lock from builder
-        }
 
-        if (hideSettings.hide_roller_type_settings.hide_from_builder == false) {
-            if (adminProps.roller_type_group) {
-                let index = adminProps.roller_type_group.select_button_options.findIndex((e) => {
-                    return e.default == true;
-                });
-                if (index > -1) {
-                    rollerType.type = adminProps.roller_type_group.select_button_options[index].button_name;
-                    // initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
-                    setChangedPriceWithRollerType(Number(adminProps.roller_type_group.select_button_options[index].additional_price));
-                } else {
-                    rollerType.type = '';
-                    setChangedPriceWithRollerType(0);
-                }
-            }
-        }
-
-        if (hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === true) {
-            if (hideSettings.hide_insulation_settings.default == "add") {
-                // initialPrice += Number(adminProps.insulation_group.additional_price_$_if_added);
-                setMetaObject({
-                    ...metaObj,
-                    insulation: {
-                        hasInsulation: true
-                    }
-                });
+        if (adminProps.roller_type_group) {
+            let index = adminProps.roller_type_group.select_button_options.findIndex((e) => {
+                return e.default == true;
+            });
+            if (index > -1) {
+                rollerType.type = adminProps.roller_type_group.select_button_options[index].button_name;
+                // initialPrice += Number(adminProps.roller_type_group.select_button_options[index].additional_price);
+                setChangedPriceWithRollerType(Number(adminProps.roller_type_group.select_button_options[index].additional_price));
+            } else {
+                rollerType.type = '';
+                setChangedPriceWithRollerType(0);
             }
         }
 
@@ -221,17 +204,17 @@ const Builder = () => {
                     {
                         !settingsData.uBar && <p className="size-error">The selected door size cannot be ordered. Please adjust the width and height or contact us at <a href="mailto:info@dabdoors.com">info@dabdoors.com</a></p>
                     }
-                    {hideSettings.hide_windows_settings.hide_windows_setting_from_builder === false && <WindowsSettingComponent />}
+                    <WindowsSettingComponent />
                     <PressureSettingsComponent
                         properties={adminProps.pressure_group && adminProps.pressure_group}
                     />
-                    {hideSettings.hide_insulation_settings.hide_insulation_from_window_settings === false && <InsulationSettingComponent />}
-                    {hideSettings.hide_vents_settings.hide_from_builder === false && <VentsSettingComponent />}
-                    {hideSettings.hide_lock_placement_settings.hide_from_builder === false && <LockPlacementSettingComponent />}
-                    {hideSettings.hide_panel_settings.hide_from_builder === false && <PanelSettingComponent />}
+                    <InsulationSettingComponent />
+                    <VentsSettingComponent />
+                    <LockPlacementSettingComponent />
+                    <PanelSettingComponent />
                     <HeadroomSettingComponent />
-                    {hideSettings.hide_roller_type_settings.hide_from_builder === false && <RollerTypeSettingComponent />}
-                    {hideSettings.hide_track_radius_settings.hide_from_builder === false && <TrackRadiusSettingComponent />}
+                    <RollerTypeSettingComponent />
+                    <TrackRadiusSettingComponent />
                     <ColorsSettingComponent />
                     {/* <div className="product-setting-item-component price-section">
           </div> */}

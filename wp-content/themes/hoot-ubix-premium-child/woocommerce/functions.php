@@ -422,31 +422,19 @@ function add_order_item_meta($item_id, $values) {
 }
 
 function getAdminProperties() {
-  $minimum_area_for_additional_fees = get_field('minimum_area_for_additional_fees', 'option');
-  $panels = get_field('panels', 'option');
-  $headroom = get_field('headroom', 'option');
-  $window_group = get_field('window', 'option');
-  $vents_group = get_field('vents', 'option');
-  $insulation_group = get_field('insulation', 'option');
-  $roller_type_group = get_field('roller_type', 'option');
-  $lock_placement_group = get_field('lock_placement', 'option');
-  $track_radius_group = get_field('track_radius', 'option');
-  $standard_colors_group = get_field('standard_colors', 'option');
-  $premium_colors_group = get_field('premium_colors', 'option');
-  $pressure_group = get_field('design_pressure_settings', get_the_ID())
-    ? get_field('design_pressure_settings', get_the_ID())
-    : get_field('design_pressure_settings', 'option');
-
-  $hide_panel_settings = get_field('hide_panel_settings', 'option');
-  $hide_windows_settings = get_field('hide_windows_settings', 'option');
-  $hide_vents_settings = get_field('hide_vents_settings', 'option');
-  $hide_insulation_settings = get_field('hide_insulation_settings', 'option');
-  $hide_roller_type_settings = get_field('hide_roller_type_settings', 'option');
-  $hide_lock_placement_settings = get_field('hide_lock_placement_settings', 'option');
-  $hide_track_radius_settings = get_field('hide_track_radius_settings', 'option');
-  $hide_standard_colors = get_field('hide_standard_colors', 'option');
-  $hide_premium_colors_settings = get_field('hide_premium_colors_settings', 'option');
-  $window_layouts = get_field('custom_window_layouts', 'option') ? get_field('custom_window_layouts', 'option') : [];
+  $minimum_area_for_additional_fees = get_field('minimum_area_for_additional_fees', get_the_ID());
+  $panels = get_field('panels', get_the_ID());
+  $headroom = get_field('headroom', get_the_ID());
+  $window_group = get_field('window', get_the_ID());
+  $vents_group = get_field('vents', get_the_ID());
+  $insulation_group = get_field('insulation', get_the_ID());
+  $roller_type_group = get_field('roller_type', get_the_ID());
+  $lock_placement_group = get_field('lock_placement', get_the_ID());
+  $track_radius_group = get_field('track_radius', get_the_ID());
+  $standard_colors_group = get_field('standard_colors', get_the_ID());
+  $premium_colors_group = get_field('premium_colors', get_the_ID());
+  $pressure_group = get_field('design_pressure_settings', get_the_ID());
+  $window_layouts = get_field('custom_window_layouts', get_the_ID()) ? get_field('custom_window_layouts', get_the_ID()) : [];
   $window_layouts_obj = [];
   foreach( $window_layouts as $window_layout ) {
     foreach( $window_layout['packs'] as $pack ) {
@@ -478,18 +466,7 @@ function getAdminProperties() {
     'standard_colors_group' => $standard_colors_group,
     'premium_colors_group' => $premium_colors_group,
     'pressure_group' => $pressure_group,
-    'window_layouts' => $window_layouts_obj,
-    'hide_settings' => [
-      'hide_panel_settings' => $hide_panel_settings,
-      'hide_windows_settings' => $hide_windows_settings,
-      'hide_vents_settings' => $hide_vents_settings,
-      'hide_insulation_settings' => $hide_insulation_settings,
-      'hide_roller_type_settings' => $hide_roller_type_settings,
-      'hide_lock_placement_settings' => $hide_lock_placement_settings,
-      'hide_track_radius_settings' => $hide_track_radius_settings,
-      'hide_standard_colors' => $hide_standard_colors,
-      'hide_premium_colors_settings' => $hide_premium_colors_settings
-    ]
+    'window_layouts' => $window_layouts_obj
   );
   return $adminProperties;
   wp_die();
